@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>选择题测试</title>
+
+        <script src="./vue.js"></script>
+        <script src="./axios.min.js"></script>
+        <link rel="stylesheet"
+            href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+        <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+        <style>
+            header{
+                background-color:rgb(116, 227, 162);
+                height: 50px;
+            }
+        </style>
+    </head>
+    <body>
+        <header>
+            <header>
+                <img src="logo.jpg" width="" height="">
+                <span>Test</span>
+                <span>Test</span>
+                <span>Test</span>
+            </header>
+        </header>
+        <!-- 选择题 -->
+        <div id="chose">
+            <div class="question-container">
+                <xzt :questions="questions"></xzt>
+                <button @click="submitAnswers">提交答案</button>
+            </div>
+        </div>
+
+        <!-- 选择题模板 -->
+        <script type="text/x-template" id="xzt-template">
+            <div>
+                <h2>选择题部分</h2>
+                <div class="question-item" v-for="(question, index) in questions" :key="question.id">
+                    <h3>第{{ index + 1 }}题: {{ question.title }}</h3>
+                    <img v-bind:src="question.img">
+                    <div class="options">
+                        <el-radio-group v-model="question.selected">
+                        <el-radio 
+                            v-for="option in question.options" 
+                            :key="option.value" 
+                            :label="option.value"
+                            :name="'question_' + question.id">
+                            <!-- 若有img，就渲染img，若无就渲染label -->
+                            <img v-if="option.img" :src="option.img">
+                            <span v-else>{{option.label}}</span>
+                        </el-radio>
+                        </el-radio-group>
+
+                    </div>
+                </div>
+             <hr>
+            </div>
+        </script>
+
+    </body>
+    <script>
+        // 定义选择题组件
+        Vue.component('xzt', {
+            template: '#xzt-template',
+            props: {
+                questions: {
+                    type: Array,
+                    required: true
+                }
+            }
+        });
+
+        // 模拟数据
+        const mockQuestions = [
+            {
+                id: 1,
+                title: "每只小兔吃一个萝卜，选哪一堆正好合适？",
+                img:"T1/timu.png",//非必需
+                options: [
+                    { value: "A", label: "1" ,img:"T1/A.png"},
+                    { value: "B", label: "2" ,img:"T1/B.png"},
+                    { value: "C", label: "3" ,img:"T1/C.png"},
+                    //img非必需
+                ],
+                selected: ""
+            },
+            {
+                id: 2,
+                title: "2+2=?",
+                options: [
+                    { value: "A", label: "1" },
+                    { value: "B", label: "2" },
+                    { value: "C", label: "3" },
+                    { value: "D", label: "4" }
+                ],
+                selected: ""
+            },
+            {
+                id: 3,
+                title: "2+4=?",
+                options: [
+                    { value: "A", label: "4" },
+                    { value: "B", label: "5" },
+                    { value: "C", label: "6" },
+                    { value: "D", label: "7" }
+                ],
+                selected: ""
+            }
+        ];
+        
+        var addr = "127.0.0.1"; // 后端地址
+        new Vue({
+            el: "#chose",
+            data: {
+                questions: mockQuestions,
+                img:"sxc.jpg",
+            },
+            created() {
+                // 实际应用中这里应该从后端获取题目
+                this.fetchQuestions();
+            },
+            methods: {
+                fetchQuestions() {
+                    // 向后端请求选择题数据
+                    axios.post(addr, { choseNum: 4 })
+                        .then((result) => {
+                            // 返回的数据格式为 { questions: [...] }
+                            this.questions = result.data.questions || mockQuestions;
+                        })
+                        .catch((err) => {
+                            console.error("获取题目失败，使用模拟数据", err);
+                            this.questions = mockQuestions;
+                        });
+                },
+                submitAnswers() {
+                    // 收集用户选择的答案
+                    const answers = this.questions.map(q => ({
+                        questionId: q.id,
+                        answer: q.selected
+                    }));
+                    
+                    console.log("用户答案:", answers);
+                    
+                    // 发送答案到后端进行评分
+                    axios.post(addr + '/submit', { answers })
+                        .then(response => {
+                            alert(`得分: ${response.data.score}`);
+                        })
+                        .catch(err=>{
+                            console.error("连接到后端失败",err)
+                        });
+                    
+                    alert("答案已提交!");
+                }
+            }
+        });
+    </script>
+</html>
