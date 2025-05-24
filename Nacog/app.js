@@ -34,7 +34,6 @@ const app = new Vue({
       }));
 
       console.log("用户答案:", answers);
-
     },
   },
 }).$mount("#app");
