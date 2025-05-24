@@ -1,6 +1,5 @@
-const xzt = {
-  template: `
-   <div>
+<template id="xzt">
+  <div>
     <h1>选择题部分</h1>
     <div
       class="question-item"
@@ -28,8 +27,10 @@ const xzt = {
     </div>
     <hr />
   </div>
-  
-  `,
+</template>
+
+<script>
+const xzt = {
   props: {
     questions: {
       type: Array,
@@ -37,3 +38,5 @@ const xzt = {
     },
   },
 };
+module.exports = xzt;
+</script>
