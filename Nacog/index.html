@@ -9,20 +9,13 @@
     <script src="../static/vue.js"></script>
     <script src="../static/axios.min.js"></script>
     <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+    <script src="https://unpkg.com/http-vue-loader"></script>
     <style>
-        .el-header,
-        .el-footer {
-            background-color: #B3C0D1;
-            color: #333;
-            text-align: center;
-            line-height: 60px;
-        }
-
         .el-aside {
             background-color: white;
             color: #333;
             text-align: center;
-            height: 200px;
+            height: 500px;
             line-height: 35px;
             box-shadow: 0 2px 4px rgba(0, 0, 0, .12), 0 0 6px rgba(0, 0, 0, .04);
             border-radius: 8px;
@@ -39,6 +32,11 @@
             border-radius: 8px;
 
         }
+
+        .el-progress-bar {
+            width: 75%;
+            margin-top: 30px;
+        }
     </style>
     <script src="https://unpkg.com/element-ui/lib/index.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1/crypto-js.js"></script>
@@ -50,7 +48,9 @@
         <el-container style="height: 100%;">
             <el-container>
                 <!-- 侧边栏模板 -->
-                <sidebar :student-info="studentInfo"></sidebar>
+
+                <sidebar :student-info="studentInfo" :percentage="percentage" :answered-count="answeredCount"
+                    :total-tm="totalTm"></sidebar>
                 <!-- 题目部分 -->
                 <el-main>
                     <!-- 选择题 -->
@@ -66,16 +66,14 @@
         </el-container>
     </div>
 
-    
+
 
 </body>
 <script src="./generateJWT.js"></script>
-<script src="./component/xzt.js"></script>
-<script src="./component/sidebar.js"></script>
 
 <script>
-    Vue.component('xzt', xzt);
-    Vue.component('sidebar', sidebar)
+    const xzt = httpVueLoader('./component/xzt.vue');
+    const sidebar = httpVueLoader('./component/sidebar.vue');
 
     // 模拟数据
     const mockQuestions = [
@@ -114,15 +112,14 @@
             selected: ""
         }
     ];
-    const mockStudentInfo={
+    const mockStudentInfo = {
         name: "Jack",
         class: "202",
         teacher: "Bob",
     }
-    
+
 
     var addr = "127.0.0.1"; // 后端地址
-
 
 </script>
 <script src="app.js"></script>
