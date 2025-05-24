@@ -8,7 +8,7 @@
         <script src="../static/vue.js"></script>
         <script src="../static/axios.min.js"></script>
         <link rel="stylesheet"
-            href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+            href="../static/element.css">
         <style>
             .el-header, .el-footer {
                 background-color: #B3C0D1;
@@ -41,17 +41,15 @@
   
   
 </style>
+        <script src="../static/element.js"></script>
+
     </head>
     <body>
         <div id="app">
             <el-container style="height: 100%;">
                 <el-container>
                     <!-- 侧边栏 -->
-                    <el-aside width="200px">
-                        <p v-for="(value, key) in StudentInfo" :key="key">{{key}}:{{value}}</p>
-                            <!--侧边栏之后可以像学习通一样显示题目作答情况  -->
-                             
-                    </el-aside>
+                    <sidebar>111</sidebar>
                     <!-- 题目部分 -->
                     <el-main>
                         <!-- 选择题 -->
@@ -59,7 +57,9 @@
                             <div class="question-container">
                                 <xzt :questions="questions"></xzt>
                                 <el-button type="primary"
-                                    @click="submitAnswers">提交答案</el-button>
+                                    @click="submitAnswers"
+                                    id="Submit">提交答案</el-button>
+
                             </div>
                         </div>
                     </el-main>
@@ -68,45 +68,14 @@
         </div>
 
         <!-- 选择题模板 -->
-        <script type="text/x-template" id="xzt-template">
-            <div>
-                <h1>选择题部分</h1>
-                <div class="question-item" v-for="(question, index) in questions" :key="question.id">
-                    <h2>第{{ index + 1 }}题: {{ question.title }}</h2>
-                    <img v-if="question.img" v-bind:src="question.img" class="tmImg">
-                    <div class="options">
-                        <el-radio-group v-model="question.selected">
-                        <el-radio 
-                            v-for="option in question.options" 
-                            :key="option.value" 
-                            :label="option.value"
-                            :name="'question_' + question.id">
-                            <!-- 若有img，就渲染img，若无就渲染label -->
-                            <img v-if="option.img" :src="option.img">
-                            <span v-else style="font-size: 30px;">{{option.value}}:{{option.label}}</span>
-                        </el-radio>
-                        </el-radio-group>
-
-                    </div>
-                </div>
-             <hr>
-            </div>
-        </script>
 
     </body>
-    <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+    <script src="./component/xzt.js"></script>
+    <script src="./component/sidebar.js"></script>
 
     <script>
-        // 定义选择题组件
-        Vue.component('xzt', {
-            template: '#xzt-template',
-            props: {
-                questions: {
-                    type: Array,
-                    required: true
-                }
-            }
-        });
+       Vue.component('xzt', xzt);
+       Vue.component('sidebar',sidebar)
 
         // 模拟数据
         const mockQuestions = [
@@ -147,57 +116,32 @@
         ];
         
         var addr = "127.0.0.1"; // 后端地址
-        new Vue({
-            el: "#app",
-            data: {
-                questions: mockQuestions,
-                img:"sxc.jpg",
-                StudentInfo:{
-                    "name":"Jack",
-                    "class":"202",
-                    "teacher":"Bob"
-                }
-            },
-            created() {
-                // 实际应用中这里应该从后端获取题目
-                // this.fetchQuestions();
+        
+        
+    </script>
+
+    <script>
+        const app = new Vue({
+            data() {
+                return {
+                    questions: mockQuestions,
+                    img: "sxc.jpg",
+                };
             },
             methods: {
-                // fetchQuestions() {
-                //     // 向后端请求选择题数据
-                //     axios.post(addr, { choseNum: 4 })
-                //         .then((result) => {
-                //             // 返回的数据格式为 { questions: [...] }
-                //             this.questions = result.data.questions || mockQuestions;
-                //         })
-                //         .catch((err) => {
-                //             console.error("获取题目失败，使用模拟数据", err);
-                //             this.questions = mockQuestions;
-                //         });
-                // },
-                
                 submitAnswers() {
                     // 收集用户选择的答案
-                    const answers = this.questions.map(q => ({
+                    const answers = this.questions.map((q) => ({
                         questionId: q.id,
-                        answer: q.selected
+                        answer: q.selected,
                     }));
-                    
+
                     console.log("用户答案:", answers);
-                    
-                    // 发送答案到后端进行评分
-                    // axios.post(addr + '/submit', { answers })
-                    //     .then(response => {
-                    //         alert(`得分: ${response.data.score}`);
-                    //     })
-                    //     .catch(err=>{
-                    //         console.error("连接到后端失败",err)
-                    //     });
-                    
+
+
                     alert("答案已提交!");
-                }
-            }
-        });
-        
+                },
+            },
+        }).$mount("#app");
     </script>
 </html>
