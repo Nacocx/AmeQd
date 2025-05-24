@@ -8,7 +8,7 @@
         <script src="../static/vue.js"></script>
         <script src="../static/axios.min.js"></script>
         <link rel="stylesheet"
-            href="../static/element.css">
+            href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
         <style>
             .el-header, .el-footer {
                 background-color: #B3C0D1;
@@ -41,11 +41,12 @@
   
   
 </style>
-        <script src="../static/element.js"></script>
+        <script src="https://unpkg.com/element-ui/lib/index.js"></script>
 
     </head>
     <body>
         <div id="app">
+            
             <el-container style="height: 100%;">
                 <el-container>
                     <!-- 侧边栏 -->
@@ -57,7 +58,7 @@
                             <div class="question-container">
                                 <xzt :questions="questions"></xzt>
                                 <el-button type="primary"
-                                    @click="submitAnswers"
+                                    @click="willSubmit"
                                     id="Submit">提交答案</el-button>
 
                             </div>
@@ -119,29 +120,5 @@
         
         
     </script>
-
-    <script>
-        const app = new Vue({
-            data() {
-                return {
-                    questions: mockQuestions,
-                    img: "sxc.jpg",
-                };
-            },
-            methods: {
-                submitAnswers() {
-                    // 收集用户选择的答案
-                    const answers = this.questions.map((q) => ({
-                        questionId: q.id,
-                        answer: q.selected,
-                    }));
-
-                    console.log("用户答案:", answers);
-
-
-                    alert("答案已提交!");
-                },
-            },
-        }).$mount("#app");
-    </script>
+    <script src="app.js"></script>
 </html>
