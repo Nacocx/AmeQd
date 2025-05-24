@@ -41,7 +41,7 @@
         }
     </style>
     <script src="https://unpkg.com/element-ui/lib/index.js"></script>
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1/crypto-js.js"></script>
 </head>
 
 <body>
@@ -49,13 +49,14 @@
 
         <el-container style="height: 100%;">
             <el-container>
-                <!-- 侧边栏 -->
-                <sidebar>111</sidebar>
+                <!-- 侧边栏模板 -->
+                <sidebar :student-info="studentInfo"></sidebar>
                 <!-- 题目部分 -->
                 <el-main>
                     <!-- 选择题 -->
                     <div id="chose">
                         <div class="question-container">
+                            <!-- 选择题模板 -->
                             <xzt :questions="questions"></xzt>
                             <el-button type="primary" @click="willSubmit" id="Submit">提交答案</el-button>
                         </div>
@@ -65,9 +66,10 @@
         </el-container>
     </div>
 
-    <!-- 选择题模板 -->
+    
 
 </body>
+<script src="./generateJWT.js"></script>
 <script src="./component/xzt.js"></script>
 <script src="./component/sidebar.js"></script>
 
@@ -85,7 +87,7 @@
                 { value: "A", label: "1", img: "../static/T1/A.png" },
                 { value: "B", label: "2", img: "../static/T1/B.png" },
                 { value: "C", label: "3", img: "../static/T1/C.png" },
-                //img非必需
+                //img非必需，但label和img
             ],
             selected: ""
         },
@@ -112,6 +114,12 @@
             selected: ""
         }
     ];
+    const mockStudentInfo={
+        name: "Jack",
+        class: "202",
+        teacher: "Bob",
+    }
+    
 
     var addr = "127.0.0.1"; // 后端地址
 

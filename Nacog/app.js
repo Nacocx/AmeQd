@@ -3,6 +3,7 @@ const app = new Vue({
     return {
       questions: mockQuestions,
       img: "sxc.jpg",
+      studentInfo:mockStudentInfo,
     };
   },
   methods: {

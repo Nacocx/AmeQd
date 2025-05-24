@@ -35,5 +35,5 @@ const xzt = {
       type: Array,
       required: true,
     },
-  }
+  },
 };
