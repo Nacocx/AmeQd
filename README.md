@@ -1,10 +1,29 @@
-# 题目开发
-1. 我们只用保证后端传来的JSON能够正确解析
-2. 题目类型有选择题（ez），填空题（应该也简单），画图题（包括写字、连线）
-3. 尽可能多的使用vue特性，少使用JS原生的dom操作
-4. 在无必要的情况下，不引入新的JS框架、模板
-5. 不使用可能会和vue冲突的js，如（`jQuery`）
+# ame
 
-# 疑问
-1. 后端传的JSON格式是我们指定吗？
-2. 
+This template should help get you started developing with Vue 3 in Vite.
+
+## Recommended IDE Setup
+
+[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
+
+## Customize configuration
+
+See [Vite Configuration Reference](https://vite.dev/config/).
+
+## Project Setup
+
+```sh
+npm install
+```
+
+### Compile and Hot-Reload for Development
+
+```sh
+npm run dev
+```
+
+### Compile and Minify for Production
+
+```sh
+npm run build
+```

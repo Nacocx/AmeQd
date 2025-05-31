@@ -1,0 +1,55 @@
+.el-aside {
+    background-color: white;
+    color: #333;
+    text-align: center;
+    height: 500px;
+    line-height: 35px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, .12), 0 0 6px rgba(0, 0, 0, .04);
+    border-radius: 8px;
+    margin-right: 50px;
+}
+
+.el-main {
+    color: #333;
+    text-align: center;
+    line-height: 100px;
+    border: 1px white solid;
+    max-width: 1000px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, .12), 0 0 6px rgba(0, 0, 0, .04);
+    border-radius: 8px;
+
+}
+
+.el-progress-bar {
+    width: 75%;
+    margin-top: 30px;
+}
+
+#app {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 60px;
+
+}
+
+.el-container {
+    margin-right: 150px;
+    max-width: 1200px;
+}
+
+.el-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 60px !important;
+    /* 固定高度 */
+    background: #fff;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    padding: 0 20px;
+}
