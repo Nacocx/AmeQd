@@ -23,9 +23,9 @@
               <sst :items="questions.sst" />
               <htt :message="questions.htt" />
               <el-button-group>
-                <el-button type="default" @click="pageSub" :icon="ArrowLeft" size="large" :disabled="currentPage===1">Last Part</el-button>
+                <!-- <el-button type="default" @click="pageSub" :icon="ArrowLeft" size="large" :disabled="currentPage===1">Last Part</el-button> -->
                 <el-button type="primary" @click="willSubmit" id="Submit" size="large">提交答案</el-button>
-                <el-button type="default" @click="pageAdd" size="large" :disabled="currentPage===4">Next Part<el-icon class="el-icon--right"><ArrowRight /></el-icon></el-button>
+                <!-- <el-button type="default" @click="pageAdd" size="large" :disabled="currentPage===4">Next Part<el-icon class="el-icon--right"><ArrowRight /></el-icon></el-button> -->
               </el-button-group>
 
 
@@ -51,7 +51,14 @@ import Sst from "@/components/sst.vue";
 import Htt from "@/components/htt.vue";
 
 
-
+//axios 获得题目
+// async function getTm(addr) {
+//   try{
+//     let response=await 
+//   }catch(e){
+//     console.error(e);
+//   }
+// }
 
 //实际使用中数据从后端获取
 const mockQuestions={
@@ -267,7 +274,7 @@ export default {
       questions: mockQuestions,
       studentInfo: mockStudentInfo,
       corAnswers: mockCorAnswers,
-      currentPage:1 ,
+      // currentPage:1 ,
 
 
     };
@@ -308,10 +315,16 @@ export default {
 
       // 获得画图题答案
       totalTm+=this.questions.htt.userAnswer.length;
-      this.questions.htt.userAnswer.forEach(ans=>{
-        ans.forEach(e=>{
-          if(e!==null)
+      // 防止多次计算
+      let prev=[];
+      this.questions.htt.userAnswer.forEach((ans,index)=>{
+        ans.forEach((e)=>{
+          if(e!==null&&prev[index]==null)
+          {
             answeredCount++;
+            prev[index]=e;
+            // console.log(e+","+prev[index]+","+index);
+          }
         })
       })
 
@@ -431,6 +444,8 @@ export default {
       // console.log(sstAns);
       // console.log(xztAns);
       // this.checkAnswers(xztAns);
+
+      // 获得画图题答案
       const httAns=[];
       this.questions.htt.userAnswer.forEach(ans=>{
         httAns.push(ans)
@@ -456,18 +471,18 @@ export default {
     //   console.log(boolList);
     // },
 
-    pageAdd(){
-      if(this.currentPage<5) {
-        this.currentPage++;
-        document.documentElement.scrollTop = 0;
-      }
-    },
-    pageSub(){
-      if(this.currentPage>1) {
-        this.currentPage--;
-        document.documentElement.scrollTop = 0;
-      }
-    },
+    // pageAdd(){
+    //   if(this.currentPage<5) {
+    //     this.currentPage++;
+    //     document.documentElement.scrollTop = 0;
+    //   }
+    // },
+    // pageSub(){
+    //   if(this.currentPage>1) {
+    //     this.currentPage--;
+    //     document.documentElement.scrollTop = 0;
+    //   }
+    // },
     // 禁用右键菜单
     preventContextMenu(e) {
       ElMessage('为了更好的体验，右键已被禁用')

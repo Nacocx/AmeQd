@@ -35,7 +35,7 @@
       </div>
     </div>
     <br>
-    <button class="submit" @click="yes">提交</button>
+    <!-- <button class="submit" @click="yes">提交</button> -->
   </div>
   <br>
   <hr>
