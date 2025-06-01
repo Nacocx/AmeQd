@@ -26,9 +26,18 @@
 
               <!-- part3_连线题 -->
               <!-- TODO: Fix lxt bugs -->
-              <!-- <lxt :message="questions.lxt_part3" /> -->
+               <div>
+
+              <lxt :message="questions.lxt_part3" v-if="lxtpage===1"/>
               <!-- 拓展应用：3 -->
-              <!-- <lxt :message="questions.lxt_tuo3" /> -->
+              <lxt :message="questions.lxt_tuo3" v-if="lxtpage===2"/>
+                <el-button-group>
+                  <el-button @click="lxtpage--" type="primary" :disabled="lxtpage===1">Last</el-button>
+                  <el-button @click="lxtpage++" type="primary" :disabled="lxtpage===3">Next</el-button>
+                </el-button-group>
+               <hr/>
+
+               </div>
 
               <xzt :questions="questions.xzt" />
               <sst :items="questions.sst" />
@@ -214,6 +223,7 @@ const mockQuestions = {
     draggedElement: null, //正在拖拽的元素
   },
   lxt_part3: {
+    id:1,
     title: "part3",
     flag: "t3",
     imgU: [
@@ -290,6 +300,7 @@ const mockQuestions = {
     result: [],
   },
   lxt_tuo3: {
+    id:2,
     title: "拓展应用3",
     flag: "tuo3",
     imgU: [
@@ -417,6 +428,7 @@ export default {
         sst: [],
         htt: [],
       },
+      lxtpage:1,
     };
   },
   components: {
