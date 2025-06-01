@@ -28,7 +28,7 @@
                                 <img :src="tuxingPath[2].noneCircle" alt="图片" v-if="!item.flag[4]" draggable="false">
                                 <img :src="tuxingPath[1].redCircle" alt="图片" v-if="item.flag[4]" draggable="false">
                             </div>
-                            <div><img :src="item.rightItem" alt="" width="50px" class="rightItem" draggable="false">
+                            <div><img :src="item.rightItem" alt="图片" width="50px" class="rightItem" draggable="false">
                             </div>
 
                         </div>
@@ -38,6 +38,7 @@
         </div>
     </template>
 <script>
+
 export default{
     name:'tht',
     props:{
@@ -45,31 +46,31 @@ export default{
             type:Array,
             require:true,
             default:()=>[
-                { rightItem: '../images3/rightItem1.png', cunt: 2, flag: [false, false, false, false, false] },
-                { rightItem: '../images3/rightItem2.png', cunt: 1, flag: [false, false, false, false, false] },
-                { rightItem: '../images3/rightItem3.png', cunt: 3, flag: [false, false, false, false, false] },
+                { rightItem: './static/img/tht/rightItem1.png', cunt: 2, flag: [false, false, false, false, false] },
+                { rightItem: './static/img/tht/rightItem2.png', cunt: 1, flag: [false, false, false, false, false] },
+                { rightItem: './static/img/tht/rightItem3.png', cunt: 3, flag: [false, false, false, false, false] },
             ]
         },
         tuxingPath:{
             type:Array,
             requir:true,
             default:()=>[
-                {leftImage:'../images3/left.png'},
-                {redCircle:'../images3/redCircle.png'},
-                {noneCircle:'../images3/noneCircle.png'},  
+                {leftImage:'./static/img/tht/left.png'},
+                {redCircle:'./static/img/tht/redCircle.png'},
+                {noneCircle:'./static/img/tht/noneCircle.png'},  
             ]
         }
     },
     methods: {
         changeFlag(item, index) {
-            Vue.set(item.flag, index, !item.flag[index]);
-        }
+        item.flag[index] = !item.flag[index];
+    }
     }
 }
 
 </script>
 
-  <style>
+  <style scoped>
     body {
         font-family: 'Arial Rounded MT Bold', 'Arial', sans-serif;
         background-color: #f9f3ff;
