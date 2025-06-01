@@ -1,14 +1,16 @@
-
-
 <template>
   <div id="app">
     <el-header>
-      <img src="./assets/logo.png" width="50px" height="50px" alt="Logo Missing!">
-      <span style="margin-left: 15px; font-size: 18px;">熊猫沉浸</span>
+      <img
+        src="./assets/logo.png"
+        width="50px"
+        height="50px"
+        alt="Logo Missing!"
+      />
+      <span style="margin-left: 15px; font-size: 18px">熊猫沉浸</span>
     </el-header>
 
     <el-container>
-
       <el-container>
         <!-- 侧边栏模板 -->
         <sidebar :student-info="studentInfo" :count-tm="countTm" />
@@ -18,43 +20,31 @@
           <div id="chose">
             <div class="question-container">
               <!-- part1_填空题 -->
-<<<<<<< Updated upstream
-              <tkt :all-questions="questions.tkt"/>
+              <tkt :all-questions="questions.tkt" />
               <!-- part2_画图题 -->
               <htt :message="questions.htt" />
-              <!-- part3_连线题 -->
-              <lxt :message="questions.lxt_part3" />
-
-
-              <!-- 拓展应用：3 -->
-              <lxt :message="questions.lxt_tuo3" />
-
-
-
-              <xzt :questions="questions.xzt"/>
-              <sst :items="questions.sst" />
-       
-              <el-button-group>
-                <el-button type="default" @click="pageSub" :icon="ArrowLeft" size="large" :disabled="currentPage===1">Last Part</el-button>
-                <el-button type="primary" @click="willSubmit" id="Submit" size="large">提交答案</el-button>
-                <el-button type="default" @click="pageAdd" size="large" :disabled="currentPage===4">Next Part<el-icon class="el-icon--right"><ArrowRight /></el-icon></el-button>
-=======
-              <tkt :all-questions="questions.tkt" v-if="currentPage===1" />
-              <!-- part2_画图题 -->
-              <htt :message="questions.htt" v-if="currentPage===2" />
 
               <!-- part3_连线题 -->
               <!-- TODO: Fix lxt bugs -->
-              <lxt :message="questions.lxt_part3" v-if="currentPage===3" />
-              <!-- 拓展应用：3 -->
-              <lxt :message="questions.lxt_tuo3" v-if="currentPage===4" />
+               <div>
 
-              <xzt :questions="questions.xzt" v-if="currentPage===5" />
-              <sst :items="questions.sst" v-if="currentPage===6" />
-              <tht :items="questions.tht.items" :tuxing-path="questions.tht.tuxingpath" v-if="currentPage===7" />
+              <lxt :message="questions.lxt_part3" v-if="lxtpage===1"/>
+              <!-- 拓展应用：3 -->
+              <lxt :message="questions.lxt_tuo3" v-if="lxtpage===2"/>
+                <el-button-group>
+                  <el-button @click="lxtpage--" type="primary" :disabled="lxtpage===1">Last</el-button>
+                  <el-button @click="lxtpage++" type="primary" :disabled="lxtpage===3">Next</el-button>
+                </el-button-group>
+               <hr/>
+
+               </div>
+
+              <xzt :questions="questions.xzt" />
+              <sst :items="questions.sst" />
+              <tht :items="questions.tht.items" :tuxing-path="questions.tht.tuxingpath"/>
 
               <el-button-group>
-                <el-button type="default" @click="pageSub" :icon="ArrowLeft" size="large" :disabled="currentPage===1">Last Part</el-button>
+                <!-- <el-button type="default" @click="pageSub" :icon="ArrowLeft" size="large" :disabled="currentPage===1">Last Part</el-button> -->
                 <el-button
                   type="primary"
                   @click="willSubmit"
@@ -62,39 +52,31 @@
                   size="large"
                   >提交答案</el-button
                 >
-                <el-button type="default" @click="pageAdd" size="large" :disabled="currentPage===7">Next Part<el-icon class="el-icon--right"><ArrowRight /></el-icon></el-button>
->>>>>>> Stashed changes
+                <!-- <el-button type="default" @click="pageAdd" size="large" :disabled="currentPage===4">Next Part<el-icon class="el-icon--right"><ArrowRight /></el-icon></el-button> -->
               </el-button-group>
-
-
             </div>
           </div>
         </el-main>
       </el-container>
-
-
     </el-container>
-
   </div>
-
 </template>
 
 <script>
-import xzt from '@/components/xzt.vue'
+import xzt from "@/components/xzt.vue";
 import sidebar from "@/components/sidebar.vue";
 import tkt from "@/components/tkt.vue";
-import {ArrowLeft, ArrowRight} from "@element-plus/icons-vue";
-import {ElMessage} from "element-plus";
-import '@/style/app.css'
+import { ArrowLeft, ArrowRight } from "@element-plus/icons-vue";
+import { ElMessage } from "element-plus";
+import "@/style/app.css";
 import Sst from "@/components/sst.vue";
 import Htt from "@/components/htt.vue";
 import lxt from "@/components/lxt.vue";
-
-
-
+import Tht from "@/components/tht.vue";
 
 //实际使用中数据从后端获取
-const mockQuestions={
+
+const mockQuestions = {
   xzt: [
     {
       id: 1,
@@ -107,6 +89,7 @@ const mockQuestions={
         //img非必需
       ],
       userAnswer: "",
+      answer: "B",
     },
     {
       id: 2,
@@ -118,6 +101,7 @@ const mockQuestions={
         { value: "D", label: "4" },
       ],
       userAnswer: "",
+      answer: "D",
     },
     {
       id: 3,
@@ -129,6 +113,7 @@ const mockQuestions={
         { value: "D", label: "7" },
       ],
       userAnswer: "",
+      answer: "C",
     },
   ],
 
@@ -153,11 +138,10 @@ const mockQuestions={
     },
   ],
 
-
   tkt: [
     {
       id: 1,
-      title_main:"Part1: 认识数字1、2、3，理解基数含义",
+      title_main: "Part1: 认识数字1、2、3，理解基数含义",
       title: [
         "1.认识数字“1”",
         "2.认识数字“2",
@@ -175,70 +159,34 @@ const mockQuestions={
       ],
       userAnswer: [
         {
-          type: 'complex',
+          type: "complex",
           sections: [
-            { answers: ['', ''] }, // 第一部分
-            { answers: ['', ''] }  // 第二部分
-          ]
+            { answers: ["", ""] }, // 第一部分
+            { answers: ["", ""] }, // 第二部分
+          ],
         },
         {
-          type: 'simple',
-          answers: ['', '']
-        },{
-          type: 'simple',
-          answers: ['', '']
-        },{
-          type: 'simple',
-          answers: ['', '']
-        },{
-          type: 'simple',
-          answers: ['', '']
-        },
-      ],
-    },{
-      id: 2,
-      title: [
-        "1.认识数字“1”",
-        "2.认识数字“2",
-        "3.认识数字“3”",
-        "4.认识数字“4”",
-        "5.认识数字“5”",
-      ],
-      img: "",
-      subQuestions: [
-        "（1）一个太阳、一座房子、一棵果树可以用数字TNUM表示，也可以用TNUM个小圆片表示。TSPL（2）看看图中，还有什么可以用数字“1”表示呢TNUM和TNUM都可以用数字“1”表示。",
-        "两只鸟、两个人，可以用数字TNUM表示，也可以用TNUM个小圆片表示。",
-        "有三朵云，三个苹果，可以用数字TNUM表示，也可以用TNUM个小圆片表示。",
-        "有四个萝卜，四朵花，可以用数字TNUM表示，也可以用TNUM个小圆片表示。",
-        "有五只鸭子，可以用数字TNUM表示，也可以用TNUM个小圆片表示。",
-      ],
-      userAnswer: [
-        {
-          type: 'complex',
-          sections: [
-            { answers: ['', ''] }, // 第一部分
-            { answers: ['', ''] }  // 第二部分
-          ]
+          type: "simple",
+          answers: ["", ""],
         },
         {
-          type: 'simple',
-          answers: ['', '']
-        },{
-          type: 'simple',
-          answers: ['', '']
-        },{
-          type: 'simple',
-          answers: ['', '']
-        },{
-          type: 'simple',
-          answers: ['', '']
+          type: "simple",
+          answers: ["", ""],
+        },
+        {
+          type: "simple",
+          answers: ["", ""],
+        },
+        {
+          type: "simple",
+          answers: ["", ""],
         },
       ],
     },
   ],
 
-  htt:{
-    id: 2,//1对应矩形 2对应三角形 3对应圆形
+  htt: {
+    id: 2, //1对应矩形 2对应三角形 3对应圆形
     title: "Part2",
     subQuestion: [
       {
@@ -262,93 +210,196 @@ const mockQuestions={
         answer: 4,
       },
     ],
-    shape: ["./static/img/T2_htt_ok/jx.png", "./static/img/T2_htt_ok/sjx.png", "./static/img/T2_htt_ok/yx.png"],//有那些形状图形可以选择
+    shape: [
+      "./static/img/T2_htt_ok/jx.png",
+      "./static/img/T2_htt_ok/sjx.png",
+      "./static/img/T2_htt_ok/yx.png",
+    ], //有那些形状图形可以选择
     trueShape: 1,
-    userAnswer: [
-      [],
-      [],
-      [],
-      [],
-    ],
-    isDragging: false,//是否正在拖拽
-    startX: 0,//相对于鼠标的偏移量
+    userAnswer: [[], [], [], []],
+    isDragging: false, //是否正在拖拽
+    startX: 0, //相对于鼠标的偏移量
     startY: 0,
-    draggedElement: null,//正在拖拽的元素
-
+    draggedElement: null, //正在拖拽的元素
   },
-  lxt_part3:{
+  lxt_part3: {
+    id:1,
     title: "part3",
-    flag:"t3",
-      imgU: [
-        { src: './static/img/T3_lxt_ok/l1.png', value: '1', ownership: 'U', connected: false },
-        { src: './static/img/T3_lxt_ok/l2.png', value: '2', ownership: 'U', connected: false },
-        { src: './static/img/T3_lxt_ok/l4.png', value: '4', ownership: 'U', connected: false },
-        { src: './static/img/T3_lxt_ok/l5.png', value: '5', ownership: 'U', connected: false },
-      ],
-      imgD: [
-        { src: './static/img/T3_lxt_ok/a1.png', value: '1', ownership: 'D', connected: false },
-        { src: './static/img/T3_lxt_ok/a2.png', value: '2', ownership: 'D', connected: false },
-        { src: './static/img/T3_lxt_ok/a4.png', value: '4', ownership: 'D', connected: false },
-        { src: './static/img/T3_lxt_ok/a5.png', value: '5', ownership: 'D', connected: false },
-      ],
-       // 标记是否正在绘制连线的状态，初始为 false 表示未开始绘制
-      isDrawing: false,
-      // 记录连线起始选项的对象，初始为 null 表示无起始选项
-      startItem: null,
-      // 记录连线结束选项的对象，初始为 null 表示无结束选项
-      endItem: null,
-      // 当前正在绘制的连线对象，包含起点和终点坐标，初始均为 0
-      currentLine: { x1: 0, y1: 0, x2: 0, y2: 0 },
-      // 存储所有已创建连线的数组，初始为空数组
-      connections: [],
-      // 画布的 2D 绘图上下文对象，初始为 null，后续在 mounted 钩子中初始化
-      ctx: null,
-      // 背景画布的 2D 绘图上下文对象，初始为 null，后续在 mounted 钩子中初始化
-      backCtx: null,
-      // 存储画布相对于视口的位置和尺寸信息的对象，初始为 null
-      canvasRect: null,
-      // 调试模式开关，设置为 true 时可开启调试功能，如绘制检测区域
-      isDebug: true,
-      // 存储用户连线答案检查结果的数组，初始为空数组
-      result: []
+    flag: "t3",
+    imgU: [
+      {
+        src: "./static/img/T3_lxt_ok/l1.png",
+        value: "1",
+        ownership: "U",
+        connected: false,
+      },
+      {
+        src: "./static/img/T3_lxt_ok/l2.png",
+        value: "2",
+        ownership: "U",
+        connected: false,
+      },
+      {
+        src: "./static/img/T3_lxt_ok/l4.png",
+        value: "4",
+        ownership: "U",
+        connected: false,
+      },
+      {
+        src: "./static/img/T3_lxt_ok/l5.png",
+        value: "5",
+        ownership: "U",
+        connected: false,
+      },
+    ],
+    imgD: [
+      {
+        src: "./static/img/T3_lxt_ok/a1.png",
+        value: "1",
+        ownership: "D",
+        connected: false,
+      },
+      {
+        src: "./static/img/T3_lxt_ok/a2.png",
+        value: "2",
+        ownership: "D",
+        connected: false,
+      },
+      {
+        src: "./static/img/T3_lxt_ok/a4.png",
+        value: "4",
+        ownership: "D",
+        connected: false,
+      },
+      {
+        src: "./static/img/T3_lxt_ok/a5.png",
+        value: "5",
+        ownership: "D",
+        connected: false,
+      },
+    ],
+    // 标记是否正在绘制连线的状态，初始为 false 表示未开始绘制
+    isDrawing: false,
+    // 记录连线起始选项的对象，初始为 null 表示无起始选项
+    startItem: null,
+    // 记录连线结束选项的对象，初始为 null 表示无结束选项
+    endItem: null,
+    // 当前正在绘制的连线对象，包含起点和终点坐标，初始均为 0
+    currentLine: { x1: 0, y1: 0, x2: 0, y2: 0 },
+    // 存储所有已创建连线的数组，初始为空数组
+    connections: [],
+    // 画布的 2D 绘图上下文对象，初始为 null，后续在 mounted 钩子中初始化
+    ctx: null,
+    // 背景画布的 2D 绘图上下文对象，初始为 null，后续在 mounted 钩子中初始化
+    backCtx: null,
+    // 存储画布相对于视口的位置和尺寸信息的对象，初始为 null
+    canvasRect: null,
+    // 调试模式开关，设置为 true 时可开启调试功能，如绘制检测区域
+    isDebug: true,
+    // 存储用户连线答案检查结果的数组，初始为空数组
+    result: [],
   },
-  lxt_tuo3:{
+  lxt_tuo3: {
+    id:2,
     title: "拓展应用3",
-    flag:"tuo3",
-      imgU: [
-        { src: './static/img/Tuo3_lxt_ok/tuo_l2.jpg', value: '2', ownership: 'U', connected: false },
-        { src: './static/img/Tuo3_lxt_ok/tuo_l3.png', value: '3', ownership: 'U', connected: false },
-        { src: './static/img/Tuo3_lxt_ok/tuo_l4.jpg', value: '4', ownership: 'U', connected: false },
-        { src: './static/img/Tuo3_lxt_ok/tuo_l5.jpg', value: '5', ownership: 'U', connected: false },
-      ],
-      imgD: [
-        { src: './static/img/Tuo3_lxt_ok/tuo_a2.png', value: '2', ownership: 'D', connected: false },
-        { src: './static/img/Tuo3_lxt_ok/tuo_a3.png', value: '3', ownership: 'D', connected: false },
-        { src: './static/img/Tuo3_lxt_ok/tuo_a4.png', value: '4', ownership: 'D', connected: false },
-        { src: './static/img/Tuo3_lxt_ok/tuo_a5.png', value: '5', ownership: 'D', connected: false },
-      ],
-       // 标记是否正在绘制连线的状态，初始为 false 表示未开始绘制
-      isDrawing: false,
-      // 记录连线起始选项的对象，初始为 null 表示无起始选项
-      startItem: null,
-      // 记录连线结束选项的对象，初始为 null 表示无结束选项
-      endItem: null,
-      // 当前正在绘制的连线对象，包含起点和终点坐标，初始均为 0
-      currentLine: { x1: 0, y1: 0, x2: 0, y2: 0 },
-      // 存储所有已创建连线的数组，初始为空数组
-      connections: [],
-      // 画布的 2D 绘图上下文对象，初始为 null，后续在 mounted 钩子中初始化
-      ctx: null,
-      // 背景画布的 2D 绘图上下文对象，初始为 null，后续在 mounted 钩子中初始化
-      backCtx: null,
-      // 存储画布相对于视口的位置和尺寸信息的对象，初始为 null
-      canvasRect: null,
-      // 调试模式开关，设置为 true 时可开启调试功能，如绘制检测区域
-      isDebug: true,
-      // 存储用户连线答案检查结果的数组，初始为空数组
-      result: []
-  }
-
+    flag: "tuo3",
+    imgU: [
+      {
+        src: "./static/img/Tuo3_lxt_ok/tuo_l2.jpg",
+        value: "2",
+        ownership: "U",
+        connected: false,
+      },
+      {
+        src: "./static/img/Tuo3_lxt_ok/tuo_l3.png",
+        value: "3",
+        ownership: "U",
+        connected: false,
+      },
+      {
+        src: "./static/img/Tuo3_lxt_ok/tuo_l4.jpg",
+        value: "4",
+        ownership: "U",
+        connected: false,
+      },
+      {
+        src: "./static/img/Tuo3_lxt_ok/tuo_l5.jpg",
+        value: "5",
+        ownership: "U",
+        connected: false,
+      },
+    ],
+    imgD: [
+      {
+        src: "./static/img/Tuo3_lxt_ok/tuo_a2.png",
+        value: "2",
+        ownership: "D",
+        connected: false,
+      },
+      {
+        src: "./static/img/Tuo3_lxt_ok/tuo_a3.png",
+        value: "3",
+        ownership: "D",
+        connected: false,
+      },
+      {
+        src: "./static/img/Tuo3_lxt_ok/tuo_a4.png",
+        value: "4",
+        ownership: "D",
+        connected: false,
+      },
+      {
+        src: "./static/img/Tuo3_lxt_ok/tuo_a5.png",
+        value: "5",
+        ownership: "D",
+        connected: false,
+      },
+    ],
+    // 标记是否正在绘制连线的状态，初始为 false 表示未开始绘制
+    isDrawing: false,
+    // 记录连线起始选项的对象，初始为 null 表示无起始选项
+    startItem: null,
+    // 记录连线结束选项的对象，初始为 null 表示无结束选项
+    endItem: null,
+    // 当前正在绘制的连线对象，包含起点和终点坐标，初始均为 0
+    currentLine: { x1: 0, y1: 0, x2: 0, y2: 0 },
+    // 存储所有已创建连线的数组，初始为空数组
+    connections: [],
+    // 画布的 2D 绘图上下文对象，初始为 null，后续在 mounted 钩子中初始化
+    ctx: null,
+    // 背景画布的 2D 绘图上下文对象，初始为 null，后续在 mounted 钩子中初始化
+    backCtx: null,
+    // 存储画布相对于视口的位置和尺寸信息的对象，初始为 null
+    canvasRect: null,
+    // 调试模式开关，设置为 true 时可开启调试功能，如绘制检测区域
+    isDebug: true,
+    // 存储用户连线答案检查结果的数组，初始为空数组
+    result: [],
+  },
+  tht: {
+    items: [
+      {
+        rightItem: "./static/img/tht/rightItem1.png",
+        cunt: 2,
+        flag: [false, false, false, false, false],
+      },
+      {
+        rightItem: "./static/img/tht/rightItem2.png",
+        cunt: 1,
+        flag: [false, false, false, false, false],
+      },
+      {
+        rightItem: "./static/img/tht/rightItem3.png",
+        cunt: 3,
+        flag: [false, false, false, false, false],
+      },
+    ],
+    tuxingpath: [
+      { leftImage: "./static/img/tht/left.png" },
+      { redCircle: "./static/img/tht/redCircle.png" },
+      { noneCircle: "./static/img/tht/noneCircle.png" },
+    ],
+  },
 };
 
 const mockStudentInfo = {
@@ -357,22 +408,11 @@ const mockStudentInfo = {
   teacher: "Bob",
 };
 
-const mockCorAnswers = [
-  {
-    questionId: 1,
-    answer: "B",
-  },
-  {
-    questionId: 2,
-    answer: "D",
-  },
-  {
-    questionId: 3,
-    answer: "C",
-  },
-];
-
-
+const mockCorAnswers = {
+  xzt: ["B", "D", "C"],
+  sst: [],
+  htt: [],
+};
 
 export default {
   data() {
@@ -380,27 +420,31 @@ export default {
       questions: mockQuestions,
       studentInfo: mockStudentInfo,
       corAnswers: mockCorAnswers,
-<<<<<<< Updated upstream
-      currentPage:1 ,
-
-
-=======
       loading: false,
       error: null,
-      currentPage:1,
       boolLists: {
         xzt: [],
         tkt: [],
         sst: [],
         htt: [],
       },
->>>>>>> Stashed changes
+      lxtpage:1,
     };
   },
-  components: {Htt, Sst, ArrowRight, tkt, xzt, sidebar ,circleDrawing: Sst,lxt},
+  components: {
+    Tht,
+    Htt,
+    Sst,
+    ArrowRight,
+    tkt,
+    xzt,
+    sidebar,
+    circleDrawing: Sst,
+    lxt,
+  },
   computed: {
     ArrowLeft() {
-      return ArrowLeft
+      return ArrowLeft;
     },
     countTm() {
       // TIPS: this.questions || {}：如果 this.questions 是 undefined 或 null，就返回空对象 {}，防止报错。
@@ -409,79 +453,117 @@ export default {
       let totalTm = xzt.length + sst.length;
 
       let answeredCount = [
-        ...xzt.filter(e => e.userAnswer),// 筛选出 xzt 里已答的题目
-        ...sst.filter(e => e.userAnswer),// 筛选出 sst 里已答的题目
+        ...xzt.filter((e) => e.userAnswer), // 筛选出 xzt 里已答的题目
+        ...sst.filter((e) => e.userAnswer), // 筛选出 sst 里已答的题目
       ].length;
 
       // 获得填空题里的题目
-      this.questions.tkt.forEach(question => {
-        question.userAnswer.forEach(answer => {
+      this.questions.tkt.forEach((question) => {
+        question.userAnswer.forEach((answer) => {
           // 如果是简单题
-          if (answer.type === 'simple') {
+          if (answer.type === "simple") {
             totalTm += answer.answers.length;
-            answeredCount += answer.answers.filter(a => a.trim() !== '').length;
+            answeredCount += answer.answers.filter(
+              (a) => a.trim() !== ""
+            ).length;
           }
           // 如果是复杂题(含有次级题目)
           else {
-            answer.sections.forEach(section => {
+            answer.sections.forEach((section) => {
               totalTm += section.answers.length;
-              answeredCount += section.answers.filter(a => a.trim() !== '').length;
+              answeredCount += section.answers.filter(
+                (a) => a.trim() !== ""
+              ).length;
             });
           }
         });
       });
 
       // 获得画图题答案
-      totalTm+=this.questions.htt.userAnswer.length;
-      this.questions.htt.userAnswer.forEach(ans=>{
-        ans.forEach(e=>{
-          if(e!==null)
+      totalTm += this.questions.htt.userAnswer.length;
+      // 防止多次计算
+      let prev = [];
+      this.questions.htt.userAnswer.forEach((ans, index) => {
+        ans.forEach((e) => {
+          if (e !== null && prev[index] == null) {
             answeredCount++;
-        })
-      })
+            prev[index] = e;
+            // console.log(e+","+prev[index]+","+index);
+          }
+        });
+      });
 
-      const percentage = totalTm ? Math.round((answeredCount / totalTm) * 100) : 0;
+      const percentage = totalTm
+        ? Math.round((answeredCount / totalTm) * 100)
+        : 0;
 
       return { totalTm, percentage, answeredCount };
     },
   },
-  created() {},
+  created() {
+    // this.fetchData(); //从后端获得答案
+  },
   mounted() {
-    document.addEventListener('contextmenu', this.preventContextMenu);
-    },
+    document.addEventListener("contextmenu", this.preventContextMenu);
+  },
   methods: {
+    async fetchData() {
+      this.loading = true;
+      this.error = null;
+
+      try {
+        const response = await axios.post("addr");
+        // API返回的数据结构
+        const { questions, studentInfo, corAnswers } = response.data;
+
+        this.questions = questions || mockQuestions;
+        this.studentInfo = studentInfo || mockStudentInfo;
+        this.corAnswers = corAnswers || mockCorAnswers;
+      } catch (error) {
+        //如果连接服务器失败
+        console.error("获取数据失败:", error);
+        this.error = error;
+
+        // 使用mock数据作为回退
+        this.questions = mockQuestions;
+        this.studentInfo = mockStudentInfo;
+        this.corAnswers = mockCorAnswers;
+      } finally {
+        this.loading = false;
+      }
+    },
     // 确认是否提交答案
     willSubmit() {
       let remainTm = this.countTm.totalTm - this.countTm.answeredCount;
       this.$confirm(
-          // 提示内容
-          remainTm !== 0
-              ? `你确定要提交答案吗?你还剩下${remainTm}个题目没写`
-              : `你确定要提交答案吗?`,
-          // 提示标题
-          "提示",
-          {
-            confirmButtonText: "确定",
-            cancelButtonText: "取消",
-            type: "warning",
-          }
+        // 提示内容
+        remainTm !== 0
+          ? `你确定要提交答案吗?你还剩下${remainTm}个题目没写`
+          : `你确定要提交答案吗?`,
+        // 提示标题
+        "提示",
+        {
+          confirmButtonText: "确定",
+          cancelButtonText: "取消",
+          type: "warning",
+        }
       )
-          // 确定
-          .then(() => {
-            this.submitAnswers();
-            this.$message({
-              type: "success",
-              message: "提交成功!",
-            });
-          })
-          //取消或报错(e)
-          .catch((e) => {
-            // console.log(e)
-            this.$message({
-              type: "info",
-              message: "已取消提交",
-            });
+        // 确定
+        .then(() => {
+          this.submitAnswers();
+          this.$message({
+            type: "success",
+            message: "提交成功!",
           });
+        })
+        //取消或报错(e)
+        .catch((e) => {
+          console.log(e);
+          this.$message({
+            type: "info",
+            message: "已取消提交",
+          });
+        });
     },
     // 获得填空题答案
     getFormattedAnswers() {
@@ -502,11 +584,11 @@ export default {
           const formattedAnswer = {
             questionId: tktIndex + 1, // 题目ID（页码），+1将索引转为1-based
             subQuestionId: answerIndex + 1, // 子题ID，+1将索引转为1-based
-            type: answer.type // 题目类型（'simple'或'complex'）
+            type: answer.type, // 题目类型（'simple'或'complex'）
           };
 
           // 处理简单题型
-          if (answer.type === 'simple') {
+          if (answer.type === "simple") {
             // 使用扩展运算符创建answers数组的浅拷贝
             // 避免直接引用原数组，防止意外修改原始数据
             formattedAnswer.answers = [...answer.answers];
@@ -517,7 +599,7 @@ export default {
             formattedAnswer.answers = [];
 
             // 第三层遍历：遍历复杂题型的各个部分(sections)
-            answer.sections.forEach(section => {
+            answer.sections.forEach((section) => {
               // 对每个section的answers数组进行浅拷贝，然后放入结果
               formattedAnswer.answers.push([...section.answers]);
               // 注意：这里是二维数组，每个section的answers作为子数组
@@ -533,95 +615,68 @@ export default {
       return results;
     },
     submitAnswers() {
-
       // const xztAns = this.questions.xzt.map((q) => ({
       //   questionId: q.id,
       //   answer: q.userAnswer,
       // }));
 
-      // 获得选择题答案
-      const xztAns=[];
-       this.questions.xzt.forEach(e=>{
-         xztAns.push(e.userAnswer);
-      })
+      // 获得选择题答案并且判断正误
+      const xztAns = [];
+      this.questions.xzt.forEach((e, index) => {
+        xztAns.push(e.userAnswer);
+        this.boolLists.xzt[index] = e.userAnswer === e.answer ? true : false;
+      });
       // 获得填空题答案
-      const tktAns=this.getFormattedAnswers();
+      const tktAns = this.getFormattedAnswers();
       // 获得数数题答案
-      const sstAns=[];
-      this.questions.sst.forEach(e=>{
-        sstAns.push( e.userAnswer);
-      })
+      const sstAns = [];
+      this.questions.sst.forEach((e, index) => {
+        sstAns.push(e.userAnswer);
+        this.boolLists.sst[index] =
+          e.userAnswer == e.title.count ? true : false;
+      });
 
       // console.log(tktAns);
       // console.log(sstAns);
       // console.log(xztAns);
       // this.checkAnswers(xztAns);
-      const httAns=[];
-      this.questions.htt.userAnswer.forEach(ans=>{
-        httAns.push(ans)
-      })
-      const finalAns={
-        xzt:xztAns,
-        sst:sstAns,
-        tkt:tktAns,
-        htt:httAns,
-      };
-      console.log(finalAns);
+      const httAns = [];
+      this.questions.htt.userAnswer.forEach((e, index) => {
+        let num = 0;
+        let flag = false;
+        e.forEach((e1, index1) => {
+          if (e1 != this.questions.htt.id) {
+            if (flag == false) {
+              httAns.push(false);
+              flag = true;
+            }
+          } else {
+            num++;
+          }
+        });
+        if (num == this.questions.htt.subQuestion[index].answer && flag == 0) {
+          httAns.push(true);
+          flag = true;
+        }
+        if (flag == false) {
+          httAns.push(false);
+          flag = true;
+        }
+      });
+
+      this.boolLists.htt = httAns;
+      //调试用
+      console.log(this.boolLists);
     },
 
-    // checkAnswers(answers) {
-    //
-    //   let boolList = [];
-    //   for (let i = 0; i < answers.length; i++) {
-    //     boolList.push(
-    //         answers[i].answer === this.corAnswers[i].answer
-    //         // && answers[i].questionId === this.corAnswers[i].questionId
-    //     );
-    //   }
-    //   console.log(boolList);
-    // },
-
-    pageAdd(){
-      if(this.currentPage<5) {
-        this.currentPage++;
-        document.documentElement.scrollTop = 0;
-      }
-    },
-    pageSub(){
-      if(this.currentPage>1) {
-        this.currentPage--;
-        document.documentElement.scrollTop = 0;
-      }
-    },
     // 禁用右键菜单
     preventContextMenu(e) {
-      ElMessage('为了更好的体验，右键已被禁用')
+      ElMessage("为了更好的体验，右键已被禁用");
       e.preventDefault();
-<<<<<<< Updated upstream
-    }
-=======
     },
-    pageAdd(){
-      if(this.currentPage<5) {
-        this.currentPage++;
-        document.documentElement.scrollTop = 0;
-      }
-    },
-    pageSub(){
-      if(this.currentPage>1) {
-        this.currentPage--;
-        document.documentElement.scrollTop = 0;
-      }
-    },
->>>>>>> Stashed changes
   },
   beforeDestroy() {
-    document.removeEventListener('contextmenu', this.preventContextMenu);
+    document.removeEventListener("contextmenu", this.preventContextMenu);
   },
-
-
-
-}
-
+};
 </script>
-

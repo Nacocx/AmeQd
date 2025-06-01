@@ -33,7 +33,6 @@
       </div>
     </div>
     <br>
-    <!-- <button class="submit" @click="yes">提交</button> -->
   </div>
   <br>
   <hr>
@@ -108,7 +107,7 @@ export  default {
             // 存储用户答案
             this.message.userAnswer[e.dataset.value - 1].push(this.message.draggedElement.dataset.value);
             this.message.draggedElement = null;
-            console.log(this.message.userAnswer);
+            // console.log(this.message.userAnswer);
             this.message.startX = 0;
             this.message.startY = 0;
           } else {
@@ -121,38 +120,6 @@ export  default {
 
       }
     },
-    yes() {
-      this.answer = [];
-      console.log(this.message.userAnswer);
-      this.message.userAnswer.forEach((e, index) => {
-        var num = 0;
-        var flag = 0;
-        e.forEach((e1, index1) => {
-
-          if (e1 != this.message.id) {
-            if (flag == 0) {
-              this.answer.push(0);
-              flag = 1;
-            }
-          }
-          else {
-            num++;
-          }
-        })
-        if (num == this.message.subQuestion[index].answer && flag == 0) {
-          this.answer.push(1);
-          flag = 1;
-        }
-        if (flag == 0) {
-          this.answer.push(0);
-          flag = 1;
-        }
-      })
-      // console.log(this.answer);//返回给后端的结果 对应每道题是否正确
-
-
-
-    }
   },
 
 }
