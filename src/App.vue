@@ -413,7 +413,7 @@ export default {
           {
             answeredCount++;
             prev[index]=e;
-            // console.log(e+","+prev[index]+","+index);
+            console.log(e+","+prev[index]+","+index);
           }
         })
       })
