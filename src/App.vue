@@ -21,12 +21,12 @@
               <tkt :all-questions="questions.tkt"/>
               <!-- part2_画图题 -->
               <htt :message="questions.htt" />
+              
               <!-- part3_连线题 -->
-              <lxt :message="questions.lxt_part3" />
-
-
+               <!-- TODO: Fix lxt bugs -->
+              <!-- <lxt :message="questions.lxt_part3" /> -->
               <!-- 拓展应用：3 -->
-              <lxt :message="questions.lxt_tuo3" />
+              <!-- <lxt :message="questions.lxt_tuo3" /> -->
 
 
 
@@ -138,45 +138,6 @@ const mockQuestions={
     {
       id: 1,
       title_main:"Part1: 认识数字1、2、3，理解基数含义",
-      title: [
-        "1.认识数字“1”",
-        "2.认识数字“2",
-        "3.认识数字“3”",
-        "4.认识数字“4”",
-        "5.认识数字“5”",
-      ],
-      img: "./static/img/T1_tkt_ok/tkt_1.jpeg",
-      subQuestions: [
-        "（1）一个太阳、一座房子、一棵果树可以用数字TNUM表示，也可以用TNUM个小圆片表示。TSPL（2）看看图中，还有什么可以用数字“1”表示呢TNUM和TNUM都可以用数字“1”表示。",
-        "两只鸟、两个人，可以用数字TNUM表示，也可以用TNUM个小圆片表示。",
-        "有三朵云，三个苹果，可以用数字TNUM表示，也可以用TNUM个小圆片表示。",
-        "有四个萝卜，四朵花，可以用数字TNUM表示，也可以用TNUM个小圆片表示。",
-        "有五只鸭子，可以用数字TNUM表示，也可以用TNUM个小圆片表示。",
-      ],
-      userAnswer: [
-        {
-          type: 'complex',
-          sections: [
-            { answers: ['', ''] }, // 第一部分
-            { answers: ['', ''] }  // 第二部分
-          ]
-        },
-        {
-          type: 'simple',
-          answers: ['', '']
-        },{
-          type: 'simple',
-          answers: ['', '']
-        },{
-          type: 'simple',
-          answers: ['', '']
-        },{
-          type: 'simple',
-          answers: ['', '']
-        },
-      ],
-    },{
-      id: 2,
       title: [
         "1.认识数字“1”",
         "2.认识数字“2",
@@ -406,7 +367,7 @@ export default {
           {
             answeredCount++;
             prev[index]=e;
-            console.log(e+","+prev[index]+","+index);
+            // console.log(e+","+prev[index]+","+index);
           }
         })
       })
@@ -558,19 +519,34 @@ export default {
       // console.log(sstAns);
       // console.log(xztAns);
       // this.checkAnswers(xztAns);
-      
       const httAns=[];
-      this.questions.htt.userAnswer.forEach(ans=>{
-        httAns.push(ans)
+      this.questions.htt.userAnswer.forEach((e, index) => {
+        let num = 0;
+        let flag = false;
+        e.forEach((e1, index1) => {
+
+          if (e1 != this.questions.htt.id) {
+            if (flag == false) {
+              httAns.push(false);
+              flag = true;
+            }
+          }
+          else {
+            num++;
+          }
+        })
+        if (num == this.questions.htt.subQuestion[index].answer && flag == 0) {
+          httAns.push(true);
+          flag = true;
+        }
+        if (flag == false) {
+          httAns.push(false);
+          flag = true;
+        }
       })
-      const finalAns={
-        xzt:xztAns,
-        sst:sstAns,
-        tkt:tktAns,
-        htt:httAns,
-      };
+      
+      this.boolLists.htt=httAns;
       //调试用
-      console.log(finalAns);
       console.log(this.boolLists);
     },
    
