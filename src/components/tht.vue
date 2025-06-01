@@ -69,62 +69,152 @@ export default{
 
 </script>
 
-<style>
-.container {
-    display: flex;
-    justify-content: center;
-    user-select: none;
+  <style>
+    body {
+        font-family: 'Arial Rounded MT Bold', 'Arial', sans-serif;
+        background-color: #f9f3ff;
+        margin: 0;
+        padding: 20px;
+    }
 
-}
+    /* #app {
+        max-width: 1000px;
+        margin: 0 auto;
+        background-color: white;
+        border-radius: 15px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        padding: 30px;
+    } */
 
-.left-area {
+    h3 {
+        text-align: center;
+        font-size: 24px;
+        color: #9a7deb;
+        margin-bottom: 30px;
+        font-weight: bold;
+        text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+    }
 
-    width: 500px;
-    height: 400px;
-    margin-right: 20px;
-    position: relative;
+    .container {
+        display: flex;
+        justify-content: center;
+        user-select: none;
+        border: 2px dashed #d1b3ff;
+        border-radius: 12px;
+        padding: 30px;
+        background-color: #fefcff;
+        margin-bottom: 20px;
+    }
 
+    .left-area {
+        width: 500px;
+        height: 400px;
+        margin-right: 30px;
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: white;
+        border-radius: 10px;
+        box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+    }
 
-}
+    .left-area img {
+        width: 90%;
+        max-height: 90%;
+        object-fit: contain;
+        border-radius: 8px;
+    }
 
-.right-area {
-    border: 2px dashed pink;
-    width: 300px;
-    height: 400px;
-    display: flex;
-    justify-content: space-around;
+    .right-area {
+        border-left: 2px dashed #d1b3ff;
+        width: 300px;
+        height: 400px;
+        display: flex;
+        justify-content: space-around;
+        padding-left: 30px;
+    }
 
+    .col {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        /* align-items: center; */
+        position: relative;
+    }
 
-}
+    .col > div {
+        margin-bottom: 10px;
+        transition: all 0.2s ease;
+    }
 
-.col {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    position: relative;
+    .col > div:hover {
+        transform: scale(1.05);
+    }
 
-}
+    .col img {
+        cursor: pointer;
+        transition: all 0.2s ease;
+    }
 
-.col img {
-    margin-bottom: 4px;
+    .col img:hover {
+        filter: brightness(1.1);
+    }
 
-}
+    .rightItem {
+        position: absolute;
+        bottom: -60px;
+        width: 60px !important;
+        height: auto;
+    }
 
-h3 {
-    text-align: center;
-    font-size: 20px;
-}
+    .confirm {
+        display: block;
+        width: 150px;
+        height: 50px;
+        margin: 20px auto 0;
+        background: linear-gradient(135deg, #76f5a3, #adc6dd);
+        color: white;
+        border: none;
+        border-radius: 25px;
+        font-size: 18px;
+        font-weight: bold;
+        cursor: pointer;
+        box-shadow: 0 4px 8px rgba(106, 48, 147, 0.3);
+        transition: all 0.3s ease;
+    }
 
-.left-area img {
-    width: 420px;
-    position: absolute;
-    top: 150px;
-    left: 5px;
+    .confirm:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 12px rgba(106, 48, 147, 0.4);
+    }
 
-}
+    .confirm:active {
+        transform: translateY(1px);
+    }
 
-.rightItem {
-    position: absolute;
-
-}
+    /* 响应式设计 */
+    @media (max-width: 900px) {
+        .container {
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+        }
+        
+        .left-area {
+            width: 100%;
+            margin-right: 0;
+            margin-bottom: 30px;
+            height: auto;
+        }
+        
+        .right-area {
+            border-left: none;
+            border-top: 2px dashed #d1b3ff;
+            padding-left: 0;
+            padding-top: 30px;
+            width: 100%;
+            height: auto;
+        }
+    }
 </style>
