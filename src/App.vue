@@ -68,14 +68,7 @@ import lxt from "@/components/lxt.vue";
 
 //实际使用中数据从后端获取
 
-//axios 获得题目
-// async function getTm(addr) {
-//   try{
-//     let response=await 
-//   }catch(e){
-//     console.error(e);
-//   }
-// }
+
 
 
 const mockQuestions={
@@ -188,7 +181,7 @@ const mockQuestions={
         "4.认识数字“4”",
         "5.认识数字“5”",
       ],
-      img: "",
+      img: "./static/img/T1_tkt_ok/tkt_1.jpeg",
       subQuestions: [
         "（1）一个太阳、一座房子、一棵果树可以用数字TNUM表示，也可以用TNUM个小圆片表示。TSPL（2）看看图中，还有什么可以用数字“1”表示呢TNUM和TNUM都可以用数字“1”表示。",
         "两只鸟、两个人，可以用数字TNUM表示，也可以用TNUM个小圆片表示。",
@@ -341,20 +334,10 @@ const mockStudentInfo = {
   teacher: "Bob",
 };
 
-const mockCorAnswers = [
-  {
-    questionId: 1,
-    answer: "B",
-  },
-  {
-    questionId: 2,
-    answer: "D",
-  },
-  {
-    questionId: 3,
-    answer: "C",
-  },
-];
+const mockCorAnswers = {
+  xzt:['B','D','C'],
+
+}
 
 
 
@@ -364,8 +347,8 @@ export default {
       questions: mockQuestions,
       studentInfo: mockStudentInfo,
       corAnswers: mockCorAnswers,
-      // currentPage:1 ,
-
+      loading:false,
+      error:null,
 
     };
   },
@@ -423,11 +406,38 @@ export default {
       return { totalTm, percentage, answeredCount };
     },
   },
-  created() {},
+  created() {
+    this.fetchData();
+  },
   mounted() {
     document.addEventListener('contextmenu', this.preventContextMenu);
     },
   methods: {
+    async fetchData() {
+    this.loading = true;
+    this.error = null;
+    
+    try {
+      const response = await axios.post('addr');
+      // API返回的数据结构
+      const { questions, studentInfo, corAnswers } = response.data;
+      
+      this.questions = questions || mockQuestions;
+      this.studentInfo = studentInfo || mockStudentInfo;
+      this.corAnswers = corAnswers || mockCorAnswers;
+      
+    } catch (error) {
+      console.error('获取数据失败:', error);
+      this.error = error;
+      
+      // 使用mock数据作为回退
+      this.questions = mockQuestions;
+      this.studentInfo = mockStudentInfo;
+      this.corAnswers = mockCorAnswers;
+    } finally {
+      this.loading = false;
+    }
+  },
     // 确认是否提交答案
     willSubmit() {
       let remainTm = this.countTm.totalTm - this.countTm.answeredCount;
@@ -534,6 +544,7 @@ export default {
       // console.log(sstAns);
       // console.log(xztAns);
       // this.checkAnswers(xztAns);
+      
       const httAns=[];
       this.questions.htt.userAnswer.forEach(ans=>{
         httAns.push(ans)
@@ -558,7 +569,6 @@ export default {
     //   }
     //   console.log(boolList);
     // },
-
     // pageAdd(){
     //   if(this.currentPage<5) {
     //     this.currentPage++;
@@ -572,6 +582,7 @@ export default {
     //   }
     // },
     // 禁用右键菜单
+    
     preventContextMenu(e) {
       ElMessage('为了更好的体验，右键已被禁用')
       e.preventDefault();

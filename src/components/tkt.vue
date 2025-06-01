@@ -1,10 +1,9 @@
 <template>
   <section class="question-container">
     <div
-        v-for="(questionGroup, groupIndex) in allQuestions"
+        v-for="(questionGroup) in allQuestions"
         :key="'group-' + questionGroup.id"
         :id="'part-' + questionGroup.id"
-        v-show="questionGroup.id === currentPage"
         class="question-part"
     >
     
