@@ -36,7 +36,6 @@
     <div class="submitDiv">
       <!-- <button class="submit" @click="checkAnswer">提交</button> -->
     </div>
-    <hr/>
   </div>
 
 </template>
@@ -486,7 +485,7 @@ export default {
       // 如果连线数组为空，直接返回
       if (this.message.connections.length === 0) return;
       // 移除最后一条连线
-      const lastConnection = this.connections.pop();
+      const lastConnection = this.message.connections.pop();
       // 将最后一条连线的起始选项连接状态设置为未连接
       lastConnection.start.connected = false;
       // 将最后一条连线的结束选项连接状态设置为未连接
