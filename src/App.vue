@@ -18,6 +18,7 @@
           <div id="chose">
             <div class="question-container">
               <!-- part1_填空题 -->
+<<<<<<< Updated upstream
               <tkt :all-questions="questions.tkt"/>
               <!-- part2_画图题 -->
               <htt :message="questions.htt" />
@@ -37,6 +38,32 @@
                 <el-button type="default" @click="pageSub" :icon="ArrowLeft" size="large" :disabled="currentPage===1">Last Part</el-button>
                 <el-button type="primary" @click="willSubmit" id="Submit" size="large">提交答案</el-button>
                 <el-button type="default" @click="pageAdd" size="large" :disabled="currentPage===4">Next Part<el-icon class="el-icon--right"><ArrowRight /></el-icon></el-button>
+=======
+              <tkt :all-questions="questions.tkt" v-if="currentPage===1" />
+              <!-- part2_画图题 -->
+              <htt :message="questions.htt" v-if="currentPage===2" />
+
+              <!-- part3_连线题 -->
+              <!-- TODO: Fix lxt bugs -->
+              <lxt :message="questions.lxt_part3" v-if="currentPage===3" />
+              <!-- 拓展应用：3 -->
+              <lxt :message="questions.lxt_tuo3" v-if="currentPage===4" />
+
+              <xzt :questions="questions.xzt" v-if="currentPage===5" />
+              <sst :items="questions.sst" v-if="currentPage===6" />
+              <tht :items="questions.tht.items" :tuxing-path="questions.tht.tuxingpath" v-if="currentPage===7" />
+
+              <el-button-group>
+                <el-button type="default" @click="pageSub" :icon="ArrowLeft" size="large" :disabled="currentPage===1">Last Part</el-button>
+                <el-button
+                  type="primary"
+                  @click="willSubmit"
+                  id="Submit"
+                  size="large"
+                  >提交答案</el-button
+                >
+                <el-button type="default" @click="pageAdd" size="large" :disabled="currentPage===7">Next Part<el-icon class="el-icon--right"><ArrowRight /></el-icon></el-button>
+>>>>>>> Stashed changes
               </el-button-group>
 
 
@@ -353,9 +380,21 @@ export default {
       questions: mockQuestions,
       studentInfo: mockStudentInfo,
       corAnswers: mockCorAnswers,
+<<<<<<< Updated upstream
       currentPage:1 ,
 
 
+=======
+      loading: false,
+      error: null,
+      currentPage:1,
+      boolLists: {
+        xzt: [],
+        tkt: [],
+        sst: [],
+        htt: [],
+      },
+>>>>>>> Stashed changes
     };
   },
   components: {Htt, Sst, ArrowRight, tkt, xzt, sidebar ,circleDrawing: Sst,lxt},
@@ -558,7 +597,23 @@ export default {
     preventContextMenu(e) {
       ElMessage('为了更好的体验，右键已被禁用')
       e.preventDefault();
+<<<<<<< Updated upstream
     }
+=======
+    },
+    pageAdd(){
+      if(this.currentPage<5) {
+        this.currentPage++;
+        document.documentElement.scrollTop = 0;
+      }
+    },
+    pageSub(){
+      if(this.currentPage>1) {
+        this.currentPage--;
+        document.documentElement.scrollTop = 0;
+      }
+    },
+>>>>>>> Stashed changes
   },
   beforeDestroy() {
     document.removeEventListener('contextmenu', this.preventContextMenu);
