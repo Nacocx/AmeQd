@@ -1,6 +1,6 @@
 # ame
 
-This template should help get you started developing with Vue 3 in Vite.
+私密仓库
 
 ## Recommended IDE Setup
 
@@ -27,3 +27,4 @@ npm run dev
 ```sh
 npm run build
 ```
+运行build后，会产生dist文件夹，里面的就是打包好的静态页面

@@ -1,14 +1,15 @@
 <template>
   <section class="question-container">
     <div
-        v-for="(questionGroup, groupIndex) in allQuestions"
+        v-for="(questionGroup) in allQuestions"
         :key="'group-' + questionGroup.id"
         :id="'part-' + questionGroup.id"
-        v-show="questionGroup.id === currentPage"
         class="question-part"
     >
-      <h1 class="question-title">当前第 {{ questionGroup.id }} 题</h1>
-
+    
+      <!-- <h1 class="question-title">当前第 {{ questionGroup.id }} 题</h1> -->
+      <!-- <h1>当前第 {{ questionGroup.id }} 题</h1> -->
+      <h1>{{questionGroup.title_main}}</h1>
       <div v-if="questionGroup.img" class="question-image">
         <img :src="questionGroup.img" :alt="'第' + questionGroup.id + '题图片'">
       </div>
@@ -58,10 +59,10 @@
   </section>
   <br>
 <!--  如果填空题只有一个，就没必要显示翻页按钮-->
-  <el-button-group>
+  <!-- <el-button-group>
     <el-button type="primary" @click="pageSub" :disabled="currentPage===1">上一题</el-button>
     <el-button type="primary" @click="pageAdd" :disabled="currentPage===allQuestions.length">下一题</el-button>
-  </el-button-group>
+  </el-button-group> -->
   <br>
   <hr/>
 
