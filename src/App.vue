@@ -84,6 +84,7 @@ const mockQuestions={
         //img非必需
       ],
       userAnswer: "",
+      answer:"B"
     },
     {
       id: 2,
@@ -95,6 +96,7 @@ const mockQuestions={
         { value: "D", label: "4" },
       ],
       userAnswer: "",
+      answer:"D"
     },
     {
       id: 3,
@@ -106,6 +108,7 @@ const mockQuestions={
         { value: "D", label: "7" },
       ],
       userAnswer: "",
+      answer:"C"
     },
   ],
 
@@ -336,7 +339,8 @@ const mockStudentInfo = {
 
 const mockCorAnswers = {
   xzt:['B','D','C'],
-
+  sst:[],
+  htt:[]
 }
 
 
@@ -349,6 +353,12 @@ export default {
       corAnswers: mockCorAnswers,
       loading:false,
       error:null,
+      boolLists:{
+        xzt:[],
+        tkt:[],
+        sst:[],
+        htt:[],
+      },
 
     };
   },
@@ -407,7 +417,7 @@ export default {
     },
   },
   created() {
-    this.fetchData();
+    // this.fetchData(); //从后端获得答案
   },
   mounted() {
     document.addEventListener('contextmenu', this.preventContextMenu);
@@ -425,8 +435,10 @@ export default {
       this.questions = questions || mockQuestions;
       this.studentInfo = studentInfo || mockStudentInfo;
       this.corAnswers = corAnswers || mockCorAnswers;
-      
-    } catch (error) {
+
+    } 
+    //如果连接服务器失败
+    catch (error) {
       console.error('获取数据失败:', error);
       this.error = error;
       
@@ -464,7 +476,7 @@ export default {
           })
           //取消或报错(e)
           .catch((e) => {
-            // console.log(e)
+            console.log(e)
             this.$message({
               type: "info",
               message: "已取消提交",
@@ -527,17 +539,19 @@ export default {
       //   answer: q.userAnswer,
       // }));
 
-      // 获得选择题答案
+      // 获得选择题答案并且判断正误
       const xztAns=[];
-       this.questions.xzt.forEach(e=>{
+       this.questions.xzt.forEach((e,index)=>{
          xztAns.push(e.userAnswer);
+         this.boolLists.xzt[index]=((e.userAnswer===e.answer)?true:false);
       })
       // 获得填空题答案
       const tktAns=this.getFormattedAnswers();
       // 获得数数题答案
       const sstAns=[];
-      this.questions.sst.forEach(e=>{
+      this.questions.sst.forEach((e,index)=>{
         sstAns.push( e.userAnswer);
+        this.boolLists.sst[index]=((e.userAnswer==e.title.count)?true:false);
       })
 
       // console.log(tktAns);
@@ -555,34 +569,13 @@ export default {
         tkt:tktAns,
         htt:httAns,
       };
+      //调试用
       console.log(finalAns);
+      console.log(this.boolLists);
     },
+   
 
-    // checkAnswers(answers) {
-    //
-    //   let boolList = [];
-    //   for (let i = 0; i < answers.length; i++) {
-    //     boolList.push(
-    //         answers[i].answer === this.corAnswers[i].answer
-    //         // && answers[i].questionId === this.corAnswers[i].questionId
-    //     );
-    //   }
-    //   console.log(boolList);
-    // },
-    // pageAdd(){
-    //   if(this.currentPage<5) {
-    //     this.currentPage++;
-    //     document.documentElement.scrollTop = 0;
-    //   }
-    // },
-    // pageSub(){
-    //   if(this.currentPage>1) {
-    //     this.currentPage--;
-    //     document.documentElement.scrollTop = 0;
-    //   }
-    // },
     // 禁用右键菜单
-    
     preventContextMenu(e) {
       ElMessage('为了更好的体验，右键已被禁用')
       e.preventDefault();
