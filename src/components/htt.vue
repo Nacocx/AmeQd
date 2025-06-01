@@ -6,10 +6,8 @@
 
 
   <div>
-    <div class="header">
-
-      {{message.title}}
-    </div>
+    <h1>{{message.title}}:</h1>
+   
     <div class="questions">
       请拖进与图片物品数量一样的:<img :src="message.shape[message.id-1]" alt="" class="shape">
     </div>
@@ -18,7 +16,7 @@
     <div class="main_body">
       <div class="part" v-for="(e,index) in message.subQuestion">
         <div class="up">
-          <img :src="e.img" alt="图片加载失败">
+          <img :src="e.img" alt="图片加载失败" class="img_style">
         </div>
         <!-- 这里加了data-value属性 匹配那个框 -->
         <div class="down target-area" :data-value="index+1">
@@ -198,10 +196,10 @@ body {
 
 }
 
-.htt_main_part .part .up {
-  width: 100%;
-  height: 35%;
-}
+.main_body .part .up {
+  height: 170px;
+  align-self: center;
+} 
 
 .down {
   width: 100%;
@@ -211,13 +209,6 @@ body {
   border-radius: 10px;
 
 }
-
-.htt_main_part .part .up img {
-  width: 100%;
-  height: 100%;
-}
-
-
 .htt_main_part .header {
   text-align: center;
   height: 8%;
@@ -254,7 +245,10 @@ body {
   width: 40px;
   height: 40px;
 }
+.img_style{
+  width: 100%;
 
+}
 .submit {
   padding: 10px 20px;
   border: none;
@@ -284,6 +278,6 @@ body {
 .questions img {
   height: 40px;
   width: 40px;
-  transform: translateY(5px);
+  transform: translateY(15px);
 }
 </style>

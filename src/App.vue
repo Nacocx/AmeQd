@@ -17,15 +17,26 @@
           <!-- 选择题 -->
           <div id="chose">
             <div class="question-container">
-              <!-- 选择题模板 -->
-              <xzt :questions="questions.xzt" />
-              <tkt :all-questions="questions.tkt" />
-              <sst :items="questions.sst" />
+              <!-- part1_填空题 -->
+              <tkt :all-questions="questions.tkt"/>
+              <!-- part2_画图题 -->
               <htt :message="questions.htt" />
+              <!-- part3_连线题 -->
+              <lxt :message="questions.lxt_part3" />
+
+
+              <!-- 拓展应用：3 -->
+              <lxt :message="questions.lxt_tuo3" />
+
+
+
+              <xzt :questions="questions.xzt"/>
+              <sst :items="questions.sst" />
+       
               <el-button-group>
-                <!-- <el-button type="default" @click="pageSub" :icon="ArrowLeft" size="large" :disabled="currentPage===1">Last Part</el-button> -->
+                <el-button type="default" @click="pageSub" :icon="ArrowLeft" size="large" :disabled="currentPage===1">Last Part</el-button>
                 <el-button type="primary" @click="willSubmit" id="Submit" size="large">提交答案</el-button>
-                <!-- <el-button type="default" @click="pageAdd" size="large" :disabled="currentPage===4">Next Part<el-icon class="el-icon--right"><ArrowRight /></el-icon></el-button> -->
+                <el-button type="default" @click="pageAdd" size="large" :disabled="currentPage===4">Next Part<el-icon class="el-icon--right"><ArrowRight /></el-icon></el-button>
               </el-button-group>
 
 
@@ -47,18 +58,13 @@ import sidebar from "@/components/sidebar.vue";
 import tkt from "@/components/tkt.vue";
 import {ArrowLeft, ArrowRight} from "@element-plus/icons-vue";
 import {ElMessage} from "element-plus";
+import '@/style/app.css'
 import Sst from "@/components/sst.vue";
 import Htt from "@/components/htt.vue";
+import lxt from "@/components/lxt.vue";
 
 
-//axios 获得题目
-// async function getTm(addr) {
-//   try{
-//     let response=await 
-//   }catch(e){
-//     console.error(e);
-//   }
-// }
+
 
 //实际使用中数据从后端获取
 const mockQuestions={
@@ -66,11 +72,11 @@ const mockQuestions={
     {
       id: 1,
       title: "每只小兔吃一个萝卜，选哪一堆正好合适？",
-      img: "../static/T1/timu.png", //非必需
+      img: "../static/img/T1_xzt/timu.png", //非必需
       options: [
-        { value: "A", img: "../static/T1/A.png" },
-        { value: "B", img: "../static/T1/B.png" },
-        { value: "C", img: "../static/T1/C.png" },
+        { value: "A", img: "./static/img/T1_xzt/A.png" },
+        { value: "B", img: "./static/img/T1_xzt/B.png" },
+        { value: "C", img: "./static/img/T1_xzt/C.png" },
         //img非必需
       ],
       userAnswer: "",
@@ -102,20 +108,20 @@ const mockQuestions={
   sst: [
     {
       id: 1,
-      title: { image: "./static/icecream.png", count: 5 },
-      tuXingPath: "./static/circle.png",
+      title: { image: "./static/img/T3_sst/icecream.png", count: 5 },
+      tuXingPath: "./static/img/T3_sst/circle.png",
       userAnswer: "",
     },
     {
       id: 2,
-      title: { image: "./static/plane.png", count: 4 },
-      tuXingPath: "./static/circle.png",
+      title: { image: "./static/img/T3_sst/plane.png", count: 4 },
+      tuXingPath: "./static/img/T3_sst/circle.png",
       userAnswer: "",
     },
     {
       id: 3,
-      title: { image: "./static/tree.png", count: 3 },
-      tuXingPath: "./static/circle.png",
+      title: { image: "./static/img/T3_sst/tree.png", count: 3 },
+      tuXingPath: "./static/img/T3_sst/circle.png",
       userAnswer: "",
     },
   ],
@@ -124,6 +130,7 @@ const mockQuestions={
   tkt: [
     {
       id: 1,
+      title_main:"Part1: 认识数字1、2、3，理解基数含义",
       title: [
         "1.认识数字“1”",
         "2.认识数字“2",
@@ -131,7 +138,7 @@ const mockQuestions={
         "4.认识数字“4”",
         "5.认识数字“5”",
       ],
-      img: "./static/tkt1.png",
+      img: "./static/img/T1_tkt_ok/tkt_1.jpeg",
       subQuestions: [
         "（1）一个太阳、一座房子、一棵果树可以用数字TNUM表示，也可以用TNUM个小圆片表示。TSPL（2）看看图中，还有什么可以用数字“1”表示呢TNUM和TNUM都可以用数字“1”表示。",
         "两只鸟、两个人，可以用数字TNUM表示，也可以用TNUM个小圆片表示。",
@@ -170,7 +177,7 @@ const mockQuestions={
         "4.认识数字“4”",
         "5.认识数字“5”",
       ],
-      img: "./static/tkt1.png",
+      img: "",
       subQuestions: [
         "（1）一个太阳、一座房子、一棵果树可以用数字TNUM表示，也可以用TNUM个小圆片表示。TSPL（2）看看图中，还有什么可以用数字“1”表示呢TNUM和TNUM都可以用数字“1”表示。",
         "两只鸟、两个人，可以用数字TNUM表示，也可以用TNUM个小圆片表示。",
@@ -204,31 +211,31 @@ const mockQuestions={
   ],
 
   htt:{
-    id: 1,//1对应矩形 2对应三角形 3对应圆形
-    title: "画图题",
+    id: 2,//1对应矩形 2对应三角形 3对应圆形
+    title: "Part2",
     subQuestion: [
       {
         id: 1,
-        img: "./img/t1.png",
+        img: "./static/img/T2_htt_ok/t1.jpeg",
         answer: 2,
       },
       {
         id: 2,
-        img: "./img/t2.png",
+        img: "./static/img/T2_htt_ok/t2.jpeg",
         answer: 3,
       },
       {
         id: 3,
-        img: "./img/t3.png",
+        img: "./static/img/T2_htt_ok/t3.jpeg",
         answer: 5,
       },
       {
         id: 4,
-        img: "./img/t4.png",
+        img: "./static/img/T2_htt_ok/t4.jpeg",
         answer: 4,
       },
     ],
-    shape: ["./img/jx.png", "./img/sjx.png", "./img/yx.png"],//有那些形状图形可以选择
+    shape: ["./static/img/T2_htt_ok/jx.png", "./static/img/T2_htt_ok/sjx.png", "./static/img/T2_htt_ok/yx.png"],//有那些形状图形可以选择
     trueShape: 1,
     userAnswer: [
       [],
@@ -242,6 +249,78 @@ const mockQuestions={
     draggedElement: null,//正在拖拽的元素
 
   },
+  lxt_part3:{
+    title: "part3",
+    flag:"t3",
+      imgU: [
+        { src: './static/img/T3_lxt_ok/l1.png', value: '1', ownership: 'U', connected: false },
+        { src: './static/img/T3_lxt_ok/l2.png', value: '2', ownership: 'U', connected: false },
+        { src: './static/img/T3_lxt_ok/l4.png', value: '4', ownership: 'U', connected: false },
+        { src: './static/img/T3_lxt_ok/l5.png', value: '5', ownership: 'U', connected: false },
+      ],
+      imgD: [
+        { src: './static/img/T3_lxt_ok/a1.png', value: '1', ownership: 'D', connected: false },
+        { src: './static/img/T3_lxt_ok/a2.png', value: '2', ownership: 'D', connected: false },
+        { src: './static/img/T3_lxt_ok/a4.png', value: '4', ownership: 'D', connected: false },
+        { src: './static/img/T3_lxt_ok/a5.png', value: '5', ownership: 'D', connected: false },
+      ],
+       // 标记是否正在绘制连线的状态，初始为 false 表示未开始绘制
+      isDrawing: false,
+      // 记录连线起始选项的对象，初始为 null 表示无起始选项
+      startItem: null,
+      // 记录连线结束选项的对象，初始为 null 表示无结束选项
+      endItem: null,
+      // 当前正在绘制的连线对象，包含起点和终点坐标，初始均为 0
+      currentLine: { x1: 0, y1: 0, x2: 0, y2: 0 },
+      // 存储所有已创建连线的数组，初始为空数组
+      connections: [],
+      // 画布的 2D 绘图上下文对象，初始为 null，后续在 mounted 钩子中初始化
+      ctx: null,
+      // 背景画布的 2D 绘图上下文对象，初始为 null，后续在 mounted 钩子中初始化
+      backCtx: null,
+      // 存储画布相对于视口的位置和尺寸信息的对象，初始为 null
+      canvasRect: null,
+      // 调试模式开关，设置为 true 时可开启调试功能，如绘制检测区域
+      isDebug: true,
+      // 存储用户连线答案检查结果的数组，初始为空数组
+      result: []
+  },
+  lxt_tuo3:{
+    title: "拓展应用3",
+    flag:"tuo3",
+      imgU: [
+        { src: './static/img/Tuo3_lxt_ok/tuo_l2.jpg', value: '2', ownership: 'U', connected: false },
+        { src: './static/img/Tuo3_lxt_ok/tuo_l3.png', value: '3', ownership: 'U', connected: false },
+        { src: './static/img/Tuo3_lxt_ok/tuo_l4.jpg', value: '4', ownership: 'U', connected: false },
+        { src: './static/img/Tuo3_lxt_ok/tuo_l5.jpg', value: '5', ownership: 'U', connected: false },
+      ],
+      imgD: [
+        { src: './static/img/Tuo3_lxt_ok/tuo_a2.png', value: '2', ownership: 'D', connected: false },
+        { src: './static/img/Tuo3_lxt_ok/tuo_a3.png', value: '3', ownership: 'D', connected: false },
+        { src: './static/img/Tuo3_lxt_ok/tuo_a4.png', value: '4', ownership: 'D', connected: false },
+        { src: './static/img/Tuo3_lxt_ok/tuo_a5.png', value: '5', ownership: 'D', connected: false },
+      ],
+       // 标记是否正在绘制连线的状态，初始为 false 表示未开始绘制
+      isDrawing: false,
+      // 记录连线起始选项的对象，初始为 null 表示无起始选项
+      startItem: null,
+      // 记录连线结束选项的对象，初始为 null 表示无结束选项
+      endItem: null,
+      // 当前正在绘制的连线对象，包含起点和终点坐标，初始均为 0
+      currentLine: { x1: 0, y1: 0, x2: 0, y2: 0 },
+      // 存储所有已创建连线的数组，初始为空数组
+      connections: [],
+      // 画布的 2D 绘图上下文对象，初始为 null，后续在 mounted 钩子中初始化
+      ctx: null,
+      // 背景画布的 2D 绘图上下文对象，初始为 null，后续在 mounted 钩子中初始化
+      backCtx: null,
+      // 存储画布相对于视口的位置和尺寸信息的对象，初始为 null
+      canvasRect: null,
+      // 调试模式开关，设置为 true 时可开启调试功能，如绘制检测区域
+      isDebug: true,
+      // 存储用户连线答案检查结果的数组，初始为空数组
+      result: []
+  }
 
 };
 
@@ -274,12 +353,12 @@ export default {
       questions: mockQuestions,
       studentInfo: mockStudentInfo,
       corAnswers: mockCorAnswers,
-      // currentPage:1 ,
+      currentPage:1 ,
 
 
     };
   },
-  components: {Htt, Sst, ArrowRight, tkt, xzt, sidebar ,circleDrawing: Sst},
+  components: {Htt, Sst, ArrowRight, tkt, xzt, sidebar ,circleDrawing: Sst,lxt},
   computed: {
     ArrowLeft() {
       return ArrowLeft
@@ -315,16 +394,10 @@ export default {
 
       // 获得画图题答案
       totalTm+=this.questions.htt.userAnswer.length;
-      // 防止多次计算
-      let prev=[];
-      this.questions.htt.userAnswer.forEach((ans,index)=>{
-        ans.forEach((e)=>{
-          if(e!==null&&prev[index]==null)
-          {
+      this.questions.htt.userAnswer.forEach(ans=>{
+        ans.forEach(e=>{
+          if(e!==null)
             answeredCount++;
-            prev[index]=e;
-            // console.log(e+","+prev[index]+","+index);
-          }
         })
       })
 
@@ -444,8 +517,6 @@ export default {
       // console.log(sstAns);
       // console.log(xztAns);
       // this.checkAnswers(xztAns);
-
-      // 获得画图题答案
       const httAns=[];
       this.questions.htt.userAnswer.forEach(ans=>{
         httAns.push(ans)
@@ -471,18 +542,18 @@ export default {
     //   console.log(boolList);
     // },
 
-    // pageAdd(){
-    //   if(this.currentPage<5) {
-    //     this.currentPage++;
-    //     document.documentElement.scrollTop = 0;
-    //   }
-    // },
-    // pageSub(){
-    //   if(this.currentPage>1) {
-    //     this.currentPage--;
-    //     document.documentElement.scrollTop = 0;
-    //   }
-    // },
+    pageAdd(){
+      if(this.currentPage<5) {
+        this.currentPage++;
+        document.documentElement.scrollTop = 0;
+      }
+    },
+    pageSub(){
+      if(this.currentPage>1) {
+        this.currentPage--;
+        document.documentElement.scrollTop = 0;
+      }
+    },
     // 禁用右键菜单
     preventContextMenu(e) {
       ElMessage('为了更好的体验，右键已被禁用')
@@ -499,61 +570,3 @@ export default {
 
 </script>
 
-<!-- 更改选择题前框的大小-->
-
-<style>
-.el-radio__inner {
-  width: 30px;
-  height: 30px;
-}
-
-*{
-  user-select: none;
-}
-.el-aside {
-  background-color: white;
-  color: #333;
-  text-align: center;
-  height: 500px;
-  line-height: 35px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, .12), 0 0 6px rgba(0, 0, 0, .04);
-  border-radius: 8px;
-  position: fixed;
-  width: 350px;
-}
-
-.el-main {
-  color: #333;
-  text-align: center;
-  border: 1px white solid;
-  max-width: 1000px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, .12), 0 0 6px rgba(0, 0, 0, .04);
-  border-radius: 8px;
-  margin: auto;
-}
-
-
-.el-progress-bar {
-  width: 75%;
-  margin-top: 30px;
-}
-
-#app{
-  padding-top: 60px;
-}
-
-.el-header {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 60px !important;
-  /* 固定高度 */
-  background: #fff;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-  z-index: 1000;
-  display: flex;
-  align-items: center;
-  padding: 0 20px;
-}
-</style>
