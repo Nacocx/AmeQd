@@ -410,6 +410,7 @@ export default {
       context.lineWidth = width;
       // 绘制路径
       context.stroke();
+      this.checkAnswer();
     },
 
     /**
@@ -428,10 +429,10 @@ export default {
      */
     checkAnswer() {
       // 标记所有答案是否正确
-      let allCorrect = true;
+      // let allCorrect = true;
       // 存储每个选项的检查结果
-      this.message.result = [];
-
+      this.message.result = [0,0,0,0];
+      // let n=0;
       // 遍历上方选项
       this.message.imgU.forEach((upItem, index) => {
         // 查找与当前选项相关的连线
@@ -441,27 +442,27 @@ export default {
 
         if (connection) {
           // 如果连线的结束选项值与起始选项值相同，结果为 1，否则为 0
-          this.message.result.push(connection.end.value === upItem.value ? 1 : 0);
+          this.message.result[index]=(connection.end.value === upItem.value ? 1 : 0);
         } else {
           // 如果没有连线，结果为 0
-          this.message.result.push(0);
+          this.message.result[index]=(0);
         }
 
         // 如果当前选项的结果不为 1，说明有错误
-        if (this.message.result[index] !== 1) {
-          allCorrect = false;
-        }
+        // if (this.message.result[index] !== 1) {
+        //   allCorrect = false;
+        // }
       });
 
       // 检查是否所有选项都已连接
-      const allConnected = this.message.connections.length === this.message.imgU.length;
+      // const allConnected = this.message.connections.length === this.message.imgU.length;
       // 所有答案正确且所有选项都已连接才判定为全部正确
-      allCorrect = allCorrect && allConnected;
+      // allCorrect = allCorrect && allConnected;
 
       // 打印结果数组
       console.log("结果数组:", this.message.result);
       // 根据检查结果弹出提示框
-      alert(allCorrect ? '恭喜你，全部正确！' : '还有错误，请重试');
+      // alert(allCorrect ? '恭喜你，全部正确！' : '还有错误，请重试');
     },
 
     /**
