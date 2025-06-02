@@ -1,6 +1,8 @@
+<!-- 连线题 -->
+
 <template>
-  
-  <div>
+
+  <div class="lxt_main_body">
     <!-- <div class="header"></div> -->
       <h1>{{message.title}}</h1>
     <div class="questions">请连接和图片中物品数量一致的圆的图片</div>
@@ -36,6 +38,7 @@
     <div class="submitDiv">
       <!-- <button class="submit" @click="checkAnswer">提交</button> -->
     </div>
+    <!-- <hr> -->
   </div>
 
 </template>
@@ -532,7 +535,7 @@ export default {
 
 <style>
 
-.container {
+  .lxt_main_body .container {
   width: 1000px;
   height: 850px;
   margin: auto;
@@ -541,7 +544,7 @@ export default {
   position: relative;
 }
 
-.header {
+  .lxt_main_body .header {
   text-align: center;
   font-size: 50px;
   color: white;
@@ -553,13 +556,13 @@ export default {
 
 
 
-.questions {
+  .lxt_main_body .questions {
   text-align: center;
   font-size: 30px;
   margin: 20px 0;
 }
 
-.content {
+  .lxt_main_body .content {
   width: 900px;
   height: 500px;
   margin: auto;
@@ -569,14 +572,14 @@ export default {
   position: relative;
 }
 
-.options {
+  .lxt_main_body .options {
   display: flex;
   width: 100%;
   justify-content: space-around;
   margin: 20px 0;
 }
 
-.option {
+  .lxt_main_body .option {
   width: 150px;
   height: 150px;
   margin: 10px;
@@ -592,26 +595,26 @@ export default {
   border-radius: 20px;
 }
 
-.option img {
+  .lxt_main_body .option img {
   width: 100%;
   height: 100%;
   object-fit: contain;
 }
 
-.option.active {
+  .lxt_main_body .option.active {
   border-color: #4CAF50;
 }
 
-.option.hover-valid {
+  .lxt_main_body .option.hover-valid {
   border-color: #4CAF50;
 }
 
-.option.hover-invalid {
+  .lxt_main_body .option.hover-invalid {
   border-color: #F44336;
 }
 
-#canvas,
-#backCanvas {
+  .lxt_main_body #canvas,
+  .lxt_main_body #backCanvas {
   position: absolute;
   top: 0;
   left: 0;
@@ -619,12 +622,12 @@ export default {
   z-index: 0;
 }
 
-.buttons {
+  .lxt_main_body .buttons {
   text-align: center;
   margin: 0;
 }
 
-.button {
+  .lxt_main_body .button {
   width: 200px;
   height: 80px;
   padding: 10px 20px;
@@ -638,16 +641,16 @@ export default {
   transition: background-color 0.2s;
 }
 
-.button:hover {
+  .lxt_main_body .button:hover {
   background-color: #45a049;
 }
 
-.submitDiv {
+  .lxt_main_body .submitDiv {
   text-align: center;
   margin: 10px 0;
 }
 
-.submit {
+  .lxt_main_body .submit {
   width: 200px;
   height: 60px;
   padding: 10px 30px;
