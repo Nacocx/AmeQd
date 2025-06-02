@@ -31,9 +31,9 @@
               <lxt :message="questions.lxt_part3" v-if="lxtpage===1"/>
               <!-- 拓展应用：3 -->
               <lxt :message="questions.lxt_tuo3" v-if="lxtpage===2"/>
-                <el-button-group>
+                <el-button-group size="large">
                   <el-button @click="lxtpage--" type="primary" :disabled="lxtpage===1">Last</el-button>
-                  <el-button @click="lxtpage++" type="primary" :disabled="lxtpage===3">Next</el-button>
+                  <el-button @click="lxtpage++" type="primary" :disabled="lxtpage===2">Next</el-button>
                 </el-button-group>
                <hr/>
 
@@ -182,6 +182,9 @@ const mockQuestions = {
           answers: ["", ""],
         },
       ],
+      answer:[
+        
+      ]
     },
   ],
 
@@ -550,6 +553,8 @@ export default {
       )
         // 确定
         .then(() => {
+          console.log(this.questions);
+          
           this.submitAnswers();
           this.$message({
             type: "success",
