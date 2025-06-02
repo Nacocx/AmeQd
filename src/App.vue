@@ -21,16 +21,22 @@
 
               <!-- part3_连线题 -->
               <!-- TODO: Fix lxt bugs -->
+
+               
+               
+
               <div>
 
                 <lxt :message="questions.lxt_part3" v-if="lxtpage === 1" />
                 <!-- 拓展应用：3 -->
                 <lxt :message="questions.lxt_tuo3" v-if="lxtpage === 2" />
+                <qst :message="questions.qst"/>
                 <el-button-group size="large">
                   <el-button @click="lxtpage--" type="primary" :disabled="lxtpage === 1">Last</el-button>
                   <el-button @click="lxtpage++" type="primary" :disabled="lxtpage === 2">Next</el-button>
                 </el-button-group>
                 <hr />
+
 
               </div>
 
@@ -62,6 +68,7 @@ import Sst from "@/components/sst.vue";
 import Htt from "@/components/htt.vue";
 import lxt from "@/components/lxt.vue";
 import Tht from "@/components/tht.vue";
+import qst from "@/components/qst.vue";
 
 //实际使用中数据从后端获取
 
@@ -401,6 +408,27 @@ const mockQuestions = {
       { noneCircle: "./static/img/tht/noneCircle.png" },
     ],
   },
+  qst:{
+    title: "对照上面图片根据左边的图形数量圈出右边的数量",
+    example: {
+    t_img: "./static/img/Tuo2_qst_ok/t1.png",//样例题目
+    a_img: "./static/img/Tuo2_qst_ok/a1.png",//样例答案
+    },
+    question: {
+    t_img: "./static/img/Tuo2_qst_ok/t2.png",//题目
+    n_img: "./static/img/Tuo2_qst_ok/n2.png",//单个形状
+    num: 8,//有多少个单个形状
+    tureNum: 5
+    },
+    ctx: "",
+    shapeXY: [],//所有点的中心坐标
+    allXY: [],
+    result: [],
+    useAnswer: [],
+    userNum: 0,
+    flag: 1,
+    img:"./static/img/Tuo2_qst_ok/jian.png",
+  }
 };
 
 const mockStudentInfo = {
@@ -443,6 +471,7 @@ export default {
     sidebar,
     circleDrawing: Sst,
     lxt,
+    qst
   },
   computed: {
     ArrowLeft() {
