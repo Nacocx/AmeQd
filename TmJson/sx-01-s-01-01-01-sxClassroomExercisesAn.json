@@ -1,42 +1,5 @@
 {
-  "xzt": [
-    {
-      "id": 1,
-      "title": "每只小兔吃一个萝卜，选哪一堆正好合适？",
-      "img": "../static/img/T1_xzt/timu.png",
-      "options": [
-        { "value": "A", "img": "./static/img/T1_xzt/A.png" },
-        { "value": "B", "img": "./static/img/T1_xzt/B.png" },
-        { "value": "C", "img": "./static/img/T1_xzt/C.png" }
-      ],
-      "userAnswer": "",
-      "answer": "B"
-    },
-    {
-      "id": 2,
-      "title": "2+2=?",
-      "options": [
-        { "value": "A", "label": "1" },
-        { "value": "B", "label": "2" },
-        { "value": "C", "label": "3" },
-        { "value": "D", "label": "4" }
-      ],
-      "userAnswer": "",
-      "answer": "D"
-    },
-    {
-      "id": 3,
-      "title": "2+4=?",
-      "options": [
-        { "value": "A", "label": "4" },
-        { "value": "B", "label": "5" },
-        { "value": "C", "label": "6" },
-        { "value": "D", "label": "7" }
-      ],
-      "userAnswer": "",
-      "answer": "C"
-    }
-  ],
+  
   "sst": [
     {
       "id": 1,
@@ -115,6 +78,43 @@
   ],
   "htt": {
     "id": 2,
+    "title": "Part1",
+    "subQuestion": [
+      {
+        "id": 1,
+        "img": "./static/img/T2_htt_ok/t1.jpeg",
+        "answer": 2
+      },
+      {
+        "id": 2,
+        "img": "./static/img/T2_htt_ok/t2.jpeg",
+        "answer": 3
+      },
+      {
+        "id": 3,
+        "img": "./static/img/T2_htt_ok/t3.jpeg",
+        "answer": 5
+      },
+      {
+        "id": 4,
+        "img": "./static/img/T2_htt_ok/t4.jpeg",
+        "answer": 4
+      }
+    ],
+    "shape": [
+      "./static/img/T2_htt_ok/jx.png",
+      "./static/img/T2_htt_ok/sjx.png",
+      "./static/img/T2_htt_ok/yx.png"
+    ],
+    "trueShape": 1,
+    "userAnswer": [[], [], [], []],
+    "isDragging": false,
+    "startX": 0,
+    "startY": 0,
+    "draggedElement": null
+  },
+  "htt2": {
+    "id": 1,
     "title": "Part2",
     "subQuestion": [
       {
