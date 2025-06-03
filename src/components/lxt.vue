@@ -1,32 +1,34 @@
 <!-- 连线题 -->
 
 <template>
-  <span>如果连线出现错误,请按F5刷新再试一试哦</span>
+
   <div class="lxt_main_body">
     <!-- <div class="header"></div> -->
-      <h1>{{message.title}}</h1>
+    <h1>{{ message.title }}</h1>
     <div class="questions">请连接和图片中物品数量一致的圆的图片</div>
 
     <div class="content">
       <!-- 上侧选项 -->
       <div class="options upOptions">
-        <div v-for="(item, index) in message.imgU" :key="index" class="option" :class="{ 'active': item.connected }"
-          @mousedown="onMousedown($event, item)" :data-value="item.value" :data-ownership="item.ownership">
+        <div v-for="(item, index) in localMessage.imgU" :key="index" class="option"
+          :class="{ 'active': item.connected }" @mousedown="onMousedown($event, item)" :data-value="item.value"
+          :data-ownership="item.ownership">
           <img :src="item.src">
         </div>
       </div>
 
       <!-- 下侧选项 -->
       <div class="options downOptions">
-        <div v-for="(item, index) in message.imgD" :key="index" class="option" :class="{ 'active': item.connected }"
-          @mousedown="onMousedown($event, item)" :data-value="item.value" :data-ownership="item.ownership">
+        <div v-for="(item, index) in localMessage.imgD" :key="index" class="option"
+          :class="{ 'active': item.connected }" @mousedown="onMousedown($event, item)" :data-value="item.value"
+          :data-ownership="item.ownership">
           <img :src="item.src">
         </div>
       </div>
 
       <!-- 连线画布 -->
       <canvas id="canvas" ref="canvas" :class="message.flag"></canvas>
-      <canvas id="backCanvas" :class="message.flag+'back'" ref="backCanvas"></canvas>
+      <canvas id="backCanvas" :class="message.flag + 'back'" ref="backCanvas"></canvas>
     </div>
 
     <!-- 按钮移至图片下方 -->
@@ -46,16 +48,36 @@
 
 <script>
 export default {
-  name:"lxt",
-   data() {
+  name: "lxt",
+  data() {
     return {
-     
+      // 标记是否正在绘制连线的状态，初始为 false 表示未开始绘制
+      isDrawing: false,
+      // 记录连线起始选项的对象，初始为 null 表示无起始选项
+      startItem: null,
+      // 记录连线结束选项的对象，初始为 null 表示无结束选项
+      endItem: null,
+      // 当前正在绘制的连线对象，包含起点和终点坐标，初始均为 0
+      currentLine: { x1: 0, y1: 0, x2: 0, y2: 0 },
+      // 存储所有已创建连线的数组，初始为空数组
+      connections: [],
+      // 画布的 2D 绘图上下文对象，初始为 null，后续在 mounted 钩子中初始化
+      ctx: null,
+      // 背景画布的 2D 绘图上下文对象，初始为 null，后续在 mounted 钩子中初始化
+      backCtx: null,
+      // 存储画布相对于视口的位置和尺寸信息的对象，初始为 null
+      canvasRect: null,
+      // 调试模式开关，设置为 true 时可开启调试功能，如绘制检测区域
+      isDebug: true,
+      // 存储用户连线答案检查结果的数组，初始为空数组
+      result: [],
+      localMessage: { ...this.message },
     };
   },
-  props:{
-    message:{
+  props: {
+    message: {
       // type:Array,
-      required:true,
+      required: true,
     }
   },
 
@@ -65,9 +87,9 @@ export default {
 */
   mounted() {
     // 获取画布的 2D 绘图上下文
-    this.message.ctx =document.querySelector(`.${this.message.flag}`).getContext('2d');
+    this.ctx = this.$refs.canvas.getContext('2d');
     // 获取背景画布的 2D 绘图上下文
-    this.message.backCtx = document.querySelector(`.${this.message.flag}back`).getContext('2d');
+    this.backCtx = this.$refs.backCanvas.getContext('2d');
     // 初始化画布大小
     this.resizeCanvas();
     // 监听窗口大小变化事件，窗口大小改变时重新调整画布大小
@@ -83,19 +105,22 @@ export default {
      */
     resizeCanvas() {
       // 获取画布元素
-      const canvas = document.querySelector(`.${this.message.flag}`);
+      const canvas = this.$refs.canvas;
+      // console.log("canvas", canvas);
+
       // 获取画布的父元素
       const content = canvas.parentElement;
+      // console.log("content", content);
       // 获取画布相对于视口的位置和尺寸信息
-      this.message.canvasRect = canvas.getBoundingClientRect();
+      this.canvasRect = canvas.getBoundingClientRect();
       // 设置画布的宽度为父容器的宽度
       canvas.width = content.offsetWidth;
       // 设置画布的高度为父容器的高度
       canvas.height = content.offsetHeight;
       // 设置背景画布的宽度为父容器的宽度
-      document.querySelector(`.${this.message.flag}back`).width = content.offsetWidth;
+      this.$refs.backCanvas.width = content.offsetWidth;
       // 设置背景画布的高度为父容器的高度
-      document.querySelector(`.${this.message.flag}back`).height = content.offsetHeight;
+      this.$refs.backCanvas.height = content.offsetHeight;
       // 重新绘制所有已存在的连线
       this.drawConnections();
     },
@@ -106,20 +131,20 @@ export default {
      */
     updateItemPositions() {
       // 合并上下两侧的选项数组并遍历
-      [...this.message.imgU, ...this.message.imgD].forEach(item => {
+      [...this.localMessage.imgU, ...this.localMessage.imgD].forEach(item => {
         // 根据选项的值和所属区域查找对应的 DOM 元素
         const element = document.querySelector(`[data-value="${item.value}"][data-ownership="${item.ownership}"]`);
         if (element) {
           // 获取元素相对于视口的位置和尺寸信息
           const rect = element.getBoundingClientRect();
           // 计算选项的中心 x 坐标
-          item.x = rect.left - this.message.canvasRect.left + rect.width / 2;
+          item.x = rect.left - this.canvasRect.left + rect.width / 2;
           // 计算选项的中心 y 坐标
-          item.y = rect.top - this.message.canvasRect.top + rect.height / 2;
+          item.y = rect.top - this.canvasRect.top + rect.height / 2;
           // 存储选项的矩形区域信息
           item.rect = {//会直接存储到元素 里面相当于直接json 加了一个属性值存元素的位置信息
-            x: rect.left - this.message.canvasRect.left,
-            y: rect.top - this.message.canvasRect.top,
+            x: rect.left - this.canvasRect.left,
+            y: rect.top - this.canvasRect.top,
             width: rect.width,
             height: rect.height
           };
@@ -134,21 +159,31 @@ export default {
      * @param {Object} item - 被按下的选项对象
      */
     onMousedown(event, item) {
+      this.resizeCanvas();
+      // console.log("this.localMessage", this.localMessage);
+
+      // console.log("down");
+
       // 阻止默认事件
       event.preventDefault();
       // 标记开始绘制连线
-      this.message.isDrawing = true;
+      this.isDrawing = true;
       // 记录起始选项
-      this.message.startItem = item;
+      this.startItem = item;
       // 清空结束选项
-      this.message.endItem = null;
+      this.endItem = null;
       // 清除所有选项的悬停状态
       this.clearHoverStates();
       // 标记起始选项为已连接
-      this.message.startItem.connected = true;
+      this.startItem.connected = true;
+
+      // console.log("item", item);
+
       // 设置连线的起始点坐标
-      this.message.currentLine.x1 = this.message.startItem.x;
-      this.message.currentLine.y1 = this.message.startItem.y;
+      this.currentLine.x1 = this.startItem.x;
+      this.currentLine.y1 = this.startItem.y;
+      // console.log("this.currentLine.x1", this.currentLine.x1);
+
       // 添加鼠标移动事件监听
       document.addEventListener('mousemove', this.onMousemove);
       // 添加鼠标抬起事件监听
@@ -163,31 +198,46 @@ export default {
     onMousemove(event) {
       //在 onMousemove(event) 方法里，event 代表原生的鼠标移动事件对象。虽然在代码里看起来没有显式传参，但这是浏览器事件监听机制自动处理的
       // 如果没有开始绘制连线，直接返回
-      if (!this.message.isDrawing) return;
+      if (!this.isDrawing) return;
+
+
 
       // 清除所有选项的悬停状态
       this.clearHoverStates();
 
       // 计算鼠标相对于画布的 x 坐标
-      const mouseX = event.clientX - this.message.canvasRect.left;
+      const mouseX = event.clientX - this.canvasRect.left;
       // 计算鼠标相对于画布的 y 坐标
-      const mouseY = event.clientY - this.message.canvasRect.top;
+      const mouseY = event.clientY - this.canvasRect.top;
+
+
+      // console.log("event.clientX", event.clientX);
+      // console.log("event.clientY", event.clientY);
+      // console.log("this.canvasRect.left", this.canvasRect.left);
+
+      // console.log("this.canvasRect.top", this.canvasRect.top);
+
       // 获取画布元素
-      const canvas = document.querySelector(`.${this.message.flag}`);
+      const canvas = this.$refs.canvas;
       // 将鼠标 x 坐标限制在画布范围内
       const clampedX = Math.max(0, Math.min(mouseX, canvas.width));
       // 将鼠标 y 坐标限制在画布范围内
       const clampedY = Math.max(0, Math.min(mouseY, canvas.height));
 
       // 设置连线的终点 x 坐标
-      this.message.currentLine.x2 = clampedX;
+      this.currentLine.x2 = clampedX;
       // 设置连线的终点 y 坐标
-      this.message.currentLine.y2 = clampedY;
+      this.currentLine.y2 = clampedY;
+      // console.log("this.currentLine.x2", this.currentLine.x2);
+
 
       // 清空画布上的临时内容
-      this.message.ctx.clearRect(0, 0, canvas.width, canvas.height);
+      this.ctx.clearRect(0, 0, canvas.width, canvas.height);
       // 绘制临时连线
-      this.drawLine(this.message.ctx, this.message.currentLine, '#4CAF50', 3);
+      // console.log(this.ctx);
+      // console.log(this.currentLine);
+
+      this.drawLine(this.ctx, this.currentLine, '#4CAF50', 3);
 
       // 检查鼠标悬停的选项
       this.checkHoverTarget(event);
@@ -202,9 +252,9 @@ export default {
      */
     clearHoverStates() {
       // 重置上方选项的悬停标志和悬停有效性标志为 false
-      this.message.imgU.forEach(item => { item.hover = false; item.hoverValid = false; });
+      this.localMessage.imgU.forEach(item => { item.hover = false; item.hoverValid = false; });
       // 重置下方选项的悬停标志和悬停有效性标志为 false
-      this.message.imgD.forEach(item => { item.hover = false; item.hoverValid = false; });
+      this.localMessage.imgD.forEach(item => { item.hover = false; item.hoverValid = false; });
       // 遍历所有带有 hover-valid 或 hover-invalid 类名的选项元素
       document.querySelectorAll('.option.hover-valid, .option.hover-invalid').forEach(el => {
         // 移除这些元素的 hover-valid 和 hover-invalid 类名
@@ -220,16 +270,16 @@ export default {
     checkHoverTarget(event) {
 
       // 计算鼠标相对于画布的 x 坐标
-      const mouseX = event.clientX - this.message.canvasRect.left;
+      const mouseX = event.clientX - this.canvasRect.left;
       // 计算鼠标相对于画布的 y 坐标
-      const mouseY = event.clientY - this.message.canvasRect.top;
+      const mouseY = event.clientY - this.canvasRect.top;
       // 清空结束选项
-      this.message.endItem = null;
+      this.endItem = null;
 
       // 合并上下两侧的选项数组并遍历
-      [...this.message.imgU, ...this.message.imgD].forEach(item => {
+      [...this.localMessage.imgU, ...this.localMessage.imgD].forEach(item => {
         // 如果当前选项是起始选项，跳过
-        if (item === this.message.startItem) return;
+        if (item === this.startItem) return;
         // 获取选项的矩形区域信息
         const elementRect = item.rect;
         // 如果没有矩形区域信息，跳过
@@ -246,7 +296,7 @@ export default {
           // 标记选项为悬停状态
           item.hover = true;
           // 判断悬停的选项是否有效（与起始选项不在同一侧）
-          const isValid = item.ownership !== this.message.startItem.ownership;
+          const isValid = item.ownership !== this.startItem.ownership;
           // 标记选项的悬停有效性
           item.hoverValid = isValid;
 
@@ -261,10 +311,10 @@ export default {
 
           if (isValid) {
             // 记录有效的结束选项
-            this.message.endItem = item;
+            this.endItem = item;
             // 将连线终点设置为选项的中心
-            this.message.currentLine.x2 = item.x;
-            this.message.currentLine.y2 = item.y;
+            this.currentLine.x2 = item.x;
+            this.currentLine.y2 = item.y;
           }
         }
       });
@@ -301,9 +351,9 @@ export default {
       // 阻止默认事件
       event.preventDefault();
       // 标记结束绘制连线
-      this.message.isDrawing = false;
+      this.isDrawing = false;
       // 清空画布上的临时内容
-      this.message.ctx.clearRect(0, 0, document.querySelector(`.${this.message.flag}`).width,document.querySelector(`.${this.message.flag}`).height);
+      this.ctx.clearRect(0, 0, this.$refs.canvas.width, this.$refs.canvas.height);
       // 移除鼠标移动事件监听
       document.removeEventListener('mousemove', this.onMousemove);
       // 移除鼠标抬起事件监听
@@ -312,20 +362,20 @@ export default {
       this.clearHoverStates();
 
       // 如果存在有效的结束选项
-      if (this.message.endItem && this.message.endItem.ownership !== this.message.startItem.ownership) {
+      if (this.endItem && this.endItem.ownership !== this.startItem.ownership) {
         // 如果结束选项已连接，断开相关连线
-        if (this.message.endItem.connected) this.breakExistingConnections(this.message.endItem);
+        if (this.endItem.connected) this.breakExistingConnections(this.endItem);
         // 创建新的连线
-        this.createConnection(this.message.startItem, this.message.endItem);
+        this.createConnection(this.startItem, this.endItem);
       } else {
         // 取消起始选项的连接状态
-        this.message.startItem.connected = false;
+        this.startItem.connected = false;
       }
 
       // 清空起始选项
-      this.message.startItem = null;
+      this.startItem = null;
       // 清空结束选项
-      this.message.endItem = null;
+      this.endItem = null;
     },
 
     /**
@@ -345,7 +395,7 @@ export default {
       // 断开结束选项的旧连线
       this.breakExistingConnections(endItem);
       // 将新连线添加到连线数组中
-      this.message.connections.push({ start: startItem, end: endItem });
+      this.connections.push({ start: startItem, end: endItem });
       // 标记起始选项为已连接
       startItem.connected = true;
       // 标记结束选项为已连接
@@ -361,7 +411,7 @@ export default {
      */
     breakExistingConnections(item) {
       // 筛选出与指定选项相关的旧连线
-      const oldConnections = this.message.connections.filter(connection =>
+      const oldConnections = this.connections.filter(connection =>
         (connection.start.value === item.value && connection.start.ownership === item.ownership) ||
         (connection.end.value === item.value && connection.end.ownership === item.ownership)
       );
@@ -373,7 +423,7 @@ export default {
       });
 
       // 从连线数组中移除旧连线
-      this.message.connections = this.message.connections.filter(connection => !oldConnections.includes(connection));
+      this.connections = this.connections.filter(connection => !oldConnections.includes(connection));
     },
 
     /**
@@ -382,14 +432,18 @@ export default {
      */
     drawConnections() {
       // 清空背景画布
-      this.message.backCtx.clearRect(0, 0, this.$refs.backCanvas.width, this.$refs.backCanvas.height);
+      this.backCtx.clearRect(0, 0, this.$refs.backCanvas.width, this.$refs.backCanvas.height);
       // 遍历所有连线并绘制
-      this.message.connections.forEach(connection => {
+      // console.log("this.connections", this.connections);
+
+      this.connections.forEach(connection => {
+        // console.log("connection", connection);
+
         // 确保连线从上方选项指向下方选项
         const start = connection.start.ownership === 'U' ? connection.start : connection.end;
         const end = connection.start.ownership === 'U' ? connection.end : connection.start;
         // 绘制连线
-        this.drawLine(this.message.backCtx, { x1: start.x, y1: start.y, x2: end.x, y2: end.y }, '#4CAF50', 3);
+        this.drawLine(this.backCtx, { x1: start.x, y1: start.y, x2: end.x, y2: end.y }, '#4CAF50', 3);
       });
     },
 
@@ -401,6 +455,8 @@ export default {
      * @param {number} width - 直线的宽度
      */
     drawLine(context, line, color, width) {
+      // console.log("line", line);
+
       // 开始一个新的路径
       context.beginPath();
       // 移动到直线的起点
@@ -423,7 +479,7 @@ export default {
      */
     getOptionByValue(value) {
       // 合并上下两侧的选项数组并查找匹配的选项
-      return [...this.message.imgU, ...this.message.imgD].find(item => item.value === value);
+      return [...this.localMessage.imgU, ...this.localMessage.imgD].find(item => item.value === value);
     },
 
     /**
@@ -434,21 +490,21 @@ export default {
       // 标记所有答案是否正确
       // let allCorrect = true;
       // 存储每个选项的检查结果
-      this.message.result = [0,0,0,0];
+      this.result = [0, 0, 0, 0];
       // let n=0;
       // 遍历上方选项
-      this.message.imgU.forEach((upItem, index) => {
+      this.localMessage.imgU.forEach((upItem, index) => {
         // 查找与当前选项相关的连线
-        const connection = this.message.connections.find(conn =>
+        const connection = this.connections.find(conn =>
           conn.start.ownership === 'U' && conn.start.value === upItem.value
         );
 
         if (connection) {
           // 如果连线的结束选项值与起始选项值相同，结果为 1，否则为 0
-          this.message.result[index]=(connection.end.value === upItem.value ? 1 : 0);
+          this.result[index] = (connection.end.value === upItem.value ? 1 : 0);
         } else {
           // 如果没有连线，结果为 0
-          this.message.result[index]=(0);
+          this.result[index] = (0);
         }
 
         // 如果当前选项的结果不为 1，说明有错误
@@ -463,7 +519,7 @@ export default {
       // allCorrect = allCorrect && allConnected;
 
       // 打印结果数组
-      console.log("结果数组:", this.message.result);
+      // console.log("结果数组:", this.result);
       // 根据检查结果弹出提示框
       // alert(allCorrect ? '恭喜你，全部正确！' : '还有错误，请重试');
     },
@@ -474,9 +530,9 @@ export default {
      */
     resetAllConnections() {
       // 合并上下两侧的选项数组并将所有选项的连接状态设置为未连接
-      [...this.message.imgU, ...this.message.imgD].forEach(item => { item.connected = false; });
+      [...this.localMessage.imgU, ...this.localMessage.imgD].forEach(item => { item.connected = false; });
       // 清空连线数组
-      this.message.connections = [];
+      this.connections = [];
       // 重新绘制所有已存在的连线
       this.drawConnections();
     },
@@ -487,9 +543,9 @@ export default {
      */
     resetLastConnection() {
       // 如果连线数组为空，直接返回
-      if (this.message.connections.length === 0) return;
+      if (this.connections.length === 0) return;
       // 移除最后一条连线
-      const lastConnection = this.message.connections.pop();
+      const lastConnection = this.connections.pop();
       // 将最后一条连线的起始选项连接状态设置为未连接
       lastConnection.start.connected = false;
       // 将最后一条连线的结束选项连接状态设置为未连接
@@ -503,14 +559,14 @@ export default {
    * 当 imgU 或 imgD 发生变化时，重新绘制所有已存在的连线
    */
   watch: {
- 'this.message.imgU': {
+    'this.localMessage.imgU': {
       deep: true,
       handler() {
         this.drawConnections();
       }
     },
     // 使用字符串形式监听 allQuestions 中的 imgD 属性
-    'this.message.imgD': {
+    'this.localMessage.imgD': {
       deep: true,
       handler() {
         this.drawConnections();
@@ -534,8 +590,7 @@ export default {
 </script>
 
 <style>
-
-  .lxt_main_body .container {
+.lxt_main_body .container {
   width: 1000px;
   height: 850px;
   margin: auto;
@@ -544,7 +599,7 @@ export default {
   position: relative;
 }
 
-  .lxt_main_body .header {
+.lxt_main_body .header {
   text-align: center;
   font-size: 50px;
   color: white;
@@ -556,13 +611,13 @@ export default {
 
 
 
-  .lxt_main_body .questions {
+.lxt_main_body .questions {
   text-align: center;
   font-size: 30px;
   margin: 20px 0;
 }
 
-  .lxt_main_body .content {
+.lxt_main_body .content {
   width: 900px;
   height: 500px;
   margin: auto;
@@ -572,14 +627,14 @@ export default {
   position: relative;
 }
 
-  .lxt_main_body .options {
+.lxt_main_body .options {
   display: flex;
   width: 100%;
   justify-content: space-around;
   margin: 20px 0;
 }
 
-  .lxt_main_body .option {
+.lxt_main_body .option {
   width: 150px;
   height: 150px;
   margin: 10px;
@@ -595,26 +650,26 @@ export default {
   border-radius: 20px;
 }
 
-  .lxt_main_body .option img {
+.lxt_main_body .option img {
   width: 100%;
   height: 100%;
   object-fit: contain;
 }
 
-  .lxt_main_body .option.active {
+.lxt_main_body .option.active {
   border-color: #4CAF50;
 }
 
-  .lxt_main_body .option.hover-valid {
+.lxt_main_body .option.hover-valid {
   border-color: #4CAF50;
 }
 
-  .lxt_main_body .option.hover-invalid {
+.lxt_main_body .option.hover-invalid {
   border-color: #F44336;
 }
 
-  .lxt_main_body #canvas,
-  .lxt_main_body #backCanvas {
+.lxt_main_body #canvas,
+.lxt_main_body #backCanvas {
   position: absolute;
   top: 0;
   left: 0;
@@ -622,12 +677,12 @@ export default {
   z-index: 0;
 }
 
-  .lxt_main_body .buttons {
+.lxt_main_body .buttons {
   text-align: center;
   margin: 0;
 }
 
-  .lxt_main_body .button {
+.lxt_main_body .button {
   width: 200px;
   height: 80px;
   padding: 10px 20px;
@@ -641,16 +696,16 @@ export default {
   transition: background-color 0.2s;
 }
 
-  .lxt_main_body .button:hover {
+.lxt_main_body .button:hover {
   background-color: #45a049;
 }
 
-  .lxt_main_body .submitDiv {
+.lxt_main_body .submitDiv {
   text-align: center;
   margin: 10px 0;
 }
 
-  .lxt_main_body .submit {
+.lxt_main_body .submit {
   width: 200px;
   height: 60px;
   padding: 10px 30px;
