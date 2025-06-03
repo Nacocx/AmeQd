@@ -64,6 +64,8 @@ export default{
     methods: {
         changeFlag(item, index) {
         item.flag[index] = !item.flag[index];
+        if(!item.changed)
+            item.changed=true;
     }
     }
 }

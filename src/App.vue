@@ -391,16 +391,19 @@ const mockQuestions = {
         rightItem: "./static/img/tht/rightItem1.png",
         cnt: 2,
         flag: [false, false, false, false, false],
+        "changed":false
       },
       {
         rightItem: "./static/img/tht/rightItem2.png",
         cnt: 1,
         flag: [false, false, false, false, false],
+        "changed":false
       },
       {
         rightItem: "./static/img/tht/rightItem3.png",
         cnt: 3,
         flag: [false, false, false, false, false],
+        "changed":false
       },
     ],
     tuxingpath: [
@@ -524,6 +527,20 @@ export default {
           }
         });
       });
+
+      // 获得涂画题
+      totalTm+=this.questions.tht.items.length;
+      let prevth=[]
+      this.questions.tht.items.forEach((e,index)=>{
+        if(e.changed===true&&!prevth[index])
+        {
+          prevth.push(true);
+          answeredCount++;
+        }
+      })
+
+
+
 
       const percentage = totalTm
         ? Math.round((answeredCount / totalTm) * 100)
