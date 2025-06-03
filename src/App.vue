@@ -22,8 +22,8 @@
               <!-- part3_连线题 -->
               <!-- TODO: Fix lxt bugs -->
 
-               
-               
+
+
 
               <div>
 
@@ -36,6 +36,11 @@
                   <el-button @click="lxtpage++" type="primary" :disabled="lxtpage === 2">Next</el-button>
                 </el-button-group>
                 <hr />
+<<<<<<< Updated upstream
+=======
+                <qst :message="questions.qst" />
+
+>>>>>>> Stashed changes
 
 
               </div>
@@ -285,26 +290,7 @@ const mockQuestions = {
         connected: false,
       },
     ],
-    // 标记是否正在绘制连线的状态，初始为 false 表示未开始绘制
-    isDrawing: false,
-    // 记录连线起始选项的对象，初始为 null 表示无起始选项
-    startItem: null,
-    // 记录连线结束选项的对象，初始为 null 表示无结束选项
-    endItem: null,
-    // 当前正在绘制的连线对象，包含起点和终点坐标，初始均为 0
-    currentLine: { x1: 0, y1: 0, x2: 0, y2: 0 },
-    // 存储所有已创建连线的数组，初始为空数组
-    connections: [],
-    // 画布的 2D 绘图上下文对象，初始为 null，后续在 mounted 钩子中初始化
-    ctx: null,
-    // 背景画布的 2D 绘图上下文对象，初始为 null，后续在 mounted 钩子中初始化
-    backCtx: null,
-    // 存储画布相对于视口的位置和尺寸信息的对象，初始为 null
-    canvasRect: null,
-    // 调试模式开关，设置为 true 时可开启调试功能，如绘制检测区域
-    isDebug: true,
-    // 存储用户连线答案检查结果的数组，初始为空数组
-    result: [],
+
   },
   lxt_tuo3: {
     id: 2,
@@ -362,26 +348,7 @@ const mockQuestions = {
         connected: false,
       },
     ],
-    // 标记是否正在绘制连线的状态，初始为 false 表示未开始绘制
-    isDrawing: false,
-    // 记录连线起始选项的对象，初始为 null 表示无起始选项
-    startItem: null,
-    // 记录连线结束选项的对象，初始为 null 表示无结束选项
-    endItem: null,
-    // 当前正在绘制的连线对象，包含起点和终点坐标，初始均为 0
-    currentLine: { x1: 0, y1: 0, x2: 0, y2: 0 },
-    // 存储所有已创建连线的数组，初始为空数组
-    connections: [],
-    // 画布的 2D 绘图上下文对象，初始为 null，后续在 mounted 钩子中初始化
-    ctx: null,
-    // 背景画布的 2D 绘图上下文对象，初始为 null，后续在 mounted 钩子中初始化
-    backCtx: null,
-    // 存储画布相对于视口的位置和尺寸信息的对象，初始为 null
-    canvasRect: null,
-    // 调试模式开关，设置为 true 时可开启调试功能，如绘制检测区域
-    isDebug: true,
-    // 存储用户连线答案检查结果的数组，初始为空数组
-    result: [],
+
   },
 
   tht: {
@@ -408,26 +375,19 @@ const mockQuestions = {
       { noneCircle: "./static/img/tht/noneCircle.png" },
     ],
   },
-  qst:{
+  qst: {
     title: "对照上面图片根据左边的图形数量圈出右边的数量",
     example: {
-    t_img: "./static/img/Tuo2_qst_ok/t1.png",//样例题目
-    a_img: "./static/img/Tuo2_qst_ok/a1.png",//样例答案
+      t_img: "./static/img/Tuo2_qst_ok/t1.png",//样例题目
+      a_img: "./static/img/Tuo2_qst_ok/a1.png",//样例答案
     },
     question: {
-    t_img: "./static/img/Tuo2_qst_ok/t2.png",//题目
-    n_img: "./static/img/Tuo2_qst_ok/n2.png",//单个形状
-    num: 8,//有多少个单个形状
-    tureNum: 5
+      t_img: "./static/img/Tuo2_qst_ok/t2.png",//题目
+      n_img: "./static/img/Tuo2_qst_ok/n2.png",//单个形状
+      num: 8,//有多少个单个形状
+      tureNum: 5
     },
-    ctx: "",
-    shapeXY: [],//所有点的中心坐标
-    allXY: [],
-    result: [],
-    useAnswer: [],
-    userNum: 0,
-    flag: 1,
-    img:"./static/img/Tuo2_qst_ok/jian.png",
+    img: "./static/img/Tuo2_qst_ok/jian.png",
   }
 };
 
@@ -538,6 +498,7 @@ export default {
     document.addEventListener("contextmenu", this.preventContextMenu);
   },
   methods: {
+<<<<<<< Updated upstream
     async fetchData() {
       this.loading = true;
       this.error = null;
@@ -555,6 +516,19 @@ export default {
         console.error("获取数据失败:", error);
         this.error = error;
 
+=======
+    async fetchTmData() {
+      this.loading = true;
+      this.error = null;
+      try {
+        const response = await axios.post("./TmJson/sx-01-s-01-01-01-sxClassroomExercisesAn.json");
+        this.questions = response.data; // 注意：axios 返回的数据在 response.data 中
+      } catch (error) {
+        // 如果连接服务器失败
+        console.error("获取数据失败:", error);
+        this.error = error;
+
+>>>>>>> Stashed changes
         // 使用mock数据作为回退
         this.questions = mockQuestions;
         this.studentInfo = mockStudentInfo;
@@ -711,17 +685,17 @@ export default {
       this.boolLists.tkt = tktBoolList;
 
       // 获得涂画题正确数组
-      const thtBoolList=[];
-      this.questions.tht.items.forEach(e=>{
-        let cntTrue=0;
-        e.flag.forEach(ef=>{
-          if(ef===true){
+      const thtBoolList = [];
+      this.questions.tht.items.forEach(e => {
+        let cntTrue = 0;
+        e.flag.forEach(ef => {
+          if (ef === true) {
             cntTrue++;
           }
         })
-          thtBoolList.push(cntTrue===e.cnt?true:false);
+        thtBoolList.push(cntTrue === e.cnt ? true : false);
       });
-      this.boolLists.tht=thtBoolList;
+      this.boolLists.tht = thtBoolList;
 
 
 
