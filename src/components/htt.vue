@@ -1,25 +1,25 @@
-
-
 <template>
 
 
 
 
-  <div>
-    <h1>{{message.title}}:</h1>
-   
-    <div class="questions">
-      请拖进与图片物品数量一样的:<img :src="message.shape[message.id-1]" alt="" class="shape">
-    </div>
+  <div class="htt_main_body">
+    <h1>{{ message.title }}:请拖进与图片物品数量一样的:<img :src="message.shape[message.id - 1]" alt="" class="shape">
+      <div class="questions">
+
+      </div>
+    </h1>
+
+
 
     <!-- 主要问题部分 -->
     <div class="main_body">
-      <div class="part" v-for="(e,index) in message.subQuestion">
+      <div class="part" v-for="(e, index) in message.subQuestion">
         <div class="up">
           <img :src="e.img" alt="图片加载失败" class="img_style">
         </div>
         <!-- 这里加了data-value属性 匹配那个框 -->
-        <div class="down target-area" :data-value="index+1">
+        <div class="down target-area" :data-value="index + 1">
         </div>
       </div>
     </div>
@@ -38,8 +38,8 @@
   <hr>
 </template>
 <script>
-export  default {
-  name:"htt",
+export default {
+  name: "htt",
   props: {
     message: {}
   },
@@ -102,6 +102,8 @@ export  default {
             // console.log("e", e);
             if (this.message.draggedElement) {
               e.appendChild(this.message.draggedElement);//将元素添加到目标区域
+              console.log(this.message.draggedElement);
+              
             }
             //
             // 存储用户答案
@@ -132,7 +134,7 @@ body {
   height: 100vh;
 }
 
-.htt_main_part {
+.htt_main_body .htt_main_part {
   margin: auto;
   width: 1000px;
   height: 750px;
@@ -140,7 +142,7 @@ body {
   border-radius: 10px;
 }
 
-.main_body {
+.htt_main_body .main_body {
   margin: auto;
   width: 90%;
   height: 70%;
@@ -151,24 +153,24 @@ body {
 
 
 
-.htt_header_img {
+.htt_main_body .htt_header_img {
   width: 100%;
   height: 100%;
 }
 
-.main_body .part {
+.htt_main_body .main_body .part {
   width: 200px;
   height: 440px;
   margin-top: 6%;
 
 }
 
-.main_body .part .up {
+.htt_main_body .main_body .part .up {
   height: 170px;
   align-self: center;
-} 
+}
 
-.down {
+.htt_main_body .down {
   width: 100%;
   height: 40%;
   margin-top: 30px;
@@ -176,7 +178,8 @@ body {
   border-radius: 10px;
 
 }
-.htt_main_part .header {
+
+.htt_main_body .htt_main_part .header {
   text-align: center;
   height: 8%;
   font-size: 50px;
@@ -186,7 +189,7 @@ body {
   background-color: rgb(94, 211, 73);
 }
 
-.chose {
+.htt_main_body .chose {
   box-sizing: border-box;
   border: 2px solid black;
   border-radius: 60px;
@@ -199,7 +202,7 @@ body {
   align-items: center;
 }
 
-.shape {
+ .shape {
   width: 40px;
   height: 40px;
   z-index: 100;
@@ -208,15 +211,17 @@ body {
 
 }
 
-.shape img {
+.htt_main_body .shape img {
   width: 40px;
   height: 40px;
 }
-.img_style{
+
+.htt_main_body .img_style {
   width: 100%;
 
 }
-.submit {
+
+.htt_main_body .submit {
   padding: 10px 20px;
   border: none;
   border-radius: 5px;
@@ -228,13 +233,13 @@ body {
   overflow: hidden;
 }
 
-.submitDiv {
+.htt_main_body .submitDiv {
   text-align: center;
   margin: 10px;
   height: 7%;
 }
 
-.htt_main_part .questions {
+.htt_main_body .htt_main_part .questions {
   height: 5%;
   text-align: center;
   font-size: 30px;
@@ -242,7 +247,7 @@ body {
 
 
 
-.questions img {
+.htt_main_body .questions img {
   height: 40px;
   width: 40px;
   transform: translateY(15px);
