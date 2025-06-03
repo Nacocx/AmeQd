@@ -18,36 +18,30 @@
               <tkt :all-questions="questions.tkt" />
               <!-- part2_画图题 -->
               <htt :message="questions.htt" />
-
               <!-- part3_连线题 -->
-              <!-- TODO: Fix lxt bugs -->
+              <lxt :message="questions.lxt_part3" />
+              <!-- part4_形状题 -->
+              <sst :items="questions.sst" v-if="questions.sst" />
+              <!-- part5_涂画题 -->
+              <tht :items="questions.tht.items" :tuxing-path="questions.tht.tuxingpath" v-if="questions.tht.items" />
 
 
-
-
-              <div>
-
-                <lxt :message="questions.lxt_part3" v-if="lxtpage === 1" />
-                <!-- 拓展应用：3 -->
-                <lxt :message="questions.lxt_tuo3" v-if="lxtpage === 2" />
-                <qst :message="questions.qst"/>
+              <!-- <div>
                 <el-button-group size="large">
                   <el-button @click="lxtpage--" type="primary" :disabled="lxtpage === 1">Last</el-button>
                   <el-button @click="lxtpage++" type="primary" :disabled="lxtpage === 2">Next</el-button>
                 </el-button-group>
-                <hr />
-<<<<<<< Updated upstream
-=======
-                <qst :message="questions.qst" />
+              </div> -->
 
->>>>>>> Stashed changes
+              <!-- 拓展应用：2 -->
+              <qst :message="questions.qst" v-if="questions.qst" />
+              <!-- 拓展应用：3 -->
+              <lxt :message="questions.lxt_tuo3" />
+
+              <xzt :questions="questions.xzt" v-if="questions.xzt" />
 
 
-              </div>
 
-              <xzt :questions="questions.xzt" />
-              <sst :items="questions.sst" />
-              <tht :items="questions.tht.items" :tuxing-path="questions.tht.tuxingpath" />
 
               <el-button-group>
                 <!-- <el-button type="default" @click="pageSub" :icon="ArrowLeft" size="large" :disabled="currentPage===1">Last Part</el-button> -->
@@ -74,7 +68,7 @@ import Htt from "@/components/htt.vue";
 import lxt from "@/components/lxt.vue";
 import Tht from "@/components/tht.vue";
 import qst from "@/components/qst.vue";
-
+import axios from "axios";
 //实际使用中数据从后端获取
 
 const mockQuestions = {
@@ -357,16 +351,19 @@ const mockQuestions = {
         rightItem: "./static/img/tht/rightItem1.png",
         cnt: 2,
         flag: [false, false, false, false, false],
+        "changed": false
       },
       {
         rightItem: "./static/img/tht/rightItem2.png",
         cnt: 1,
         flag: [false, false, false, false, false],
+        "changed": false
       },
       {
         rightItem: "./static/img/tht/rightItem3.png",
         cnt: 3,
         flag: [false, false, false, false, false],
+        "changed": false
       },
     ],
     tuxingpath: [
@@ -431,7 +428,8 @@ export default {
     sidebar,
     circleDrawing: Sst,
     lxt,
-    qst
+    qst,
+
   },
   computed: {
     ArrowLeft() {
@@ -484,6 +482,19 @@ export default {
         });
       });
 
+      // 获得涂画题
+      totalTm += this.questions.tht.items.length;
+      let prevth = []
+      this.questions.tht.items.forEach((e, index) => {
+        if (e.changed === true && !prevth[index]) {
+          prevth.push(true);
+          answeredCount++;
+        }
+      })
+
+
+
+
       const percentage = totalTm
         ? Math.round((answeredCount / totalTm) * 100)
         : 0;
@@ -492,31 +503,12 @@ export default {
     },
   },
   created() {
-    // this.fetchData(); //从后端获得答案
+    this.fetchTmData(); //从后端获得题目数据
   },
   mounted() {
     document.addEventListener("contextmenu", this.preventContextMenu);
   },
   methods: {
-<<<<<<< Updated upstream
-    async fetchData() {
-      this.loading = true;
-      this.error = null;
-
-      try {
-        const response = await axios.post("addr");
-        // API返回的数据结构
-        const { questions, studentInfo, corAnswers } = response.data;
-
-        this.questions = questions || mockQuestions;
-        this.studentInfo = studentInfo || mockStudentInfo;
-        this.corAnswers = corAnswers || mockCorAnswers;
-      } catch (error) {
-        //如果连接服务器失败
-        console.error("获取数据失败:", error);
-        this.error = error;
-
-=======
     async fetchTmData() {
       this.loading = true;
       this.error = null;
@@ -528,7 +520,6 @@ export default {
         console.error("获取数据失败:", error);
         this.error = error;
 
->>>>>>> Stashed changes
         // 使用mock数据作为回退
         this.questions = mockQuestions;
         this.studentInfo = mockStudentInfo;
@@ -628,11 +619,13 @@ export default {
       // }));
 
       // 获得选择题答案并且判断正误
-      const xztAns = [];
-      this.questions.xzt.forEach((e, index) => {
-        xztAns.push(e.userAnswer);
-        this.boolLists.xzt[index] = e.userAnswer === e.answer ? true : false;
-      });
+      if (this.questions.xzt) {
+        const xztAns = [];
+        this.questions.xzt.forEach((e, index) => {
+          xztAns.push(e.userAnswer);
+          this.boolLists.xzt[index] = e.userAnswer === e.answer ? true : false;
+        });
+      }
 
 
 
