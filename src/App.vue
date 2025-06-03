@@ -28,7 +28,6 @@
                 <lxt :message="questions.lxt_part3" v-if="lxtpage === 1" />
                 <!-- 拓展应用：3 -->
                 <lxt :message="questions.lxt_tuo3" v-if="lxtpage === 2" />
-                <qst :message="questions.qst" />
                 <el-button-group size="large">
                   <el-button @click="lxtpage--" type="primary" :disabled="lxtpage === 1">Last</el-button>
                   <el-button @click="lxtpage++" type="primary" :disabled="lxtpage === 2">Next</el-button>
@@ -37,10 +36,12 @@
 
 
               </div>
+              <qst :message="questions.qst" v-if="questions.qst"/>
 
-              <xzt :questions="questions.xzt" />
-              <sst :items="questions.sst" />
-              <tht :items="questions.tht.items" :tuxing-path="questions.tht.tuxingpath" />
+              <xzt :questions="questions.xzt" v-if="questions.xzt"/>
+              <sst :items="questions.sst" v-if="questions.sst"/>
+
+              <tht :items="questions.tht.items" :tuxing-path="questions.tht.tuxingpath" v-if="questions.tht.items"/>
 
               <el-button-group>
                 <!-- <el-button type="default" @click="pageSub" :icon="ArrowLeft" size="large" :disabled="currentPage===1">Last Part</el-button> -->
@@ -283,26 +284,7 @@ const mockQuestions = {
         connected: false,
       },
     ],
-    // 标记是否正在绘制连线的状态，初始为 false 表示未开始绘制
-    isDrawing: false,
-    // 记录连线起始选项的对象，初始为 null 表示无起始选项
-    startItem: null,
-    // 记录连线结束选项的对象，初始为 null 表示无结束选项
-    endItem: null,
-    // 当前正在绘制的连线对象，包含起点和终点坐标，初始均为 0
-    currentLine: { x1: 0, y1: 0, x2: 0, y2: 0 },
-    // 存储所有已创建连线的数组，初始为空数组
-    connections: [],
-    // 画布的 2D 绘图上下文对象，初始为 null，后续在 mounted 钩子中初始化
-    ctx: null,
-    // 背景画布的 2D 绘图上下文对象，初始为 null，后续在 mounted 钩子中初始化
-    backCtx: null,
-    // 存储画布相对于视口的位置和尺寸信息的对象，初始为 null
-    canvasRect: null,
-    // 调试模式开关，设置为 true 时可开启调试功能，如绘制检测区域
-    isDebug: true,
-    // 存储用户连线答案检查结果的数组，初始为空数组
-    result: [],
+
   },
   lxt_tuo3: {
     id: 2,
@@ -360,26 +342,7 @@ const mockQuestions = {
         connected: false,
       },
     ],
-    // 标记是否正在绘制连线的状态，初始为 false 表示未开始绘制
-    isDrawing: false,
-    // 记录连线起始选项的对象，初始为 null 表示无起始选项
-    startItem: null,
-    // 记录连线结束选项的对象，初始为 null 表示无结束选项
-    endItem: null,
-    // 当前正在绘制的连线对象，包含起点和终点坐标，初始均为 0
-    currentLine: { x1: 0, y1: 0, x2: 0, y2: 0 },
-    // 存储所有已创建连线的数组，初始为空数组
-    connections: [],
-    // 画布的 2D 绘图上下文对象，初始为 null，后续在 mounted 钩子中初始化
-    ctx: null,
-    // 背景画布的 2D 绘图上下文对象，初始为 null，后续在 mounted 钩子中初始化
-    backCtx: null,
-    // 存储画布相对于视口的位置和尺寸信息的对象，初始为 null
-    canvasRect: null,
-    // 调试模式开关，设置为 true 时可开启调试功能，如绘制检测区域
-    isDebug: true,
-    // 存储用户连线答案检查结果的数组，初始为空数组
-    result: [],
+
   },
 
   tht: {
@@ -409,26 +372,19 @@ const mockQuestions = {
       { noneCircle: "./static/img/tht/noneCircle.png" },
     ],
   },
-  qst:{
+  qst: {
     title: "对照上面图片根据左边的图形数量圈出右边的数量",
     example: {
-    t_img: "./static/img/Tuo2_qst_ok/t1.png",//样例题目
-    a_img: "./static/img/Tuo2_qst_ok/a1.png",//样例答案
+      t_img: "./static/img/Tuo2_qst_ok/t1.png",//样例题目
+      a_img: "./static/img/Tuo2_qst_ok/a1.png",//样例答案
     },
     question: {
-    t_img: "./static/img/Tuo2_qst_ok/t2.png",//题目
-    n_img: "./static/img/Tuo2_qst_ok/n2.png",//单个形状
-    num: 8,//有多少个单个形状
-    tureNum: 5
+      t_img: "./static/img/Tuo2_qst_ok/t2.png",//题目
+      n_img: "./static/img/Tuo2_qst_ok/n2.png",//单个形状
+      num: 8,//有多少个单个形状
+      tureNum: 5
     },
-    ctx: "",
-    shapeXY: [],//所有点的中心坐标
-    allXY: [],
-    result: [],
-    useAnswer: [],
-    userNum: 0,
-    flag: 1,
-    img:"./static/img/Tuo2_qst_ok/jian.png",
+    img: "./static/img/Tuo2_qst_ok/jian.png",
   }
 };
 
@@ -663,11 +619,12 @@ export default {
       // }));
 
       // 获得选择题答案并且判断正误
+      if(this.questions.xzt){
       const xztAns = [];
       this.questions.xzt.forEach((e, index) => {
         xztAns.push(e.userAnswer);
         this.boolLists.xzt[index] = e.userAnswer === e.answer ? true : false;
-      });
+      });}
 
 
 

@@ -80,15 +80,6 @@ export default{
         padding: 20px;
     }
 
-    /* #app {
-        max-width: 1000px;
-        margin: 0 auto;
-        background-color: white;
-        border-radius: 15px;
-        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-        padding: 30px;
-    } */
-
     h3 {
         text-align: center;
         font-size: 24px;
