@@ -19,23 +19,20 @@
               <!-- part2_画图题 -->
               <htt :message="questions.htt" />
 
-              <!-- part3_连线题 -->
-              <!-- TODO: Fix lxt bugs -->
+              
 
                
                
-
-              <div>
                 <!-- TODO: fix lxt and qst bugs -->
-                <!-- <lxt :message="questions.lxt_part3" v-if="lxtpage === 1" /> -->
-                <!-- 拓展应用：3 -->
-                <!-- <lxt :message="questions.lxt_tuo3" v-if="lxtpage === 2" /> -->
+              <!-- <div>
+                <lxt :message="questions.lxt_part3" v-if="lxtpage === 1" />
+                <lxt :message="questions.lxt_tuo3" v-if="lxtpage === 2" />
                 <el-button-group size="large">
                   <el-button @click="lxtpage--" type="primary" :disabled="lxtpage === 1">Last</el-button>
                   <el-button @click="lxtpage++" type="primary" :disabled="lxtpage === 2">Next</el-button>
                 </el-button-group>
                 <hr />
-              </div>
+              </div> -->
                 <!-- <qst :message="questions.qst"/> -->
 
               <xzt :questions="questions.xzt" />
