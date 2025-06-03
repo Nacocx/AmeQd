@@ -65,8 +65,12 @@ export default {
     },
     methods: {
         changeFlag(item, index) {
-            item.flag[index] = !item.flag[index];
-        }
+
+        item.flag[index] = !item.flag[index];
+        if(!item.changed)
+            item.changed=true;
+    }
+
     }
 }
 
@@ -80,23 +84,16 @@ body {
     padding: 20px;
 }
 
-/* #app {
-        max-width: 1000px;
-        margin: 0 auto;
-        background-color: white;
-        border-radius: 15px;
-        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-        padding: 30px;
-    } */
 
-h3 {
-    text-align: center;
-    font-size: 24px;
-    color: #9a7deb;
-    margin-bottom: 30px;
-    font-weight: bold;
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
-}
+    h3 {
+        text-align: center;
+        font-size: 24px;
+        color: #9a7deb;
+        margin-bottom: 30px;
+        font-weight: bold;
+        text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+    }
+
 
 .container {
     display: flex;
@@ -164,12 +161,14 @@ h3 {
     filter: brightness(1.1);
 }
 
-.rightItem {
-    position: absolute;
-    bottom: -60px;
-    width: 60px !important;
-    height: auto;
-}
+
+    /* .rightItem {
+        position: absolute;
+        bottom: -60px;
+        width: 60px !important;
+        height: auto;
+    } */
+
 
 .confirm {
     display: block;
