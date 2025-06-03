@@ -1,6 +1,8 @@
+<!-- 连线题 -->
+
 <template>
-  
-  <div>
+
+  <div class="lxt_main_body">
     <!-- <div class="header"></div> -->
       <h1>{{message.title}}</h1>
     <div class="questions">请连接和图片中物品数量一致的圆的图片</div>
@@ -36,6 +38,7 @@
     <div class="submitDiv">
       <!-- <button class="submit" @click="checkAnswer">提交</button> -->
     </div>
+    <!-- <hr> -->
   </div>
 
 </template>
@@ -410,6 +413,7 @@ export default {
       context.lineWidth = width;
       // 绘制路径
       context.stroke();
+      this.checkAnswer();
     },
 
     /**
@@ -428,10 +432,10 @@ export default {
      */
     checkAnswer() {
       // 标记所有答案是否正确
-      let allCorrect = true;
+      // let allCorrect = true;
       // 存储每个选项的检查结果
-      this.message.result = [];
-
+      this.message.result = [0,0,0,0];
+      // let n=0;
       // 遍历上方选项
       this.message.imgU.forEach((upItem, index) => {
         // 查找与当前选项相关的连线
@@ -441,27 +445,27 @@ export default {
 
         if (connection) {
           // 如果连线的结束选项值与起始选项值相同，结果为 1，否则为 0
-          this.message.result.push(connection.end.value === upItem.value ? 1 : 0);
+          this.message.result[index]=(connection.end.value === upItem.value ? 1 : 0);
         } else {
           // 如果没有连线，结果为 0
-          this.message.result.push(0);
+          this.message.result[index]=(0);
         }
 
         // 如果当前选项的结果不为 1，说明有错误
-        if (this.message.result[index] !== 1) {
-          allCorrect = false;
-        }
+        // if (this.message.result[index] !== 1) {
+        //   allCorrect = false;
+        // }
       });
 
       // 检查是否所有选项都已连接
-      const allConnected = this.message.connections.length === this.message.imgU.length;
+      // const allConnected = this.message.connections.length === this.message.imgU.length;
       // 所有答案正确且所有选项都已连接才判定为全部正确
-      allCorrect = allCorrect && allConnected;
+      // allCorrect = allCorrect && allConnected;
 
       // 打印结果数组
       console.log("结果数组:", this.message.result);
       // 根据检查结果弹出提示框
-      alert(allCorrect ? '恭喜你，全部正确！' : '还有错误，请重试');
+      // alert(allCorrect ? '恭喜你，全部正确！' : '还有错误，请重试');
     },
 
     /**
@@ -531,7 +535,7 @@ export default {
 
 <style>
 
-.container {
+  .lxt_main_body .container {
   width: 1000px;
   height: 850px;
   margin: auto;
@@ -540,7 +544,7 @@ export default {
   position: relative;
 }
 
-.header {
+  .lxt_main_body .header {
   text-align: center;
   font-size: 50px;
   color: white;
@@ -552,13 +556,13 @@ export default {
 
 
 
-.questions {
+  .lxt_main_body .questions {
   text-align: center;
   font-size: 30px;
   margin: 20px 0;
 }
 
-.content {
+  .lxt_main_body .content {
   width: 900px;
   height: 500px;
   margin: auto;
@@ -568,14 +572,14 @@ export default {
   position: relative;
 }
 
-.options {
+  .lxt_main_body .options {
   display: flex;
   width: 100%;
   justify-content: space-around;
   margin: 20px 0;
 }
 
-.option {
+  .lxt_main_body .option {
   width: 150px;
   height: 150px;
   margin: 10px;
@@ -591,26 +595,26 @@ export default {
   border-radius: 20px;
 }
 
-.option img {
+  .lxt_main_body .option img {
   width: 100%;
   height: 100%;
   object-fit: contain;
 }
 
-.option.active {
+  .lxt_main_body .option.active {
   border-color: #4CAF50;
 }
 
-.option.hover-valid {
+  .lxt_main_body .option.hover-valid {
   border-color: #4CAF50;
 }
 
-.option.hover-invalid {
+  .lxt_main_body .option.hover-invalid {
   border-color: #F44336;
 }
 
-#canvas,
-#backCanvas {
+  .lxt_main_body #canvas,
+  .lxt_main_body #backCanvas {
   position: absolute;
   top: 0;
   left: 0;
@@ -618,12 +622,12 @@ export default {
   z-index: 0;
 }
 
-.buttons {
+  .lxt_main_body .buttons {
   text-align: center;
   margin: 0;
 }
 
-.button {
+  .lxt_main_body .button {
   width: 200px;
   height: 80px;
   padding: 10px 20px;
@@ -637,16 +641,16 @@ export default {
   transition: background-color 0.2s;
 }
 
-.button:hover {
+  .lxt_main_body .button:hover {
   background-color: #45a049;
 }
 
-.submitDiv {
+  .lxt_main_body .submitDiv {
   text-align: center;
   margin: 10px 0;
 }
 
-.submit {
+  .lxt_main_body .submit {
   width: 200px;
   height: 60px;
   padding: 10px 30px;
