@@ -23,17 +23,20 @@
 
                
                
-                <!-- TODO: fix lxt and qst bugs -->
-              <!-- <div>
+               <div>
+
                 <lxt :message="questions.lxt_part3" v-if="lxtpage === 1" />
+                <!-- 拓展应用：3 -->
                 <lxt :message="questions.lxt_tuo3" v-if="lxtpage === 2" />
+                <qst :message="questions.qst" />
                 <el-button-group size="large">
                   <el-button @click="lxtpage--" type="primary" :disabled="lxtpage === 1">Last</el-button>
                   <el-button @click="lxtpage++" type="primary" :disabled="lxtpage === 2">Next</el-button>
                 </el-button-group>
                 <hr />
-              </div> -->
-                <!-- <qst :message="questions.qst"/> -->
+
+
+              </div>
 
               <xzt :questions="questions.xzt" />
               <sst :items="questions.sst" />
