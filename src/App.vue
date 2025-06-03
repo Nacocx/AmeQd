@@ -26,20 +26,17 @@
                
 
               <div>
-                <span>如果连线出现错误,请按F5刷新再试一试哦</span>
-                <lxt :message="questions.lxt_part3" v-if="lxtpage === 1" />
+                <!-- TODO: fix lxt and qst bugs -->
+                <!-- <lxt :message="questions.lxt_part3" v-if="lxtpage === 1" /> -->
                 <!-- 拓展应用：3 -->
-                <lxt :message="questions.lxt_tuo3" v-if="lxtpage === 2" />
+                <!-- <lxt :message="questions.lxt_tuo3" v-if="lxtpage === 2" /> -->
                 <el-button-group size="large">
                   <el-button @click="lxtpage--" type="primary" :disabled="lxtpage === 1">Last</el-button>
                   <el-button @click="lxtpage++" type="primary" :disabled="lxtpage === 2">Next</el-button>
                 </el-button-group>
                 <hr />
-                <qst :message="questions.qst"/>
-
-
-
               </div>
+                <!-- <qst :message="questions.qst"/> -->
 
               <xzt :questions="questions.xzt" />
               <sst :items="questions.sst" />
