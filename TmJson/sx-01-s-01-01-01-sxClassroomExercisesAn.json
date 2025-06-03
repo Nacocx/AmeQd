@@ -1,0 +1,332 @@
+{
+  "xzt": [
+    {
+      "id": 1,
+      "title": "每只小兔吃一个萝卜，选哪一堆正好合适？",
+      "img": "../static/img/T1_xzt/timu.png",
+      "options": [
+        { "value": "A", "img": "./static/img/T1_xzt/A.png" },
+        { "value": "B", "img": "./static/img/T1_xzt/B.png" },
+        { "value": "C", "img": "./static/img/T1_xzt/C.png" }
+      ],
+      "userAnswer": "",
+      "answer": "B"
+    },
+    {
+      "id": 2,
+      "title": "2+2=?",
+      "options": [
+        { "value": "A", "label": "1" },
+        { "value": "B", "label": "2" },
+        { "value": "C", "label": "3" },
+        { "value": "D", "label": "4" }
+      ],
+      "userAnswer": "",
+      "answer": "D"
+    },
+    {
+      "id": 3,
+      "title": "2+4=?",
+      "options": [
+        { "value": "A", "label": "4" },
+        { "value": "B", "label": "5" },
+        { "value": "C", "label": "6" },
+        { "value": "D", "label": "7" }
+      ],
+      "userAnswer": "",
+      "answer": "C"
+    }
+  ],
+  "sst": [
+    {
+      "id": 1,
+      "title": { "image": "./static/img/T3_sst/icecream.png", "count": 5 },
+      "tuXingPath": "./static/img/T3_sst/circle.png",
+      "userAnswer": ""
+    },
+    {
+      "id": 2,
+      "title": { "image": "./static/img/T3_sst/plane.png", "count": 4 },
+      "tuXingPath": "./static/img/T3_sst/circle.png",
+      "userAnswer": ""
+    },
+    {
+      "id": 3,
+      "title": { "image": "./static/img/T3_sst/tree.png", "count": 3 },
+      "tuXingPath": "./static/img/T3_sst/circle.png",
+      "userAnswer": ""
+    }
+  ],
+  "tkt": [
+    {
+      "id": 1,
+      "title_main": "Part1: 认识数字1、2、3，理解基数含义",
+      "title": [
+        "1.认识数字\"1\"",
+        "2.认识数字\"2",
+        "3.认识数字\"3\"",
+        "4.认识数字\"4\"",
+        "5.认识数字\"5\""
+      ],
+      "img": "./static/img/T1_tkt_ok/tkt_1.jpeg",
+      "subQuestions": [
+        "（1）一个太阳、一座房子、一棵果树可以用数字TNUM表示，也可以用TNUM个小圆片表示。TSPL（2）看看图中，还有什么可以用数字\"1\"表示呢TNUM和TNUM都可以用数字\"1\"表示。",
+        "两只鸟、两个人，可以用数字TNUM表示，也可以用TNUM个小圆片表示。",
+        "有三朵云，三个苹果，可以用数字TNUM表示，也可以用TNUM个小圆片表示。",
+        "有四个萝卜，四朵花，可以用数字TNUM表示，也可以用TNUM个小圆片表示。",
+        "有五只鸭子，可以用数字TNUM表示，也可以用TNUM个小圆片表示。"
+      ],
+      "userAnswer": [
+        {
+          "type": "complex",
+          "sections": [
+            { "answers": ["", ""] },
+            { "answers": ["", ""] }
+          ]
+        },
+        {
+          "type": "simple",
+          "answers": ["", ""]
+        },
+        {
+          "type": "simple",
+          "answers": ["", ""]
+        },
+        {
+          "type": "simple",
+          "answers": ["", ""]
+        },
+        {
+          "type": "simple",
+          "answers": ["", ""]
+        }
+      ],
+      "answers": [
+        [
+          ["1", "1"],
+          ["小船", "小狗"]
+        ],
+        ["2", "2"],
+        ["3", "3"],
+        ["4", "4"],
+        ["5", "5"]
+      ]
+    }
+  ],
+  "htt": {
+    "id": 2,
+    "title": "Part2",
+    "subQuestion": [
+      {
+        "id": 1,
+        "img": "./static/img/T2_htt_ok/t1.jpeg",
+        "answer": 2
+      },
+      {
+        "id": 2,
+        "img": "./static/img/T2_htt_ok/t2.jpeg",
+        "answer": 3
+      },
+      {
+        "id": 3,
+        "img": "./static/img/T2_htt_ok/t3.jpeg",
+        "answer": 5
+      },
+      {
+        "id": 4,
+        "img": "./static/img/T2_htt_ok/t4.jpeg",
+        "answer": 4
+      }
+    ],
+    "shape": [
+      "./static/img/T2_htt_ok/jx.png",
+      "./static/img/T2_htt_ok/sjx.png",
+      "./static/img/T2_htt_ok/yx.png"
+    ],
+    "trueShape": 1,
+    "userAnswer": [[], [], [], []],
+    "isDragging": false,
+    "startX": 0,
+    "startY": 0,
+    "draggedElement": null
+  },
+  "lxt_part3": {
+    "id": 1,
+    "title": "part3",
+    "flag": "t3",
+    "imgU": [
+      {
+        "src": "./static/img/T3_lxt_ok/l1.png",
+        "value": "1",
+        "ownership": "U",
+        "connected": false
+      },
+      {
+        "src": "./static/img/T3_lxt_ok/l2.png",
+        "value": "2",
+        "ownership": "U",
+        "connected": false
+      },
+      {
+        "src": "./static/img/T3_lxt_ok/l4.png",
+        "value": "4",
+        "ownership": "U",
+        "connected": false
+      },
+      {
+        "src": "./static/img/T3_lxt_ok/l5.png",
+        "value": "5",
+        "ownership": "U",
+        "connected": false
+      }
+    ],
+    "imgD": [
+      {
+        "src": "./static/img/T3_lxt_ok/a1.png",
+        "value": "1",
+        "ownership": "D",
+        "connected": false
+      },
+      {
+        "src": "./static/img/T3_lxt_ok/a2.png",
+        "value": "2",
+        "ownership": "D",
+        "connected": false
+      },
+      {
+        "src": "./static/img/T3_lxt_ok/a4.png",
+        "value": "4",
+        "ownership": "D",
+        "connected": false
+      },
+      {
+        "src": "./static/img/T3_lxt_ok/a5.png",
+        "value": "5",
+        "ownership": "D",
+        "connected": false
+      }
+    ],
+    "isDrawing": false,
+    "startItem": null,
+    "endItem": null,
+    "currentLine": { "x1": 0, "y1": 0, "x2": 0, "y2": 0 },
+    "connections": [],
+    "ctx": null,
+    "backCtx": null,
+    "canvasRect": null,
+    "isDebug": true,
+    "result": []
+  },
+  "lxt_tuo3": {
+    "id": 2,
+    "title": "拓展应用3",
+    "flag": "tuo3",
+    "imgU": [
+      {
+        "src": "./static/img/Tuo3_lxt_ok/tuo_l2.jpg",
+        "value": "2",
+        "ownership": "U",
+        "connected": false
+      },
+      {
+        "src": "./static/img/Tuo3_lxt_ok/tuo_l3.png",
+        "value": "3",
+        "ownership": "U",
+        "connected": false
+      },
+      {
+        "src": "./static/img/Tuo3_lxt_ok/tuo_l4.jpg",
+        "value": "4",
+        "ownership": "U",
+        "connected": false
+      },
+      {
+        "src": "./static/img/Tuo3_lxt_ok/tuo_l5.jpg",
+        "value": "5",
+        "ownership": "U",
+        "connected": false
+      }
+    ],
+    "imgD": [
+      {
+        "src": "./static/img/Tuo3_lxt_ok/tuo_a2.png",
+        "value": "2",
+        "ownership": "D",
+        "connected": false
+      },
+      {
+        "src": "./static/img/Tuo3_lxt_ok/tuo_a3.png",
+        "value": "3",
+        "ownership": "D",
+        "connected": false
+      },
+      {
+        "src": "./static/img/Tuo3_lxt_ok/tuo_a4.png",
+        "value": "4",
+        "ownership": "D",
+        "connected": false
+      },
+      {
+        "src": "./static/img/Tuo3_lxt_ok/tuo_a5.png",
+        "value": "5",
+        "ownership": "D",
+        "connected": false
+      }
+    ],
+    "isDrawing": false,
+    "startItem": null,
+    "endItem": null,
+    "currentLine": { "x1": 0, "y1": 0, "x2": 0, "y2": 0 },
+    "connections": [],
+    "ctx": null,
+    "backCtx": null,
+    "canvasRect": null,
+    "isDebug": true,
+    "result": []
+  },
+  "tht": {
+    "items": [
+      {
+        "rightItem": "./static/img/tht/rightItem1.png",
+        "cnt": 2,
+        "flag": [false, false, false, false, false]
+      },
+      {
+        "rightItem": "./static/img/tht/rightItem2.png",
+        "cnt": 1,
+        "flag": [false, false, false, false, false]
+      },
+      {
+        "rightItem": "./static/img/tht/rightItem3.png",
+        "cnt": 3,
+        "flag": [false, false, false, false, false]
+      }
+    ],
+    "tuxingpath": [
+      { "leftImage": "./static/img/tht/left.png" },
+      { "redCircle": "./static/img/tht/redCircle.png" },
+      { "noneCircle": "./static/img/tht/noneCircle.png" }
+    ]
+  },
+  "qst": {
+    "title": "对照上面图片根据左边的图形数量圈出右边的数量",
+    "example": {
+      "t_img": "./static/img/Tuo2_qst_ok/t1.png",
+      "a_img": "./static/img/Tuo2_qst_ok/a1.png"
+    },
+    "question": {
+      "t_img": "./static/img/Tuo2_qst_ok/t2.png",
+      "n_img": "./static/img/Tuo2_qst_ok/n2.png",
+      "num": 8,
+      "tureNum": 5
+    },
+    "ctx": "",
+    "shapeXY": [],
+    "allXY": [],
+    "result": [],
+    "useAnswer": [],
+    "userNum": 0,
+    "flag": 1,
+    "img": "./static/img/Tuo2_qst_ok/jian.png"
+  }
+}

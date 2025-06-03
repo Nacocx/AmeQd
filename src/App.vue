@@ -533,7 +533,7 @@ export default {
     },
   },
   created() {
-    // this.fetchData(); //从后端获得答案
+    this.fetchData(); //从后端获得答案
   },
   mounted() {
     document.addEventListener("contextmenu", this.preventContextMenu);
@@ -543,15 +543,18 @@ export default {
       this.loading = true;
       this.error = null;
 
-      try {
-        const response = await axios.post("addr");
+      
+        const response = await axios.post("./TmJson/sx-01-s-01-01-01-sxClassroomExercisesAn.json")
+        .then(e=>{
+          this.questions=response;
+        })
         // API返回的数据结构
-        const { questions, studentInfo, corAnswers } = response.data;
+        // const { questions, studentInfo, corAnswers } = response.data;
 
-        this.questions = questions || mockQuestions;
-        this.studentInfo = studentInfo || mockStudentInfo;
-        this.corAnswers = corAnswers || mockCorAnswers;
-      } catch (error) {
+        // this.questions = questions || mockQuestions;
+        // this.studentInfo = studentInfo || mockStudentInfo;
+        // this.corAnswers = corAnswers || mockCorAnswers;
+      .catch (error =>{
         //如果连接服务器失败
         console.error("获取数据失败:", error);
         this.error = error;
@@ -560,9 +563,7 @@ export default {
         this.questions = mockQuestions;
         this.studentInfo = mockStudentInfo;
         this.corAnswers = mockCorAnswers;
-      } finally {
-        this.loading = false;
-      }
+      })
     },
     // 确认是否提交答案
     willSubmit() {
