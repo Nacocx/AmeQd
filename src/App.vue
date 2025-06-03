@@ -533,7 +533,7 @@ export default {
     },
   },
   created() {
-    // this.fetchTmData(); //从后端获得答案
+    // this.fetchTmData(); //从后端获得题目数据
   },
   mounted() {
     document.addEventListener("contextmenu", this.preventContextMenu);
