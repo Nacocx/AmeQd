@@ -1,12 +1,7 @@
 <template>
   <div id="app">
     <el-header>
-      <img
-        src="./assets/logo.png"
-        width="50px"
-        height="50px"
-        alt="Logo Missing!"
-      />
+      <img src="./assets/logo.png" width="50px" height="50px" alt="Logo Missing!" />
       <span style="margin-left: 15px; font-size: 18px">熊猫沉浸</span>
     </el-header>
 
@@ -26,32 +21,33 @@
 
               <!-- part3_连线题 -->
               <!-- TODO: Fix lxt bugs -->
-               <div>
 
-              <lxt :message="questions.lxt_part3" v-if="lxtpage===1"/>
-              <!-- 拓展应用：3 -->
-              <lxt :message="questions.lxt_tuo3" v-if="lxtpage===2"/>
-                <el-button-group>
-                  <el-button @click="lxtpage--" type="primary" :disabled="lxtpage===1">Last</el-button>
-                  <el-button @click="lxtpage++" type="primary" :disabled="lxtpage===3">Next</el-button>
+               
+               
+
+              <div>
+                <span>如果连线出现错误,请按F5刷新再试一试哦</span>
+                <lxt :message="questions.lxt_part3" v-if="lxtpage === 1" />
+                <!-- 拓展应用：3 -->
+                <lxt :message="questions.lxt_tuo3" v-if="lxtpage === 2" />
+                <el-button-group size="large">
+                  <el-button @click="lxtpage--" type="primary" :disabled="lxtpage === 1">Last</el-button>
+                  <el-button @click="lxtpage++" type="primary" :disabled="lxtpage === 2">Next</el-button>
                 </el-button-group>
-               <hr/>
+                <hr />
+                <qst :message="questions.qst"/>
 
-               </div>
+
+
+              </div>
 
               <xzt :questions="questions.xzt" />
               <sst :items="questions.sst" />
-              <tht :items="questions.tht.items" :tuxing-path="questions.tht.tuxingpath"/>
+              <tht :items="questions.tht.items" :tuxing-path="questions.tht.tuxingpath" />
 
               <el-button-group>
                 <!-- <el-button type="default" @click="pageSub" :icon="ArrowLeft" size="large" :disabled="currentPage===1">Last Part</el-button> -->
-                <el-button
-                  type="primary"
-                  @click="willSubmit"
-                  id="Submit"
-                  size="large"
-                  >提交答案</el-button
-                >
+                <el-button type="primary" @click="willSubmit" id="Submit" size="large">提交答案</el-button>
                 <!-- <el-button type="default" @click="pageAdd" size="large" :disabled="currentPage===4">Next Part<el-icon class="el-icon--right"><ArrowRight /></el-icon></el-button> -->
               </el-button-group>
             </div>
@@ -73,7 +69,8 @@ import Sst from "@/components/sst.vue";
 import Htt from "@/components/htt.vue";
 import lxt from "@/components/lxt.vue";
 import Tht from "@/components/tht.vue";
-
+import qst from "@/components/qst.vue";
+import axios from "axios";
 //实际使用中数据从后端获取
 
 const mockQuestions = {
@@ -182,6 +179,16 @@ const mockQuestions = {
           answers: ["", ""],
         },
       ],
+      answers: [
+        [
+          ["1", "1"],
+          ["小船", "小狗"]
+        ],
+        ["2", "2"],
+        ["3", "3"],
+        ["4", "4"],
+        ["5", "5"]
+      ],
     },
   ],
 
@@ -222,8 +229,9 @@ const mockQuestions = {
     startY: 0,
     draggedElement: null, //正在拖拽的元素
   },
+
   lxt_part3: {
-    id:1,
+    id: 1,
     title: "part3",
     flag: "t3",
     imgU: [
@@ -300,7 +308,7 @@ const mockQuestions = {
     result: [],
   },
   lxt_tuo3: {
-    id:2,
+    id: 2,
     title: "拓展应用3",
     flag: "tuo3",
     imgU: [
@@ -376,22 +384,26 @@ const mockQuestions = {
     // 存储用户连线答案检查结果的数组，初始为空数组
     result: [],
   },
+
   tht: {
     items: [
       {
         rightItem: "./static/img/tht/rightItem1.png",
-        cunt: 2,
+        cnt: 2,
         flag: [false, false, false, false, false],
+        "changed":false
       },
       {
         rightItem: "./static/img/tht/rightItem2.png",
-        cunt: 1,
+        cnt: 1,
         flag: [false, false, false, false, false],
+        "changed":false
       },
       {
         rightItem: "./static/img/tht/rightItem3.png",
-        cunt: 3,
+        cnt: 3,
         flag: [false, false, false, false, false],
+        "changed":false
       },
     ],
     tuxingpath: [
@@ -400,6 +412,27 @@ const mockQuestions = {
       { noneCircle: "./static/img/tht/noneCircle.png" },
     ],
   },
+  qst:{
+    title: "对照上面图片根据左边的图形数量圈出右边的数量",
+    example: {
+    t_img: "./static/img/Tuo2_qst_ok/t1.png",//样例题目
+    a_img: "./static/img/Tuo2_qst_ok/a1.png",//样例答案
+    },
+    question: {
+    t_img: "./static/img/Tuo2_qst_ok/t2.png",//题目
+    n_img: "./static/img/Tuo2_qst_ok/n2.png",//单个形状
+    num: 8,//有多少个单个形状
+    tureNum: 5
+    },
+    ctx: "",
+    shapeXY: [],//所有点的中心坐标
+    allXY: [],
+    result: [],
+    useAnswer: [],
+    userNum: 0,
+    flag: 1,
+    img:"./static/img/Tuo2_qst_ok/jian.png",
+  }
 };
 
 const mockStudentInfo = {
@@ -427,8 +460,9 @@ export default {
         tkt: [],
         sst: [],
         htt: [],
+        tht: [],
       },
-      lxtpage:1,
+      lxtpage: 1,
     };
   },
   components: {
@@ -441,6 +475,7 @@ export default {
     sidebar,
     circleDrawing: Sst,
     lxt,
+    qst
   },
   computed: {
     ArrowLeft() {
@@ -493,6 +528,20 @@ export default {
         });
       });
 
+      // 获得涂画题
+      totalTm+=this.questions.tht.items.length;
+      let prevth=[]
+      this.questions.tht.items.forEach((e,index)=>{
+        if(e.changed===true&&!prevth[index])
+        {
+          prevth.push(true);
+          answeredCount++;
+        }
+      })
+
+
+
+
       const percentage = totalTm
         ? Math.round((answeredCount / totalTm) * 100)
         : 0;
@@ -501,37 +550,31 @@ export default {
     },
   },
   created() {
-    // this.fetchData(); //从后端获得答案
+    this.fetchTmData(); //从后端获得题目数据
   },
   mounted() {
     document.addEventListener("contextmenu", this.preventContextMenu);
   },
   methods: {
-    async fetchData() {
-      this.loading = true;
-      this.error = null;
+    async fetchTmData() {
+  this.loading = true;
+  this.error = null;
+  try {
+    const response = await axios.post("./TmJson/sx-01-s-01-01-01-sxClassroomExercisesAn.json");
+    this.questions = response.data; // 注意：axios 返回的数据在 response.data 中
+  } catch (error) {
+    // 如果连接服务器失败
+    console.error("获取数据失败:", error);
+    this.error = error;
 
-      try {
-        const response = await axios.post("addr");
-        // API返回的数据结构
-        const { questions, studentInfo, corAnswers } = response.data;
-
-        this.questions = questions || mockQuestions;
-        this.studentInfo = studentInfo || mockStudentInfo;
-        this.corAnswers = corAnswers || mockCorAnswers;
-      } catch (error) {
-        //如果连接服务器失败
-        console.error("获取数据失败:", error);
-        this.error = error;
-
-        // 使用mock数据作为回退
-        this.questions = mockQuestions;
-        this.studentInfo = mockStudentInfo;
-        this.corAnswers = mockCorAnswers;
-      } finally {
-        this.loading = false;
-      }
-    },
+    // 使用mock数据作为回退
+    this.questions = mockQuestions;
+    this.studentInfo = mockStudentInfo;
+    this.corAnswers = mockCorAnswers;
+  } finally {
+    this.loading = false;
+  }
+},
     // 确认是否提交答案
     willSubmit() {
       let remainTm = this.countTm.totalTm - this.countTm.answeredCount;
@@ -550,6 +593,8 @@ export default {
       )
         // 确定
         .then(() => {
+          console.log(this.questions);
+
           this.submitAnswers();
           this.$message({
             type: "success",
@@ -626,8 +671,73 @@ export default {
         xztAns.push(e.userAnswer);
         this.boolLists.xzt[index] = e.userAnswer === e.answer ? true : false;
       });
+
+
+
+
       // 获得填空题答案
-      const tktAns = this.getFormattedAnswers();
+      const tktBoolList = [];
+      // 遍历每个TKT模块
+      this.questions.tkt.forEach(tktItem => {
+        // 遍历模块中的每个题目
+        tktItem.userAnswer.forEach((userAnswer, questionIndex) => {
+          const correctAnswer = tktItem.answers[questionIndex];
+
+          if (userAnswer.type === "simple") {
+            // 处理简单题型
+            userAnswer.answers.forEach((userAns, ansIndex) => {
+              // 获取正确答案（支持单值和数组两种格式）
+              const correctValue = Array.isArray(correctAnswer)
+                ? correctAnswer[ansIndex]
+                : correctAnswer;
+
+              // 比较答案（忽略首尾空格）
+              const isCorrect = String(userAns).trim() === String(correctValue).trim();
+              tktBoolList.push(isCorrect);
+            });
+          } else {
+            // 处理复杂题型
+            userAnswer.sections.forEach((section, sectionIndex) => {
+              section.answers.forEach((userAns, ansIndex) => {
+                // 处理多层嵌套的正确答案结构
+                let correctValue = correctAnswer;
+
+                // 第一层：部分索引
+                if (Array.isArray(correctAnswer)) {
+                  correctValue = correctAnswer[sectionIndex];
+
+                  // 第二层：空位索引
+                  if (Array.isArray(correctValue)) {
+                    correctValue = correctValue[ansIndex];
+                  }
+                }
+
+                // 比较答案
+                const isCorrect = String(userAns).trim() === String(correctValue).trim();
+                tktBoolList.push(isCorrect);
+              });
+            });
+          }
+        });
+      });
+      this.boolLists.tkt = tktBoolList;
+
+      // 获得涂画题正确数组
+      const thtBoolList=[];
+      this.questions.tht.items.forEach(e=>{
+        let cntTrue=0;
+        e.flag.forEach(ef=>{
+          if(ef===true){
+            cntTrue++;
+          }
+        })
+          thtBoolList.push(cntTrue===e.cnt?true:false);
+      });
+      this.boolLists.tht=thtBoolList;
+
+
+
+
       // 获得数数题答案
       const sstAns = [];
       this.questions.sst.forEach((e, index) => {
@@ -667,6 +777,7 @@ export default {
       this.boolLists.htt = httAns;
       //调试用
       console.log(this.boolLists);
+
     },
 
     // 禁用右键菜单

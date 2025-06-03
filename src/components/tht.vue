@@ -46,9 +46,9 @@ export default{
             type:Array,
             require:true,
             default:()=>[
-                { rightItem: './static/img/tht/rightItem1.png', cunt: 2, flag: [false, false, false, false, false] },
-                { rightItem: './static/img/tht/rightItem2.png', cunt: 1, flag: [false, false, false, false, false] },
-                { rightItem: './static/img/tht/rightItem3.png', cunt: 3, flag: [false, false, false, false, false] },
+                { rightItem: './static/img/tht/rightItem1.png', cnt: 2, flag: [false, false, false, false, false] },
+                { rightItem: './static/img/tht/rightItem2.png', cnt: 1, flag: [false, false, false, false, false] },
+                { rightItem: './static/img/tht/rightItem3.png', cnt: 3, flag: [false, false, false, false, false] },
             ]
         },
         tuxingPath:{
@@ -64,6 +64,8 @@ export default{
     methods: {
         changeFlag(item, index) {
         item.flag[index] = !item.flag[index];
+        if(!item.changed)
+            item.changed=true;
     }
     }
 }
@@ -162,12 +164,12 @@ export default{
         filter: brightness(1.1);
     }
 
-    .rightItem {
+    /* .rightItem {
         position: absolute;
         bottom: -60px;
         width: 60px !important;
         height: auto;
-    }
+    } */
 
     .confirm {
         display: block;
