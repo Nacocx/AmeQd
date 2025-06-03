@@ -70,7 +70,7 @@ import Htt from "@/components/htt.vue";
 import lxt from "@/components/lxt.vue";
 import Tht from "@/components/tht.vue";
 import qst from "@/components/qst.vue";
-
+import axios from "axios";
 //实际使用中数据从后端获取
 
 const mockQuestions = {
@@ -533,38 +533,31 @@ export default {
     },
   },
   created() {
-    this.fetchData(); //从后端获得答案
+    // this.fetchTmData(); //从后端获得答案
   },
   mounted() {
     document.addEventListener("contextmenu", this.preventContextMenu);
   },
   methods: {
-    async fetchData() {
-      this.loading = true;
-      this.error = null;
+    async fetchTmData() {
+  this.loading = true;
+  this.error = null;
+  try {
+    const response = await axios.post("./TmJson/sx-01-s-01-01-01-sxClassroomExercisesAn.json");
+    this.questions = response.data; // 注意：axios 返回的数据在 response.data 中
+  } catch (error) {
+    // 如果连接服务器失败
+    console.error("获取数据失败:", error);
+    this.error = error;
 
-      
-        const response = await axios.post("./TmJson/sx-01-s-01-01-01-sxClassroomExercisesAn.json")
-        .then(e=>{
-          this.questions=response;
-        })
-        // API返回的数据结构
-        // const { questions, studentInfo, corAnswers } = response.data;
-
-        // this.questions = questions || mockQuestions;
-        // this.studentInfo = studentInfo || mockStudentInfo;
-        // this.corAnswers = corAnswers || mockCorAnswers;
-      .catch (error =>{
-        //如果连接服务器失败
-        console.error("获取数据失败:", error);
-        this.error = error;
-
-        // 使用mock数据作为回退
-        this.questions = mockQuestions;
-        this.studentInfo = mockStudentInfo;
-        this.corAnswers = mockCorAnswers;
-      })
-    },
+    // 使用mock数据作为回退
+    this.questions = mockQuestions;
+    this.studentInfo = mockStudentInfo;
+    this.corAnswers = mockCorAnswers;
+  } finally {
+    this.loading = false;
+  }
+},
     // 确认是否提交答案
     willSubmit() {
       let remainTm = this.countTm.totalTm - this.countTm.answeredCount;
