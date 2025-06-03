@@ -5,7 +5,7 @@
   <div class="lxt_main_body">
     <!-- <div class="header"></div> -->
     <h1>{{ message.title }}</h1>
-    <div class="questions">请连接和图片中物品数量一致的圆的图片</div>
+    <!-- <div class="questions">请连接和图片中物品数量一致的圆的图片</div> -->
 
     <div class="content">
       <!-- 上侧选项 -->

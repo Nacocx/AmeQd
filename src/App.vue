@@ -33,6 +33,8 @@
                 </el-button-group>
               </div> -->
 
+              <htt_tuo :message="questions.htt_tuo" />
+
               <!-- 拓展应用：2 -->
               <qst :message="questions.qst" v-if="questions.qst" />
               <!-- 拓展应用：3 -->
@@ -68,6 +70,7 @@ import Htt from "@/components/htt.vue";
 import lxt from "@/components/lxt.vue";
 import Tht from "@/components/tht.vue";
 import qst from "@/components/qst.vue";
+import htt_tuo from "@/components/htt_tuo.vue";
 import axios from "axios";
 //实际使用中数据从后端获取
 
@@ -385,7 +388,43 @@ const mockQuestions = {
       tureNum: 5
     },
     img: "./static/img/Tuo2_qst_ok/jian.png",
-  }
+  },
+  htt_tuo: {
+    title: "画图题",
+    subQuestion: [
+      {
+        id: 1,
+        img: "./static/img/Tuo1_htt_ok/t1.png",
+        answer: 4,
+        trueShape: 1,
+      },
+      {
+        id: 2,
+        img: "./static/img/Tuo1_htt_ok/t2.png",
+        answer: 3,
+        trueShape: 2,
+      },
+      {
+        id: 3,
+        img: "./static/img/Tuo1_htt_ok/t3.png",
+        answer: 1,
+        trueShape: 3,
+      },
+
+    ],
+    shape: ["./static/img/Tuo1_htt_ok/jx.png", "./static/img/Tuo1_htt_ok/sjx.png", "./static/img/Tuo1_htt_ok/yuan.png"],//有那些形状图形可以选择
+    // trueShape: 1,
+    userAnswer: [
+      [],
+      [],
+      [],
+    ],
+    isDragging: false,//是否正在拖拽
+    startX: 0,//相对于鼠标的偏移量
+    startY: 0,
+    draggedElement: null,//正在拖拽的元素
+    answer: [],//是否正确 返回后端的数据
+  },
 };
 
 const mockStudentInfo = {
@@ -429,6 +468,7 @@ export default {
     circleDrawing: Sst,
     lxt,
     qst,
+    htt_tuo
 
   },
   computed: {
@@ -491,10 +531,6 @@ export default {
           answeredCount++;
         }
       })
-
-
-
-
       const percentage = totalTm
         ? Math.round((answeredCount / totalTm) * 100)
         : 0;
