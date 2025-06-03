@@ -39,10 +39,7 @@
 export default {
   name: "qst",
   data() {
-<<<<<<< Updated upstream
-=======
     return {}
->>>>>>> Stashed changes
 
   },
   props: {
@@ -134,12 +131,9 @@ export default {
           console.log("你错了！");
         }
       }
-<<<<<<< Updated upstream
       else {
         document.removeEventListener('mousemove', this.mouseMove);
       }
-=======
->>>>>>> Stashed changes
 
 
 
