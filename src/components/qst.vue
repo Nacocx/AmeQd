@@ -40,47 +40,6 @@
 export default {
   name: "qst",
   data() {
-<<<<<<< Updated upstream
-    return {}
-
-  },
-  props: {
-    message: {
-      required: true,
-    }
-
-  },
-  mounted() {
-    try {
-      // 获取画布上下文
-      this.message.ctx = this.$refs.canvas.getContext("2d");
-      if (!this.message.ctx) {
-        throw new Error('无法获取画布 2D 上下文');
-      }
-      // 添加 mouseup 事件监听器
-      document.addEventListener('mouseup', this.mouseUp);
-
-      // 获取画布和 .right 容器元素
-      const canvas = this.$refs.canvas;
-      const rightContainer = canvas.parentElement;
-
-      // 计算画布相对于 .right 容器的左侧偏移量
-      const canvasOffsetLeft = canvas.offsetLeft;
-
-      // 获取所有 .option 元素
-      const optionElements = document.querySelectorAll(".qst_option");
-      if (optionElements.length === 0) {
-        console.warn('未找到 .qst_option 元素');
-      }
-
-      // 遍历 .option 元素，计算并存储每个形状的中心坐标
-      optionElements.forEach(e => {
-        const centerX = e.offsetLeft + 30 - canvasOffsetLeft;
-        const centerY = e.offsetTop + 30;
-        this.message.shapeXY.push({ x: centerX, y: centerY });
-      });
-
-=======
     return {
       ctx: "",
       shapeXY: [],//所有点的中心坐标
@@ -128,7 +87,6 @@ export default {
         this.shapeXY.push({ x: centerX, y: centerY });
       });
 
->>>>>>> Stashed changes
       // 打印存储的中心坐标，可在调试完成后移除
       // console.log('形状中心坐标:', this.message.shapeXY);
     } catch (error) {
@@ -137,57 +95,14 @@ export default {
   },
   methods: {
     mouseDown(e) {
-<<<<<<< Updated upstream
-      // 获取画布元素
-      const canvas = this.$refs.canvas;
-      // 获取画布相对于视口的位置
-      const rect = canvas.getBoundingClientRect();
-      // 计算鼠标在画布内的相对坐标
-      const x = e.clientX - rect.left;
-      const y = e.clientY - rect.top;
-=======
       this.flag = 1
       // 获取画布元素
       const canvas = this.$refs.canvas;
       console.log("canvas=", canvas);
       console.log("this.message.ctx=", this.ctx);
       this.ctx = this.$refs.canvas.getContext("2d");
->>>>>>> Stashed changes
 
-      document.addEventListener('mousemove', this.mouseMove);
-      this.message.ctx.beginPath();
-      // 使用计算后的相对坐标
-      this.message.ctx.moveTo(x, y);
-      // console.log("x=", x, "y=", y);
-    },
-    mouseMove(e) {
-      // console.log("123");
-      const canvas = this.$refs.canvas;
-      // 获取画布相对于视口的位置
-      const rect = canvas.getBoundingClientRect();
-      // 计算鼠标在画布内的相对坐标
-      const x = e.clientX - rect.left;
-      const y = e.clientY - rect.top;
 
-<<<<<<< Updated upstream
-      this.message.ctx.lineTo(x, y); // 直线
-      this.message.ctx.stroke();
-    },
-    mouseUp() {
-      if (this.message.flag) {
-        this.message.ctx.closePath();
-        document.removeEventListener('mousemove', this.mouseMove);
-        // console.log(this.shapeXY);
-
-        this.message.shapeXY.forEach(e => {
-          this.message.useAnswer.push({ ist: this.message.ctx.isPointInPath(e.x, e.y), x: e.x, y: e.y })
-          this.message.userNum += this.message.ctx.isPointInPath(e.x, e.y);
-        })
-        // console.log(this.useAnswer);
-        this.message.flag = 0;
-        if (this.message.userNum == this.message.question.tureNum) {
-          this.message.result = 1;  //圈图题就返回一个值就行 1 对 0 错
-=======
       // 获取画布相对于视口的位置
       const rect = canvas.getBoundingClientRect();
       // 计算鼠标在画布内的相对坐标
@@ -228,7 +143,6 @@ export default {
         this.flag = 0;
         if (this.userNum == this.message.question.tureNum) {
           this.result = 1;  //圈图题就返回一个值就行 1 对 0 错
->>>>>>> Stashed changes
           console.log("你对了！");
         } else {
           console.log("你错了！");

@@ -12,7 +12,7 @@
       <div class="options upOptions">
         <div v-for="(item, index) in localMessage.imgU" :key="index" class="option"
           :class="{ 'active': item.connected }" @mousedown="onMousedown($event, item)" :data-value="item.value"
-          :data-ownership="item.ownership">
+          :data-ownership="item.ownership + message.flag">
           <img :src="item.src">
         </div>
       </div>
@@ -21,7 +21,7 @@
       <div class="options downOptions">
         <div v-for="(item, index) in localMessage.imgD" :key="index" class="option"
           :class="{ 'active': item.connected }" @mousedown="onMousedown($event, item)" :data-value="item.value"
-          :data-ownership="item.ownership">
+          :data-ownership="item.ownership + message.flag">
           <img :src="item.src">
         </div>
       </div>
@@ -40,7 +40,7 @@
     <div class="submitDiv">
       <!-- <button class="submit" @click="checkAnswer">提交</button> -->
     </div>
-    <!-- <hr> -->
+    <hr>
   </div>
 
 </template>
@@ -133,10 +133,14 @@ export default {
       // 合并上下两侧的选项数组并遍历
       [...this.localMessage.imgU, ...this.localMessage.imgD].forEach(item => {
         // 根据选项的值和所属区域查找对应的 DOM 元素
-        const element = document.querySelector(`[data-value="${item.value}"][data-ownership="${item.ownership}"]`);
+        const element = document.querySelector(`[data-value="${item.value}"][data-ownership="${item.ownership}${this.message.flag}"]`);
+        // console.log("element", element);
+
         if (element) {
           // 获取元素相对于视口的位置和尺寸信息
           const rect = element.getBoundingClientRect();
+          // console.log(rect);
+
           // 计算选项的中心 x 坐标
           item.x = rect.left - this.canvasRect.left + rect.width / 2;
           // 计算选项的中心 y 坐标
@@ -150,6 +154,7 @@ export default {
           };
         }
       });
+      // console.log("-----------------------------");
     },
 
     /**
@@ -455,7 +460,7 @@ export default {
      * @param {number} width - 直线的宽度
      */
     drawLine(context, line, color, width) {
-      // console.log("line", line);
+      // console.log("lxt line", line);
 
       // 开始一个新的路径
       context.beginPath();
