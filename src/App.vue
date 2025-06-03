@@ -19,29 +19,35 @@
               <!-- part2_画图题 -->
               <htt :message="questions.htt" />
 
-              
+              <!-- part3_连线题 -->
+              <lxt :message="questions.lxt_part3" />
+              <!-- part4_形状题 -->
+              <sst :items="questions.sst" v-if="questions.sst" />
+              <!-- part5_涂画题 -->
+              <tht :items="questions.tht.items" :tuxing-path="questions.tht.tuxingpath" v-if="questions.tht.items" />
 
-               
-               
-               <div>
 
-                <lxt :message="questions.lxt_part3" v-if="lxtpage === 1" />
-                <!-- 拓展应用：3 -->
-                <lxt :message="questions.lxt_tuo3" v-if="lxtpage === 2" />
+              <!-- <div>
+
                 <el-button-group size="large">
                   <el-button @click="lxtpage--" type="primary" :disabled="lxtpage === 1">Last</el-button>
                   <el-button @click="lxtpage++" type="primary" :disabled="lxtpage === 2">Next</el-button>
                 </el-button-group>
-                <hr />
+              </div> -->
+
+              <htt_tuo :message="questions.htt_tuo" />
+
+              <!-- 拓展应用：2 -->
+              <qst :message="questions.qst" v-if="questions.qst" />
+              <!-- 拓展应用：3 -->
+              <lxt :message="questions.lxt_tuo3" />
+
+              <xzt :questions="questions.xzt" v-if="questions.xzt" />
 
 
-              </div>
-              <qst :message="questions.qst" v-if="questions.qst"/>
 
-              <xzt :questions="questions.xzt" v-if="questions.xzt"/>
-              <sst :items="questions.sst" v-if="questions.sst"/>
 
-              <tht :items="questions.tht.items" :tuxing-path="questions.tht.tuxingpath" v-if="questions.tht.items"/>
+
 
               <el-button-group>
                 <!-- <el-button type="default" @click="pageSub" :icon="ArrowLeft" size="large" :disabled="currentPage===1">Last Part</el-button> -->
@@ -68,6 +74,9 @@ import Htt from "@/components/htt.vue";
 import lxt from "@/components/lxt.vue";
 import Tht from "@/components/tht.vue";
 import qst from "@/components/qst.vue";
+
+import htt_tuo from "@/components/htt_tuo.vue";
+
 import axios from "axios";
 //实际使用中数据从后端获取
 
@@ -351,19 +360,25 @@ const mockQuestions = {
         rightItem: "./static/img/tht/rightItem1.png",
         cnt: 2,
         flag: [false, false, false, false, false],
+
         "changed":false
+
       },
       {
         rightItem: "./static/img/tht/rightItem2.png",
         cnt: 1,
         flag: [false, false, false, false, false],
+
         "changed":false
+
       },
       {
         rightItem: "./static/img/tht/rightItem3.png",
         cnt: 3,
         flag: [false, false, false, false, false],
+
         "changed":false
+
       },
     ],
     tuxingpath: [
@@ -385,7 +400,45 @@ const mockQuestions = {
       tureNum: 5
     },
     img: "./static/img/Tuo2_qst_ok/jian.png",
-  }
+
+  },
+  htt_tuo: {
+    title: "画图题",
+    subQuestion: [
+      {
+        id: 1,
+        img: "./static/img/Tuo1_htt_ok/t1.png",
+        answer: 4,
+        trueShape: 1,
+      },
+      {
+        id: 2,
+        img: "./static/img/Tuo1_htt_ok/t2.png",
+        answer: 3,
+        trueShape: 2,
+      },
+      {
+        id: 3,
+        img: "./static/img/Tuo1_htt_ok/t3.png",
+        answer: 1,
+        trueShape: 3,
+      },
+
+    ],
+    shape: ["./static/img/Tuo1_htt_ok/jx.png", "./static/img/Tuo1_htt_ok/sjx.png", "./static/img/Tuo1_htt_ok/yuan.png"],//有那些形状图形可以选择
+    // trueShape: 1,
+    userAnswer: [
+      [],
+      [],
+      [],
+    ],
+    isDragging: false,//是否正在拖拽
+    startX: 0,//相对于鼠标的偏移量
+    startY: 0,
+    draggedElement: null,//正在拖拽的元素
+    answer: [],//是否正确 返回后端的数据
+  },
+
 };
 
 const mockStudentInfo = {
@@ -428,7 +481,9 @@ export default {
     sidebar,
     circleDrawing: Sst,
     lxt,
-    qst
+    qst,
+    htt_tuo
+
   },
   computed: {
     ArrowLeft() {
@@ -482,18 +537,17 @@ export default {
       });
 
       // 获得涂画题
+
       totalTm+=this.questions.tht.items.length;
       let prevth=[]
       this.questions.tht.items.forEach((e,index)=>{
         if(e.changed===true&&!prevth[index])
         {
+
           prevth.push(true);
           answeredCount++;
         }
       })
-
-
-
 
       const percentage = totalTm
         ? Math.round((answeredCount / totalTm) * 100)
@@ -510,24 +564,26 @@ export default {
   },
   methods: {
     async fetchTmData() {
-  this.loading = true;
-  this.error = null;
-  try {
-    const response = await axios.post("./TmJson/sx-01-s-01-01-01-sxClassroomExercisesAn.json");
-    this.questions = response.data; // 注意：axios 返回的数据在 response.data 中
-  } catch (error) {
-    // 如果连接服务器失败
-    console.error("获取数据失败:", error);
-    this.error = error;
 
-    // 使用mock数据作为回退
-    this.questions = mockQuestions;
-    this.studentInfo = mockStudentInfo;
-    this.corAnswers = mockCorAnswers;
-  } finally {
-    this.loading = false;
-  }
-},
+      this.loading = true;
+      this.error = null;
+      try {
+        const response = await axios.post("./TmJson/sx-01-s-01-01-01-sxClassroomExercisesAn.json");
+        this.questions = response.data; // 注意：axios 返回的数据在 response.data 中
+      } catch (error) {
+        // 如果连接服务器失败
+        console.error("获取数据失败:", error);
+        this.error = error;
+
+        // 使用mock数据作为回退
+        this.questions = mockQuestions;
+        this.studentInfo = mockStudentInfo;
+        this.corAnswers = mockCorAnswers;
+      } finally {
+        this.loading = false;
+      }
+    },
+
     // 确认是否提交答案
     willSubmit() {
       let remainTm = this.countTm.totalTm - this.countTm.answeredCount;
@@ -619,12 +675,14 @@ export default {
       // }));
 
       // 获得选择题答案并且判断正误
+
       if(this.questions.xzt){
       const xztAns = [];
       this.questions.xzt.forEach((e, index) => {
         xztAns.push(e.userAnswer);
         this.boolLists.xzt[index] = e.userAnswer === e.answer ? true : false;
       });}
+
 
 
 
@@ -677,17 +735,17 @@ export default {
       this.boolLists.tkt = tktBoolList;
 
       // 获得涂画题正确数组
-      const thtBoolList=[];
-      this.questions.tht.items.forEach(e=>{
-        let cntTrue=0;
-        e.flag.forEach(ef=>{
-          if(ef===true){
+      const thtBoolList = [];
+      this.questions.tht.items.forEach(e => {
+        let cntTrue = 0;
+        e.flag.forEach(ef => {
+          if (ef === true) {
             cntTrue++;
           }
         })
-          thtBoolList.push(cntTrue===e.cnt?true:false);
+        thtBoolList.push(cntTrue === e.cnt ? true : false);
       });
-      this.boolLists.tht=thtBoolList;
+      this.boolLists.tht = thtBoolList;
 
 
 
