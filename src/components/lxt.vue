@@ -1,7 +1,7 @@
 <!-- 连线题 -->
 
 <template>
-
+  <span>如果连线出现错误,请按F5刷新再试一试哦</span>
   <div class="lxt_main_body">
     <!-- <div class="header"></div> -->
       <h1>{{message.title}}</h1>
