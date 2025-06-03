@@ -162,12 +162,12 @@ export default{
         filter: brightness(1.1);
     }
 
-    .rightItem {
+    /* .rightItem {
         position: absolute;
         bottom: -60px;
         width: 60px !important;
         height: auto;
-    }
+    } */
 
     .confirm {
         display: block;
