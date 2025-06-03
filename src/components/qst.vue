@@ -38,9 +38,7 @@
  
       export default{
         name: "qst",
-        data(){
-          
-        },
+        
         props:{
           message:{
             required:true,
