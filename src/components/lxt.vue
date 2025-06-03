@@ -5,14 +5,18 @@
   <div class="lxt_main_body">
     <!-- <div class="header"></div> -->
     <h1>{{ message.title }}</h1>
+
     <!-- <div class="questions">请连接和图片中物品数量一致的圆的图片</div> -->
+
 
     <div class="content">
       <!-- 上侧选项 -->
       <div class="options upOptions">
         <div v-for="(item, index) in localMessage.imgU" :key="index" class="option"
           :class="{ 'active': item.connected }" @mousedown="onMousedown($event, item)" :data-value="item.value"
+
           :data-ownership="item.ownership + message.flag">
+
           <img :src="item.src">
         </div>
       </div>
@@ -21,7 +25,9 @@
       <div class="options downOptions">
         <div v-for="(item, index) in localMessage.imgD" :key="index" class="option"
           :class="{ 'active': item.connected }" @mousedown="onMousedown($event, item)" :data-value="item.value"
+
           :data-ownership="item.ownership + message.flag">
+
           <img :src="item.src">
         </div>
       </div>
@@ -460,7 +466,9 @@ export default {
      * @param {number} width - 直线的宽度
      */
     drawLine(context, line, color, width) {
+
       // console.log("lxt line", line);
+
 
       // 开始一个新的路径
       context.beginPath();

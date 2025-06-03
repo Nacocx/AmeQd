@@ -18,6 +18,7 @@
               <tkt :all-questions="questions.tkt" />
               <!-- part2_画图题 -->
               <htt :message="questions.htt" />
+
               <!-- part3_连线题 -->
               <lxt :message="questions.lxt_part3" />
               <!-- part4_形状题 -->
@@ -27,6 +28,7 @@
 
 
               <!-- <div>
+
                 <el-button-group size="large">
                   <el-button @click="lxtpage--" type="primary" :disabled="lxtpage === 1">Last</el-button>
                   <el-button @click="lxtpage++" type="primary" :disabled="lxtpage === 2">Next</el-button>
@@ -41,6 +43,8 @@
               <lxt :message="questions.lxt_tuo3" />
 
               <xzt :questions="questions.xzt" v-if="questions.xzt" />
+
+
 
 
 
@@ -70,7 +74,9 @@ import Htt from "@/components/htt.vue";
 import lxt from "@/components/lxt.vue";
 import Tht from "@/components/tht.vue";
 import qst from "@/components/qst.vue";
+
 import htt_tuo from "@/components/htt_tuo.vue";
+
 import axios from "axios";
 //实际使用中数据从后端获取
 
@@ -354,19 +360,25 @@ const mockQuestions = {
         rightItem: "./static/img/tht/rightItem1.png",
         cnt: 2,
         flag: [false, false, false, false, false],
-        "changed": false
+
+        "changed":false
+
       },
       {
         rightItem: "./static/img/tht/rightItem2.png",
         cnt: 1,
         flag: [false, false, false, false, false],
-        "changed": false
+
+        "changed":false
+
       },
       {
         rightItem: "./static/img/tht/rightItem3.png",
         cnt: 3,
         flag: [false, false, false, false, false],
-        "changed": false
+
+        "changed":false
+
       },
     ],
     tuxingpath: [
@@ -388,6 +400,7 @@ const mockQuestions = {
       tureNum: 5
     },
     img: "./static/img/Tuo2_qst_ok/jian.png",
+
   },
   htt_tuo: {
     title: "画图题",
@@ -425,6 +438,7 @@ const mockQuestions = {
     draggedElement: null,//正在拖拽的元素
     answer: [],//是否正确 返回后端的数据
   },
+
 };
 
 const mockStudentInfo = {
@@ -523,14 +537,18 @@ export default {
       });
 
       // 获得涂画题
-      totalTm += this.questions.tht.items.length;
-      let prevth = []
-      this.questions.tht.items.forEach((e, index) => {
-        if (e.changed === true && !prevth[index]) {
+
+      totalTm+=this.questions.tht.items.length;
+      let prevth=[]
+      this.questions.tht.items.forEach((e,index)=>{
+        if(e.changed===true&&!prevth[index])
+        {
+
           prevth.push(true);
           answeredCount++;
         }
       })
+
       const percentage = totalTm
         ? Math.round((answeredCount / totalTm) * 100)
         : 0;
@@ -546,6 +564,7 @@ export default {
   },
   methods: {
     async fetchTmData() {
+
       this.loading = true;
       this.error = null;
       try {
@@ -564,6 +583,7 @@ export default {
         this.loading = false;
       }
     },
+
     // 确认是否提交答案
     willSubmit() {
       let remainTm = this.countTm.totalTm - this.countTm.answeredCount;
@@ -655,13 +675,14 @@ export default {
       // }));
 
       // 获得选择题答案并且判断正误
-      if (this.questions.xzt) {
-        const xztAns = [];
-        this.questions.xzt.forEach((e, index) => {
-          xztAns.push(e.userAnswer);
-          this.boolLists.xzt[index] = e.userAnswer === e.answer ? true : false;
-        });
-      }
+
+      if(this.questions.xzt){
+      const xztAns = [];
+      this.questions.xzt.forEach((e, index) => {
+        xztAns.push(e.userAnswer);
+        this.boolLists.xzt[index] = e.userAnswer === e.answer ? true : false;
+      });}
+
 
 
 
