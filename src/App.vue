@@ -399,10 +399,16 @@ const mockQuestions = {
       num: 8,//有多少个单个形状
       tureNum: 5
     },
+
     img: "./static/img/Tuo2_qst_ok/jian_10.png",
+
+
+    result:false,
+    changed:false,
 
   },
   htt_tuo: {
+    id:[1,2,3],
     title: "拓展应用1：根据数字提示，把缺少的图形拖进来",
     subQuestion: [
       {
@@ -467,6 +473,7 @@ export default {
         sst: [],
         htt: [],
         tht: [],
+        qst: [],
       },
       lxtpage: 1,
     };
@@ -536,8 +543,20 @@ export default {
         });
       });
 
-      // 获得涂画题
+      // 获得画图题答案
+      totalTm += this.questions.htt_tuo.userAnswer.length;
+      // 防止多次计算
+      let prev2 = [];
+      this.questions.htt_tuo.userAnswer.forEach((ans, index) => {
+        ans.forEach((e) => {
+          if (e !== null && prev2[index] == null) {
+            answeredCount++;
+            prev2[index] = e;
+          }
+        });
+      });
 
+      // 获得涂画题
       totalTm+=this.questions.tht.items.length;
       let prevth=[]
       this.questions.tht.items.forEach((e,index)=>{
@@ -549,15 +568,22 @@ export default {
         }
       })
 
+      // 获得圈数题
+      totalTm+=1;
+      if(this.questions.qst.changed)
+        {
+          answeredCount++;
+        }
+
       const percentage = totalTm
         ? Math.round((answeredCount / totalTm) * 100)
         : 0;
-
+      totalTm;
       return { totalTm, percentage, answeredCount };
     },
   },
   created() {
-    this.fetchTmData(); //从后端获得题目数据
+    // this.fetchTmData(); //从后端获得题目数据
   },
   mounted() {
     document.addEventListener("contextmenu", this.preventContextMenu);
@@ -762,13 +788,32 @@ export default {
       // console.log(sstAns);
       // console.log(xztAns);
       // this.checkAnswers(xztAns);
-      const httAns = [];
-      this.questions.htt.userAnswer.forEach((e, index) => {
+      let htt1=this.questions.htt;
+      let htt2=this.questions.htt_tuo;
+      
+      this.boolLists.htt = this.getHttBoolList(htt1);
+      this.boolLists.htt_tuo =this.getHttBoolList(htt2);
+
+
+      //获得圈数题答案
+      if(this.questions.qst.result===true)
+        this.boolLists.qst.push(true);
+
+
+
+
+      //调试用
+      console.log(this.boolLists);
+
+    },
+     getHttBoolList(htt){
+        let httAns = [];
+        htt.userAnswer.forEach((e, index) => {
         let num = 0;
         let flag = false;
-        e.forEach((e1, index1) => {
-          if (e1 != this.questions.htt.id) {
-            if (flag == false) {
+        e.forEach((e1,index1) => {
+          if (e1 != ((typeof(htt.id)==="number")?htt.id:(htt.id[index]))) {
+            if (flag === false) {
               httAns.push(false);
               flag = true;
             }
@@ -776,21 +821,17 @@ export default {
             num++;
           }
         });
-        if (num == this.questions.htt.subQuestion[index].answer && flag == 0) {
+        if (num == htt.subQuestion[index].answer && flag === false) {
           httAns.push(true);
           flag = true;
         }
-        if (flag == false) {
+        if (flag === false) {
           httAns.push(false);
           flag = true;
         }
       });
-
-      this.boolLists.htt = httAns;
-      //调试用
-      console.log(this.boolLists);
-
-    },
+      return httAns;
+      },
 
     // 禁用右键菜单
     preventContextMenu(e) {
