@@ -79,13 +79,13 @@ import htt_tuo from "@/components/htt_tuo.vue";
 
 import axios from "axios";
 //实际使用中数据从后端获取
-
+// import logo from "/static/img/T1_tkt_ok/tkt_1.jpeg";   // 必须用 import
 const mockQuestions = {
   xzt: [
     {
       id: 1,
       title: "每只小兔吃一个萝卜，选哪一堆正好合适？",
-      img: "../static/img/T1_xzt/timu.png", //非必需
+      img: "./static/img/T1_xzt/timu.png", //非必需
       options: [
         { value: "A", img: "./static/img/T1_xzt/A.png" },
         { value: "B", img: "./static/img/T1_xzt/B.png" },
@@ -239,7 +239,7 @@ const mockQuestions = {
 
   lxt_part3: {
     id: 1,
-    title: "part3",
+    title: "part3：请连接和图片中物品数量一致的圆的图片",
     flag: "t3",
     imgU: [
       {
@@ -297,7 +297,7 @@ const mockQuestions = {
   },
   lxt_tuo3: {
     id: 2,
-    title: "拓展应用3",
+    title: "拓展应用3：请连接对应物品数量的数字",
     flag: "tuo3",
     imgU: [
       {
@@ -388,7 +388,7 @@ const mockQuestions = {
     ],
   },
   qst: {
-    title: "对照上面图片根据左边的图形数量圈出右边的数量",
+    title: "拓展应用2：对照上面图片根据左边的图形数量圈出右边的数量",
     example: {
       t_img: "./static/img/Tuo2_qst_ok/t1.png",//样例题目
       a_img: "./static/img/Tuo2_qst_ok/a1.png",//样例答案
@@ -403,7 +403,7 @@ const mockQuestions = {
 
   },
   htt_tuo: {
-    title: "画图题",
+    title: "拓展应用1：根据数字提示，把缺少的图形拖进来",
     subQuestion: [
       {
         id: 1,
