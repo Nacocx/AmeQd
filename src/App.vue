@@ -153,7 +153,7 @@ const mockQuestions = {
         "4.认识数字“4”",
         "5.认识数字“5”",
       ],
-      img: "./static/img/T1_tkt_ok/tkt_1_y.jpeg",
+      img: "./static/img/T1_tkt_ok/tkt_1_90.jpeg",
       subQuestions: [
         "（1）一个太阳、一座房子、一棵果树可以用数字TNUM表示，也可以用TNUM个小圆片表示。TSPL（2）看看图中，还有什么可以用数字“1”表示呢TNUM和TNUM都可以用数字“1”表示。",
         "两只鸟、两个人，可以用数字TNUM表示，也可以用TNUM个小圆片表示。",
