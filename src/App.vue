@@ -589,26 +589,26 @@ export default {
     document.addEventListener("contextmenu", this.preventContextMenu);
   },
   methods: {
-    async fetchTmData() {
+    // async fetchTmData() {
 
-      this.loading = true;
-      this.error = null;
-      try {
-        const response = await axios.post("./TmJson/sx-01-s-01-01-01-sxClassroomExercisesAn.json");
-        this.questions = response.data; // 注意：axios 返回的数据在 response.data 中
-      } catch (error) {
-        // 如果连接服务器失败
-        console.error("获取数据失败:", error);
-        this.error = error;
+    //   this.loading = true;
+    //   this.error = null;
+    //   try {
+    //     const response = await axios.post("./TmJson/sx-01-s-01-01-01-sxClassroomExercisesAn.json");
+    //     this.questions = response.data; // 注意：axios 返回的数据在 response.data 中
+    //   } catch (error) {
+    //     // 如果连接服务器失败
+    //     console.error("获取数据失败:", error);
+    //     this.error = error;
 
-        // 使用mock数据作为回退
-        this.questions = mockQuestions;
-        this.studentInfo = mockStudentInfo;
-        this.corAnswers = mockCorAnswers;
-      } finally {
-        this.loading = false;
-      }
-    },
+    //     // 使用mock数据作为回退
+    //     this.questions = mockQuestions;
+    //     this.studentInfo = mockStudentInfo;
+    //     this.corAnswers = mockCorAnswers;
+    //   } finally {
+    //     this.loading = false;
+    //   }
+    // },
 
     // 确认是否提交答案
     willSubmit() {
