@@ -401,7 +401,7 @@ const mockQuestions = {
     },
     img: "./static/img/Tuo2_qst_ok/jian.png",
     result:false,
-
+    changed:false,
   },
   htt_tuo: {
     id:[1,2,3],
@@ -539,8 +539,20 @@ export default {
         });
       });
 
-      // 获得涂画题
+      // 获得画图题答案
+      totalTm += this.questions.htt_tuo.userAnswer.length;
+      // 防止多次计算
+      let prev2 = [];
+      this.questions.htt_tuo.userAnswer.forEach((ans, index) => {
+        ans.forEach((e) => {
+          if (e !== null && prev2[index] == null) {
+            answeredCount++;
+            prev2[index] = e;
+          }
+        });
+      });
 
+      // 获得涂画题
       totalTm+=this.questions.tht.items.length;
       let prevth=[]
       this.questions.tht.items.forEach((e,index)=>{
@@ -552,10 +564,17 @@ export default {
         }
       })
 
+      // 获得圈数题
+      totalTm+=1;
+      if(this.questions.qst.changed)
+        {
+          answeredCount++;
+        }
+
       const percentage = totalTm
         ? Math.round((answeredCount / totalTm) * 100)
         : 0;
-
+      totalTm;
       return { totalTm, percentage, answeredCount };
     },
   },
