@@ -140,6 +140,7 @@ export default {
         // console.log("this.message.userNum=", this.userNum);
 
         this.flag = 0;
+        this.message.changed=true;
         if (this.userNum == this.message.question.tureNum) {
           this.message.result = true;  //圈图题就返回一个值就行 1 对 0 错
           // console.log("你对了！");
