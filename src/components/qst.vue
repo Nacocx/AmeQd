@@ -44,7 +44,6 @@ export default {
       ctx: "",
       shapeXY: [],//所有点的中心坐标
       allXY: [],
-      result: [],
       useAnswer: [],
       userNum: 0,
       flag: 0,
@@ -138,14 +137,14 @@ export default {
           this.userNum += this.ctx.isPointInPath(e.x, e.y);
         })
         // console.log(this.useAnswer);
-        console.log("this.message.userNum=", this.userNum);
+        // console.log("this.message.userNum=", this.userNum);
 
         this.flag = 0;
         if (this.userNum == this.message.question.tureNum) {
-          this.result = 1;  //圈图题就返回一个值就行 1 对 0 错
-          console.log("你对了！");
+          this.message.result = true;  //圈图题就返回一个值就行 1 对 0 错
+          // console.log("你对了！");
         } else {
-          console.log("你错了！");
+          // console.log("你错了！");
         }
       }
       else {
