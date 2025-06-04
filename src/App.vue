@@ -19,25 +19,35 @@
               <!-- part2_画图题 -->
               <htt :message="questions.htt" />
 
-              
+              <!-- part3_连线题 -->
+              <lxt :message="questions.lxt_part3" />
+              <!-- part4_形状题 -->
+              <sst :items="questions.sst" v-if="questions.sst" />
+              <!-- part5_涂画题 -->
+              <tht :items="questions.tht.items" :tuxing-path="questions.tht.tuxingpath" v-if="questions.tht.items" />
 
-               
-               
-                <!-- TODO: fix lxt and qst bugs -->
+
               <!-- <div>
-                <lxt :message="questions.lxt_part3" v-if="lxtpage === 1" />
-                <lxt :message="questions.lxt_tuo3" v-if="lxtpage === 2" />
+
                 <el-button-group size="large">
                   <el-button @click="lxtpage--" type="primary" :disabled="lxtpage === 1">Last</el-button>
                   <el-button @click="lxtpage++" type="primary" :disabled="lxtpage === 2">Next</el-button>
                 </el-button-group>
-                <hr />
               </div> -->
-                <!-- <qst :message="questions.qst"/> -->
 
-              <xzt :questions="questions.xzt" />
-              <sst :items="questions.sst" />
-              <tht :items="questions.tht.items" :tuxing-path="questions.tht.tuxingpath" />
+              <htt_tuo :message="questions.htt_tuo" />
+
+              <!-- 拓展应用：2 -->
+              <qst :message="questions.qst" v-if="questions.qst" />
+              <!-- 拓展应用：3 -->
+              <lxt :message="questions.lxt_tuo3" />
+
+              <xzt :questions="questions.xzt" v-if="questions.xzt" />
+
+
+
+
+
 
               <el-button-group>
                 <!-- <el-button type="default" @click="pageSub" :icon="ArrowLeft" size="large" :disabled="currentPage===1">Last Part</el-button> -->
@@ -64,15 +74,18 @@ import Htt from "@/components/htt.vue";
 import lxt from "@/components/lxt.vue";
 import Tht from "@/components/tht.vue";
 import qst from "@/components/qst.vue";
+
+import htt_tuo from "@/components/htt_tuo.vue";
+
 import axios from "axios";
 //实际使用中数据从后端获取
-
+// import logo from "/static/img/T1_tkt_ok/tkt_1.jpeg";   // 必须用 import
 const mockQuestions = {
   xzt: [
     {
       id: 1,
       title: "每只小兔吃一个萝卜，选哪一堆正好合适？",
-      img: "../static/img/T1_xzt/timu.png", //非必需
+      img: "./static/img/T1_xzt/timu.png", //非必需
       options: [
         { value: "A", img: "./static/img/T1_xzt/A.png" },
         { value: "B", img: "./static/img/T1_xzt/B.png" },
@@ -111,20 +124,20 @@ const mockQuestions = {
   sst: [
     {
       id: 1,
-      title: { image: "./static/img/T3_sst/icecream.png", count: 5 },
-      tuXingPath: "./static/img/T3_sst/circle.png",
+      title: { image: "./static/img/T3_sst/icecream_28.png", count: 5 },
+      tuXingPath: "./static/img/T3_sst/circle_2.png",
       userAnswer: "",
     },
     {
       id: 2,
-      title: { image: "./static/img/T3_sst/plane.png", count: 4 },
-      tuXingPath: "./static/img/T3_sst/circle.png",
+      title: { image: "./static/img/T3_sst/plane_21.png", count: 4 },
+      tuXingPath: "./static/img/T3_sst/circle_2.png",
       userAnswer: "",
     },
     {
       id: 3,
-      title: { image: "./static/img/T3_sst/tree.png", count: 3 },
-      tuXingPath: "./static/img/T3_sst/circle.png",
+      title: { image: "./static/img/T3_sst/tree_13.png", count: 3 },
+      tuXingPath: "./static/img/T3_sst/circle_2.png",
       userAnswer: "",
     },
   ],
@@ -140,7 +153,7 @@ const mockQuestions = {
         "4.认识数字“4”",
         "5.认识数字“5”",
       ],
-      img: "./static/img/T1_tkt_ok/tkt_1.jpeg",
+      img: "./static/img/T1_tkt_ok/tkt_1_90.jpeg",
       subQuestions: [
         "（1）一个太阳、一座房子、一棵果树可以用数字TNUM表示，也可以用TNUM个小圆片表示。TSPL（2）看看图中，还有什么可以用数字“1”表示呢TNUM和TNUM都可以用数字“1”表示。",
         "两只鸟、两个人，可以用数字TNUM表示，也可以用TNUM个小圆片表示。",
@@ -192,29 +205,29 @@ const mockQuestions = {
     subQuestion: [
       {
         id: 1,
-        img: "./static/img/T2_htt_ok/t1.jpeg",
+        img: "./static/img/T2_htt_ok/t1_9.jpeg",
         answer: 2,
       },
       {
         id: 2,
-        img: "./static/img/T2_htt_ok/t2.jpeg",
+        img: "./static/img/T2_htt_ok/t2_9.jpeg",
         answer: 3,
       },
       {
         id: 3,
-        img: "./static/img/T2_htt_ok/t3.jpeg",
+        img: "./static/img/T2_htt_ok/t3_10.jpeg",
         answer: 5,
       },
       {
         id: 4,
-        img: "./static/img/T2_htt_ok/t4.jpeg",
+        img: "./static/img/T2_htt_ok/t4_9.jpeg",
         answer: 4,
       },
     ],
     shape: [
-      "./static/img/T2_htt_ok/jx.png",
-      "./static/img/T2_htt_ok/sjx.png",
-      "./static/img/T2_htt_ok/yx.png",
+      "./static/img/T2_htt_ok/jx_6.png",
+      "./static/img/T2_htt_ok/sjx_17.png",
+      "./static/img/T2_htt_ok/yx_15.png",
     ], //有那些形状图形可以选择
     trueShape: 1,
     userAnswer: [[], [], [], []],
@@ -226,29 +239,29 @@ const mockQuestions = {
 
   lxt_part3: {
     id: 1,
-    title: "part3",
+    title: "part3：请连接和图片中物品数量一致的圆的图片",
     flag: "t3",
     imgU: [
       {
-        src: "./static/img/T3_lxt_ok/l1.png",
+        src: "./static/img/T3_lxt_ok/l1_30.png",
         value: "1",
         ownership: "U",
         connected: false,
       },
       {
-        src: "./static/img/T3_lxt_ok/l2.png",
+        src: "./static/img/T3_lxt_ok/l2_8.png",
         value: "2",
         ownership: "U",
         connected: false,
       },
       {
-        src: "./static/img/T3_lxt_ok/l4.png",
+        src: "./static/img/T3_lxt_ok/l4_32.png",
         value: "4",
         ownership: "U",
         connected: false,
       },
       {
-        src: "./static/img/T3_lxt_ok/l5.png",
+        src: "./static/img/T3_lxt_ok/l5_36.png",
         value: "5",
         ownership: "U",
         connected: false,
@@ -256,76 +269,57 @@ const mockQuestions = {
     ],
     imgD: [
       {
-        src: "./static/img/T3_lxt_ok/a1.png",
+        src: "./static/img/T3_lxt_ok/a1_18.png",
         value: "1",
         ownership: "D",
         connected: false,
       },
       {
-        src: "./static/img/T3_lxt_ok/a2.png",
+        src: "./static/img/T3_lxt_ok/a2_13.png",
         value: "2",
         ownership: "D",
         connected: false,
       },
       {
-        src: "./static/img/T3_lxt_ok/a4.png",
+        src: "./static/img/T3_lxt_ok/a4_14.png",
         value: "4",
         ownership: "D",
         connected: false,
       },
       {
-        src: "./static/img/T3_lxt_ok/a5.png",
+        src: "./static/img/T3_lxt_ok/a5_18.png",
         value: "5",
         ownership: "D",
         connected: false,
       },
     ],
-    // 标记是否正在绘制连线的状态，初始为 false 表示未开始绘制
-    isDrawing: false,
-    // 记录连线起始选项的对象，初始为 null 表示无起始选项
-    startItem: null,
-    // 记录连线结束选项的对象，初始为 null 表示无结束选项
-    endItem: null,
-    // 当前正在绘制的连线对象，包含起点和终点坐标，初始均为 0
-    currentLine: { x1: 0, y1: 0, x2: 0, y2: 0 },
-    // 存储所有已创建连线的数组，初始为空数组
-    connections: [],
-    // 画布的 2D 绘图上下文对象，初始为 null，后续在 mounted 钩子中初始化
-    ctx: null,
-    // 背景画布的 2D 绘图上下文对象，初始为 null，后续在 mounted 钩子中初始化
-    backCtx: null,
-    // 存储画布相对于视口的位置和尺寸信息的对象，初始为 null
-    canvasRect: null,
-    // 调试模式开关，设置为 true 时可开启调试功能，如绘制检测区域
-    isDebug: true,
-    // 存储用户连线答案检查结果的数组，初始为空数组
-    result: [],
+
   },
   lxt_tuo3: {
     id: 2,
-    title: "拓展应用3",
+    title: "拓展应用3：请连接对应物品数量的数字",
     flag: "tuo3",
     imgU: [
       {
-        src: "./static/img/Tuo3_lxt_ok/tuo_l2.jpg",
+        src: "./static/img/Tuo3_lxt_ok/tuo_l2_23.png",
         value: "2",
         ownership: "U",
         connected: false,
       },
       {
-        src: "./static/img/Tuo3_lxt_ok/tuo_l3.png",
+        src: "./static/img/Tuo3_lxt_ok/tuo_l3_13.png",
         value: "3",
         ownership: "U",
         connected: false,
       },
       {
-        src: "./static/img/Tuo3_lxt_ok/tuo_l4.jpg",
+        src: "./static/img/Tuo3_lxt_ok/tuo_l4_19.png",
         value: "4",
         ownership: "U",
         connected: false,
       },
       {
-        src: "./static/img/Tuo3_lxt_ok/tuo_l5.jpg",
+        src: "./static/img/Tuo3_lxt_ok/tuo_l5_30.png",
         value: "5",
         ownership: "U",
         connected: false,
@@ -357,76 +351,100 @@ const mockQuestions = {
         connected: false,
       },
     ],
-    // 标记是否正在绘制连线的状态，初始为 false 表示未开始绘制
-    isDrawing: false,
-    // 记录连线起始选项的对象，初始为 null 表示无起始选项
-    startItem: null,
-    // 记录连线结束选项的对象，初始为 null 表示无结束选项
-    endItem: null,
-    // 当前正在绘制的连线对象，包含起点和终点坐标，初始均为 0
-    currentLine: { x1: 0, y1: 0, x2: 0, y2: 0 },
-    // 存储所有已创建连线的数组，初始为空数组
-    connections: [],
-    // 画布的 2D 绘图上下文对象，初始为 null，后续在 mounted 钩子中初始化
-    ctx: null,
-    // 背景画布的 2D 绘图上下文对象，初始为 null，后续在 mounted 钩子中初始化
-    backCtx: null,
-    // 存储画布相对于视口的位置和尺寸信息的对象，初始为 null
-    canvasRect: null,
-    // 调试模式开关，设置为 true 时可开启调试功能，如绘制检测区域
-    isDebug: true,
-    // 存储用户连线答案检查结果的数组，初始为空数组
-    result: [],
+
   },
 
   tht: {
     items: [
       {
-        rightItem: "./static/img/tht/rightItem1.png",
+        rightItem: "./static/img/tht/rightItem1_3.png",
         cnt: 2,
         flag: [false, false, false, false, false],
+
         "changed":false
+
       },
       {
-        rightItem: "./static/img/tht/rightItem2.png",
+        rightItem: "./static/img/tht/rightItem2_2.png",
         cnt: 1,
         flag: [false, false, false, false, false],
+
         "changed":false
+
       },
       {
-        rightItem: "./static/img/tht/rightItem3.png",
+        rightItem: "./static/img/tht/rightItem3_2.png",
         cnt: 3,
         flag: [false, false, false, false, false],
+
         "changed":false
+
       },
     ],
     tuxingpath: [
-      { leftImage: "./static/img/tht/left.png" },
-      { redCircle: "./static/img/tht/redCircle.png" },
-      { noneCircle: "./static/img/tht/noneCircle.png" },
+      { leftImage: "./static/img/tht/left_11.png" },
+      { redCircle: "./static/img/tht/redCircle_2.png" },
+      { noneCircle: "./static/img/tht/noneCircle_2.png" },
     ],
   },
-  qst:{
-    title: "对照上面图片根据左边的图形数量圈出右边的数量",
+  qst: {
+    title: "拓展应用2：对照上面图片根据左边的图形数量圈出右边的数量",
     example: {
-    t_img: "./static/img/Tuo2_qst_ok/t1.png",//样例题目
-    a_img: "./static/img/Tuo2_qst_ok/a1.png",//样例答案
+      t_img: "./static/img/Tuo2_qst_ok/t1_23.png",//样例题目
+      a_img: "./static/img/Tuo2_qst_ok/a1_48.png",//样例答案
     },
     question: {
-    t_img: "./static/img/Tuo2_qst_ok/t2.png",//题目
-    n_img: "./static/img/Tuo2_qst_ok/n2.png",//单个形状
-    num: 8,//有多少个单个形状
-    tureNum: 5
+      t_img: "./static/img/Tuo2_qst_ok/t2_45.png",//题目
+      n_img: "./static/img/Tuo2_qst_ok/n2_16.png",//单个形状
+      num: 8,//有多少个单个形状
+      tureNum: 5
     },
-    ctx: "",
-    shapeXY: [],//所有点的中心坐标
-    allXY: [],
-    result: [],
-    useAnswer: [],
-    userNum: 0,
-    flag: 1,
-    img:"./static/img/Tuo2_qst_ok/jian.png",
-  }
+
+    img: "./static/img/Tuo2_qst_ok/jian_10.png",
+
+
+    result:false,
+    changed:false,
+
+  },
+  htt_tuo: {
+    id:[1,2,3],
+    title: "拓展应用1：根据数字提示，把缺少的图形拖进来",
+    subQuestion: [
+      {
+        id: 1,
+        img: "./static/img/Tuo1_htt_ok/t1.png",
+        answer: 4,
+        trueShape: 1,
+      },
+      {
+        id: 2,
+        img: "./static/img/Tuo1_htt_ok/t2.png",
+        answer: 3,
+        trueShape: 2,
+      },
+      {
+        id: 3,
+        img: "./static/img/Tuo1_htt_ok/t3.png",
+        answer: 1,
+        trueShape: 3,
+      },
+
+    ],
+    shape: ["./static/img/Tuo1_htt_ok/jx.png", "./static/img/Tuo1_htt_ok/sjx_10.png", "./static/img/Tuo1_htt_ok/yuan.png"],//有那些形状图形可以选择
+    // trueShape: 1,
+    userAnswer: [
+      [],
+      [],
+      [],
+    ],
+    isDragging: false,//是否正在拖拽
+    startX: 0,//相对于鼠标的偏移量
+    startY: 0,
+    draggedElement: null,//正在拖拽的元素
+    answer: [],//是否正确 返回后端的数据
+  },
+
 };
 
 const mockStudentInfo = {
@@ -455,6 +473,7 @@ export default {
         sst: [],
         htt: [],
         tht: [],
+        qst: [],
       },
       lxtpage: 1,
     };
@@ -469,7 +488,9 @@ export default {
     sidebar,
     circleDrawing: Sst,
     lxt,
-    qst
+    qst,
+    htt_tuo
+
   },
   computed: {
     ArrowLeft() {
@@ -522,53 +543,73 @@ export default {
         });
       });
 
+      // 获得画图题答案
+      totalTm += this.questions.htt_tuo.userAnswer.length;
+      // 防止多次计算
+      let prev2 = [];
+      this.questions.htt_tuo.userAnswer.forEach((ans, index) => {
+        ans.forEach((e) => {
+          if (e !== null && prev2[index] == null) {
+            answeredCount++;
+            prev2[index] = e;
+          }
+        });
+      });
+
       // 获得涂画题
       totalTm+=this.questions.tht.items.length;
       let prevth=[]
       this.questions.tht.items.forEach((e,index)=>{
         if(e.changed===true&&!prevth[index])
         {
+
           prevth.push(true);
           answeredCount++;
         }
       })
 
-
-
+      // 获得圈数题
+      totalTm+=1;
+      if(this.questions.qst.changed)
+        {
+          answeredCount++;
+        }
 
       const percentage = totalTm
         ? Math.round((answeredCount / totalTm) * 100)
         : 0;
-
+      totalTm;
       return { totalTm, percentage, answeredCount };
     },
   },
   created() {
-    this.fetchTmData(); //从后端获得题目数据
+    // this.fetchTmData(); //从后端获得题目数据
   },
   mounted() {
     document.addEventListener("contextmenu", this.preventContextMenu);
   },
   methods: {
-    async fetchTmData() {
-  this.loading = true;
-  this.error = null;
-  try {
-    const response = await axios.post("./TmJson/sx-01-s-01-01-01-sxClassroomExercisesAn.json");
-    this.questions = response.data; // 注意：axios 返回的数据在 response.data 中
-  } catch (error) {
-    // 如果连接服务器失败
-    console.error("获取数据失败:", error);
-    this.error = error;
+    // async fetchTmData() {
 
-    // 使用mock数据作为回退
-    this.questions = mockQuestions;
-    this.studentInfo = mockStudentInfo;
-    this.corAnswers = mockCorAnswers;
-  } finally {
-    this.loading = false;
-  }
-},
+    //   this.loading = true;
+    //   this.error = null;
+    //   try {
+    //     const response = await axios.post("./TmJson/sx-01-s-01-01-01-sxClassroomExercisesAn.json");
+    //     this.questions = response.data; // 注意：axios 返回的数据在 response.data 中
+    //   } catch (error) {
+    //     // 如果连接服务器失败
+    //     console.error("获取数据失败:", error);
+    //     this.error = error;
+
+    //     // 使用mock数据作为回退
+    //     this.questions = mockQuestions;
+    //     this.studentInfo = mockStudentInfo;
+    //     this.corAnswers = mockCorAnswers;
+    //   } finally {
+    //     this.loading = false;
+    //   }
+    // },
+
     // 确认是否提交答案
     willSubmit() {
       let remainTm = this.countTm.totalTm - this.countTm.answeredCount;
@@ -660,11 +701,14 @@ export default {
       // }));
 
       // 获得选择题答案并且判断正误
+
+      if(this.questions.xzt){
       const xztAns = [];
       this.questions.xzt.forEach((e, index) => {
         xztAns.push(e.userAnswer);
         this.boolLists.xzt[index] = e.userAnswer === e.answer ? true : false;
-      });
+      });}
+
 
 
 
@@ -717,17 +761,17 @@ export default {
       this.boolLists.tkt = tktBoolList;
 
       // 获得涂画题正确数组
-      const thtBoolList=[];
-      this.questions.tht.items.forEach(e=>{
-        let cntTrue=0;
-        e.flag.forEach(ef=>{
-          if(ef===true){
+      const thtBoolList = [];
+      this.questions.tht.items.forEach(e => {
+        let cntTrue = 0;
+        e.flag.forEach(ef => {
+          if (ef === true) {
             cntTrue++;
           }
         })
-          thtBoolList.push(cntTrue===e.cnt?true:false);
+        thtBoolList.push(cntTrue === e.cnt ? true : false);
       });
-      this.boolLists.tht=thtBoolList;
+      this.boolLists.tht = thtBoolList;
 
 
 
@@ -744,13 +788,32 @@ export default {
       // console.log(sstAns);
       // console.log(xztAns);
       // this.checkAnswers(xztAns);
-      const httAns = [];
-      this.questions.htt.userAnswer.forEach((e, index) => {
+      let htt1=this.questions.htt;
+      let htt2=this.questions.htt_tuo;
+      
+      this.boolLists.htt = this.getHttBoolList(htt1);
+      this.boolLists.htt_tuo =this.getHttBoolList(htt2);
+
+
+      //获得圈数题答案
+      if(this.questions.qst.result===true)
+        this.boolLists.qst.push(true);
+
+
+
+
+      //调试用
+      console.log(this.boolLists);
+
+    },
+     getHttBoolList(htt){
+        let httAns = [];
+        htt.userAnswer.forEach((e, index) => {
         let num = 0;
         let flag = false;
-        e.forEach((e1, index1) => {
-          if (e1 != this.questions.htt.id) {
-            if (flag == false) {
+        e.forEach((e1,index1) => {
+          if (e1 != ((typeof(htt.id)==="number")?htt.id:(htt.id[index]))) {
+            if (flag === false) {
               httAns.push(false);
               flag = true;
             }
@@ -758,21 +821,17 @@ export default {
             num++;
           }
         });
-        if (num == this.questions.htt.subQuestion[index].answer && flag == 0) {
+        if (num == htt.subQuestion[index].answer && flag === false) {
           httAns.push(true);
           flag = true;
         }
-        if (flag == false) {
+        if (flag === false) {
           httAns.push(false);
           flag = true;
         }
       });
-
-      this.boolLists.htt = httAns;
-      //调试用
-      console.log(this.boolLists);
-
-    },
+      return httAns;
+      },
 
     // 禁用右键菜单
     preventContextMenu(e) {
