@@ -1,59 +1,30 @@
 {
-  "xzt": [
-    {
-      "id": 1,
-      "title": "每只小兔吃一个萝卜，选哪一堆正好合适？",
-      "img": "../static/img/T1_xzt/timu.png",
-      "options": [
-        { "value": "A", "img": "./static/img/T1_xzt/A.png" },
-        { "value": "B", "img": "./static/img/T1_xzt/B.png" },
-        { "value": "C", "img": "./static/img/T1_xzt/C.png" }
-      ],
-      "userAnswer": "",
-      "answer": "B"
-    },
-    {
-      "id": 2,
-      "title": "2+2=?",
-      "options": [
-        { "value": "A", "label": "1" },
-        { "value": "B", "label": "2" },
-        { "value": "C", "label": "3" },
-        { "value": "D", "label": "4" }
-      ],
-      "userAnswer": "",
-      "answer": "D"
-    },
-    {
-      "id": 3,
-      "title": "2+4=?",
-      "options": [
-        { "value": "A", "label": "4" },
-        { "value": "B", "label": "5" },
-        { "value": "C", "label": "6" },
-        { "value": "D", "label": "7" }
-      ],
-      "userAnswer": "",
-      "answer": "C"
-    }
-  ],
   "sst": [
     {
       "id": 1,
-      "title": { "image": "./static/img/T3_sst/icecream.png", "count": 5 },
-      "tuXingPath": "./static/img/T3_sst/circle.png",
+      "title": {
+        "image": "./static/img/T3_sst/icecream_28.png",
+        "count": 5
+      },
+      "tuXingPath": "./static/img/T3_sst/circle_2.png",
       "userAnswer": ""
     },
     {
       "id": 2,
-      "title": { "image": "./static/img/T3_sst/plane.png", "count": 4 },
-      "tuXingPath": "./static/img/T3_sst/circle.png",
+      "title": {
+        "image": "./static/img/T3_sst/plane_21.png",
+        "count": 4
+      },
+      "tuXingPath": "./static/img/T3_sst/circle_2.png",
       "userAnswer": ""
     },
     {
       "id": 3,
-      "title": { "image": "./static/img/T3_sst/tree.png", "count": 3 },
-      "tuXingPath": "./static/img/T3_sst/circle.png",
+      "title": {
+        "image": "./static/img/T3_sst/tree_13.png",
+        "count": 3
+      },
+      "tuXingPath": "./static/img/T3_sst/circle_2.png",
       "userAnswer": ""
     }
   ],
@@ -68,7 +39,7 @@
         "4.认识数字\"4\"",
         "5.认识数字\"5\""
       ],
-      "img": "./static/img/T1_tkt_ok/tkt_1.jpeg",
+      "img": "./static/img/T1_tkt_ok/tkt_1_90.jpeg",
       "subQuestions": [
         "（1）一个太阳、一座房子、一棵果树可以用数字TNUM表示，也可以用TNUM个小圆片表示。TSPL（2）看看图中，还有什么可以用数字\"1\"表示呢TNUM和TNUM都可以用数字\"1\"表示。",
         "两只鸟、两个人，可以用数字TNUM表示，也可以用TNUM个小圆片表示。",
@@ -80,41 +51,123 @@
         {
           "type": "complex",
           "sections": [
-            { "answers": ["", ""] },
-            { "answers": ["", ""] }
+            {
+              "answers": [
+                "",
+                ""
+              ]
+            },
+            {
+              "answers": [
+                "",
+                ""
+              ]
+            }
           ]
         },
         {
           "type": "simple",
-          "answers": ["", ""]
+          "answers": [
+            "",
+            ""
+          ]
         },
         {
           "type": "simple",
-          "answers": ["", ""]
+          "answers": [
+            "",
+            ""
+          ]
         },
         {
           "type": "simple",
-          "answers": ["", ""]
+          "answers": [
+            "",
+            ""
+          ]
         },
         {
           "type": "simple",
-          "answers": ["", ""]
+          "answers": [
+            "",
+            ""
+          ]
         }
       ],
       "answers": [
         [
-          ["1", "1"],
-          ["小船", "小狗"]
+          [
+            "1",
+            "1"
+          ],
+          [
+            "小船",
+            "小狗"
+          ]
         ],
-        ["2", "2"],
-        ["3", "3"],
-        ["4", "4"],
-        ["5", "5"]
+        [
+          "2",
+          "2"
+        ],
+        [
+          "3",
+          "3"
+        ],
+        [
+          "4",
+          "4"
+        ],
+        [
+          "5",
+          "5"
+        ]
       ]
     }
   ],
   "htt": {
     "id": 2,
+    "title": "Part2",
+    "subQuestion": [
+      {
+        "id": 1,
+        "img": "./static/img/T2_htt_ok/t1_9.jpeg",
+        "answer": 2
+      },
+      {
+        "id": 2,
+        "img": "./static/img/T2_htt_ok/t2_9.jpeg",
+        "answer": 3
+      },
+      {
+        "id": 3,
+        "img": "./static/img/T2_htt_ok/t3_10.jpeg",
+        "answer": 5
+      },
+      {
+        "id": 4,
+        "img": "./static/img/T2_htt_ok/t4_9.jpeg",
+        "answer": 4
+      }
+    ],
+    "shape": [
+      "./static/img/T2_htt_ok/jx_6.png",
+      "./static/img/T2_htt_ok/sjx_17.png",
+      "./static/img/T2_htt_ok/yx_15.png"
+    ],
+    "trueShape": 1,
+    "userAnswer": [
+      [],
+      [],
+      [],
+      []
+    ],
+    "isDragging": false,
+    "startX": 0,
+    "startY": 0,
+    "draggedElement": null
+  },
+  "htt2": {
+    "id": 1,
     "title": "Part2",
     "subQuestion": [
       {
@@ -144,37 +197,80 @@
       "./static/img/T2_htt_ok/yx.png"
     ],
     "trueShape": 1,
-    "userAnswer": [[], [], [], []],
+    "userAnswer": [
+      [],
+      [],
+      [],
+      []
+    ],
     "isDragging": false,
     "startX": 0,
     "startY": 0,
     "draggedElement": null
   },
+  "htt_tuo": {
+    "title": "拓展应用1：根据数字提示，把缺少的图形拖进来",
+    "subQuestion": [
+      {
+        "id": 1,
+        "img": "./static/img/Tuo1_htt_ok/t1.png",
+        "answer": 4,
+        "trueShape": 1
+      },
+      {
+        "id": 2,
+        "img": "./static/img/Tuo1_htt_ok/t2.png",
+        "answer": 3,
+        "trueShape": 2
+      },
+      {
+        "id": 3,
+        "img": "./static/img/Tuo1_htt_ok/t3.png",
+        "answer": 1,
+        "trueShape": 3
+      }
+    ],
+    "shape": [
+      "./static/img/Tuo1_htt_ok/jx.png",
+      "./static/img/Tuo1_htt_ok/sjx_10.png",
+      "./static/img/Tuo1_htt_ok/yuan.png"
+    ],
+    "userAnswer": [
+      [],
+      [],
+      []
+    ],
+    "isDragging": false,
+    "startX": 0,
+    "startY": 0,
+    "draggedElement": null,
+    "answer": []
+  },
   "lxt_part3": {
     "id": 1,
-    "title": "part3",
+    "title": "part3：请连接和图片中物品数量一致的圆的图片",
     "flag": "t3",
     "imgU": [
       {
-        "src": "./static/img/T3_lxt_ok/l1.png",
+        "src": "./static/img/T3_lxt_ok/l1_30.png",
         "value": "1",
         "ownership": "U",
         "connected": false
       },
       {
-        "src": "./static/img/T3_lxt_ok/l2.png",
+        "src": "./static/img/T3_lxt_ok/l2_8.png",
         "value": "2",
         "ownership": "U",
         "connected": false
       },
       {
-        "src": "./static/img/T3_lxt_ok/l4.png",
+        "src": "./static/img/T3_lxt_ok/l4_32.png",
         "value": "4",
         "ownership": "U",
         "connected": false
       },
       {
-        "src": "./static/img/T3_lxt_ok/l5.png",
+        "src": "./static/img/T3_lxt_ok/l5_36.png",
         "value": "5",
         "ownership": "U",
         "connected": false
@@ -182,25 +278,25 @@
     ],
     "imgD": [
       {
-        "src": "./static/img/T3_lxt_ok/a1.png",
+        "src": "./static/img/T3_lxt_ok/a1_18.png",
         "value": "1",
         "ownership": "D",
         "connected": false
       },
       {
-        "src": "./static/img/T3_lxt_ok/a2.png",
+        "src": "./static/img/T3_lxt_ok/a2_13.png",
         "value": "2",
         "ownership": "D",
         "connected": false
       },
       {
-        "src": "./static/img/T3_lxt_ok/a4.png",
+        "src": "./static/img/T3_lxt_ok/a4_14.png",
         "value": "4",
         "ownership": "D",
         "connected": false
       },
       {
-        "src": "./static/img/T3_lxt_ok/a5.png",
+        "src": "./static/img/T3_lxt_ok/a5_18.png",
         "value": "5",
         "ownership": "D",
         "connected": false
@@ -209,7 +305,12 @@
     "isDrawing": false,
     "startItem": null,
     "endItem": null,
-    "currentLine": { "x1": 0, "y1": 0, "x2": 0, "y2": 0 },
+    "currentLine": {
+      "x1": 0,
+      "y1": 0,
+      "x2": 0,
+      "y2": 0
+    },
     "connections": [],
     "ctx": null,
     "backCtx": null,
@@ -219,29 +320,29 @@
   },
   "lxt_tuo3": {
     "id": 2,
-    "title": "拓展应用3",
+    "title": "拓展应用3：请连接对应物品数量的数字",
     "flag": "tuo3",
     "imgU": [
       {
-        "src": "./static/img/Tuo3_lxt_ok/tuo_l2.jpg",
+        "src": "./static/img/Tuo3_lxt_ok/tuo_l2_23.png",
         "value": "2",
         "ownership": "U",
         "connected": false
       },
       {
-        "src": "./static/img/Tuo3_lxt_ok/tuo_l3.png",
+        "src": "./static/img/Tuo3_lxt_ok/tuo_l3_13.png",
         "value": "3",
         "ownership": "U",
         "connected": false
       },
       {
-        "src": "./static/img/Tuo3_lxt_ok/tuo_l4.jpg",
+        "src": "./static/img/Tuo3_lxt_ok/tuo_l4_19.png",
         "value": "4",
         "ownership": "U",
         "connected": false
       },
       {
-        "src": "./static/img/Tuo3_lxt_ok/tuo_l5.jpg",
+        "src": "./static/img/Tuo3_lxt_ok/tuo_l5_30.png",
         "value": "5",
         "ownership": "U",
         "connected": false
@@ -276,7 +377,12 @@
     "isDrawing": false,
     "startItem": null,
     "endItem": null,
-    "currentLine": { "x1": 0, "y1": 0, "x2": 0, "y2": 0 },
+    "currentLine": {
+      "x1": 0,
+      "y1": 0,
+      "x2": 0,
+      "y2": 0
+    },
     "connections": [],
     "ctx": null,
     "backCtx": null,
@@ -287,39 +393,63 @@
   "tht": {
     "items": [
       {
-        "rightItem": "./static/img/tht/rightItem1.png",
+        "rightItem": "./static/img/tht/rightItem1_3.png",
         "cnt": 2,
-        "flag": [false, false, false, false, false],
-        "changed":false
+        "flag": [
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "changed": false
       },
       {
-        "rightItem": "./static/img/tht/rightItem2.png",
+        "rightItem": "./static/img/tht/rightItem2_2.png",
         "cnt": 1,
-        "flag": [false, false, false, false, false],
-        "changed":false
+        "flag": [
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "changed": false
       },
       {
-        "rightItem": "./static/img/tht/rightItem3.png",
+        "rightItem": "./static/img/tht/rightItem3_2.png",
         "cnt": 3,
-        "flag": [false, false, false, false, false],
-        "changed":false
+        "flag": [
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "changed": false
       }
     ],
     "tuxingpath": [
-      { "leftImage": "./static/img/tht/left.png" },
-      { "redCircle": "./static/img/tht/redCircle.png" },
-      { "noneCircle": "./static/img/tht/noneCircle.png" }
+      {
+        "leftImage": "./static/img/tht/left_11.png"
+      },
+      {
+        "redCircle": "./static/img/tht/redCircle_2.png"
+      },
+      {
+        "noneCircle": "./static/img/tht/noneCircle_2.png"
+      }
     ]
   },
   "qst": {
-    "title": "对照上面图片根据左边的图形数量圈出右边的数量",
+    "title": "拓展应用2：对照上面图片根据左边的图形数量圈出右边的数量",
     "example": {
-      "t_img": "./static/img/Tuo2_qst_ok/t1.png",
-      "a_img": "./static/img/Tuo2_qst_ok/a1.png"
+      "t_img": "./static/img/Tuo2_qst_ok/t1_23.png",
+      "a_img": "./static/img/Tuo2_qst_ok/a1_48.png"
     },
     "question": {
-      "t_img": "./static/img/Tuo2_qst_ok/t2.png",
-      "n_img": "./static/img/Tuo2_qst_ok/n2.png",
+      "t_img": "./static/img/Tuo2_qst_ok/t2_45.png",
+      "n_img": "./static/img/Tuo2_qst_ok/n2_16.png",
       "num": 8,
       "tureNum": 5
     },
@@ -330,6 +460,6 @@
     "useAnswer": [],
     "userNum": 0,
     "flag": 1,
-    "img": "./static/img/Tuo2_qst_ok/jian.png"
+    "img": "./static/img/Tuo2_qst_ok/jian_10.png"
   }
 }
