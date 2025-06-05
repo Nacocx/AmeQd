@@ -1,54 +1,41 @@
 <template>
   <section class="question-container">
-    <div
-        v-for="(questionGroup) in allQuestions"
-        :key="'group-' + questionGroup.id"
-        :id="'part-' + questionGroup.id"
-        class="question-part"
-    >
-    
+    <div v-for="(questionGroup) in allQuestions" :key="'group-' + questionGroup.id" :id="'part-' + questionGroup.id"
+      class="question-part">
+
       <!-- <h1 class="question-title">当前第 {{ questionGroup.id }} 题</h1> -->
       <!-- <h1>当前第 {{ questionGroup.id }} 题</h1> -->
-      <h1>{{questionGroup.title_main}}</h1>
+      <h1>{{ questionGroup.title_main }}</h1>
       <div v-if="questionGroup.img" class="question-image">
         <img :src="questionGroup.img" :alt="'第' + questionGroup.id + '题图片'">
       </div>
 
       <div class="question-content">
-        <div
-            v-for="(title, titleIndex) in questionGroup.title"
-            :key="'title-' + titleIndex"
-            class="question-item"
-        >
+        <div v-for="(title, titleIndex) in questionGroup.title" :key="'title-' + titleIndex" class="question-item-tkt">
           <h2 class="question-subtitle">{{ title }}</h2>
 
           <!-- 简单问题渲染 -->
           <template v-if="questionGroup.userAnswer[titleIndex].type === 'simple'">
-            <span v-for="(part, partIndex) in splitQuestion(questionGroup.subQuestions[titleIndex])" :key="'part-' + partIndex">
+            <span v-for="(part, partIndex) in splitQuestion(questionGroup.subQuestions[titleIndex])"
+              :key="'part-' + partIndex">
               {{ part }}
-              <el-input
-                  v-if="partIndex !== splitQuestion(questionGroup.subQuestions[titleIndex]).length - 1"
-                  style="width: 100px;"
-                  v-model="questionGroup.userAnswer[titleIndex].answers[partIndex]"
-              ></el-input>
+              <el-input v-if="partIndex !== splitQuestion(questionGroup.subQuestions[titleIndex]).length - 1"
+                style="width: 100px;" v-model="questionGroup.userAnswer[titleIndex].answers[partIndex]"></el-input>
             </span>
           </template>
 
           <!-- 复杂问题渲染 -->
           <template v-else>
-            <div
-                v-for="(section, sectionIndex) in questionGroup.userAnswer[titleIndex].sections"
-                :key="'section-' + sectionIndex"
-                class="question-section"
-            >
-              <span v-for="(part, partIndex) in splitQuestion(getSectionText(questionGroup.subQuestions[titleIndex], sectionIndex))"
-                    :key="'section-part-' + partIndex">
+            <div v-for="(section, sectionIndex) in questionGroup.userAnswer[titleIndex].sections"
+              :key="'section-' + sectionIndex" class="question-section">
+              <span
+                v-for="(part, partIndex) in splitQuestion(getSectionText(questionGroup.subQuestions[titleIndex], sectionIndex))"
+                :key="'section-part-' + partIndex">
                 {{ part }}
                 <el-input
-                    v-if="partIndex !== splitQuestion(getSectionText(questionGroup.subQuestions[titleIndex], sectionIndex)).length - 1"
-                    style="width: 100px;"
-                    v-model="questionGroup.userAnswer[titleIndex].sections[sectionIndex].answers[partIndex]"
-                ></el-input>
+                  v-if="partIndex !== splitQuestion(getSectionText(questionGroup.subQuestions[titleIndex], sectionIndex)).length - 1"
+                  style="width: 100px;"
+                  v-model="questionGroup.userAnswer[titleIndex].sections[sectionIndex].answers[partIndex]"></el-input>
               </span>
             </div>
           </template>
@@ -58,43 +45,43 @@
     </div>
   </section>
   <br>
-<!--  如果填空题只有一个，就没必要显示翻页按钮-->
+  <!--  如果填空题只有一个，就没必要显示翻页按钮-->
   <!-- <el-button-group>
     <el-button type="primary" @click="pageSub" :disabled="currentPage===1">上一题</el-button>
     <el-button type="primary" @click="pageAdd" :disabled="currentPage===allQuestions.length">下一题</el-button>
   </el-button-group> -->
   <br>
-  <hr/>
+  <hr />
 
 </template>
 
 
 <script>
 export default {
-  name:"tkt",
-  data(){
-    return{// 所有问题
-      currentPage:1, //当前页面
+  name: "tkt",
+  data() {
+    return {// 所有问题
+      currentPage: 1, //当前页面
       tkt_nowPos: 1, // 当前问题的索引
       results: [], // 存储每个问题的结果
 
     }
   },
-  props:{
-    allQuestions:{
-      type:Array,
-      required:true,
+  props: {
+    allQuestions: {
+      type: Array,
+      required: true,
     }
   },
   methods: {
-    pageAdd(){
-      if(this.currentPage<this.allQuestions.length) {
+    pageAdd() {
+      if (this.currentPage < this.allQuestions.length) {
         this.currentPage++;
         document.documentElement.scrollTop = 0;
       }
     },
-    pageSub(){
-      if(this.currentPage>1) {
+    pageSub() {
+      if (this.currentPage > 1) {
         this.currentPage--;
         document.documentElement.scrollTop = 0;
       }
@@ -217,6 +204,25 @@ export default {
 </script>
 
 <style scoped>
+.question-subtitle {
+  font-size: 19px;
+}
+
+.question-container {
+  text-align: center;
+
+}
+
+.question-content {
+  width: 80%;
+  display: inline-block;
+  text-align: left;
+
+  /* background-color: aqua; */
+}
+
+
+
 .question-title {
   height: 2%;
 }
@@ -230,7 +236,7 @@ export default {
   /* 设置背景颜色 */
   color: white;
   /* 设置文字颜色 */
-  font-size: 20px;
+  font-size: 15px;
   /* 设置文字大小 */
   font-weight: bold;
   /* 设置文字加粗 */
@@ -252,8 +258,9 @@ img {
   height: 100%;
   margin: auto;
 }
+
 /* 图片盒子位置 */
-img{
+img {
   width: 100%;
   height: 40%;
   text-align: center;
@@ -264,8 +271,8 @@ img{
   display: block;
   width: 100%;
   height: 98%;
+  /* background-color: antiquewhite */
 }
-
 </style>
 
 
@@ -320,4 +327,3 @@ img{
 <!--.tkt_main_part #part1 .tkt_mainQuestion input:hover {-->
 <!--  border-color: #888;-->
 <!--}-->
-

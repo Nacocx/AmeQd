@@ -241,6 +241,11 @@ const mockQuestions = {
     id: 1,
     title: "part3：请连接和图片中物品数量一致的圆的图片",
     flag: "t3",
+<<<<<<< Updated upstream
+=======
+    changed: false,
+    result: [],
+>>>>>>> Stashed changes
     imgU: [
       {
         src: "./static/img/T3_lxt_ok/l1_30.png",
@@ -298,7 +303,13 @@ const mockQuestions = {
   lxt_tuo3: {
     id: 2,
     title: "拓展应用3：请连接对应物品数量的数字",
+<<<<<<< Updated upstream
     flag: "tuo3",
+=======
+    changed: false,
+    flag: "tuo3",
+    result: [],
+>>>>>>> Stashed changes
     imgU: [
       {
         src: "./static/img/Tuo3_lxt_ok/tuo_l2_23.png",
@@ -361,7 +372,7 @@ const mockQuestions = {
         cnt: 2,
         flag: [false, false, false, false, false],
 
-        "changed":false
+        "changed": false
 
       },
       {
@@ -369,7 +380,7 @@ const mockQuestions = {
         cnt: 1,
         flag: [false, false, false, false, false],
 
-        "changed":false
+        "changed": false
 
       },
       {
@@ -377,14 +388,20 @@ const mockQuestions = {
         cnt: 3,
         flag: [false, false, false, false, false],
 
-        "changed":false
+        "changed": false
 
       },
     ],
     tuxingpath: [
+<<<<<<< Updated upstream
       { leftImage: "./static/img/tht/left_11.png" },
       { redCircle: "./static/img/tht/redCircle_2.png" },
       { noneCircle: "./static/img/tht/noneCircle_2.png" },
+=======
+      { leftImage: "../static/img/interact/left_11.png" },
+      { redCircle: "../static/img/interact/redCircle_2.png" },
+      { noneCircle: "../static/img/interact/noneCircle_2.png" },
+>>>>>>> Stashed changes
     ],
   },
   qst: {
@@ -403,12 +420,12 @@ const mockQuestions = {
     img: "./static/img/Tuo2_qst_ok/jian_10.png",
 
 
-    result:false,
-    changed:false,
+    result: false,
+    changed: false,
 
   },
   htt_tuo: {
-    id:[1,2,3],
+    id: [1, 2, 3],
     title: "拓展应用1：根据数字提示，把缺少的图形拖进来",
     subQuestion: [
       {
@@ -464,7 +481,11 @@ export default {
     return {
       questions: mockQuestions,
       studentInfo: mockStudentInfo,
+<<<<<<< Updated upstream
       corAnswers: mockCorAnswers,
+=======
+
+>>>>>>> Stashed changes
       loading: false,
       error: null,
       boolLists: {
@@ -557,11 +578,10 @@ export default {
       });
 
       // 获得涂画题
-      totalTm+=this.questions.tht.items.length;
-      let prevth=[]
-      this.questions.tht.items.forEach((e,index)=>{
-        if(e.changed===true&&!prevth[index])
-        {
+      totalTm += this.questions.tht.items.length;
+      let prevth = []
+      this.questions.tht.items.forEach((e, index) => {
+        if (e.changed === true && !prevth[index]) {
 
           prevth.push(true);
           answeredCount++;
@@ -569,11 +589,26 @@ export default {
       })
 
       // 获得圈数题
+<<<<<<< Updated upstream
       totalTm+=1;
       if(this.questions.qst.changed)
         {
           answeredCount++;
         }
+=======
+      totalTm += 1;
+      if (this.questions.qst.changed) {
+        answeredCount++;
+      }
+      //获得连线题
+      totalTm += 2;
+      if (this.questions.lxt_part3.changed) {
+        answeredCount++;
+      }
+      if (this.questions.lxt_tuo3.changed) {
+        answeredCount++;
+      }
+>>>>>>> Stashed changes
 
       const percentage = totalTm
         ? Math.round((answeredCount / totalTm) * 100)
@@ -702,12 +737,13 @@ export default {
 
       // 获得选择题答案并且判断正误
 
-      if(this.questions.xzt){
-      const xztAns = [];
-      this.questions.xzt.forEach((e, index) => {
-        xztAns.push(e.userAnswer);
-        this.boolLists.xzt[index] = e.userAnswer === e.answer ? true : false;
-      });}
+      if (this.questions.xzt) {
+        const xztAns = [];
+        this.questions.xzt.forEach((e, index) => {
+          xztAns.push(e.userAnswer);
+          this.boolLists.xzt[index] = e.userAnswer === e.answer ? true : false;
+        });
+      }
 
 
 
@@ -788,31 +824,37 @@ export default {
       // console.log(sstAns);
       // console.log(xztAns);
       // this.checkAnswers(xztAns);
-      let htt1=this.questions.htt;
-      let htt2=this.questions.htt_tuo;
-      
+      let htt1 = this.questions.htt;
+      let htt2 = this.questions.htt_tuo;
+
       this.boolLists.htt = this.getHttBoolList(htt1);
-      this.boolLists.htt_tuo =this.getHttBoolList(htt2);
+      this.boolLists.htt_tuo = this.getHttBoolList(htt2);
 
 
       //获得圈数题答案
-      if(this.questions.qst.result===true)
+      if (this.questions.qst.result === true)
         this.boolLists.qst.push(true);
 
 
+<<<<<<< Updated upstream
 
+=======
+      // 获得连线题答案
+      this.boolLists.lxt_part3 = (this.questions.lxt_part3.result);
+      this.boolLists.lxt_tuo3 = (this.questions.lxt_tuo3.result);
+>>>>>>> Stashed changes
 
       //调试用
       console.log(this.boolLists);
 
     },
-     getHttBoolList(htt){
-        let httAns = [];
-        htt.userAnswer.forEach((e, index) => {
+    getHttBoolList(htt) {
+      let httAns = [];
+      htt.userAnswer.forEach((e, index) => {
         let num = 0;
         let flag = false;
-        e.forEach((e1,index1) => {
-          if (e1 != ((typeof(htt.id)==="number")?htt.id:(htt.id[index]))) {
+        e.forEach((e1, index1) => {
+          if (e1 != ((typeof (htt.id) === "number") ? htt.id : (htt.id[index]))) {
             if (flag === false) {
               httAns.push(false);
               flag = true;
@@ -831,7 +873,7 @@ export default {
         }
       });
       return httAns;
-      },
+    },
 
     // 禁用右键菜单
     preventContextMenu(e) {
@@ -844,3 +886,61 @@ export default {
   },
 };
 </script>
+<<<<<<< Updated upstream
+=======
+<style>
+* {
+  user-select: none;
+}
+
+.el-aside {
+  background-color: white;
+  color: #333;
+  text-align: center;
+  height: 500px;
+  line-height: 35px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, .12), 0 0 6px rgba(0, 0, 0, .04);
+  border-radius: 8px;
+  position: fixed;
+  width: 350px;
+}
+
+.el-main {
+  color: #333;
+  text-align: center;
+  border: 1px white solid;
+  max-width: 1000px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, .12), 0 0 6px rgba(0, 0, 0, .04);
+  border-radius: 8px;
+  margin: auto;
+  /* padding-left: 100px; */
+  box-sizing: border-box;
+
+}
+
+
+.el-progress-bar {
+  width: 75%;
+  margin-top: 30px;
+}
+
+#app {
+  padding-top: 60px;
+}
+
+.el-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 60px !important;
+  /* 固定高度 */
+  background: #fff;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  padding: 0 20px;
+}
+</style>
+>>>>>>> Stashed changes

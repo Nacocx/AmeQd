@@ -24,12 +24,9 @@
       </div>
     </div>
     <div class="chose" id="source-area">
-      <div v-for="(e, index) in message.shape" @mousedown="mousedown">
-        <!-- 添加 data-value 属性 -->
-        <div>
-          <!-- 加了data-value属性更好监听是那个图形 -->
-          <img :src="e" class="shape" :data-value="index + 1" alt="图片加载失败">
-        </div>
+      <div @mousedown="mousedown">
+        <img :src="message.shape[message.id - 1]" class="shape" :data-value="index + 1" alt="图片加载失败">
+
       </div>
     </div>
     <br>
@@ -103,7 +100,7 @@ export default {
             if (this.message.draggedElement) {
               e.appendChild(this.message.draggedElement);//将元素添加到目标区域
               console.log(this.message.draggedElement);
-              
+
             }
             //
             // 存储用户答案
@@ -166,7 +163,7 @@ body {
 }
 
 .htt_main_body .main_body .part .up {
-  height: 170px;
+  height: 100px;
   align-self: center;
 }
 
@@ -194,7 +191,7 @@ body {
   border: 2px solid black;
   border-radius: 60px;
   display: flex;
-  width: 30%;
+  width: 10%;
   height: 10%;
   margin: auto;
   padding: 5px;
@@ -202,7 +199,7 @@ body {
   align-items: center;
 }
 
- .shape {
+.shape {
   width: 40px;
   height: 40px;
   z-index: 100;
@@ -218,6 +215,7 @@ body {
 
 .htt_main_body .img_style {
   width: 100%;
+  height: 100%;
 
 }
 
@@ -248,7 +246,7 @@ body {
 
 
 .htt_main_body .questions img {
-  height: 40px;
+  height: 20px;
   width: 40px;
   transform: translateY(15px);
 }
