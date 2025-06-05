@@ -68,7 +68,6 @@ import sidebar from "@/components/sidebar.vue";
 import tkt from "@/components/tkt.vue";
 import { ArrowLeft, ArrowRight } from "@element-plus/icons-vue";
 import { ElMessage } from "element-plus";
-import "@/style/app.css";
 import Sst from "@/components/sst.vue";
 import Htt from "@/components/htt.vue";
 import lxt from "@/components/lxt.vue";
@@ -854,3 +853,54 @@ export default {
   },
 };
 </script>
+<style>
+*{
+    user-select: none;
+}
+.el-aside {
+    background-color: white;
+    color: #333;
+    text-align: center;
+    height: 500px;
+    line-height: 35px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, .12), 0 0 6px rgba(0, 0, 0, .04);
+    border-radius: 8px;
+    position: fixed;
+    width: 350px;
+}
+
+.el-main {
+    color: #333;
+    text-align: center;
+    border: 1px white solid;
+    max-width: 1000px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, .12), 0 0 6px rgba(0, 0, 0, .04);
+    border-radius: 8px;
+    margin: auto;
+}
+
+
+.el-progress-bar {
+    width: 75%;
+    margin-top: 30px;
+}
+
+#app{
+    padding-top: 60px;
+}
+
+.el-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 60px !important;
+    /* 固定高度 */
+    background: #fff;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    padding: 0 20px;
+}
+</style>
