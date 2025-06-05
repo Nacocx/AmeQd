@@ -241,6 +241,7 @@ const mockQuestions = {
     id: 1,
     title: "part3：请连接和图片中物品数量一致的圆的图片",
     flag: "t3",
+    changed:false,
     imgU: [
       {
         src: "../static/img/interact/l1_30.png",
@@ -298,6 +299,7 @@ const mockQuestions = {
   lxt_tuo3: {
     id: 2,
     title: "拓展应用3：请连接对应物品数量的数字",
+    changed:false,
     flag: "tuo3",
     imgU: [
       {
@@ -453,18 +455,14 @@ const mockStudentInfo = {
   teacher: "Bob",
 };
 
-const mockCorAnswers = {
-  xzt: ["B", "D", "C"],
-  sst: [],
-  htt: [],
-};
+
 
 export default {
   data() {
     return {
       questions: mockQuestions,
       studentInfo: mockStudentInfo,
-      corAnswers: mockCorAnswers,
+      
       loading: false,
       error: null,
       boolLists: {
@@ -572,6 +570,14 @@ export default {
       totalTm+=1;
       if(this.questions.qst.changed)
         {
+          answeredCount++;
+        }
+        //获得连线题
+        totalTm+=2;
+        if(this.questions.lxt_part3.changed ){
+          answeredCount++;
+        }
+        if(this.questions.lxt_tuo3.changed ){
           answeredCount++;
         }
 
@@ -800,7 +806,8 @@ export default {
         this.boolLists.qst.push(true);
 
 
-
+      // 获得连线题答案
+      
 
       //调试用
       console.log(this.boolLists);

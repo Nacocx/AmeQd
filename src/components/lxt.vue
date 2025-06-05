@@ -371,7 +371,7 @@ export default {
       document.removeEventListener('mouseup', this.onMouseup);
       // 清除所有选项的悬停状态
       this.clearHoverStates();
-
+      this.message.changed=true;
       // 如果存在有效的结束选项
       if (this.endItem && this.endItem.ownership !== this.startItem.ownership) {
         // 如果结束选项已连接，断开相关连线
