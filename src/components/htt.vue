@@ -14,12 +14,13 @@
         </div>
         <!-- 这里加了data-value属性 匹配那个框 -->
         <div class="down target-area" :data-value="index + 1">
+          {{ index }}
         </div>
       </div>
     </div>
     <div class="chose" id="source-area">
       <div @mousedown="mousedown">
-        <img :src="message.shape[message.id - 1]" class="shape" :data-value="index + 1" alt="图片加载失败">
+        <img :src="message.shape[message.id - 1]" class="shape" :data-value="message.id-1" alt="图片加载失败">
 
       </div>
     </div>
@@ -68,6 +69,9 @@ export default {
       this.message.draggedElement = ee.target.cloneNode(true);
       this.message.draggedElement.style.position = 'absolute';
       this.message.draggedElement.style.zIndex = 100;
+      this.message.draggedElement.dataset.value = ee.target.dataset.value;
+      // console.log(ee.target);
+      
       document.body.appendChild(this.message.draggedElement);
     },
     // 移动事件处理函数
@@ -80,6 +84,8 @@ export default {
       }
     },
     mouseup(ee) {
+      console.log(this.userAnswer);
+      
       if (this.message.isDragging) {
         this.message.isDragging = false;
         const targetArea = document.querySelectorAll('.target-area');
@@ -98,6 +104,8 @@ export default {
                 value: this.message.draggedElement.dataset.value
               });
             }
+            // console.log(1);
+            
             // 存储用户答案
             this.userAnswer[e.dataset.value - 1].push(this.message.draggedElement.dataset.value);
             this.message.draggedElement = null;
@@ -110,6 +118,9 @@ export default {
           }
         });
       }
+    },
+    yes(){
+
     },
     // 撤销方法
     undo() {
