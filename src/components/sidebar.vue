@@ -2,10 +2,11 @@
   <el-affix :offset="120">
   <el-aside id="sidebar" width="350px">
     <el-progress
-        :percentage="countTm.percentage"
-        :stroke-width="15"
-        type="circle"
-    ></el-progress>
+    :percentage="countTm.percentage"
+    :stroke-width="15"
+    type="circle"
+    :status="countTm.percentage === 100 ? 'success' : undefined"
+></el-progress>
     <p>
       已作答:{{ countTm.answeredCount }}题 剩余:{{
         countTm.totalTm - countTm.answeredCount

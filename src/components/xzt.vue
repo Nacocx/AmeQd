@@ -46,6 +46,6 @@ export default  {
 </script>
 <style>
 .el-radio__inner {
-  transform: scale(2);
+  transform: scale(1.22);
 }
 </style>
