@@ -3,37 +3,34 @@
 
 
 
-  <div class="htt_tuo_main">
-    <h1>{{ message.title }}</h1>
-    <!-- <div class="questions">
-      
-    </div> -->
+  <div class="htt_main_body">
+    <h1>{{ message.title }}:请拖进与图片物品数量一样的:<img :src="message.shape[message.id - 1]" alt="" class="shape">
+      <div class="questions">
+
+      </div>
+    </h1>
+
+
 
     <!-- 主要问题部分 -->
     <div class="main_body">
       <div class="part" v-for="(e, index) in message.subQuestion">
         <div class="up">
-          <img :src="e.img" alt="图片加载失败">
+          <img :src="e.img" alt="图片加载失败" class="img_style">
         </div>
         <!-- 这里加了data-value属性 匹配那个框 -->
-        <div class="down target-area-tuo" :data-value="index + 1">
-          <img :src="message.shape[e.trueShape - 1]" class="shape" :data-value="index + 1" alt="图片加载失败">
+        <div class="down target-area" :data-value="index + 1">
         </div>
       </div>
     </div>
-    <!-- 选择图形部分 -->
     <div class="chose" id="source-area">
-      <div v-for="(e, index) in message.shape" @mousedown="mousedown">
+      <div  @mousedown="mousedown">
         <!-- 添加 data-value 属性 -->
-        <div>
+      
           <!-- 加了data-value属性更好监听是那个图形 -->
-          <img :src="e" class="shape" :data-value="index + 1" alt="图片加载失败">
-        </div>
+          <img :src="message.shape[message.id-1]" class="shape" :data-value="index + 1" alt="图片加载失败">
+       
       </div>
-    </div>
-    <!-- 添加撤销按钮 -->
-    <div class="undo-button">
-      <button @click="undo" :disabled="actionHistory.length === 0">撤销</button>
     </div>
     <br>
   </div>
@@ -42,17 +39,13 @@
 </template>
 <script>
 export default {
-  name: "htt_tuo",
+  name: "htt",
   props: {
     message: {}
   },
   data() {
     return {
       answer: [],//是否正确 返回后端的数据
-      // 记录操作历史
-      actionHistory: [],
-      // 初始化 userAnswer
-      userAnswer: this.message.subQuestion.map(() => [])
 
     };
   },
@@ -97,7 +90,7 @@ export default {
       if (this.message.isDragging) {
         this.message.isDragging = false;
         // 正确获取目标区域元素
-        const targetArea = document.querySelectorAll('.target-area-tuo');
+        const targetArea = document.querySelectorAll('.target-area');
         // console.log(targetArea);
 
         targetArea.forEach(e => {
@@ -109,88 +102,26 @@ export default {
             // console.log("e", e);
             if (this.message.draggedElement) {
               e.appendChild(this.message.draggedElement);//将元素添加到目标区域
-              // console.log("元素：", this.message.draggedElement);
-              // 记录操作历史
-              this.actionHistory.push({
-                target: e,
-                element: this.message.draggedElement,
-                index: e.dataset.value - 1,
-                value: this.message.draggedElement.dataset.value
-              });
+              console.log(this.message.draggedElement);
+              
             }
-            // 
+            //
             // 存储用户答案
             this.message.userAnswer[e.dataset.value - 1].push(this.message.draggedElement.dataset.value);
             this.message.draggedElement = null;
             // console.log(this.message.userAnswer);
             this.message.startX = 0;
             this.message.startY = 0;
-            // console.log("放了");
           } else {
             if (this.message.draggedElement) {//这个检测是为了防止点击空白处时，this.draggedElement为null，导致报错
 
               this.message.draggedElement.remove();//没有在目标区域内，移除元素
             }
           }
-           
         })
-    
 
       }
-      this.yes()
-      // console.log(this.message.answer);//返回给后端的结果 对应每道题是否正确
     },
-    yes() {
-      this.message.answer = [];
-      // console.log(this.message.userAnswer);
-
-
-      this.message.userAnswer.forEach((e, index) => {
-        // console.log(e);
-
-        var num = 0;
-        var flag = 0;
-        e.forEach((e1, index1) => {
-
-          if (e1 != this.message.subQuestion[index].trueShape) {
-            if (flag == 0) {
-              this.message.answer.push(0);
-              flag = 1;
-            }
-          }
-          else {
-            num++;
-          }
-        })
-        if (num == this.message.subQuestion[index].answer && flag == 0) {
-          this.message.answer.push(1);
-          flag = 1;
-        }
-        if (flag == 0) {
-          this.message.answer.push(0);
-          flag = 1;
-        }
-      })
-      // console.log(this.message.answer);//返回给后端的结果 对应每道题是否正确
-
-
-
-    },
-    // 撤销方法
-    undo() {
-      if (this.actionHistory.length > 0) {
-        const lastAction = this.actionHistory.pop();
-        // 从目标区域移除元素
-        lastAction.element.remove();
-        // 从用户答案中移除对应的值
-        const index = this.userAnswer[lastAction.index].indexOf(lastAction.value);
-        if (index > -1) {
-          this.userAnswer[lastAction.index].splice(index, 1);
-        }
-      }
-      console.log(this.userAnswer);
-
-    }
   },
 
 }
@@ -203,7 +134,7 @@ body {
   height: 100vh;
 }
 
-.htt_tuo_main .htt_main_part {
+.htt_main_body .htt_main_part {
   margin: auto;
   width: 1000px;
   height: 750px;
@@ -211,53 +142,48 @@ body {
   border-radius: 10px;
 }
 
-.htt_tuo_main .main_body {
+.htt_main_body .main_body {
   margin: auto;
-  width: 70%;
-  height: 400px;
+  width: 90%;
+  height: 70%;
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
+  justify-content: space-around;
+  box-sizing: border-box;
+  padding-left: 40px;
+  padding-right: 40px;
 }
 
 
 
-.htt_tuo_main .htt_header_img {
+.htt_main_body .htt_header_img {
   width: 100%;
   height: 100%;
 }
 
-.htt_tuo_main .main_body .part {
-  width: 200px;
-  height: 440px;
+.htt_main_body .main_body .part {
+  width: 120px;
+  height: 340px;
   margin-top: 6%;
-  text-align: center;
 
 }
 
-.htt_tuo_main .main_body .part .up {
-  height: 90px;
-  width: 90px;
+.htt_main_body .main_body .part .up {
+  height: 140px;
+  width: 140px  ;
   align-self: center;
-  display: inline-block;
 }
 
-.htt_tuo_main .main_body .part .up img {
-  width: 100%;
-  /* height: 100%; */
-}
-
-.htt_tuo_main .down {
-  display: inline-block;
-  width: 150px;
-  height: 150px;
+.htt_main_body .down {
+  width: 140px;
+  height: 140px;
   margin-top: 30px;
   border: 2px solid black;
   border-radius: 10px;
 
 }
 
-.htt_tuo_main .htt_main_part .header {
+.htt_main_body .htt_main_part .header {
   text-align: center;
   height: 8%;
   font-size: 50px;
@@ -267,12 +193,12 @@ body {
   background-color: rgb(94, 211, 73);
 }
 
-.htt_tuo_main .chose {
+.htt_main_body .chose {
   box-sizing: border-box;
   border: 2px solid black;
   border-radius: 60px;
   display: flex;
-  width: 30%;
+  width: 10%;
   height: 10%;
   margin: auto;
   padding: 5px;
@@ -280,26 +206,26 @@ body {
   align-items: center;
 }
 
-.shape {
-  width: 40px;
-  height: 40px;
+ .shape {
+  width: 30px;
+  height: 30px;
   z-index: 100;
   cursor: pointer;
 
 
 }
 
-.shape img {
-  width: 40px;
-  height: 40px;
+.htt_main_body .shape img {
+  width: 20px;
+  height: 20px;
 }
 
-.htt_tuo_main .img_style {
+.htt_main_body .img_style {
   width: 100%;
 
 }
 
-.htt_tuo_main .submit {
+.htt_main_body .submit {
   padding: 10px 20px;
   border: none;
   border-radius: 5px;
@@ -311,13 +237,13 @@ body {
   overflow: hidden;
 }
 
-.htt_tuo_main .submitDiv {
+.htt_main_body .submitDiv {
   text-align: center;
   margin: 10px;
   height: 7%;
 }
 
-.htt_tuo_main .htt_main_part .questions {
+.htt_main_body .htt_main_part .questions {
   height: 5%;
   text-align: center;
   font-size: 30px;
@@ -325,31 +251,9 @@ body {
 
 
 
-.htt_tuo_main .questions img {
-  height: 40px;
-  width: 40px;
+.htt_main_body .questions img {
+  height: 20px;
+  width: 20px;
   transform: translateY(15px);
-}
-
-/* 新增撤销按钮样式 */
-.undo-button {
-  text-align: center;
-  margin-top: 10px;
-}
-
-.undo-button button {
-  padding: 8px 16px;
-  border: none;
-  border-radius: 5px;
-  background-color: #4CAF50;
-  color: white;
-  font-size: 16px;
-  cursor: pointer;
-  transition: all 0.2s ease;
-}
-
-.undo-button button:disabled {
-  background-color: #cccccc;
-  cursor: not-allowed;
 }
 </style>

@@ -14,7 +14,6 @@
       <div class="options upOptions">
         <div v-for="(item, index) in localMessage.imgU" :key="index" class="option"
           :class="{ 'active': item.connected }" @mousedown="onMousedown($event, item)" :data-value="item.value"
-
           :data-ownership="item.ownership + message.flag">
 
           <img :src="item.src">
@@ -25,10 +24,9 @@
       <div class="options downOptions">
         <div v-for="(item, index) in localMessage.imgD" :key="index" class="option"
           :class="{ 'active': item.connected }" @mousedown="onMousedown($event, item)" :data-value="item.value"
-
           :data-ownership="item.ownership + message.flag">
 
-          <img :src="item.src">
+          <img :src="item.src" :class="message.flag">
         </div>
       </div>
 
@@ -371,7 +369,11 @@ export default {
       document.removeEventListener('mouseup', this.onMouseup);
       // 清除所有选项的悬停状态
       this.clearHoverStates();
+<<<<<<< Updated upstream
 
+=======
+      this.message.changed = true;
+>>>>>>> Stashed changes
       // 如果存在有效的结束选项
       if (this.endItem && this.endItem.ownership !== this.startItem.ownership) {
         // 如果结束选项已连接，断开相关连线
@@ -519,7 +521,11 @@ export default {
           // 如果没有连线，结果为 0
           this.result[index] = (0);
         }
+<<<<<<< Updated upstream
 
+=======
+        this.message.result = this.result;
+>>>>>>> Stashed changes
         // 如果当前选项的结果不为 1，说明有错误
         // if (this.message.result[index] !== 1) {
         //   allCorrect = false;
@@ -632,7 +638,7 @@ export default {
 
 .lxt_main_body .content {
   width: 900px;
-  height: 500px;
+  height: 400px;
   margin: auto;
   display: flex;
   flex-wrap: wrap;
@@ -642,14 +648,15 @@ export default {
 
 .lxt_main_body .options {
   display: flex;
-  width: 100%;
+  width: 80%;
   justify-content: space-around;
   margin: 20px 0;
+  /* height: 120px; */
 }
 
 .lxt_main_body .option {
-  width: 150px;
-  height: 150px;
+  width: 120px;
+  height: 120px;
   margin: 10px;
   background-color: rgb(221, 254, 239);
   border: 2px solid black;
@@ -661,12 +668,21 @@ export default {
   z-index: 1;
   transition: border-color 0.2s;
   border-radius: 20px;
+    display: flex;
+  justify-content: center; /* 水平居中 */
+  align-items: center; /* 垂直居中 */
 }
 
 .lxt_main_body .option img {
-  width: 100%;
-  height: 100%;
+  width: 120px;
+  height: 120px;
   object-fit: contain;
+}
+
+.lxt_main_body .tuo3 {
+  width:60px !important;
+  height: 60px !important;
+
 }
 
 .lxt_main_body .option.active {
@@ -696,17 +712,19 @@ export default {
 }
 
 .lxt_main_body .button {
-  width: 200px;
-  height: 80px;
+  width: 150px;
+  height: 60px;
   padding: 10px 20px;
-  margin: 0 5px;
-  font-size: 25px;
+  margin: 0 20px;
+  margin-bottom: 30px;
+  font-size: 20px;
   background-color: #4CAF50;
   color: white;
   border: none;
   border-radius: 20px;
   cursor: pointer;
   transition: background-color 0.2s;
+
 }
 
 .lxt_main_body .button:hover {
