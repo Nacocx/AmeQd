@@ -11,8 +11,13 @@
       </div>
 
       <div class="question-content">
+<<<<<<< Updated upstream
         <div v-for="(title, titleIndex) in questionGroup.title" :key="'title-' + titleIndex" class="question-item-tkt">
           <h2 class="question-subtitle">{{ title }}</h2>
+=======
+        <div v-for="(title, titleIndex) in questionGroup.title" :key="'title-' + titleIndex" class="question-item">
+          <h3 class="question-subtitle">{{ title }}</h3>
+>>>>>>> Stashed changes
 
           <!-- 简单问题渲染 -->
           <template v-if="questionGroup.userAnswer[titleIndex].type === 'simple'">
@@ -204,6 +209,7 @@ export default {
 </script>
 
 <style scoped>
+<<<<<<< Updated upstream
 .question-subtitle {
   font-size: 19px;
 }
@@ -223,6 +229,19 @@ export default {
 
 
 
+=======
+.question-container {
+  text-align: center;
+}
+
+.question-content {
+  display: inline-block;
+  /* background-color: aqua; */
+  width: 80%;
+  text-align: left;
+}
+
+>>>>>>> Stashed changes
 .question-title {
   height: 2%;
 }

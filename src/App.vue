@@ -156,9 +156,9 @@ const mockQuestions = {
       img: "./static/img/T1_tkt_ok/tkt_1_y.jpeg",
       subQuestions: [
         "（1）一个太阳、一座房子、一棵果树可以用数字TNUM表示，也可以用TNUM个小圆片表示。TSPL（2）看看图中，还有什么可以用数字“1”表示呢TNUM和TNUM都可以用数字“1”表示。",
-        "两只鸟、两个人，可以用数字TNUM表示，也可以用TNUM个小圆片表示。",
-        "有三朵云，三个苹果，可以用数字TNUM表示，也可以用TNUM个小圆片表示。",
-        "有四个萝卜，四朵花，可以用数字TNUM表示，也可以用TNUM个小圆片表示。",
+        " 两只鸟、两个人，可以用数字TNUM表示，也可以用TNUM个小圆片表示。",
+        " 有三朵云，三个苹果，可以用数字TNUM表示，也可以用TNUM个小圆片表示。",
+        " 有四个萝卜，四朵花，可以用数字TNUM表示，也可以用TNUM个小圆片表示。",
         "有五只鸭子，可以用数字TNUM表示，也可以用TNUM个小圆片表示。",
       ],
       userAnswer: [
@@ -241,6 +241,7 @@ const mockQuestions = {
     id: 1,
     title: "part3：请连接和图片中物品数量一致的圆的图片",
     flag: "t3",
+
     changed: false,
     result: [],
     imgU: [
@@ -258,7 +259,22 @@ const mockQuestions = {
       },
       {
         src: "./static/img/T3_lxt_ok/l4_32.png",
+      }]
+    },
+      lxt_tuo3:{
+    changed: false,
+    result: [],
+    imgU: [
+      {
+        src: "../static/img/interact/l4_32.png",
         value: "4",
+        ownership: "U",
+        connected: false,
+      },
+
+      {
+        src: "../static/img/interact/l2_8.png",
+        value: "2",
         ownership: "U",
         connected: false,
       },
@@ -268,10 +284,24 @@ const mockQuestions = {
         ownership: "U",
         connected: false,
       },
+      {
+        src: "../static/img/interact/l1_30.png",
+        value: "1",
+        ownership: "U",
+        connected: false,
+      },
+
+
     ],
     imgD: [
       {
-        src: "./static/img/T3_lxt_ok/a1_18.png",
+        src: "../static/img/interact/a5_18.png",
+        value: "5",
+        ownership: "D",
+        connected: false,
+      },
+      {
+        src: "../static/img/interact/a1_18.png",
         value: "1",
         ownership: "D",
         connected: false,
@@ -282,15 +312,10 @@ const mockQuestions = {
         ownership: "D",
         connected: false,
       },
+
       {
         src: "./static/img/T3_lxt_ok/a4_14.png",
         value: "4",
-        ownership: "D",
-        connected: false,
-      },
-      {
-        src: "./static/img/T3_lxt_ok/a5_18.png",
-        value: "5",
         ownership: "D",
         connected: false,
       },
@@ -303,6 +328,7 @@ const mockQuestions = {
     changed: false,
     flag: "tuo3",
     result: [],
+
     imgU: [
       {
         src: "./static/img/Tuo3_lxt_ok/tuo_l2_23.png",
@@ -571,6 +597,12 @@ export default {
       })
 
       // 获得圈数题
+      totalTm+=1;
+      if(this.questions.qst.changed)
+        {
+          answeredCount++;
+        }
+
       totalTm += 1;
       if (this.questions.qst.changed) {
         answeredCount++;
@@ -583,6 +615,7 @@ export default {
       if (this.questions.lxt_tuo3.changed) {
         answeredCount++;
       }
+
 
       const percentage = totalTm
         ? Math.round((answeredCount / totalTm) * 100)
@@ -814,6 +847,7 @@ export default {
       this.boolLists.lxt_part3 = (this.questions.lxt_part3.result);
       this.boolLists.lxt_tuo3 = (this.questions.lxt_tuo3.result);
 
+
       //调试用
       console.log(this.boolLists);
 
@@ -865,12 +899,11 @@ export default {
   background-color: white;
   color: #333;
   text-align: center;
-  height: 500px;
-  line-height: 35px;
+  height: 350px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, .12), 0 0 6px rgba(0, 0, 0, .04);
   border-radius: 8px;
   position: fixed;
-  width: 350px;
+  width: 200px;
 }
 
 .el-main {
@@ -881,9 +914,6 @@ export default {
   box-shadow: 0 2px 4px rgba(0, 0, 0, .12), 0 0 6px rgba(0, 0, 0, .04);
   border-radius: 8px;
   margin: auto;
-  /* padding-left: 100px; */
-  box-sizing: border-box;
-
 }
 
 

@@ -164,7 +164,7 @@ export default {
 .qst_mian_body {
 
   width: 850px;
-  height: 700px;
+  height: 620px;
   /* border: 1px solid black; */
   margin: auto;
   text-align: center;
