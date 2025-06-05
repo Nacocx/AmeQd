@@ -79,6 +79,7 @@ import htt_tuo from "@/components/htt_tuo.vue";
 import axios from "axios";
 //实际使用中数据从后端获取
 // import logo from "/static/img/T1_tkt_ok/tkt_1.jpeg";   // 必须用 import
+// ../static/img/interact/xx.png
 const mockQuestions = {
   xzt: [
     {
@@ -86,9 +87,9 @@ const mockQuestions = {
       title: "每只小兔吃一个萝卜，选哪一堆正好合适？",
       img: "./static/img/timu.png", //非必需
       options: [
-        { value: "A", img: "./static/img/A.png" },
-        { value: "B", img: "./static/img/B.png" },
-        { value: "C", img: "./static/img/C.png" },
+        { value: "A", img: "../static/img/interact/A.png" },
+        { value: "B", img: "../static/img/interact/B.png" },
+        { value: "C", img: "../static/img/interact/C.png" },
         //img非必需
       ],
       userAnswer: "",
@@ -123,20 +124,20 @@ const mockQuestions = {
   sst: [
     {
       id: 1,
-      title: { image: "./static/img/icecream_28.png", count: 5 },
-      tuXingPath: "./static/img/circle_2.png",
+      title: { image: "../static/img/interact/icecream_28.png", count: 5 },
+      tuXingPath: "../static/img/interact/circle_2.png",
       userAnswer: "",
     },
     {
       id: 2,
-      title: { image: "./static/img/plane_21.png", count: 4 },
-      tuXingPath: "./static/img/circle_2.png",
+      title: { image: "../static/img/interact/plane_21.png", count: 4 },
+      tuXingPath: "../static/img/interact/circle_2.png",
       userAnswer: "",
     },
     {
       id: 3,
-      title: { image: "./static/img/tree_13.png", count: 3 },
-      tuXingPath: "./static/img/circle_2.png",
+      title: { image: "../static/img/interact/tree_13.png", count: 3 },
+      tuXingPath: "../static/img/interact/circle_2.png",
       userAnswer: "",
     },
   ],
@@ -152,7 +153,7 @@ const mockQuestions = {
         "4.认识数字“4”",
         "5.认识数字“5”",
       ],
-      img: "./static/img/tkt_1_90.jpeg",
+      img: "../static/img/interact/tkt_1_90.jpeg",
       subQuestions: [
         "（1）一个太阳、一座房子、一棵果树可以用数字TNUM表示，也可以用TNUM个小圆片表示。TSPL（2）看看图中，还有什么可以用数字“1”表示呢TNUM和TNUM都可以用数字“1”表示。",
         "两只鸟、两个人，可以用数字TNUM表示，也可以用TNUM个小圆片表示。",
@@ -204,29 +205,29 @@ const mockQuestions = {
     subQuestion: [
       {
         id: 1,
-        img: "./static/img/t1_9.jpeg",
+        img: "../static/img/interact/t1_9.jpeg",
         answer: 2,
       },
       {
         id: 2,
-        img: "./static/img/t2_9.jpeg",
+        img: "../static/img/interact/t2_9.jpeg",
         answer: 3,
       },
       {
         id: 3,
-        img: "./static/img/t3_10.jpeg",
+        img: "../static/img/interact/t3_10.jpeg",
         answer: 5,
       },
       {
         id: 4,
-        img: "./static/img/t4_9.jpeg",
+        img: "../static/img/interact/t4_9.jpeg",
         answer: 4,
       },
     ],
     shape: [
-      "./static/img/jx_6.png",
-      "./static/img/sjx_17.png",
-      "./static/img/yx_15.png",
+      "../static/img/interact/jx_6.png",
+      "../static/img/interact/sjx_17.png",
+      "../static/img/interact/yx_15.png",
     ], //有那些形状图形可以选择
     trueShape: 1,
     userAnswer: [[], [], [], []],
@@ -242,25 +243,25 @@ const mockQuestions = {
     flag: "t3",
     imgU: [
       {
-        src: "./static/img/l1_30.png",
+        src: "../static/img/interact/l1_30.png",
         value: "1",
         ownership: "U",
         connected: false,
       },
       {
-        src: "./static/img/l2_8.png",
+        src: "../static/img/interact/l2_8.png",
         value: "2",
         ownership: "U",
         connected: false,
       },
       {
-        src: "./static/img/l4_32.png",
+        src: "../static/img/interact/l4_32.png",
         value: "4",
         ownership: "U",
         connected: false,
       },
       {
-        src: "./static/img/l5_36.png",
+        src: "../static/img/interact/l5_36.png",
         value: "5",
         ownership: "U",
         connected: false,
@@ -268,25 +269,25 @@ const mockQuestions = {
     ],
     imgD: [
       {
-        src: "./static/img/a1_18.png",
+        src: "../static/img/interact/a1_18.png",
         value: "1",
         ownership: "D",
         connected: false,
       },
       {
-        src: "./static/img/a2_13.png",
+        src: "../static/img/interact/a2_13.png",
         value: "2",
         ownership: "D",
         connected: false,
       },
       {
-        src: "./static/img/a4_14.png",
+        src: "../static/img/interact/a4_14.png",
         value: "4",
         ownership: "D",
         connected: false,
       },
       {
-        src: "./static/img/a5_18.png",
+        src: "../static/img/interact/a5_18.png",
         value: "5",
         ownership: "D",
         connected: false,
@@ -300,25 +301,25 @@ const mockQuestions = {
     flag: "tuo3",
     imgU: [
       {
-        src: "./static/img/tuo_l2_23.png",
+        src: "../static/img/interact/tuo_l2_23.png",
         value: "2",
         ownership: "U",
         connected: false,
       },
       {
-        src: "./static/img/tuo_l3_13.png",
+        src: "../static/img/interact/tuo_l3_13.png",
         value: "3",
         ownership: "U",
         connected: false,
       },
       {
-        src: "./static/img/tuo_l4_19.png",
+        src: "../static/img/interact/tuo_l4_19.png",
         value: "4",
         ownership: "U",
         connected: false,
       },
       {
-        src: "./static/img/tuo_l5_30.png",
+        src: "../static/img/interact/tuo_l5_30.png",
         value: "5",
         ownership: "U",
         connected: false,
@@ -326,25 +327,25 @@ const mockQuestions = {
     ],
     imgD: [
       {
-        src: "./static/img/tuo_a2.png",
+        src: "../static/img/interact/tuo_a2.png",
         value: "2",
         ownership: "D",
         connected: false,
       },
       {
-        src: "./static/img/tuo_a3.png",
+        src: "../static/img/interact/tuo_a3.png",
         value: "3",
         ownership: "D",
         connected: false,
       },
       {
-        src: "./static/img/tuo_a4.png",
+        src: "../static/img/interact/tuo_a4.png",
         value: "4",
         ownership: "D",
         connected: false,
       },
       {
-        src: "./static/img/tuo_a5.png",
+        src: "../static/img/interact/tuo_a5.png",
         value: "5",
         ownership: "D",
         connected: false,
@@ -356,7 +357,7 @@ const mockQuestions = {
   tht: {
     items: [
       {
-        rightItem: "./static/img/rightItem1_3.png",
+        rightItem: "../static/img/interact/rightItem1_3.png",
         cnt: 2,
         flag: [false, false, false, false, false],
 
@@ -364,7 +365,7 @@ const mockQuestions = {
 
       },
       {
-        rightItem: "./static/img/rightItem2_2.png",
+        rightItem: "../static/img/interact/rightItem2_2.png",
         cnt: 1,
         flag: [false, false, false, false, false],
 
@@ -372,7 +373,7 @@ const mockQuestions = {
 
       },
       {
-        rightItem: "./static/img/rightItem3_2.png",
+        rightItem: "../static/img/interact/rightItem3_2.png",
         cnt: 3,
         flag: [false, false, false, false, false],
 
@@ -381,25 +382,25 @@ const mockQuestions = {
       },
     ],
     tuxingpath: [
-      { leftImage: "./static/img/left_11.png" },
-      { redCircle: "./static/img/redCircle_2.png" },
-      { noneCircle: "./static/img/noneCircle_2.png" },
+      { leftImage: "../static/img/interact/left_11.png" },
+      { redCircle: "../static/img/interact/redCircle_2.png" },
+      { noneCircle:"../static/img/interact/noneCircle_2.png" },
     ],
   },
   qst: {
     title: "拓展应用2：对照上面图片根据左边的图形数量圈出右边的数量",
     example: {
-      t_img: "./static/img/t1_23.png",//样例题目
-      a_img: "./static/img/a1_48.png",//样例答案
+      t_img: "../static/img/interact/t1_23.png",//样例题目
+      a_img: "../static/img/interact/a1_48.png",//样例答案
     },
     question: {
-      t_img: "./static/img/t2_45.png",//题目
-      n_img: "./static/img/n2_16.png",//单个形状
+      t_img: "../static/img/interact/t2_45.png",//题目
+      n_img: "../static/img/interact/n2_16.png",//单个形状
       num: 8,//有多少个单个形状
       tureNum: 5
     },
 
-    img: "./static/img/jian_10.png",
+    img: "../static/img/interact/jian_10.png",
 
 
     result:false,
@@ -412,25 +413,25 @@ const mockQuestions = {
     subQuestion: [
       {
         id: 1,
-        img: "./static/img/t1.png",
+        img: "../static/img/interact/t1.png",
         answer: 4,
         trueShape: 1,
       },
       {
         id: 2,
-        img: "./static/img/t2.png",
+        img: "../static/img/interact/t2.png",
         answer: 3,
         trueShape: 2,
       },
       {
         id: 3,
-        img: "./static/img/t3.png",
+        img: "../static/img/interact/t3.png",
         answer: 1,
         trueShape: 3,
       },
 
     ],
-    shape: ["./static/img/jx.png", "./static/img/sjx_10.png", "./static/img/yuan.png"],//有那些形状图形可以选择
+    shape: ["../static/img/interact/jx.png", "../static/img/interact/sjx_10.png", "../static/img/interact/yuan.png"],//有那些形状图形可以选择
     // trueShape: 1,
     userAnswer: [
       [],
