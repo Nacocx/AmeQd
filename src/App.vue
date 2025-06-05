@@ -241,11 +241,8 @@ const mockQuestions = {
     id: 1,
     title: "part3：请连接和图片中物品数量一致的圆的图片",
     flag: "t3",
-<<<<<<< Updated upstream
-=======
     changed: false,
     result: [],
->>>>>>> Stashed changes
     imgU: [
       {
         src: "./static/img/T3_lxt_ok/l1_30.png",
@@ -303,13 +300,9 @@ const mockQuestions = {
   lxt_tuo3: {
     id: 2,
     title: "拓展应用3：请连接对应物品数量的数字",
-<<<<<<< Updated upstream
-    flag: "tuo3",
-=======
     changed: false,
     flag: "tuo3",
     result: [],
->>>>>>> Stashed changes
     imgU: [
       {
         src: "./static/img/Tuo3_lxt_ok/tuo_l2_23.png",
@@ -393,15 +386,9 @@ const mockQuestions = {
       },
     ],
     tuxingpath: [
-<<<<<<< Updated upstream
-      { leftImage: "./static/img/tht/left_11.png" },
-      { redCircle: "./static/img/tht/redCircle_2.png" },
-      { noneCircle: "./static/img/tht/noneCircle_2.png" },
-=======
       { leftImage: "../static/img/interact/left_11.png" },
       { redCircle: "../static/img/interact/redCircle_2.png" },
       { noneCircle: "../static/img/interact/noneCircle_2.png" },
->>>>>>> Stashed changes
     ],
   },
   qst: {
@@ -481,11 +468,6 @@ export default {
     return {
       questions: mockQuestions,
       studentInfo: mockStudentInfo,
-<<<<<<< Updated upstream
-      corAnswers: mockCorAnswers,
-=======
-
->>>>>>> Stashed changes
       loading: false,
       error: null,
       boolLists: {
@@ -589,13 +571,6 @@ export default {
       })
 
       // 获得圈数题
-<<<<<<< Updated upstream
-      totalTm+=1;
-      if(this.questions.qst.changed)
-        {
-          answeredCount++;
-        }
-=======
       totalTm += 1;
       if (this.questions.qst.changed) {
         answeredCount++;
@@ -608,7 +583,6 @@ export default {
       if (this.questions.lxt_tuo3.changed) {
         answeredCount++;
       }
->>>>>>> Stashed changes
 
       const percentage = totalTm
         ? Math.round((answeredCount / totalTm) * 100)
@@ -836,13 +810,9 @@ export default {
         this.boolLists.qst.push(true);
 
 
-<<<<<<< Updated upstream
-
-=======
       // 获得连线题答案
       this.boolLists.lxt_part3 = (this.questions.lxt_part3.result);
       this.boolLists.lxt_tuo3 = (this.questions.lxt_tuo3.result);
->>>>>>> Stashed changes
 
       //调试用
       console.log(this.boolLists);
@@ -886,8 +856,6 @@ export default {
   },
 };
 </script>
-<<<<<<< Updated upstream
-=======
 <style>
 * {
   user-select: none;
@@ -943,4 +911,3 @@ export default {
   padding: 0 20px;
 }
 </style>
->>>>>>> Stashed changes
