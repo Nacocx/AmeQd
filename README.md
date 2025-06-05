@@ -1,5 +1,3 @@
-以下是一个更完整的 README.md 文件，包含了您需要的 axios、Vue 和 Element Plus 的相关信息：
-
 # AME Project
 
 私密仓库 - 基于 Vue 3 + Vite + Element Plus 的前端项目
