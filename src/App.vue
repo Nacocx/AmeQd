@@ -861,12 +861,11 @@ export default {
     background-color: white;
     color: #333;
     text-align: center;
-    height: 500px;
-    line-height: 35px;
+    height: 350px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, .12), 0 0 6px rgba(0, 0, 0, .04);
     border-radius: 8px;
     position: fixed;
-    width: 350px;
+    width: 200px;
 }
 
 .el-main {
