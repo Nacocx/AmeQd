@@ -217,6 +217,24 @@ export default {
 </script>
 
 <style scoped>
+
+.question-subtitle {
+  font-size: 19px;
+}
+
+.question-container {
+  text-align: center;
+
+}
+
+.question-content {
+  width: 80%;
+  display: inline-block;
+  text-align: left;
+
+  /* background-color: aqua; */
+}
+
 .question-title {
   height: 2%;
 }
