@@ -2,7 +2,7 @@
   <div>
     <h1>选择题部分</h1>
     <div
-      class="question-item"
+      class="xzt_question-item"
       v-for="(question, index) in questions"
       :key="question.id"
     >
@@ -47,5 +47,8 @@ export default  {
 <style>
 .el-radio__inner {
   transform: scale(1.22);
+}
+.xzt_question-item{
+  width: 80%;
 }
 </style>

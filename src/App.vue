@@ -243,6 +243,12 @@ const mockQuestions = {
     changed:false,
     result:[],
     imgU: [
+        {
+        src: "../static/img/interact/l5_36.png",
+        value: "5",
+        ownership: "U",
+        connected: false,
+      },
       {
         src: "../static/img/interact/l1_30.png",
         value: "1",
@@ -255,29 +261,32 @@ const mockQuestions = {
         ownership: "U",
         connected: false,
       },
-      {
+   
+    
+         {
         src: "../static/img/interact/l4_32.png",
         value: "4",
         ownership: "U",
         connected: false,
       },
-      {
-        src: "../static/img/interact/l5_36.png",
-        value: "5",
-        ownership: "U",
-        connected: false,
-      },
     ],
     imgD: [
+       {
+        src: "../static/img/interact/a2_13.png",
+        value: "2",
+        ownership: "D",
+        connected: false,
+      },
       {
         src: "../static/img/interact/a1_18.png",
         value: "1",
         ownership: "D",
         connected: false,
       },
+     
       {
-        src: "../static/img/interact/a2_13.png",
-        value: "2",
+        src: "../static/img/interact/a5_18.png",
+        value: "5",
         ownership: "D",
         connected: false,
       },
@@ -287,20 +296,15 @@ const mockQuestions = {
         ownership: "D",
         connected: false,
       },
-      {
-        src: "../static/img/interact/a5_18.png",
-        value: "5",
-        ownership: "D",
-        connected: false,
-      },
+      
     ],
 
   },
   lxt_tuo3: {
     id: 2,
     title: "拓展应用3：请连接对应物品数量的数字",
-    changed:false,
     flag: "tuo3",
+    changed:false,
     result:[],
     imgU: [
       {
@@ -309,29 +313,39 @@ const mockQuestions = {
         ownership: "U",
         connected: false,
       },
-      {
-        src: "../static/img/interact/tuo_l3_13.png",
-        value: "3",
+          {
+        src: "../static/img/interact/tuo_l5_30.png",
+        value: "5",
         ownership: "U",
         connected: false,
       },
+    
       {
         src: "../static/img/interact/tuo_l4_19.png",
         value: "4",
         ownership: "U",
         connected: false,
       },
-      {
-        src: "../static/img/interact/tuo_l5_30.png",
-        value: "5",
+        {
+        src: "../static/img/interact/tuo_l3_13.png",
+        value: "3",
         ownership: "U",
         connected: false,
       },
+  
     ],
     imgD: [
+           {
+        src: "../static/img/interact/tuo_a4.png",
+        value: "4",
+        ownership: "D",
+        connected: false,
+      },
+    
+      
       {
-        src: "../static/img/interact/tuo_a2.png",
-        value: "2",
+        src: "../static/img/interact/tuo_a5.png",
+        value: "5",
         ownership: "D",
         connected: false,
       },
@@ -341,18 +355,13 @@ const mockQuestions = {
         ownership: "D",
         connected: false,
       },
-      {
-        src: "../static/img/interact/tuo_a4.png",
-        value: "4",
+        {
+        src: "../static/img/interact/tuo_a2.png",
+        value: "2",
         ownership: "D",
         connected: false,
       },
-      {
-        src: "../static/img/interact/tuo_a5.png",
-        value: "5",
-        ownership: "D",
-        connected: false,
-      },
+ 
     ],
 
   },
