@@ -19,7 +19,7 @@
     </div>
     <div class="chose" id="source-area">
       <div @mousedown="mousedown">
-        <img :src="message.shape[message.id - 1]" class="shape" :data-value="index + 1" alt="图片加载失败">
+        <img :src="message.shape[message.id - 1]" class="shape" :data-value="[message.id - 1]" alt="图片加载失败">
 
       </div>
     </div>
