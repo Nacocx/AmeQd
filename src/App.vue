@@ -1,9 +1,9 @@
 <template>
   <div id="app">
-    <el-header>
+    <!-- <el-header>
       <img src="./assets/logo.png" width="50px" height="50px" alt="Logo Missing!" />
       <span style="margin-left: 15px; font-size: 18px">熊猫沉浸</span>
-    </el-header>
+    </el-header> -->
 
     <el-container>
       <el-container>
@@ -885,10 +885,15 @@ export default {
 }
 
 #app{
-    padding-top: 60px;
+    padding-top: 10px;
 }
 
-.el-header {
+
+
+</style>
+
+
+<!-- .el-header {
     position: fixed;
     top: 0;
     left: 0;
@@ -901,5 +906,4 @@ export default {
     display: flex;
     align-items: center;
     padding: 0 20px;
-}
-</style>
+} -->
