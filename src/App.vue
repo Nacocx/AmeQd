@@ -85,7 +85,7 @@ const mockQuestions = {
     {
       id: 1,
       title: "每只小兔吃一个萝卜，选哪一堆正好合适？",
-      img: "./static/img/timu.png", //非必需
+      img: "../static/img/interact/timu.png", //非必需
       options: [
         { value: "A", img: "../static/img/interact/A.png" },
         { value: "B", img: "../static/img/interact/B.png" },
@@ -242,6 +242,7 @@ const mockQuestions = {
     title: "part3：请连接和图片中物品数量一致的圆的图片",
     flag: "t3",
     changed:false,
+    result:[],
     imgU: [
       {
         src: "../static/img/interact/l1_30.png",
@@ -301,6 +302,7 @@ const mockQuestions = {
     title: "拓展应用3：请连接对应物品数量的数字",
     changed:false,
     flag: "tuo3",
+    result:[],
     imgU: [
       {
         src: "../static/img/interact/tuo_l2_23.png",
@@ -807,7 +809,8 @@ export default {
 
 
       // 获得连线题答案
-      
+      this.boolLists.lxt_part3=(this.questions.lxt_part3.result);
+      this.boolLists.lxt_tuo3=(this.questions.lxt_tuo3.result);
 
       //调试用
       console.log(this.boolLists);

@@ -382,7 +382,7 @@ export default {
         // 取消起始选项的连接状态
         this.startItem.connected = false;
       }
-
+      this.checkAnswer();
       // 清空起始选项
       this.startItem = null;
       // 清空结束选项
@@ -519,7 +519,7 @@ export default {
           // 如果没有连线，结果为 0
           this.result[index] = (0);
         }
-
+        this.message.result=this.result;
         // 如果当前选项的结果不为 1，说明有错误
         // if (this.message.result[index] !== 1) {
         //   allCorrect = false;
