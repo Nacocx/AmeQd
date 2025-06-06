@@ -103,9 +103,10 @@ src/
 
 ## 代码规范
 
-- 使用 ESLint + Prettier 保持代码风格一致
-- 组件使用 PascalCase 命名
+- 尽量保持代码风格一致
+- 组件命名清晰
 - 单文件组件结构顺序：template -> script -> style
+- 非必须情况下style使用scoped
 
 ## 部署说明
 
