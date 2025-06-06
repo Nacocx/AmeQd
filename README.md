@@ -95,7 +95,6 @@ app.mount('#app')
 src/
 ├── assets/            # 静态资源
 ├── components/        # 公共组件
-├── views/             # 页面组件
 ├── App.vue            # 根组件
 └── main.js            # 入口文件
 ```
@@ -110,8 +109,8 @@ src/
 
 ## 部署说明
 
-1. 修改 `vite.config.js`中`mydirname`的值为文件夹名
-2. 注意JSON中图片路径是否正确
+1. 修改 `.env`中`VITE_IMG_BASE_PATH`和`VITE_JC_BASE_PATH`为正确路径
+2. 将public中图片文件夹名按照正确路径排好
 3. 运行 `npm run build`
 4. 将 dist 文件夹内容部署到静态服务器
 5. 配置服务器路由重定向到 index.html (SPA 需要)
