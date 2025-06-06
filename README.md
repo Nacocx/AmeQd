@@ -113,4 +113,3 @@ src/
 2. 将public中图片文件夹名按照正确路径排好
 3. 运行 `npm run build`
 4. 将 dist 文件夹内容部署到静态服务器
-5. 配置服务器路由重定向到 index.html (SPA 需要)
