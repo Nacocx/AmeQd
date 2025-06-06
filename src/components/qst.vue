@@ -97,8 +97,8 @@ export default {
       this.flag = 1
       // 获取画布元素
       const canvas = this.$refs.canvas;
-      console.log("canvas=", canvas);
-      console.log("this.message.ctx=", this.ctx);
+      // console.log("canvas=", canvas);
+      // console.log("this.message.ctx=", this.ctx);
       this.ctx = this.$refs.canvas.getContext("2d");
 
 
