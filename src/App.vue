@@ -29,14 +29,6 @@
               <tht :items="questions.tht.items" :tuxing-path="questions.tht.tuxingpath" v-if="questions.tht.items" />
 
 
-              <!-- <div>
-
-                <el-button-group size="large">
-                  <el-button @click="lxtpage--" type="primary" :disabled="lxtpage === 1">Last</el-button>
-                  <el-button @click="lxtpage++" type="primary" :disabled="lxtpage === 2">Next</el-button>
-                </el-button-group>
-              </div> -->
-
               <htt_tuo :message="questions.htt_tuo" />
 
               <!-- 拓展应用：2 -->
