@@ -42,7 +42,7 @@
               <!-- 拓展应用：3 -->
               <lxt :message="questions.lxt_tuo3" />
 
-              <xzt :questions="questions.xzt" v-if="questions.xzt" />
+              <!-- <xzt :questions="questions.xzt" v-if="questions.xzt" /> -->
 
 
 
@@ -80,45 +80,45 @@ import axios from "axios";
 // import logo from "/static/img/T1_tkt_ok/tkt_1.jpeg";   // 必须用 import
 // /static2/sx-01-s-01-01-01/img/xx.png
 const mockQuestions = {
-  xzt: [
-    {
-      id: 1,
-      title: "每只小兔吃一个萝卜，选哪一堆正好合适？",
-      img: "/static2/sx-01-s-01-01-01/img/timu.png", //非必需
-      options: [
-        { value: "A", img: "/static2/sx-01-s-01-01-01/img/A.png" },
-        { value: "B", img: "/static2/sx-01-s-01-01-01/img/B.png" },
-        { value: "C", img: "/static2/sx-01-s-01-01-01/img/C.png" },
-        //img非必需
-      ],
-      userAnswer: "",
-      answer: "B",
-    },
-    {
-      id: 2,
-      title: "2+2=?",
-      options: [
-        { value: "A", label: "1" },
-        { value: "B", label: "2" },
-        { value: "C", label: "3" },
-        { value: "D", label: "4" },
-      ],
-      userAnswer: "",
-      answer: "D",
-    },
-    {
-      id: 3,
-      title: "2+4=?",
-      options: [
-        { value: "A", label: "4" },
-        { value: "B", label: "5" },
-        { value: "C", label: "6" },
-        { value: "D", label: "7" },
-      ],
-      userAnswer: "",
-      answer: "C",
-    },
-  ],
+  // xzt: [
+  //   {
+  //     id: 1,
+  //     title: "每只小兔吃一个萝卜，选哪一堆正好合适？",
+  //     img: "/static2/sx-01-s-01-01-01/img/timu.png", //非必需
+  //     options: [
+  //       { value: "A", img: "/static2/sx-01-s-01-01-01/img/A.png" },
+  //       { value: "B", img: "/static2/sx-01-s-01-01-01/img/B.png" },
+  //       { value: "C", img: "/static2/sx-01-s-01-01-01/img/C.png" },
+  //       //img非必需
+  //     ],
+  //     userAnswer: "",
+  //     answer: "B",
+  //   },
+  //   {
+  //     id: 2,
+  //     title: "2+2=?",
+  //     options: [
+  //       { value: "A", label: "1" },
+  //       { value: "B", label: "2" },
+  //       { value: "C", label: "3" },
+  //       { value: "D", label: "4" },
+  //     ],
+  //     userAnswer: "",
+  //     answer: "D",
+  //   },
+  //   {
+  //     id: 3,
+  //     title: "2+4=?",
+  //     options: [
+  //       { value: "A", label: "4" },
+  //       { value: "B", label: "5" },
+  //       { value: "C", label: "6" },
+  //       { value: "D", label: "7" },
+  //     ],
+  //     userAnswer: "",
+  //     answer: "C",
+  //   },
+  // ],
 
   sst: [
     {
@@ -539,14 +539,18 @@ export default {
 
       // 获得画图题答案
       totalTm += this.questions.htt.userAnswer.length;
+      console.log(this.questions.htt.userAnswer);
+      
       // 防止多次计算
       let prev = [];
       this.questions.htt.userAnswer.forEach((ans, index) => {
+      console.log("e1");
+        
         ans.forEach((e) => {
           if (e !== null && prev[index] == null) {
             answeredCount++;
             prev[index] = e;
-            // console.log(e+","+prev[index]+","+index);
+            console.log(e+","+prev[index]+","+index);
           }
         });
       });
@@ -556,10 +560,14 @@ export default {
       // 防止多次计算
       let prev2 = [];
       this.questions.htt_tuo.userAnswer.forEach((ans, index) => {
+      console.log("e2");
+
         ans.forEach((e) => {
           if (e !== null && prev2[index] == null) {
             answeredCount++;
             prev2[index] = e;
+            console.log(e+","+prev2[index]+","+index);
+
           }
         });
       });
@@ -902,7 +910,7 @@ export default {
 
 </style>
 
-
+<!-- 原本的header   -->
 <!-- .el-header {
     position: fixed;
     top: 0;

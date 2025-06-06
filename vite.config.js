@@ -48,7 +48,6 @@ export default defineConfig({
             return 'vendor'
           }
           if (id.includes('src/components')) return 'components'
-          if (id.includes('src/views')) return 'views'
         }
       }
     
