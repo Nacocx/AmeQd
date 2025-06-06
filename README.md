@@ -110,6 +110,8 @@ src/
 
 ## 部署说明
 
-1. 运行 `npm run build`
-2. 将 dist 文件夹内容部署到静态服务器
-3. 配置服务器路由重定向到 index.html (SPA 需要)
+1. 修改 `vite.config.js`中`mydirname`的值为文件夹名
+2. 注意JSON中图片路径是否正确
+3. 运行 `npm run build`
+4. 将 dist 文件夹内容部署到静态服务器
+5. 配置服务器路由重定向到 index.html (SPA 需要)
