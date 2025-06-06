@@ -43,12 +43,24 @@
 
 
 
-                <el-button type="primary" @click="willSubmit" id="Submit" size="large">提交答案</el-button>
+              <el-button type="primary" @click="willSubmit" id="Submit" size="large">提交答案</el-button>
             </div>
           </div>
         </el-main>
       </el-container>
     </el-container>
+    <el-dialog v-model="dialogTableVisible" title="答题统计结果:" width="800">
+      <span>整体对了{{finalJson.totalR}}题,正确率: <el-progress :percentage="finalJson.totalP" /></span>
+      <!-- <span>选择题对了{{finalJson.xztR}}题,正确率: <el-progress :percentage="finalJson.xztP" /></span> -->
+      <span>填空题对了{{finalJson.tktR}}题,正确率: <el-progress :percentage="finalJson.tktP" /></span>
+      <span>连线题对了{{finalJson.lxtR}}题,正确率: <el-progress :percentage="finalJson.lxtP" /></span>
+      <span>画图题对了{{finalJson.httR}}题,正确率: <el-progress :percentage="finalJson.httP" /></span>
+      <span>涂画题对了{{finalJson.thtR}}题,正确率: <el-progress :percentage="finalJson.thtP" /></span>
+      <span>数数题对了{{finalJson.sstR}}题,正确率: <el-progress :percentage="finalJson.sstP" /></span>
+      <span>画圈题对了{{finalJson.hqtR}}题,正确率: <el-progress :percentage="finalJson.qstP" /></span>
+    </el-dialog>
+
+
   </div>
 </template>
 
@@ -399,8 +411,7 @@ export default {
     return {
       questions: mockQuestions,
       studentInfo: mockStudentInfo,
-      loading: false,
-      error: null,
+      dialogTableVisible: false,
       boolLists: {
         xzt: [],
         tkt: [],
@@ -408,10 +419,10 @@ export default {
         htt: [],
         tht: [],
         qst: [false],
-        lxt_part3:[false],
-        lxt_tuo3:[false]
+        lxt_part3: [false],
+        lxt_tuo3: [false]
       },
-      lxtpage: 1,
+      finalJson: {},
     };
   },
   components: {
@@ -533,10 +544,99 @@ export default {
   methods: {
 
     // 计算总体情况
-    calcTotal(){
+    calcTotal() {
       this.submitAnswers();
-      const showBoolLists=this.boolLists;
-      
+      const showBoolLists = this.boolLists;
+      let httRcnt = 0;
+      let lxtRcnt = 0;
+      let tktRcnt = 0;
+      let thtRcnt = 0;
+      let sstRcnt = 0;
+      let xztRcnt = 0;
+      let qstRcnt = 0;
+      let httAll = showBoolLists.htt.concat(showBoolLists.htt_tuo);
+      let lxtAll = showBoolLists.lxt_part3.concat(showBoolLists.lxt_tuo3);
+      httAll.forEach(e => {
+        if (e === true) {
+          httRcnt++;
+        }
+      });
+      lxtAll.forEach(e => {
+        if (e === true) {
+          lxtRcnt++;
+        }
+      });
+      showBoolLists.sst.forEach(e => {
+        if (e === true) {
+          sstRcnt++;
+        }
+      });
+      showBoolLists.tht.forEach(e => {
+        if (e === true) {
+          thtRcnt++;
+        }
+      });
+      showBoolLists.tkt.forEach(e => {
+        if (e === true) {
+          tktRcnt++;
+        }
+      });
+      showBoolLists.xzt.forEach(e => {
+        if (e === true) {
+          xztRcnt++;
+        }
+      });
+      showBoolLists.qst.forEach(e => {
+        if (e === true) {
+          qstRcnt++;
+        }
+      });
+
+      this.finalJson = {
+        "httR": httRcnt,
+        "httP": parseFloat((httAll?.length ? (httRcnt / httAll.length * 100) : 0).toFixed(2)),
+
+        "lxtR": lxtRcnt,
+        "lxtP": parseFloat((lxtAll?.length ? (lxtRcnt / lxtAll.length * 100) : 0).toFixed(2)),
+
+        "tktR": tktRcnt,
+        "tktP": parseFloat((showBoolLists.tkt?.length ? (tktRcnt / showBoolLists.tkt.length * 100) : 0).toFixed(2)),
+
+        "thtR": thtRcnt,
+        "thtP": parseFloat((showBoolLists.tht?.length ? (thtRcnt / showBoolLists.tht.length * 100) : 0).toFixed(2)),
+
+        "sstR": sstRcnt,
+        "sstP": parseFloat((showBoolLists.sst?.length ? (sstRcnt / showBoolLists.sst.length * 100) : 0).toFixed(2)),
+
+        "xztR": xztRcnt,
+        "xztP": parseFloat((showBoolLists.xzt?.length ? (xztRcnt / showBoolLists.xzt.length * 100) : 0).toFixed(2)),
+
+        "qstR": qstRcnt,
+        "qstP": parseFloat((showBoolLists.qst?.length ? (qstRcnt / showBoolLists.qst.length * 100) : 0).toFixed(2)),
+
+        "totalR": httRcnt + lxtRcnt + thtRcnt + tktRcnt + sstRcnt + xztRcnt + qstRcnt,
+        "totalP": parseFloat((
+          (httAll?.length +
+            lxtAll?.length +
+            showBoolLists.tht?.length +
+            showBoolLists.tkt?.length +
+            showBoolLists.sst?.length +
+            showBoolLists.xzt?.length +
+            showBoolLists.qst?.length)
+            ? (httRcnt + lxtRcnt + thtRcnt + tktRcnt + sstRcnt + xztRcnt + qstRcnt) /
+            (httAll.length +
+              lxtAll.length +
+              showBoolLists.tht.length +
+              showBoolLists.tkt.length +
+              showBoolLists.sst.length +
+              showBoolLists.xzt.length +
+              showBoolLists.qst.length) * 100
+            : 0
+        ).toFixed(2))
+      };
+
+      console.log(this.finalJson);
+      this.dialogTableVisible = true;
     },
 
     // 确认是否提交答案
@@ -563,14 +663,14 @@ export default {
             message: "提交成功!",
           })
         })
-        //取消或报错(e)
-        .catch((e) => {
-          console.log("!ERROR:"+e);
-          ElMessage({
-            type: "info",
-            message: "已取消提交",
-          })
-        });
+      //取消或报错(e)
+      // .catch((e) => {
+      //   console.log("!ERROR:" + e);
+      //   ElMessage({
+      //     type: "info",
+      //     message: "已取消提交",
+      //   })
+      // });
     },
     // 获得填空题答案
     getFormattedAnswers() {
@@ -699,7 +799,7 @@ export default {
           e.userAnswer == e.title.count ? true : false;
       });
 
-      
+
       let htt1 = this.questions.htt;
       let htt2 = this.questions.htt_tuo;
 
@@ -709,11 +809,11 @@ export default {
 
       //获得圈数题正确数组
       if (this.questions.qst.result === true)
-        this.boolLists.qst[0]=true;
+        this.boolLists.qst[0] = true;
 
 
       // 获得连线题正确数组
-      this.boolLists.lxt_part3 = (this.questions.lxt_part3.result); 
+      this.boolLists.lxt_part3 = (this.questions.lxt_part3.result);
       this.boolLists.lxt_tuo3 = (this.questions.lxt_tuo3.result);
 
       //调试用
