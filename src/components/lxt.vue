@@ -250,6 +250,7 @@ export default {
 
       // 检查鼠标悬停的选项
       this.checkHoverTarget(event);
+      this.checkAnswer();
 
       // 如果处于调试模式，绘制检测区域
       // if (this.isDebug) this.drawDetectionCircles();
@@ -501,7 +502,7 @@ export default {
       // 标记所有答案是否正确
       // let allCorrect = true;
       // 存储每个选项的检查结果
-      this.result = [0, 0, 0, 0];
+      this.result = [false, false, false, false];
       // let n=0;
       // 遍历上方选项
       this.localMessage.imgU.forEach((upItem, index) => {
@@ -512,12 +513,13 @@ export default {
 
         if (connection) {
           // 如果连线的结束选项值与起始选项值相同，结果为 1，否则为 0
-          this.result[index] = (connection.end.value === upItem.value ? 1 : 0);
+          this.result[index] = (connection.end.value === upItem.value ? true : false);
         } else {
           // 如果没有连线，结果为 0
-          this.result[index] = (0);
+          this.result[index] = (false);
         }
-
+        this.message.result=this.result;
+        this.message.changed=true;
         // 如果当前选项的结果不为 1，说明有错误
         // if (this.message.result[index] !== 1) {
         //   allCorrect = false;
