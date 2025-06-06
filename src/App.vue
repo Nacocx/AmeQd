@@ -539,7 +539,6 @@ export default {
 
       // 获得画图题答案
       totalTm += this.questions.htt.userAnswer.length;
-      console.log(this.questions.htt.userAnswer);
       
       // 防止多次计算
       let prev = [];
@@ -648,7 +647,6 @@ export default {
       )
         // 确定
         .then(() => {
-          console.log(this.questions);
 
           this.submitAnswers();
           this.$message({
@@ -825,7 +823,9 @@ export default {
       this.boolLists.lxt_tuo3=(this.questions.lxt_tuo3.result);
 
       //调试用
+      console.log(this.questions);
       console.log(this.boolLists);
+
 
     },
     // 获得画图题正确列表

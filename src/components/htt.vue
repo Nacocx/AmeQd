@@ -86,7 +86,7 @@ export default {
       }
     },
     mouseup(ee) {
-      console.log(this.userAnswer);
+      // console.log(this.userAnswer);
 
       if (this.message.isDragging) {
         this.message.isDragging = false;
@@ -110,7 +110,7 @@ export default {
 
             // 存储用户答案
             this.message.userAnswer[e.dataset.value - 1].push(this.message.draggedElement.dataset.value);
-            console.log(this.message.userAnswer);
+            // console.log(this.message.userAnswer);
 
             this.message.draggedElement = null;
             this.message.startX = 0;
