@@ -1,9 +1,9 @@
 <template>
   <div id="app">
-    <el-header>
+    <!-- <el-header>
       <img src="./assets/logo.png" width="50px" height="50px" alt="Logo Missing!" />
       <span style="margin-left: 15px; font-size: 18px">熊猫沉浸</span>
-    </el-header>
+    </el-header> -->
 
     <el-container>
       <el-container>
@@ -21,19 +21,13 @@
 
               <!-- part3_连线题 -->
               <lxt :message="questions.lxt_part3" />
-              <!-- part4_形状题 -->
-              <sst :items="questions.sst" v-if="questions.sst" />
+              <!-- part4_数数题 -->
+               <div v-for="(sstP,index) in questions.sst" :key="sstP">
+              <sst :item="questions.sst[index]"/>
+              </div>
               <!-- part5_涂画题 -->
               <tht :items="questions.tht.items" :tuxing-path="questions.tht.tuxingpath" v-if="questions.tht.items" />
 
-
-              <!-- <div>
-
-                <el-button-group size="large">
-                  <el-button @click="lxtpage--" type="primary" :disabled="lxtpage === 1">Last</el-button>
-                  <el-button @click="lxtpage++" type="primary" :disabled="lxtpage === 2">Next</el-button>
-                </el-button-group>
-              </div> -->
 
               <htt_tuo :message="questions.htt_tuo" />
 
@@ -42,7 +36,7 @@
               <!-- 拓展应用：3 -->
               <lxt :message="questions.lxt_tuo3" />
 
-              <xzt :questions="questions.xzt" v-if="questions.xzt" />
+              <!-- <xzt :questions="questions.xzt" v-if="questions.xzt" /> -->
 
 
 
@@ -68,125 +62,85 @@ import sidebar from "@/components/sidebar.vue";
 import tkt from "@/components/tkt.vue";
 import { ArrowLeft, ArrowRight } from "@element-plus/icons-vue";
 import { ElMessage } from "element-plus";
-import "@/style/app.css";
 import Sst from "@/components/sst.vue";
 import Htt from "@/components/htt.vue";
 import lxt from "@/components/lxt.vue";
-import Tht from "@/components/tht.vue";
 import qst from "@/components/qst.vue";
-
+import Tht from "@/components/tht.vue";
 import htt_tuo from "@/components/htt_tuo.vue";
 
 import axios from "axios";
+const basePath = import.meta.env.VITE_IMG_BASE_PATH;
 //实际使用中数据从后端获取
 // import logo from "/static/img/T1_tkt_ok/tkt_1.jpeg";   // 必须用 import
+// /static2/sx-01-s-01-01-01/img/xx.png
 const mockQuestions = {
-  xzt: [
+  "sst": [
     {
-      id: 1,
-      title: "每只小兔吃一个萝卜，选哪一堆正好合适？",
-      img: "./static/img/T1_xzt/timu.png", //非必需
-      options: [
-        { value: "A", img: "./static/img/T1_xzt/A.png" },
-        { value: "B", img: "./static/img/T1_xzt/B.png" },
-        { value: "C", img: "./static/img/T1_xzt/C.png" },
-        //img非必需
-      ],
-      userAnswer: "",
-      answer: "B",
+      "id": 1,
+      "title": { "image": `${basePath}/icecream_28.png`, "count": 5 },
+      "tuXingPath": `${basePath}/circle_2.png`,
+      "userAnswer": ""
     },
     {
-      id: 2,
-      title: "2+2=?",
-      options: [
-        { value: "A", label: "1" },
-        { value: "B", label: "2" },
-        { value: "C", label: "3" },
-        { value: "D", label: "4" },
-      ],
-      userAnswer: "",
-      answer: "D",
+      "id": 2,
+      "title": { "image": `${basePath}/plane_21.png`, "count": 4 },
+      "tuXingPath": `${basePath}/circle_2.png`,
+      "userAnswer": ""
     },
     {
-      id: 3,
-      title: "2+4=?",
-      options: [
-        { value: "A", label: "4" },
-        { value: "B", label: "5" },
-        { value: "C", label: "6" },
-        { value: "D", label: "7" },
-      ],
-      userAnswer: "",
-      answer: "C",
-    },
+      "id": 3,
+      "title": { "image": `${basePath}/tree_13.png`, "count": 3 },
+      "tuXingPath": `${basePath}/circle_2.png`,
+      "userAnswer": ""
+    }
   ],
 
-  sst: [
+  "tkt": [
     {
-      id: 1,
-      title: { image: "./static/img/T3_sst/icecream_28.png", count: 5 },
-      tuXingPath: "./static/img/T3_sst/circle_2.png",
-      userAnswer: "",
-    },
-    {
-      id: 2,
-      title: { image: "./static/img/T3_sst/plane_21.png", count: 4 },
-      tuXingPath: "./static/img/T3_sst/circle_2.png",
-      userAnswer: "",
-    },
-    {
-      id: 3,
-      title: { image: "./static/img/T3_sst/tree_13.png", count: 3 },
-      tuXingPath: "./static/img/T3_sst/circle_2.png",
-      userAnswer: "",
-    },
-  ],
-
-  tkt: [
-    {
-      id: 1,
-      title_main: "Part1: 认识数字1、2、3，理解基数含义",
-      title: [
-        "1.认识数字“1”",
-        "2.认识数字“2",
-        "3.认识数字“3”",
-        "4.认识数字“4”",
-        "5.认识数字“5”",
+      "id": 1,
+      "title_main": "Part1: 认识数字1、2、3，理解基数含义",
+      "title": [
+        "1.认识数字\"1\"",
+        "2.认识数字\"2",
+        "3.认识数字\"3\"",
+        "4.认识数字\"4\"",
+        "5.认识数字\"5\""
       ],
-      img: "./static/img/T1_tkt_ok/tkt_1_90.jpeg",
-      subQuestions: [
-        "（1）一个太阳、一座房子、一棵果树可以用数字TNUM表示，也可以用TNUM个小圆片表示。TSPL（2）看看图中，还有什么可以用数字“1”表示呢TNUM和TNUM都可以用数字“1”表示。",
+      "img": `${basePath}/tkt_1_90.jpeg`,
+      "subQuestions": [
+        "（1）一个太阳、一座房子、一棵果树可以用数字TNUM表示，也可以用TNUM个小圆片表示。TSPL（2）看看图中，还有什么可以用数字\"1\"表示呢TNUM和TNUM都可以用数字\"1\"表示。",
         "两只鸟、两个人，可以用数字TNUM表示，也可以用TNUM个小圆片表示。",
         "有三朵云，三个苹果，可以用数字TNUM表示，也可以用TNUM个小圆片表示。",
         "有四个萝卜，四朵花，可以用数字TNUM表示，也可以用TNUM个小圆片表示。",
-        "有五只鸭子，可以用数字TNUM表示，也可以用TNUM个小圆片表示。",
+        "有五只鸭子，可以用数字TNUM表示，也可以用TNUM个小圆片表示。"
       ],
-      userAnswer: [
+      "userAnswer": [
         {
-          type: "complex",
-          sections: [
-            { answers: ["", ""] }, // 第一部分
-            { answers: ["", ""] }, // 第二部分
-          ],
+          "type": "complex",
+          "sections": [
+            { "answers": ["", ""] },
+            { "answers": ["", ""] }
+          ]
         },
         {
-          type: "simple",
-          answers: ["", ""],
+          "type": "simple",
+          "answers": ["", ""]
         },
         {
-          type: "simple",
-          answers: ["", ""],
+          "type": "simple",
+          "answers": ["", ""]
         },
         {
-          type: "simple",
-          answers: ["", ""],
+          "type": "simple",
+          "answers": ["", ""]
         },
         {
-          type: "simple",
-          answers: ["", ""],
-        },
+          "type": "simple",
+          "answers": ["", ""]
+        }
       ],
-      answers: [
+      "answers": [
         [
           ["1", "1"],
           ["小船", "小狗"]
@@ -195,257 +149,248 @@ const mockQuestions = {
         ["3", "3"],
         ["4", "4"],
         ["5", "5"]
-      ],
-    },
+      ]
+    }
   ],
 
-  htt: {
-    id: 2, //1对应矩形 2对应三角形 3对应圆形
-    title: "Part2",
-    subQuestion: [
+  "htt": {
+    "id": 2,
+    "title": "Part2",
+    "subQuestion": [
       {
-        id: 1,
-        img: "./static/img/T2_htt_ok/t1_9.jpeg",
-        answer: 2,
+        "id": 1,
+        "img": `${basePath}/t1_9.jpeg`,
+        "answer": 2
       },
       {
-        id: 2,
-        img: "./static/img/T2_htt_ok/t2_9.jpeg",
-        answer: 3,
+        "id": 2,
+        "img": `${basePath}/t2_9.jpeg`,
+        "answer": 3
       },
       {
-        id: 3,
-        img: "./static/img/T2_htt_ok/t3_10.jpeg",
-        answer: 5,
+        "id": 3,
+        "img": `${basePath}/t3_10.jpeg`,
+        "answer": 5
       },
       {
-        id: 4,
-        img: "./static/img/T2_htt_ok/t4_9.jpeg",
-        answer: 4,
-      },
+        "id": 4,
+        "img": `${basePath}/t4_9.jpeg`,
+        "answer": 4
+      }
     ],
-    shape: [
-      "./static/img/T2_htt_ok/jx_6.png",
-      "./static/img/T2_htt_ok/sjx_17.png",
-      "./static/img/T2_htt_ok/yx_15.png",
-    ], //有那些形状图形可以选择
-    trueShape: 1,
-    userAnswer: [[], [], [], []],
-    isDragging: false, //是否正在拖拽
-    startX: 0, //相对于鼠标的偏移量
-    startY: 0,
-    draggedElement: null, //正在拖拽的元素
+    "shape": [
+      `${basePath}/jx_6.png`,
+      `${basePath}/sjx_17.png`,
+      `${basePath}/yx_15.png`
+    ],
+    "trueShape": 1,
+    "userAnswer": [[], [], [], []],
+    "isDragging": false,
+    "startX": 0,
+    "startY": 0,
+    "draggedElement": null
   },
 
-  lxt_part3: {
-    id: 1,
-    title: "part3：请连接和图片中物品数量一致的圆的图片",
-    flag: "t3",
-    imgU: [
+  "lxt_part3": {
+    "id": 1,
+    "title": "part3：请连接和图片中物品数量一致的圆的图片",
+    "flag": "t3",
+    "changed": false,
+    "result": [],
+    "imgU": [
       {
-        src: "./static/img/T3_lxt_ok/l1_30.png",
-        value: "1",
-        ownership: "U",
-        connected: false,
+        "src": `${basePath}/l5_36.png`,
+        "value": "5",
+        "ownership": "U",
+        "connected": false
       },
       {
-        src: "./static/img/T3_lxt_ok/l2_8.png",
-        value: "2",
-        ownership: "U",
-        connected: false,
+        "src": `${basePath}/l1_30.png`,
+        "value": "1",
+        "ownership": "U",
+        "connected": false
       },
       {
-        src: "./static/img/T3_lxt_ok/l4_32.png",
-        value: "4",
-        ownership: "U",
-        connected: false,
+        "src": `${basePath}/l2_8.png`,
+        "value": "2",
+        "ownership": "U",
+        "connected": false
       },
       {
-        src: "./static/img/T3_lxt_ok/l5_36.png",
-        value: "5",
-        ownership: "U",
-        connected: false,
-      },
+        "src": `${basePath}/l4_32.png`,
+        "value": "4",
+        "ownership": "U",
+        "connected": false
+      }
     ],
-    imgD: [
+    "imgD": [
       {
-        src: "./static/img/T3_lxt_ok/a1_18.png",
-        value: "1",
-        ownership: "D",
-        connected: false,
+        "src": `${basePath}/a2_13.png`,
+        "value": "2",
+        "ownership": "D",
+        "connected": false
       },
       {
-        src: "./static/img/T3_lxt_ok/a2_13.png",
-        value: "2",
-        ownership: "D",
-        connected: false,
+        "src": `${basePath}/a1_18.png`,
+        "value": "1",
+        "ownership": "D",
+        "connected": false
       },
       {
-        src: "./static/img/T3_lxt_ok/a4_14.png",
-        value: "4",
-        ownership: "D",
-        connected: false,
+        "src": `${basePath}/a5_18.png`,
+        "value": "5",
+        "ownership": "D",
+        "connected": false
       },
       {
-        src: "./static/img/T3_lxt_ok/a5_18.png",
-        value: "5",
-        ownership: "D",
-        connected: false,
-      },
-    ],
-
+        "src": `${basePath}/a4_14.png`,
+        "value": "4",
+        "ownership": "D",
+        "connected": false
+      }
+    ]
   },
-  lxt_tuo3: {
-    id: 2,
-    title: "拓展应用3：请连接对应物品数量的数字",
-    flag: "tuo3",
-    imgU: [
+  "lxt_tuo3": {
+    "id": 2,
+    "title": "拓展应用3：请连接对应物品数量的数字",
+    "flag": "tuo3",
+    "changed": false,
+    "result": [],
+    "imgU": [
       {
-        src: "./static/img/Tuo3_lxt_ok/tuo_l2_23.png",
-        value: "2",
-        ownership: "U",
-        connected: false,
+        "src": `${basePath}/tuo_l2_23.png`,
+        "value": "2",
+        "ownership": "U",
+        "connected": false
       },
       {
-        src: "./static/img/Tuo3_lxt_ok/tuo_l3_13.png",
-        value: "3",
-        ownership: "U",
-        connected: false,
+        "src": `${basePath}/tuo_l5_30.png`,
+        "value": "5",
+        "ownership": "U",
+        "connected": false
       },
       {
-        src: "./static/img/Tuo3_lxt_ok/tuo_l4_19.png",
-        value: "4",
-        ownership: "U",
-        connected: false,
+        "src": `${basePath}/tuo_l4_19.png`,
+        "value": "4",
+        "ownership": "U",
+        "connected": false
       },
       {
-        src: "./static/img/Tuo3_lxt_ok/tuo_l5_30.png",
-        value: "5",
-        ownership: "U",
-        connected: false,
-      },
+        "src": `${basePath}/tuo_l3_13.png`,
+        "value": "3",
+        "ownership": "U",
+        "connected": false
+      }
     ],
-    imgD: [
+    "imgD": [
       {
-        src: "./static/img/Tuo3_lxt_ok/tuo_a2.png",
-        value: "2",
-        ownership: "D",
-        connected: false,
+        "src": `${basePath}/tuo_a4.png`,
+        "value": "4",
+        "ownership": "D",
+        "connected": false
       },
       {
-        src: "./static/img/Tuo3_lxt_ok/tuo_a3.png",
-        value: "3",
-        ownership: "D",
-        connected: false,
+        "src": `${basePath}/tuo_a5.png`,
+        "value": "5",
+        "ownership": "D",
+        "connected": false
       },
       {
-        src: "./static/img/Tuo3_lxt_ok/tuo_a4.png",
-        value: "4",
-        ownership: "D",
-        connected: false,
+        "src": `${basePath}/tuo_a3.png`,
+        "value": "3",
+        "ownership": "D",
+        "connected": false
       },
       {
-        src: "./static/img/Tuo3_lxt_ok/tuo_a5.png",
-        value: "5",
-        ownership: "D",
-        connected: false,
-      },
-    ],
-
+        "src": `${basePath}/tuo_a2.png`,
+        "value": "2",
+        "ownership": "D",
+        "connected": false
+      }
+    ]
   },
 
-  tht: {
-    items: [
+  "tht": {
+    "items": [
       {
-        rightItem: "./static/img/tht/rightItem1_3.png",
-        cnt: 2,
-        flag: [false, false, false, false, false],
-
-        "changed":false
-
+        "rightItem": `${basePath}/rightItem1_3.png`,
+        "cnt": 2,
+        "flag": [false, false, false, false, false],
+        "changed": false
       },
       {
-        rightItem: "./static/img/tht/rightItem2_2.png",
-        cnt: 1,
-        flag: [false, false, false, false, false],
-
-        "changed":false
-
+        "rightItem": `${basePath}/rightItem2_2.png`,
+        "cnt": 1,
+        "flag": [false, false, false, false, false],
+        "changed": false
       },
       {
-        rightItem: "./static/img/tht/rightItem3_2.png",
-        cnt: 3,
-        flag: [false, false, false, false, false],
-
-        "changed":false
-
-      },
+        "rightItem": `${basePath}/rightItem3_2.png`,
+        "cnt": 3,
+        "flag": [false, false, false, false, false],
+        "changed": false
+      }
     ],
-    tuxingpath: [
-      { leftImage: "./static/img/tht/left_11.png" },
-      { redCircle: "./static/img/tht/redCircle_2.png" },
-      { noneCircle: "./static/img/tht/noneCircle_2.png" },
-    ],
+    "tuxingpath": [
+      { "leftImage": `${basePath}/left_11.png` },
+      { "redCircle": `${basePath}/redCircle_2.png` },
+      { "noneCircle": `${basePath}/noneCircle_2.png` }
+    ]
   },
-  qst: {
-    title: "拓展应用2：对照上面图片根据左边的图形数量圈出右边的数量",
-    example: {
-      t_img: "./static/img/Tuo2_qst_ok/t1_23.png",//样例题目
-      a_img: "./static/img/Tuo2_qst_ok/a1_48.png",//样例答案
+  "qst": {
+    "title": "拓展应用2：对照上面图片根据左边的图形数量圈出右边的数量",
+    "example": {
+      "t_img": `${basePath}/t1_23.png`,
+      "a_img": `${basePath}/a1_48.png`
     },
-    question: {
-      t_img: "./static/img/Tuo2_qst_ok/t2_45.png",//题目
-      n_img: "./static/img/Tuo2_qst_ok/n2_16.png",//单个形状
-      num: 8,//有多少个单个形状
-      tureNum: 5
+    "question": {
+      "t_img": `${basePath}/t2_45.png`,
+      "n_img": `${basePath}/n2_16.png`,
+      "num": 8,
+      "tureNum": 5
     },
-
-    img: "./static/img/Tuo2_qst_ok/jian_10.png",
-
-
-    result:false,
-    changed:false,
-
+    "img": `${basePath}/jian_10.png`,
+    "result": false,
+    "changed": false
   },
-  htt_tuo: {
-    id:[1,2,3],
-    title: "拓展应用1：根据数字提示，把缺少的图形拖进来",
-    subQuestion: [
+  "htt_tuo": {
+    "id": [1, 2, 3],
+    "title": "拓展应用1：根据数字提示，把缺少的图形拖进来",
+    "subQuestion": [
       {
-        id: 1,
-        img: "./static/img/Tuo1_htt_ok/t1.png",
-        answer: 4,
-        trueShape: 1,
+        "id": 1,
+        "img": `${basePath}/t1.png`,
+        "answer": 4,
+        "trueShape": 1
       },
       {
-        id: 2,
-        img: "./static/img/Tuo1_htt_ok/t2.png",
-        answer: 3,
-        trueShape: 2,
+        "id": 2,
+        "img": `${basePath}/t2.png`,
+        "answer": 3,
+        "trueShape": 2
       },
       {
-        id: 3,
-        img: "./static/img/Tuo1_htt_ok/t3.png",
-        answer: 1,
-        trueShape: 3,
-      },
-
+        "id": 3,
+        "img": `${basePath}/t3.png`,
+        "answer": 1,
+        "trueShape": 3
+      }
     ],
-    shape: ["./static/img/Tuo1_htt_ok/jx.png", "./static/img/Tuo1_htt_ok/sjx_10.png", "./static/img/Tuo1_htt_ok/yuan.png"],//有那些形状图形可以选择
-    // trueShape: 1,
-    userAnswer: [
-      [],
-      [],
-      [],
+    "shape": [
+      `${basePath}/jx.png`,
+      `${basePath}/sjx_10.png`,
+      `${basePath}/yuan.png`
     ],
-    isDragging: false,//是否正在拖拽
-    startX: 0,//相对于鼠标的偏移量
-    startY: 0,
-    draggedElement: null,//正在拖拽的元素
-    answer: [],//是否正确 返回后端的数据
-  },
+    "userAnswer": [[], [], []],
+    "isDragging": false,
+    "startX": 0,
+    "startY": 0,
+    "draggedElement": null,
+    "answer": []
+  }
+}
 
-};
+
 
 const mockStudentInfo = {
   name: "Jack",
@@ -453,18 +398,14 @@ const mockStudentInfo = {
   teacher: "Bob",
 };
 
-const mockCorAnswers = {
-  xzt: ["B", "D", "C"],
-  sst: [],
-  htt: [],
-};
+
 
 export default {
   data() {
     return {
       questions: mockQuestions,
       studentInfo: mockStudentInfo,
-      corAnswers: mockCorAnswers,
+
       loading: false,
       error: null,
       boolLists: {
@@ -531,14 +472,15 @@ export default {
 
       // 获得画图题答案
       totalTm += this.questions.htt.userAnswer.length;
+
       // 防止多次计算
       let prev = [];
       this.questions.htt.userAnswer.forEach((ans, index) => {
+
         ans.forEach((e) => {
           if (e !== null && prev[index] == null) {
             answeredCount++;
             prev[index] = e;
-            // console.log(e+","+prev[index]+","+index);
           }
         });
       });
@@ -548,20 +490,21 @@ export default {
       // 防止多次计算
       let prev2 = [];
       this.questions.htt_tuo.userAnswer.forEach((ans, index) => {
+
         ans.forEach((e) => {
           if (e !== null && prev2[index] == null) {
             answeredCount++;
             prev2[index] = e;
+
           }
         });
       });
 
       // 获得涂画题
-      totalTm+=this.questions.tht.items.length;
-      let prevth=[]
-      this.questions.tht.items.forEach((e,index)=>{
-        if(e.changed===true&&!prevth[index])
-        {
+      totalTm += this.questions.tht.items.length;
+      let prevth = []
+      this.questions.tht.items.forEach((e, index) => {
+        if (e.changed === true && !prevth[index]) {
 
           prevth.push(true);
           answeredCount++;
@@ -569,11 +512,18 @@ export default {
       })
 
       // 获得圈数题
-      totalTm+=1;
-      if(this.questions.qst.changed)
-        {
-          answeredCount++;
-        }
+      totalTm += 1;
+      if (this.questions.qst.changed) {
+        answeredCount++;
+      }
+      //获得连线题
+      totalTm += 2;
+      if (this.questions.lxt_part3.changed) {
+        answeredCount++;
+      }
+      if (this.questions.lxt_tuo3.changed) {
+        answeredCount++;
+      }
 
       const percentage = totalTm
         ? Math.round((answeredCount / totalTm) * 100)
@@ -594,7 +544,7 @@ export default {
     //   this.loading = true;
     //   this.error = null;
     //   try {
-    //     const response = await axios.post("./TmJson/sx-01-s-01-01-01-sxClassroomExercisesAn.json");
+    //     const response = await axios.post("./TmJson/sx-01-s-01-01-01/sxClassroomExercisesAn.json");
     //     this.questions = response.data; // 注意：axios 返回的数据在 response.data 中
     //   } catch (error) {
     //     // 如果连接服务器失败
@@ -628,7 +578,6 @@ export default {
       )
         // 确定
         .then(() => {
-          console.log(this.questions);
 
           this.submitAnswers();
           this.$message({
@@ -702,12 +651,13 @@ export default {
 
       // 获得选择题答案并且判断正误
 
-      if(this.questions.xzt){
-      const xztAns = [];
-      this.questions.xzt.forEach((e, index) => {
-        xztAns.push(e.userAnswer);
-        this.boolLists.xzt[index] = e.userAnswer === e.answer ? true : false;
-      });}
+      if (this.questions.xzt) {
+        const xztAns = [];
+        this.questions.xzt.forEach((e, index) => {
+          xztAns.push(e.userAnswer);
+          this.boolLists.xzt[index] = e.userAnswer === e.answer ? true : false;
+        });
+      }
 
 
 
@@ -788,31 +738,36 @@ export default {
       // console.log(sstAns);
       // console.log(xztAns);
       // this.checkAnswers(xztAns);
-      let htt1=this.questions.htt;
-      let htt2=this.questions.htt_tuo;
-      
+      let htt1 = this.questions.htt;
+      let htt2 = this.questions.htt_tuo;
+
       this.boolLists.htt = this.getHttBoolList(htt1);
-      this.boolLists.htt_tuo =this.getHttBoolList(htt2);
+      this.boolLists.htt_tuo = this.getHttBoolList(htt2);
 
 
       //获得圈数题答案
-      if(this.questions.qst.result===true)
+      if (this.questions.qst.result === true)
         this.boolLists.qst.push(true);
 
 
-
+      // 获得连线题答案
+      this.boolLists.lxt_part3 = (this.questions.lxt_part3.result);
+      this.boolLists.lxt_tuo3 = (this.questions.lxt_tuo3.result);
 
       //调试用
+      console.log(this.questions);
       console.log(this.boolLists);
 
+
     },
-     getHttBoolList(htt){
-        let httAns = [];
-        htt.userAnswer.forEach((e, index) => {
+    // 获得画图题正确列表
+    getHttBoolList(htt) {
+      let httAns = [];
+      htt.userAnswer.forEach((e, index) => {
         let num = 0;
         let flag = false;
-        e.forEach((e1,index1) => {
-          if (e1 != ((typeof(htt.id)==="number")?htt.id:(htt.id[index]))) {
+        e.forEach((e1, index1) => {
+          if (e1 != ((typeof (htt.id) === "number") ? htt.id : (htt.id[index]))) {
             if (flag === false) {
               httAns.push(false);
               flag = true;
@@ -831,7 +786,7 @@ export default {
         }
       });
       return httAns;
-      },
+    },
 
     // 禁用右键菜单
     preventContextMenu(e) {
@@ -844,3 +799,55 @@ export default {
   },
 };
 </script>
+<style>
+* {
+  user-select: none;
+}
+
+.el-aside {
+  background-color: white;
+  color: #333;
+  text-align: center;
+  height: 350px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, .12), 0 0 6px rgba(0, 0, 0, .04);
+  border-radius: 8px;
+  position: fixed;
+  width: 200px;
+}
+
+.el-main {
+  color: #333;
+  text-align: center;
+  border: 1px white solid;
+  max-width: 1000px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, .12), 0 0 6px rgba(0, 0, 0, .04);
+  border-radius: 8px;
+  margin: auto;
+}
+
+
+.el-progress-bar {
+  width: 75%;
+  margin-top: 30px;
+}
+
+#app {
+  padding-top: 10px;
+}
+</style>
+
+<!-- 原本的header   -->
+<!-- .el-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 60px !important;
+    /* 固定高度 */
+    background: #fff;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    padding: 0 20px;
+} -->
