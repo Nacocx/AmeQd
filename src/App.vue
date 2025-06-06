@@ -411,7 +411,7 @@ export default {
     return {
       questions: mockQuestions,
       studentInfo: mockStudentInfo,
-      
+
       loading: false,
       error: null,
       boolLists: {
@@ -478,11 +478,11 @@ export default {
 
       // 获得画图题答案
       totalTm += this.questions.htt.userAnswer.length;
-      
+
       // 防止多次计算
       let prev = [];
       this.questions.htt.userAnswer.forEach((ans, index) => {
-        
+
         ans.forEach((e) => {
           if (e !== null && prev[index] == null) {
             answeredCount++;
@@ -507,11 +507,10 @@ export default {
       });
 
       // 获得涂画题
-      totalTm+=this.questions.tht.items.length;
-      let prevth=[]
-      this.questions.tht.items.forEach((e,index)=>{
-        if(e.changed===true&&!prevth[index])
-        {
+      totalTm += this.questions.tht.items.length;
+      let prevth = []
+      this.questions.tht.items.forEach((e, index) => {
+        if (e.changed === true && !prevth[index]) {
 
           prevth.push(true);
           answeredCount++;
@@ -519,19 +518,18 @@ export default {
       })
 
       // 获得圈数题
-      totalTm+=1;
-      if(this.questions.qst.changed)
-        {
-          answeredCount++;
-        }
-        //获得连线题
-        totalTm+=2;
-        if(this.questions.lxt_part3.changed ){
-          answeredCount++;
-        }
-        if(this.questions.lxt_tuo3.changed ){
-          answeredCount++;
-        }
+      totalTm += 1;
+      if (this.questions.qst.changed) {
+        answeredCount++;
+      }
+      //获得连线题
+      totalTm += 2;
+      if (this.questions.lxt_part3.changed) {
+        answeredCount++;
+      }
+      if (this.questions.lxt_tuo3.changed) {
+        answeredCount++;
+      }
 
       const percentage = totalTm
         ? Math.round((answeredCount / totalTm) * 100)
@@ -659,12 +657,13 @@ export default {
 
       // 获得选择题答案并且判断正误
 
-      if(this.questions.xzt){
-      const xztAns = [];
-      this.questions.xzt.forEach((e, index) => {
-        xztAns.push(e.userAnswer);
-        this.boolLists.xzt[index] = e.userAnswer === e.answer ? true : false;
-      });}
+      if (this.questions.xzt) {
+        const xztAns = [];
+        this.questions.xzt.forEach((e, index) => {
+          xztAns.push(e.userAnswer);
+          this.boolLists.xzt[index] = e.userAnswer === e.answer ? true : false;
+        });
+      }
 
 
 
@@ -745,21 +744,21 @@ export default {
       // console.log(sstAns);
       // console.log(xztAns);
       // this.checkAnswers(xztAns);
-      let htt1=this.questions.htt;
-      let htt2=this.questions.htt_tuo;
-      
+      let htt1 = this.questions.htt;
+      let htt2 = this.questions.htt_tuo;
+
       this.boolLists.htt = this.getHttBoolList(htt1);
-      this.boolLists.htt_tuo =this.getHttBoolList(htt2);
+      this.boolLists.htt_tuo = this.getHttBoolList(htt2);
 
 
       //获得圈数题答案
-      if(this.questions.qst.result===true)
+      if (this.questions.qst.result === true)
         this.boolLists.qst.push(true);
 
 
       // 获得连线题答案
-      this.boolLists.lxt_part3=(this.questions.lxt_part3.result);
-      this.boolLists.lxt_tuo3=(this.questions.lxt_tuo3.result);
+      this.boolLists.lxt_part3 = (this.questions.lxt_part3.result);
+      this.boolLists.lxt_tuo3 = (this.questions.lxt_tuo3.result);
 
       //调试用
       console.log(this.questions);
@@ -768,13 +767,13 @@ export default {
 
     },
     // 获得画图题正确列表
-     getHttBoolList(htt){
-        let httAns = [];
-        htt.userAnswer.forEach((e, index) => {
+    getHttBoolList(htt) {
+      let httAns = [];
+      htt.userAnswer.forEach((e, index) => {
         let num = 0;
         let flag = false;
-        e.forEach((e1,index1) => {
-          if (e1 != ((typeof(htt.id)==="number")?htt.id:(htt.id[index]))) {
+        e.forEach((e1, index1) => {
+          if (e1 != ((typeof (htt.id) === "number") ? htt.id : (htt.id[index]))) {
             if (flag === false) {
               httAns.push(false);
               flag = true;
@@ -793,7 +792,7 @@ export default {
         }
       });
       return httAns;
-      },
+    },
 
     // 禁用右键菜单
     preventContextMenu(e) {
@@ -807,42 +806,40 @@ export default {
 };
 </script>
 <style>
-*{
-    user-select: none;
+* {
+  user-select: none;
 }
+
 .el-aside {
-    background-color: white;
-    color: #333;
-    text-align: center;
-    height: 350px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, .12), 0 0 6px rgba(0, 0, 0, .04);
-    border-radius: 8px;
-    position: fixed;
-    width: 200px;
+  background-color: white;
+  color: #333;
+  text-align: center;
+  height: 350px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, .12), 0 0 6px rgba(0, 0, 0, .04);
+  border-radius: 8px;
+  position: fixed;
+  width: 200px;
 }
 
 .el-main {
-    color: #333;
-    text-align: center;
-    border: 1px white solid;
-    max-width: 1000px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, .12), 0 0 6px rgba(0, 0, 0, .04);
-    border-radius: 8px;
-    margin: auto;
+  color: #333;
+  text-align: center;
+  border: 1px white solid;
+  max-width: 1000px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, .12), 0 0 6px rgba(0, 0, 0, .04);
+  border-radius: 8px;
+  margin: auto;
 }
 
 
 .el-progress-bar {
-    width: 75%;
-    margin-top: 30px;
+  width: 75%;
+  margin-top: 30px;
 }
 
-#app{
-    padding-top: 10px;
+#app {
+  padding-top: 10px;
 }
-
-
-
 </style>
 
 <!-- 原本的header   -->
