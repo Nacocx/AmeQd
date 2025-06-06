@@ -21,8 +21,10 @@
 
               <!-- part3_连线题 -->
               <lxt :message="questions.lxt_part3" />
-              <!-- part4_形状题 -->
-              <sst :items="questions.sst" v-if="questions.sst" />
+              <!-- part4_数数题 -->
+               <div v-for="(sstP,index) in questions.sst" :key="sstP">
+              <sst :item="questions.sst[index]"/>
+              </div>
               <!-- part5_涂画题 -->
               <tht :items="questions.tht.items" :tuxing-path="questions.tht.tuxingpath" v-if="questions.tht.items" />
 
