@@ -21,7 +21,7 @@
     <div class="chose" id="source-area">
       <div @mousedown="mousedown">
 
-        <img :src="message.shape[message.id - 1]" class="shape" :data-value="message.id-1" alt="图片加载失败">
+        <img :src="message.shape[message.id - 1]" class="shape" :data-value="message.id" alt="图片加载失败">
 
 
       </div>
@@ -47,7 +47,7 @@ export default {
       // 记录操作历史
       actionHistory: [],
       // 初始化 userAnswer
-      userAnswer: this.message.subQuestion.map(() => [])
+      // userAnswer: this.message.subQuestion.map(() => [])
     };
   },
   mounted() {
@@ -73,7 +73,7 @@ export default {
       this.message.draggedElement.style.zIndex = 100;
       this.message.draggedElement.dataset.value = ee.target.dataset.value;
       // console.log(ee.target);
-      
+
       document.body.appendChild(this.message.draggedElement);
     },
     // 移动事件处理函数
@@ -87,7 +87,7 @@ export default {
     },
     mouseup(ee) {
       console.log(this.userAnswer);
-      
+
       if (this.message.isDragging) {
         this.message.isDragging = false;
         const targetArea = document.querySelectorAll('.target-area');
@@ -107,9 +107,11 @@ export default {
               });
             }
             // console.log(1);
-            
+
             // 存储用户答案
-            this.userAnswer[e.dataset.value - 1].push(this.message.draggedElement.dataset.value);
+            this.message.userAnswer[e.dataset.value - 1].push(this.message.draggedElement.dataset.value);
+            console.log(this.message.userAnswer);
+
             this.message.draggedElement = null;
             this.message.startX = 0;
             this.message.startY = 0;
@@ -121,7 +123,7 @@ export default {
         });
       }
     },
-    yes(){
+    yes() {
 
     },
     // 撤销方法
@@ -131,11 +133,13 @@ export default {
         // 从目标区域移除元素
         lastAction.element.remove();
         // 从用户答案中移除对应的值
-        const index = this.userAnswer[lastAction.index].indexOf(lastAction.value);
+        const index = this.message.userAnswer[lastAction.index].indexOf(lastAction.value);
         if (index > -1) {
-          this.userAnswer[lastAction.index].splice(index, 1);
+          this.message.userAnswer[lastAction.index].splice(index, 1);
         }
       }
+      console.log(this.message.userAnswer);
+      
     }
   }
 }
@@ -285,4 +289,4 @@ body {
   background-color: #cccccc;
   cursor: not-allowed;
 }
-</style>  
+</style>
