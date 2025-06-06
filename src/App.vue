@@ -81,45 +81,6 @@ const basePath = import.meta.env.VITE_IMG_BASE_PATH;
 // import logo from "/static/img/T1_tkt_ok/tkt_1.jpeg";   // 必须用 import
 // /static2/sx-01-s-01-01-01/img/xx.png
 const mockQuestions = {
-  "xzt": [
-    {
-      "id": 1,
-      "title": "每只小兔吃一个萝卜，选哪一堆正好合适？",
-      "img": `${basePath}/timu.png`,
-      "options": [
-        { "value": "A", "img": `${basePath}/A.png` },
-        { "value": "B", "img": `${basePath}/B.png` },
-        { "value": "C", "img": `${basePath}/C.png` }
-      ],
-      "userAnswer": "",
-      "answer": "B"
-    },
-    {
-      "id": 2,
-      "title": "2+2=?",
-      "options": [
-        { "value": "A", "label": "1" },
-        { "value": "B", "label": "2" },
-        { "value": "C", "label": "3" },
-        { "value": "D", "label": "4" }
-      ],
-      "userAnswer": "",
-      "answer": "D"
-    },
-    {
-      "id": 3,
-      "title": "2+4=?",
-      "options": [
-        { "value": "A", "label": "4" },
-        { "value": "B", "label": "5" },
-        { "value": "C", "label": "6" },
-        { "value": "D", "label": "7" }
-      ],
-      "userAnswer": "",
-      "answer": "C"
-    }
-  ],
-
   "sst": [
     {
       "id": 1,
