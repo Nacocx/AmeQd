@@ -5,7 +5,7 @@ import vue from '@vitejs/plugin-vue'
 import vueDevTools from 'vite-plugin-vue-devtools'
 // https://vite.dev/config/
 
-const mydirname = 'static2/sx-01-s-01-01-01';
+const mydirname = 'static2/sx-01-s-01-01-01-sxClassroomExercises';
 
 export default defineConfig({
   plugins: [
