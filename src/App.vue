@@ -544,13 +544,11 @@ export default {
       // 防止多次计算
       let prev = [];
       this.questions.htt.userAnswer.forEach((ans, index) => {
-      console.log("e1");
         
         ans.forEach((e) => {
           if (e !== null && prev[index] == null) {
             answeredCount++;
             prev[index] = e;
-            console.log(e+","+prev[index]+","+index);
           }
         });
       });
@@ -560,13 +558,11 @@ export default {
       // 防止多次计算
       let prev2 = [];
       this.questions.htt_tuo.userAnswer.forEach((ans, index) => {
-      console.log("e2");
 
         ans.forEach((e) => {
           if (e !== null && prev2[index] == null) {
             answeredCount++;
             prev2[index] = e;
-            console.log(e+","+prev2[index]+","+index);
 
           }
         });
