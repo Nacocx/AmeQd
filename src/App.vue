@@ -22,8 +22,8 @@
               <!-- part3_连线题 -->
               <lxt :message="questions.lxt_part3" />
               <!-- part4_数数题 -->
-               <div v-for="(sstP,index) in questions.sst" :key="sstP">
-              <sst :item="questions.sst[index]"/>
+              <div v-for="(sstP, index) in questions.sst" :key="sstP">
+                <sst :item="questions.sst[index]" />
               </div>
               <!-- part5_涂画题 -->
               <tht :items="questions.tht.items" :tuxing-path="questions.tht.tuxingpath" v-if="questions.tht.items" />
@@ -43,11 +43,7 @@
 
 
 
-              <el-button-group>
-                <!-- <el-button type="default" @click="pageSub" :icon="ArrowLeft" size="large" :disabled="currentPage===1">Last Part</el-button> -->
                 <el-button type="primary" @click="willSubmit" id="Submit" size="large">提交答案</el-button>
-                <!-- <el-button type="default" @click="pageAdd" size="large" :disabled="currentPage===4">Next Part<el-icon class="el-icon--right"><ArrowRight /></el-icon></el-button> -->
-              </el-button-group>
             </div>
           </div>
         </el-main>
@@ -60,7 +56,6 @@
 import xzt from "@/components/xzt.vue";
 import sidebar from "@/components/sidebar.vue";
 import tkt from "@/components/tkt.vue";
-import { ArrowLeft, ArrowRight } from "@element-plus/icons-vue";
 import { ElMessage } from "element-plus";
 import Sst from "@/components/sst.vue";
 import Htt from "@/components/htt.vue";
@@ -414,7 +409,7 @@ export default {
         sst: [],
         htt: [],
         tht: [],
-        qst: [],
+        qst: [false],
       },
       lxtpage: 1,
     };
@@ -423,7 +418,6 @@ export default {
     Tht,
     Htt,
     Sst,
-    ArrowRight,
     tkt,
     xzt,
     sidebar,
@@ -434,9 +428,7 @@ export default {
 
   },
   computed: {
-    ArrowLeft() {
-      return ArrowLeft;
-    },
+    //计算总题目数
     countTm() {
       // TIPS: this.questions || {}：如果 this.questions 是 undefined 或 null，就返回空对象 {}，防止报错。
       // { xzt = [], sst = [] }：从 this.questions 里取出 xzt 和 sst，如果它们不存在，就默认赋值为空数组 []。
@@ -539,26 +531,13 @@ export default {
     document.addEventListener("contextmenu", this.preventContextMenu);
   },
   methods: {
-    // async fetchTmData() {
 
-    //   this.loading = true;
-    //   this.error = null;
-    //   try {
-    //     const response = await axios.post("./TmJson/sx-01-s-01-01-01/sxClassroomExercisesAn.json");
-    //     this.questions = response.data; // 注意：axios 返回的数据在 response.data 中
-    //   } catch (error) {
-    //     // 如果连接服务器失败
-    //     console.error("获取数据失败:", error);
-    //     this.error = error;
+    // 计算总体情况
+    calcTotal(){
+      this.submitAnswers();
+      const showBoolLists=this.boolLists;
 
-    //     // 使用mock数据作为回退
-    //     this.questions = mockQuestions;
-    //     this.studentInfo = mockStudentInfo;
-    //     this.corAnswers = mockCorAnswers;
-    //   } finally {
-    //     this.loading = false;
-    //   }
-    // },
+    },
 
     // 确认是否提交答案
     willSubmit() {
@@ -578,8 +557,7 @@ export default {
       )
         // 确定
         .then(() => {
-
-          this.submitAnswers();
+          this.calcTotal();
           this.$message({
             type: "success",
             message: "提交成功!",
@@ -643,14 +621,9 @@ export default {
       // 返回最终的结果数组
       return results;
     },
+    // 获得答案
     submitAnswers() {
-      // const xztAns = this.questions.xzt.map((q) => ({
-      //   questionId: q.id,
-      //   answer: q.userAnswer,
-      // }));
-
-      // 获得选择题答案并且判断正误
-
+      // 获得选择题正确数组
       if (this.questions.xzt) {
         const xztAns = [];
         this.questions.xzt.forEach((e, index) => {
@@ -659,13 +632,8 @@ export default {
         });
       }
 
-
-
-
-
-      // 获得填空题答案
+      // 遍历每个TKT模块，获得填空题正确数组
       const tktBoolList = [];
-      // 遍历每个TKT模块
       this.questions.tkt.forEach(tktItem => {
         // 遍历模块中的每个题目
         tktItem.userAnswer.forEach((userAnswer, questionIndex) => {
@@ -723,10 +691,7 @@ export default {
       });
       this.boolLists.tht = thtBoolList;
 
-
-
-
-      // 获得数数题答案
+      // 获得数数题正确数组
       const sstAns = [];
       this.questions.sst.forEach((e, index) => {
         sstAns.push(e.userAnswer);
@@ -734,10 +699,7 @@ export default {
           e.userAnswer == e.title.count ? true : false;
       });
 
-      // console.log(tktAns);
-      // console.log(sstAns);
-      // console.log(xztAns);
-      // this.checkAnswers(xztAns);
+      
       let htt1 = this.questions.htt;
       let htt2 = this.questions.htt_tuo;
 
@@ -745,19 +707,18 @@ export default {
       this.boolLists.htt_tuo = this.getHttBoolList(htt2);
 
 
-      //获得圈数题答案
+      //获得圈数题正确数组
       if (this.questions.qst.result === true)
-        this.boolLists.qst.push(true);
+        this.boolLists.qst[0]=true;
 
 
-      // 获得连线题答案
+      // 获得连线题正确数组
       this.boolLists.lxt_part3 = (this.questions.lxt_part3.result);
       this.boolLists.lxt_tuo3 = (this.questions.lxt_tuo3.result);
 
       //调试用
       console.log(this.questions);
       console.log(this.boolLists);
-
 
     },
     // 获得画图题正确列表
