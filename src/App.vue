@@ -63,7 +63,6 @@ import lxt from "@/components/lxt.vue";
 import qst from "@/components/qst.vue";
 import Tht from "@/components/tht.vue";
 import htt_tuo from "@/components/htt_tuo.vue";
-
 import axios from "axios";
 const basePath = import.meta.env.VITE_IMG_BASE_PATH;
 //实际使用中数据从后端获取
@@ -400,7 +399,6 @@ export default {
     return {
       questions: mockQuestions,
       studentInfo: mockStudentInfo,
-
       loading: false,
       error: null,
       boolLists: {
@@ -410,6 +408,8 @@ export default {
         htt: [],
         tht: [],
         qst: [false],
+        lxt_part3:[false],
+        lxt_tuo3:[false]
       },
       lxtpage: 1,
     };
@@ -536,13 +536,13 @@ export default {
     calcTotal(){
       this.submitAnswers();
       const showBoolLists=this.boolLists;
-
+      
     },
 
     // 确认是否提交答案
     willSubmit() {
       let remainTm = this.countTm.totalTm - this.countTm.answeredCount;
-      this.$confirm(
+      ElMessageBox.confirm(
         // 提示内容
         remainTm !== 0
           ? `你确定要提交答案吗?你还剩下${remainTm}个题目没写`
@@ -558,18 +558,18 @@ export default {
         // 确定
         .then(() => {
           this.calcTotal();
-          this.$message({
+          ElMessage({
             type: "success",
             message: "提交成功!",
-          });
+          })
         })
         //取消或报错(e)
         .catch((e) => {
-          console.log(e);
-          this.$message({
+          console.log("!ERROR:"+e);
+          ElMessage({
             type: "info",
             message: "已取消提交",
-          });
+          })
         });
     },
     // 获得填空题答案
@@ -713,7 +713,7 @@ export default {
 
 
       // 获得连线题正确数组
-      this.boolLists.lxt_part3 = (this.questions.lxt_part3.result);
+      this.boolLists.lxt_part3 = (this.questions.lxt_part3.result); 
       this.boolLists.lxt_tuo3 = (this.questions.lxt_tuo3.result);
 
       //调试用
