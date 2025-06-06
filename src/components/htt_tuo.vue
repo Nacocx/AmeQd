@@ -31,6 +31,10 @@
         </div>
       </div>
     </div>
+    <!-- 添加撤销按钮 -->
+    <div class="undo-button">
+      <button @click="undo" :disabled="actionHistory.length === 0">撤销</button>
+    </div>
     <br>
   </div>
   <br>
@@ -45,6 +49,10 @@ export default {
   data() {
     return {
       answer: [],//是否正确 返回后端的数据
+      // 记录操作历史
+      actionHistory: [],
+      // 初始化 userAnswer
+      userAnswer: this.message.subQuestion.map(() => [])
 
     };
   },
@@ -102,7 +110,13 @@ export default {
             if (this.message.draggedElement) {
               e.appendChild(this.message.draggedElement);//将元素添加到目标区域
               // console.log("元素：", this.message.draggedElement);
-
+              // 记录操作历史
+              this.actionHistory.push({
+                target: e,
+                element: this.message.draggedElement,
+                index: e.dataset.value - 1,
+                value: this.message.draggedElement.dataset.value
+              });
             }
             // 
             // 存储用户答案
@@ -118,8 +132,9 @@ export default {
               this.message.draggedElement.remove();//没有在目标区域内，移除元素
             }
           }
+           
         })
-
+    
 
       }
       this.yes()
@@ -160,6 +175,21 @@ export default {
 
 
 
+    },
+    // 撤销方法
+    undo() {
+      if (this.actionHistory.length > 0) {
+        const lastAction = this.actionHistory.pop();
+        // 从目标区域移除元素
+        lastAction.element.remove();
+        // 从用户答案中移除对应的值
+        const index = this.userAnswer[lastAction.index].indexOf(lastAction.value);
+        if (index > -1) {
+          this.userAnswer[lastAction.index].splice(index, 1);
+        }
+      }
+      console.log(this.userAnswer);
+
     }
   },
 
@@ -183,8 +213,8 @@ body {
 
 .htt_tuo_main .main_body {
   margin: auto;
-  width: 90%;
-  height: 70%;
+  width: 70%;
+  height: 400px;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
@@ -201,17 +231,26 @@ body {
   width: 200px;
   height: 440px;
   margin-top: 6%;
+  text-align: center;
 
 }
 
 .htt_tuo_main .main_body .part .up {
-  height: 170px;
+  height: 90px;
+  width: 90px;
   align-self: center;
+  display: inline-block;
+}
+
+.htt_tuo_main .main_body .part .up img {
+  width: 100%;
+  /* height: 100%; */
 }
 
 .htt_tuo_main .down {
-  width: 100%;
-  height: 40%;
+  display: inline-block;
+  width: 150px;
+  height: 150px;
   margin-top: 30px;
   border: 2px solid black;
   border-radius: 10px;
@@ -290,5 +329,27 @@ body {
   height: 40px;
   width: 40px;
   transform: translateY(15px);
+}
+
+/* 新增撤销按钮样式 */
+.undo-button {
+  text-align: center;
+  margin-top: 10px;
+}
+
+.undo-button button {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 5px;
+  background-color: #4CAF50;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.undo-button button:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
 }
 </style>

@@ -1,8 +1,8 @@
 <template id="xzt">
-  <div>
+  <div class="xzt_main">
     <h1>选择题部分</h1>
     <div
-      class="question-item"
+      class="xzt_question-item"
       v-for="(question, index) in questions"
       :key="question.id"
     >
@@ -18,7 +18,7 @@
           >
             <!-- 若有img，就渲染img，若无就渲染label -->
             <img v-if="option.img" :src="option.img" alt="Image Missing!"/>
-            <span v-else style="font-size: 30px"
+            <span v-else style="font-size: 20px"
               >{{ option.value }}:{{ option.label }}</span
             >
           </el-radio>
@@ -46,6 +46,15 @@ export default  {
 </script>
 <style>
 .el-radio__inner {
-  transform: scale(2);
+  transform: scale(1.22);
+}
+.xzt_main{
+  text-align: center;
+}
+.xzt_question-item{
+  width: 56%;
+  /* background-color: antiquewhite; */
+  display: inline-block;
+  text-align: left;
 }
 </style>
