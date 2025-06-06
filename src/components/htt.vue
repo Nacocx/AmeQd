@@ -1,8 +1,4 @@
 <template>
-
-
-
-
   <div class="htt_main_body">
     <h1>{{ message.title }}:请拖进与图片物品数量一样的:<img :src="message.shape[message.id - 1]" alt="" class="shape">
       <div class="questions">
@@ -10,27 +6,29 @@
       </div>
     </h1>
 
-
-
     <!-- 主要问题部分 -->
     <div class="main_body">
-      <div class="part" v-for="(e, index) in message.subQuestion">
+      <div class="part" v-for="(e, index) in message.subQuestion" :key="index">
         <div class="up">
           <img :src="e.img" alt="图片加载失败" class="img_style">
         </div>
         <!-- 这里加了data-value属性 匹配那个框 -->
         <div class="down target-area" :data-value="index + 1">
+          {{ index }}
         </div>
       </div>
     </div>
     <div class="chose" id="source-area">
-      <div v-for="(e, index) in message.shape" @mousedown="mousedown">
-        <!-- 添加 data-value 属性 -->
-        <div>
-          <!-- 加了data-value属性更好监听是那个图形 -->
-          <img :src="e" class="shape" :data-value="index + 1" alt="图片加载失败">
-        </div>
+      <div @mousedown="mousedown">
+
+        <img :src="message.shape[message.id - 1]" class="shape" :data-value="message.id" alt="图片加载失败">
+
+
       </div>
+    </div>
+    <!-- 添加撤销按钮 -->
+    <div class="undo-button">
+      <button @click="undo" :disabled="actionHistory.length === 0">撤销</button>
     </div>
     <br>
   </div>
@@ -46,7 +44,10 @@ export default {
   data() {
     return {
       answer: [],//是否正确 返回后端的数据
-
+      // 记录操作历史
+      actionHistory: [],
+      // 初始化 userAnswer
+      // userAnswer: this.message.subQuestion.map(() => [])
     };
   },
   mounted() {
@@ -65,21 +66,19 @@ export default {
     mousedown(ee) {
       ee.preventDefault();//加个这个就可以了 不然会有个默认的行为 阻止拖动
       this.message.isDragging = true;
-      // 使用传递进来的事件对象
-      //ee.target.offsetLeft; 是获取元素相对于父元素的偏移量 如果无父元素则相对于页面的偏移量 这个重要就是要获取元素相对于页面的偏移量
-      //否则则还需要监听父元素相对于页面的偏移量 更加麻烦
-      //ee.clientX; 是获取鼠标相对于页面的偏移量
-      this.message.startX = ee.clientX - ee.target.offsetLeft;//获取元素相对于页面的偏移量 也就是相当于匹配鼠标在元素上的位置
+      this.message.startX = ee.clientX - ee.target.offsetLeft;
       this.message.startY = ee.clientY - ee.target.offsetTop;
-      this.message.draggedElement = ee.target.cloneNode(true);//克隆元素
+      this.message.draggedElement = ee.target.cloneNode(true);
       this.message.draggedElement.style.position = 'absolute';
       this.message.draggedElement.style.zIndex = 100;
+      this.message.draggedElement.dataset.value = ee.target.dataset.value;
+      // console.log(ee.target);
+
       document.body.appendChild(this.message.draggedElement);
     },
     // 移动事件处理函数
     mousemove(ee) {
       if (this.message.isDragging) {
-        // 使用传递进来的事件对象
         const x = ee.clientX - this.message.startX;
         const y = ee.clientY - this.message.startY;
         this.message.draggedElement.style.left = x + 'px';
@@ -87,46 +86,66 @@ export default {
       }
     },
     mouseup(ee) {
+      // console.log(this.userAnswer);
+
       if (this.message.isDragging) {
         this.message.isDragging = false;
-        // 正确获取目标区域元素
         const targetArea = document.querySelectorAll('.target-area');
-        // console.log(targetArea);
 
         targetArea.forEach(e => {
-          // console.log("e", e);
-
           const rect = e.getBoundingClientRect();
           //判断鼠标是否在目标区域内
           if (ee.clientX >= rect.left && ee.clientX <= rect.right && ee.clientY >= rect.top && ee.clientY <= rect.bottom) {
-            // console.log("e", e);
             if (this.message.draggedElement) {
-              e.appendChild(this.message.draggedElement);//将元素添加到目标区域
-              console.log(this.message.draggedElement);
-              
+              e.appendChild(this.message.draggedElement);
+              // 记录操作历史
+              this.actionHistory.push({
+                target: e,
+                element: this.message.draggedElement,
+                index: e.dataset.value - 1,
+                value: this.message.draggedElement.dataset.value
+              });
             }
-            //
+            // console.log(1);
+
             // 存储用户答案
             this.message.userAnswer[e.dataset.value - 1].push(this.message.draggedElement.dataset.value);
-            this.message.draggedElement = null;
             // console.log(this.message.userAnswer);
+
+            this.message.draggedElement = null;
             this.message.startX = 0;
             this.message.startY = 0;
           } else {
-            if (this.message.draggedElement) {//这个检测是为了防止点击空白处时，this.draggedElement为null，导致报错
-
-              this.message.draggedElement.remove();//没有在目标区域内，移除元素
+            if (this.message.draggedElement) {
+              this.message.draggedElement.remove();
             }
           }
-        })
-
+        });
       }
     },
-  },
+    yes() {
 
+    },
+    // 撤销方法
+    undo() {
+      if (this.actionHistory.length > 0) {
+        const lastAction = this.actionHistory.pop();
+        // 从目标区域移除元素
+        lastAction.element.remove();
+        // 从用户答案中移除对应的值
+        const index = this.message.userAnswer[lastAction.index].indexOf(lastAction.value);
+        if (index > -1) {
+          this.message.userAnswer[lastAction.index].splice(index, 1);
+        }
+      }
+      console.log(this.message.userAnswer);
+      
+    }
+  }
 }
 </script>
 <style scoped>
+/* 样式部分保持不变 */
 html,
 body {
   position: relative;
@@ -148,10 +167,11 @@ body {
   height: 70%;
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
+  justify-content: space-around;
+  box-sizing: border-box;
+  padding-left: 40px;
+  padding-right: 40px;
 }
-
-
 
 .htt_main_body .htt_header_img {
   width: 100%;
@@ -159,24 +179,22 @@ body {
 }
 
 .htt_main_body .main_body .part {
-  width: 200px;
-  height: 440px;
+  width: 120px;
+  height: 340px;
   margin-top: 6%;
-
 }
 
 .htt_main_body .main_body .part .up {
-  height: 170px;
+  height: 100px;
   align-self: center;
 }
 
 .htt_main_body .down {
-  width: 100%;
-  height: 40%;
+  width: 140px;
+  height: 140px;
   margin-top: 30px;
   border: 2px solid black;
   border-radius: 10px;
-
 }
 
 .htt_main_body .htt_main_part .header {
@@ -194,7 +212,7 @@ body {
   border: 2px solid black;
   border-radius: 60px;
   display: flex;
-  width: 30%;
+  width: 10%;
   height: 10%;
   margin: auto;
   padding: 5px;
@@ -202,22 +220,21 @@ body {
   align-items: center;
 }
 
- .shape {
-  width: 40px;
-  height: 40px;
+.shape {
+  width: 30px;
+  height: 30px;
   z-index: 100;
   cursor: pointer;
-
-
 }
 
 .htt_main_body .shape img {
-  width: 40px;
-  height: 40px;
+  width: 20px;
+  height: 20px;
 }
 
 .htt_main_body .img_style {
   width: 100%;
+  height: 100%;
 
 }
 
@@ -245,11 +262,31 @@ body {
   font-size: 30px;
 }
 
-
-
 .htt_main_body .questions img {
-  height: 40px;
-  width: 40px;
+  height: 20px;
+  width: 20px;
   transform: translateY(15px);
+}
+
+/* 新增撤销按钮样式 */
+.undo-button {
+  text-align: center;
+  margin-top: 10px;
+}
+
+.undo-button button {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 5px;
+  background-color: #4CAF50;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.undo-button button:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
 }
 </style>

@@ -1,39 +1,24 @@
 <template>
-  <div class="circle-drawing-game" v-for="(item, index) in items" v-show="item.id === currentIndex">
-    <div v-if="item.id === currentIndex">
-      <h1>part4:接着点出与事物数量相等的<span>
-          <img alt="Missing Image" :src="item.tuXingPath" :key="index" style="width: 20px" />
-        </span></h1>
-      <!-- <h3>
-        （知识拓展）接着点出与事物数量相等的
-        <span>
-          <img alt="Missing Image" :src="item.tuXingPath" :key="index" style="width: 20px" />
-        </span>
-      </h3> -->
+  <div class="circle-drawing-game">
+    <h1>part4:接着点出与事物数量相等的<span>
+        <img alt="Missing Image" :src="item.tuXingPath"  style="width: 20px" />
+      </span></h1>
 
-      <div class="item-display">
-        <img :src="item.title.image" alt="物品图片" />
-        <div class="count">Your Answer: {{ item.userAnswer }}</div>
-      </div>
-
-      <div class="drawing-area" @click="addCircle" @touchstart.passive="addCircle">
-        <div v-for="(circle, index) in circles" :key="index" class="circle" :style="{
-          left: circle.x + 'px',
-          top: circle.y + 'px',
-        }">
-          <img :src="item.tuXingPath" style="width: 40%" alt="O" />
-        </div>
-
-      </div>
-
-      <div class="controls">
-        <el-button-group>
-          <el-button @click="lastItem" type="primary" :disabled="isFirstItem">上一个</el-button>
-          <el-button @click="resetCircles" type="primary">重新画</el-button>
-          <el-button @click="nextItem" type="primary" :disabled="isLastItem">下一个</el-button>
-        </el-button-group>
-      </div>
+    <div class="item-display">
+      <img :src="item.title.image" alt="物品图片" />
+      <div class="count">Your Answer: {{ item.userAnswer }}</div>
     </div>
+
+    <div class="drawing-area" @click="addCircle" @touchstart.passive="addCircle">
+      <div v-for="(circle, index) in circles" :key="index" class="circle" :style="{
+        left: circle.x + 'px',
+        top: circle.y + 'px',
+      }">
+        <img :src="item.tuXingPath" style="width: 40%" alt="O" />
+      </div>
+
+    </div>
+    <el-button @click="resetCircles" type="primary">重新画</el-button>
   </div>
   <hr>
 </template>
@@ -43,20 +28,13 @@
 export default {
   name: 'sst',
   props: {
-    items: {
-      type: Array,
+    item: {
+      type: Object,
       required: true,
-      default: () => [
-        { image: '../images3/icecream.png', count: 5 },
-        { image: '../images3/plane.png', count: 4 },
-        { image: '../images3/tree.png', count: 3 }
-      ]
     },
   },
   data() {
     return {
-      //items数组下标
-      currentIndex: 1,
       //存储圆圈位置的数组
       circles: [],
       isSubmitted: false,
@@ -64,12 +42,7 @@ export default {
   },
   //根据currentIndex的变化 实时改变currentItem的值
   computed: {
-    isLastItem() {
-      return this.currentIndex === this.items.length;
-    },
-    isFirstItem() {
-      return this.currentIndex === 1;
-    }
+
   },
   methods: {
     addCircle(event) {
@@ -83,25 +56,14 @@ export default {
         //为circle数组中添加相对绘画区域左上角的相对坐标
         this.circles.push({ x, y });
         // 给答案赋值
-        this.items[this.currentIndex - 1].userAnswer = this.circles.length;
+        this.item.userAnswer = this.circles.length;
 
       }
     },
     //清空circle数组中关于圆的位置坐标
     resetCircles() {
-      this.items[this.currentIndex - 1].userAnswer = '';
+      this.item.userAnswer = '';
       this.circles = [];
-    },
-    nextItem() {
-      if (!this.isLastItem) {
-        this.currentIndex++;
-      }
-      this.resetCircles();
-    },
-    lastItem() {
-      if (!this.isFirstItem) {
-        this.currentIndex--;
-      }
     },
   }
 }

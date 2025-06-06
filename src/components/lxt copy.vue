@@ -25,7 +25,9 @@
       <div class="options downOptions">
         <div v-for="(item, index) in localMessage.imgD" :key="index" class="option"
           :class="{ 'active': item.connected }" @mousedown="onMousedown($event, item)" :data-value="item.value"
+
           :data-ownership="item.ownership + message.flag">
+
           <img :src="item.src">
         </div>
       </div>
@@ -192,7 +194,7 @@ export default {
       this.currentLine.x1 = this.startItem.x;
       this.currentLine.y1 = this.startItem.y;
       // console.log("this.currentLine.x1", this.currentLine.x1);
-
+// console.log(1);
       // 添加鼠标移动事件监听
       document.addEventListener('mousemove', this.onMousemove);
       // 添加鼠标抬起事件监听
@@ -205,6 +207,8 @@ export default {
      * @param {MouseEvent} event - 鼠标移动事件对象
      */
     onMousemove(event) {
+      console.log(1);
+      
       //在 onMousemove(event) 方法里，event 代表原生的鼠标移动事件对象。虽然在代码里看起来没有显式传参，但这是浏览器事件监听机制自动处理的
       // 如果没有开始绘制连线，直接返回
       if (!this.isDrawing) return;
@@ -250,7 +254,6 @@ export default {
 
       // 检查鼠标悬停的选项
       this.checkHoverTarget(event);
-      this.checkAnswer();
 
       // 如果处于调试模式，绘制检测区域
       // if (this.isDebug) this.drawDetectionCircles();
@@ -370,7 +373,7 @@ export default {
       document.removeEventListener('mouseup', this.onMouseup);
       // 清除所有选项的悬停状态
       this.clearHoverStates();
-
+      //this.message.changed=true;
       // 如果存在有效的结束选项
       if (this.endItem && this.endItem.ownership !== this.startItem.ownership) {
         // 如果结束选项已连接，断开相关连线
@@ -381,7 +384,7 @@ export default {
         // 取消起始选项的连接状态
         this.startItem.connected = false;
       }
-
+      this.checkAnswer();
       // 清空起始选项
       this.startItem = null;
       // 清空结束选项
@@ -465,6 +468,7 @@ export default {
      * @param {number} width - 直线的宽度
      */
     drawLine(context, line, color, width) {
+console.log(line);
 
       // console.log("lxt line", line);
 
@@ -502,7 +506,7 @@ export default {
       // 标记所有答案是否正确
       // let allCorrect = true;
       // 存储每个选项的检查结果
-      this.result = [false, false, false, false];
+      this.result = [0, 0, 0, 0];
       // let n=0;
       // 遍历上方选项
       this.localMessage.imgU.forEach((upItem, index) => {
@@ -513,13 +517,12 @@ export default {
 
         if (connection) {
           // 如果连线的结束选项值与起始选项值相同，结果为 1，否则为 0
-          this.result[index] = (connection.end.value === upItem.value ? true : false);
+          this.result[index] = (connection.end.value === upItem.value ? 1 : 0);
         } else {
           // 如果没有连线，结果为 0
-          this.result[index] = (false);
+          this.result[index] = (0);
         }
-        this.message.result=this.result;
-        this.message.changed=true;
+        // this.message.result=this.result;
         // 如果当前选项的结果不为 1，说明有错误
         // if (this.message.result[index] !== 1) {
         //   allCorrect = false;
@@ -594,13 +597,14 @@ export default {
     // 移除窗口大小变化事件监听
     window.removeEventListener('resize', this.resizeCanvas);
     // 移除鼠标移动事件监听
-    document.removeEventListener('mousemove', this.onMousemove);
+    // document.removeEventListener('mousemove', this.onMousemove);
     // 移除鼠标抬起事件监听
     document.removeEventListener('mouseup', this.onMouseup);
   }
 
 }
 </script>
+
 
 <style>
 .lxt_main_body .container {
@@ -671,6 +675,12 @@ export default {
   width: 120px;
   height: 120px;
   object-fit: contain;
+}
+
+.lxt_main_body .tuo3 {
+  width:60px !important;
+  height: 60px !important;
+
 }
 
 .lxt_main_body .option.active {
