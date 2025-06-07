@@ -6,7 +6,7 @@ const home={
       "options": [
         { "value": "A", "img": `${basePath}/xzt1_A.png` },
         { "value": "B", "img": `${basePath}/xzt1_B.png` },
-        { "value": "C", "img": `${basePath}/xzt1.C.png` },
+        { "value": "C", "img": `${basePath}/xzt1_C.png` },
         { "value": "D", "img": `${basePath}/xzt1_D.png` }
       ],
       "userAnswer": "",
@@ -70,43 +70,6 @@ const home={
       "userAnswer": ""
     }
   ],
-  "htt": {
-    "id": 2,
-    "title": "Part2",
-    "subQuestion": [
-      {
-        "id": 1,
-        "img": "./static/img/T2_htt_ok/t1.jpeg",
-        "answer": 2
-      },
-      {
-        "id": 2,
-        "img": "./static/img/T2_htt_ok/t2.jpeg",
-        "answer": 3
-      },
-      {
-        "id": 3,
-        "img": "./static/img/T2_htt_ok/t3.jpeg",
-        "answer": 5
-      },
-      {
-        "id": 4,
-        "img": "./static/img/T2_htt_ok/t4.jpeg",
-        "answer": 4
-      }
-    ],
-    "shape": [
-      "./static/img/T2_htt_ok/jx.png",
-      "./static/img/T2_htt_ok/sjx.png",
-      "./static/img/T2_htt_ok/yx.png"
-    ],
-    "trueShape": 1,
-    "userAnswer": [[], [], [], []],
-    "isDragging": false,
-    "startX": 0,
-    "startY": 0,
-    "draggedElement": null
-  },
 
   "lxt_part3": {
     "id": 1,
@@ -203,26 +166,4 @@ const home={
       { "noneCircle": `${basePath}/tht_noneCircle.png` }
     ]
   },
-  "qst": {
-    "title": "对照上面图片根据左边的图形数量圈出右边的数量",
-    "example": {
-      "t_img": "./static/img/Tuo2_qst_ok/t1.png",
-      "a_img": "./static/img/Tuo2_qst_ok/a1.png"
-    },
-    "question": {
-      "t_img": "./static/img/Tuo2_qst_ok/t2.png",
-      "n_img": "./static/img/Tuo2_qst_ok/n2.png",
-      "num": 8,
-      "tureNum": 5
-    },
-    "ctx": "",
-    "shapeXY": [],
-    "allXY": [],
-    "result": [],
-    "useAnswer": [],
-    "userNum": 0,
-    "flag": 1,
-    "img": "./static/img/Tuo2_qst_ok/jian.png"
-  },
-  "tkt":[]
 }
