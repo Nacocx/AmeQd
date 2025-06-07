@@ -1,4 +1,4 @@
-{
+const home={
   "xzt": [
     {
       "id": 1,
