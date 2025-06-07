@@ -22,8 +22,8 @@
               <!-- part3_连线题 -->
               <lxt :message="questions.lxt_part3" />
               <!-- part4_数数题 -->
-               <div v-for="(sstP,index) in questions.sst" :key="sstP">
-              <sst :item="questions.sst[index]"/>
+              <div v-for="(sstP, index) in questions.sst" :key="sstP">
+                <sst :item="questions.sst[index]" />
               </div>
               <!-- part5_涂画题 -->
               <tht :items="questions.tht.items" :tuxing-path="questions.tht.tuxingpath" v-if="questions.tht.items" />
@@ -43,16 +43,24 @@
 
 
 
-              <el-button-group>
-                <!-- <el-button type="default" @click="pageSub" :icon="ArrowLeft" size="large" :disabled="currentPage===1">Last Part</el-button> -->
-                <el-button type="primary" @click="willSubmit" id="Submit" size="large">提交答案</el-button>
-                <!-- <el-button type="default" @click="pageAdd" size="large" :disabled="currentPage===4">Next Part<el-icon class="el-icon--right"><ArrowRight /></el-icon></el-button> -->
-              </el-button-group>
+              <el-button type="primary" @click="willSubmit" id="Submit" size="large">提交答案</el-button>
             </div>
           </div>
         </el-main>
       </el-container>
     </el-container>
+    <el-dialog v-model="dialogTableVisible" title="答题统计结果:" width="800">
+      <span>整体对了{{finalJson.totalR}}题,正确率: <el-progress :percentage="finalJson.totalP" /></span>
+      <!-- <span>选择题对了{{finalJson.xztR}}题,正确率: <el-progress :percentage="finalJson.xztP" /></span> -->
+      <span>填空题对了{{finalJson.tktR}}题,正确率: <el-progress :percentage="finalJson.tktP" /></span>
+      <span>连线题对了{{finalJson.lxtR}}题,正确率: <el-progress :percentage="finalJson.lxtP" /></span>
+      <span>画图题对了{{finalJson.httR}}题,正确率: <el-progress :percentage="finalJson.httP" /></span>
+      <span>涂画题对了{{finalJson.thtR}}题,正确率: <el-progress :percentage="finalJson.thtP" /></span>
+      <span>数数题对了{{finalJson.sstR}}题,正确率: <el-progress :percentage="finalJson.sstP" /></span>
+      <span>画圈题对了{{finalJson.hqtR}}题,正确率: <el-progress :percentage="finalJson.qstP" /></span>
+    </el-dialog>
+
+
   </div>
 </template>
 
@@ -60,7 +68,6 @@
 import xzt from "@/components/xzt.vue";
 import sidebar from "@/components/sidebar.vue";
 import tkt from "@/components/tkt.vue";
-import { ArrowLeft, ArrowRight } from "@element-plus/icons-vue";
 import { ElMessage } from "element-plus";
 import Sst from "@/components/sst.vue";
 import Htt from "@/components/htt.vue";
@@ -68,7 +75,6 @@ import lxt from "@/components/lxt.vue";
 import qst from "@/components/qst.vue";
 import Tht from "@/components/tht.vue";
 import htt_tuo from "@/components/htt_tuo.vue";
-
 import axios from "axios";
 const basePath = import.meta.env.VITE_IMG_BASE_PATH;
 //实际使用中数据从后端获取
@@ -405,25 +411,24 @@ export default {
     return {
       questions: mockQuestions,
       studentInfo: mockStudentInfo,
-
-      loading: false,
-      error: null,
+      dialogTableVisible: false,
       boolLists: {
         xzt: [],
         tkt: [],
         sst: [],
         htt: [],
         tht: [],
-        qst: [],
+        qst: [false],
+        lxt_part3: [false],
+        lxt_tuo3: [false]
       },
-      lxtpage: 1,
+      finalJson: {},
     };
   },
   components: {
     Tht,
     Htt,
     Sst,
-    ArrowRight,
     tkt,
     xzt,
     sidebar,
@@ -434,9 +439,7 @@ export default {
 
   },
   computed: {
-    ArrowLeft() {
-      return ArrowLeft;
-    },
+    //计算总题目数
     countTm() {
       // TIPS: this.questions || {}：如果 this.questions 是 undefined 或 null，就返回空对象 {}，防止报错。
       // { xzt = [], sst = [] }：从 this.questions 里取出 xzt 和 sst，如果它们不存在，就默认赋值为空数组 []。
@@ -541,10 +544,106 @@ export default {
   methods: {
 
 
+    // 计算总体情况
+    calcTotal() {
+      this.submitAnswers();
+      const showBoolLists = this.boolLists;
+      let httRcnt = 0;
+      let lxtRcnt = 0;
+      let tktRcnt = 0;
+      let thtRcnt = 0;
+      let sstRcnt = 0;
+      let xztRcnt = 0;
+      let qstRcnt = 0;
+      let httAll = showBoolLists.htt.concat(showBoolLists.htt_tuo);
+      let lxtAll = showBoolLists.lxt_part3.concat(showBoolLists.lxt_tuo3);
+      httAll.forEach(e => {
+        if (e === true) {
+          httRcnt++;
+        }
+      });
+      lxtAll.forEach(e => {
+        if (e === true) {
+          lxtRcnt++;
+        }
+      });
+      showBoolLists.sst.forEach(e => {
+        if (e === true) {
+          sstRcnt++;
+        }
+      });
+      showBoolLists.tht.forEach(e => {
+        if (e === true) {
+          thtRcnt++;
+        }
+      });
+      showBoolLists.tkt.forEach(e => {
+        if (e === true) {
+          tktRcnt++;
+        }
+      });
+      showBoolLists.xzt.forEach(e => {
+        if (e === true) {
+          xztRcnt++;
+        }
+      });
+      showBoolLists.qst.forEach(e => {
+        if (e === true) {
+          qstRcnt++;
+        }
+      });
+
+      this.finalJson = {
+        "httR": httRcnt,
+        "httP": parseFloat((httAll?.length ? (httRcnt / httAll.length * 100) : 0).toFixed(2)),
+
+        "lxtR": lxtRcnt,
+        "lxtP": parseFloat((lxtAll?.length ? (lxtRcnt / lxtAll.length * 100) : 0).toFixed(2)),
+
+        "tktR": tktRcnt,
+        "tktP": parseFloat((showBoolLists.tkt?.length ? (tktRcnt / showBoolLists.tkt.length * 100) : 0).toFixed(2)),
+
+        "thtR": thtRcnt,
+        "thtP": parseFloat((showBoolLists.tht?.length ? (thtRcnt / showBoolLists.tht.length * 100) : 0).toFixed(2)),
+
+        "sstR": sstRcnt,
+        "sstP": parseFloat((showBoolLists.sst?.length ? (sstRcnt / showBoolLists.sst.length * 100) : 0).toFixed(2)),
+
+        "xztR": xztRcnt,
+        "xztP": parseFloat((showBoolLists.xzt?.length ? (xztRcnt / showBoolLists.xzt.length * 100) : 0).toFixed(2)),
+
+        "qstR": qstRcnt,
+        "qstP": parseFloat((showBoolLists.qst?.length ? (qstRcnt / showBoolLists.qst.length * 100) : 0).toFixed(2)),
+
+        "totalR": httRcnt + lxtRcnt + thtRcnt + tktRcnt + sstRcnt + xztRcnt + qstRcnt,
+        "totalP": parseFloat((
+          (httAll?.length +
+            lxtAll?.length +
+            showBoolLists.tht?.length +
+            showBoolLists.tkt?.length +
+            showBoolLists.sst?.length +
+            showBoolLists.xzt?.length +
+            showBoolLists.qst?.length)
+            ? (httRcnt + lxtRcnt + thtRcnt + tktRcnt + sstRcnt + xztRcnt + qstRcnt) /
+            (httAll.length +
+              lxtAll.length +
+              showBoolLists.tht.length +
+              showBoolLists.tkt.length +
+              showBoolLists.sst.length +
+              showBoolLists.xzt.length +
+              showBoolLists.qst.length) * 100
+            : 0
+        ).toFixed(2))
+      };
+
+      console.log(this.finalJson);
+      this.dialogTableVisible = true;
+    },
+
     // 确认是否提交答案
     willSubmit() {
       let remainTm = this.countTm.totalTm - this.countTm.answeredCount;
-      this.$confirm(
+      ElMessageBox.confirm(
         // 提示内容
         remainTm !== 0
           ? `你确定要提交答案吗?你还剩下${remainTm}个题目没写`
@@ -559,21 +658,20 @@ export default {
       )
         // 确定
         .then(() => {
-
-          this.submitAnswers();
-          this.$message({
+          this.calcTotal();
+          ElMessage({
             type: "success",
             message: "提交成功!",
-          });
+          })
         })
-        //取消或报错(e)
-        .catch((e) => {
-          console.log(e);
-          this.$message({
-            type: "info",
-            message: "已取消提交",
-          });
-        });
+      //取消或报错(e)
+      // .catch((e) => {
+      //   console.log("!ERROR:" + e);
+      //   ElMessage({
+      //     type: "info",
+      //     message: "已取消提交",
+      //   })
+      // });
     },
     // 获得填空题答案
     getFormattedAnswers() {
@@ -624,14 +722,9 @@ export default {
       // 返回最终的结果数组
       return results;
     },
+    // 获得答案
     submitAnswers() {
-      // const xztAns = this.questions.xzt.map((q) => ({
-      //   questionId: q.id,
-      //   answer: q.userAnswer,
-      // }));
-
-      // 获得选择题答案并且判断正误
-
+      // 获得选择题正确数组
       if (this.questions.xzt) {
         const xztAns = [];
         this.questions.xzt.forEach((e, index) => {
@@ -640,13 +733,8 @@ export default {
         });
       }
 
-
-
-
-
-      // 获得填空题答案
+      // 遍历每个TKT模块，获得填空题正确数组
       const tktBoolList = [];
-      // 遍历每个TKT模块
       this.questions.tkt.forEach(tktItem => {
         // 遍历模块中的每个题目
         tktItem.userAnswer.forEach((userAnswer, questionIndex) => {
@@ -704,10 +792,7 @@ export default {
       });
       this.boolLists.tht = thtBoolList;
 
-
-
-
-      // 获得数数题答案
+      // 获得数数题正确数组
       const sstAns = [];
       this.questions.sst.forEach((e, index) => {
         sstAns.push(e.userAnswer);
@@ -715,10 +800,7 @@ export default {
           e.userAnswer == e.title.count ? true : false;
       });
 
-      // console.log(tktAns);
-      // console.log(sstAns);
-      // console.log(xztAns);
-      // this.checkAnswers(xztAns);
+
       let htt1 = this.questions.htt;
       let htt2 = this.questions.htt_tuo;
 
@@ -726,19 +808,18 @@ export default {
       this.boolLists.htt_tuo = this.getHttBoolList(htt2);
 
 
-      //获得圈数题答案
+      //获得圈数题正确数组
       if (this.questions.qst.result === true)
-        this.boolLists.qst.push(true);
+        this.boolLists.qst[0] = true;
 
 
-      // 获得连线题答案
+      // 获得连线题正确数组
       this.boolLists.lxt_part3 = (this.questions.lxt_part3.result);
       this.boolLists.lxt_tuo3 = (this.questions.lxt_tuo3.result);
 
       //调试用
       console.log(this.questions);
       console.log(this.boolLists);
-
 
     },
     // 获得画图题正确列表
