@@ -17,6 +17,7 @@ coverage
 /cypress/videos/
 /cypress/screenshots/
 /归档/
+/准备发送/
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
