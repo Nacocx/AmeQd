@@ -31,7 +31,6 @@
                             </div>
                             <div><img :src="item.rightItem" alt="图片" width="50px" class="rightItem" draggable="false">
                             </div>
-
                         </div>
                     </div>
                 </div>
