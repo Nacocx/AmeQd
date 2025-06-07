@@ -15,7 +15,7 @@
           <div id="chose">
             <div class="question-container">
               <!-- part1_填空题 -->
-              <tkt :all-questions="questions.tkt" />
+              <tkt :all-questions="questions.tkt" v-if="questions.tkt"/>
               <!-- part2_画图题 -->
               <htt :message="questions.htt" />
 
@@ -542,6 +542,7 @@ export default {
     document.addEventListener("contextmenu", this.preventContextMenu);
   },
   methods: {
+
 
     // 计算总体情况
     calcTotal() {
