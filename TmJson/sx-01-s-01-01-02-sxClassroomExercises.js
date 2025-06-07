@@ -1,0 +1,138 @@
+const classroom={
+   "xzt": [
+    {
+      "id": 1,
+      "title": "如果一个小猴吃一个香蕉，选哪一堆正好合适呢？",
+      "options": [
+        { "value": "A", "img": `${basePath}/xzt_A.png` },
+        { "value": "B", "img": `${basePath}/xzt_B.png` },
+        { "value": "C", "img": `${basePath}/xzt_C.png` },
+      ],
+      "userAnswer": "",
+      "answer": "C"
+    },
+  ],
+
+  "lxt_part3": {
+    "id": 1,
+    "title": "数一数，连一连。",
+    "flag": "t3",
+    "imgU": [
+      {
+        "src": `${basePath}/lxt_u1.png`,
+        "value": "6",
+        "ownership": "U",
+        "connected": false
+      },
+      {
+        "src":`${basePath}/lxt_u2.png`,
+        "value": "5",
+        "ownership": "U",
+        "connected": false
+      },
+      {
+        "src":`${basePath}/lxt_u3.png`,
+        "value": "10",
+        "ownership": "U",
+        "connected": false
+      },
+      {
+        "src": `${basePath}/lxt_u4.png`,
+        "value": "2",
+        "ownership": "U",
+        "connected": false
+      }
+    ],
+    "imgD": [
+      {
+        "src": `${basePath}/lxt_d1.png`,
+        "value": "10",
+        "ownership": "D",
+        "connected": false
+      },
+      {
+        "src": `${basePath}/lxt_d2.png`,
+        "value": "2",
+        "ownership": "D",
+        "connected": false
+      },
+      {
+        "src": `${basePath}/lxt_d3.png`,
+        "value": "5",
+        "ownership": "D",
+        "connected": false
+      },
+      {
+        "src": `${basePath}/lxt_d4.png`,
+        "value": "6",
+        "ownership": "D",
+        "connected": false
+      }
+    ],
+    "isDrawing": false,
+    "startItem": null,
+    "endItem": null,
+    "currentLine": { "x1": 0, "y1": 0, "x2": 0, "y2": 0 },
+    "connections": [],
+    "ctx": null,
+    "backCtx": null,
+    "canvasRect": null,
+    "isDebug": true,
+    "result": []
+  },
+
+    "tkt": [
+    {
+      "id": 1,
+      "title_main": "1. 理解“几”和“第几”的含义",
+      "title": [
+        "1.第一小题",
+        "2.第二小题",
+      ],
+      "img": `${basePath}/tkt1.png`,
+      "subQuestions": [
+        "你看到了什么？用一句完整的话来说？TNUM",
+        "从左往右数，你能说说每只鸭子各排在第几吗？TNUM",
+      ],
+      "userAnswer": [
+        {
+          "type": "simple",
+          "answers": [""]
+        },
+        {
+          "type": "simple",
+          "answers": [""]
+        }
+      ],
+      "answers": [
+        ["kft"],
+        ["kft"],
+
+      ]
+    },
+
+       {
+      "id": 2,
+      "title_main": "看图填空。",
+      "title": [
+        "1.第一小题",
+      ],
+      "img": `${basePath}/tkt2.png`,
+      "subQuestions": [
+        "上面一共有TNUM只小动物。从左往右数，蜗牛排第1，兔子排第TNUM,小鸡排第TNUM",
+      ],
+      "userAnswer": [
+        {
+          "type": "simple",
+          "answers": ["","",""]
+        },
+      ],
+      "answers": [
+        ["6","5","3"],
+
+
+      ]
+    }
+  ],
+
+}
