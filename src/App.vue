@@ -874,6 +874,7 @@ export default {
   box-shadow: 0 2px 4px rgba(0, 0, 0, .12), 0 0 6px rgba(0, 0, 0, .04);
   border-radius: 8px;
   position: fixed;
+  background-color: rgba(0,0,0,0);
   width: 200px;
 }
 
