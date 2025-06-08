@@ -394,6 +394,7 @@ export default {
       TmBoolinfo: {},
       createdReady: false,
       countTm: {},
+      tmRightCnt: {},
     };
   },
   components: {
@@ -468,8 +469,8 @@ export default {
         // 确定
         .then(() => {
           // this.calcTotal();
-          
-          
+
+
 
           console.log(this.questions);
           console.log(this.TmBoolinfo);
@@ -481,36 +482,72 @@ export default {
             message: "提交成功!",
           })
         })
-        // 取消或报错(e)
-        // .catch((e) => {
-        //   console.log("!ERROR:" + e);
-        //   ElMessage({
-        //     type: "info",
-        //     message: "已取消提交",
-        //   })
-        // });
+      // 取消或报错(e)
+      // .catch((e) => {
+      //   console.log("!ERROR:" + e);
+      //   ElMessage({
+      //     type: "info",
+      //     message: "已取消提交",
+      //   })
+      // });
     },
     getXztBoolList() {
-      const xztAns = [];
-      this.boolLists.xzt=[];
+      this.tmRightCnt.xzt = 0;
+      this.boolLists.xzt = [];
       this.questions.xzt.forEach((e, index) => {
-        xztAns.push(e.userAnswer);
-        this.boolLists.xzt[index] = e.userAnswer === e.answer ? true : false;
+        if (e.userAnswer === e.answer) {
+          this.tmRightCnt.xzt++;
+          this.boolLists.xzt[index] = true;
+        } else {
+          this.boolLists.xzt[index] = false;
+        }
+
       });
     },
     getTktBoolList() {
-      let tktAns = [];
-      this.boolLists.tkt=[];
+      this.tmRightCnt.tkt = 0;
+      this.boolLists.tkt = [];
       this.questions.tkt.forEach((e, index) => {
-        let obj=e.userAnswer;
-          let values = Object.values(obj);
-          tktAns=tktAns.concat(values);
-          for(let i=0;i<e.answers.length;i++){
-            this.boolLists.tkt.push(values[i]===e.answers[i]?true:false);
+        let obj = e.userAnswer;
+        let values = Object.values(obj);
+        for (let i = 0; i < e.answers.length; i++) {
+          if (values[i] === e.answers[i]) {
+            this.tmRightCnt.tkt++;
+            this.boolLists.tkt.push(true);
+          } else {
+            this.boolLists.tkt.push(false);
           }
+        }
       })
 
-    }
+    },
+    getSstBoolList() {
+      this.tmRightCnt.sst = 0;
+      this.boolLists.sst = [];
+      this.questions.sst.forEach(e => {
+        if (e.userAnswer === e.title.count) {
+          this.tmRightCnt.sst++;
+          this.boolLists.sst.push(true);
+        }
+        else {
+          this.boolLists.sst.push(false);
+        }
+      })
+    },
+    getHttBoolList(){
+      this.tmRightCnt.htt=0;
+      this.boolLists.htt=[];
+      this.questions.htt.forEach(e => {
+        for(let i=0;i<e.subQuestion.length;i++){
+          if(e.subQuestion[i].answer===e.userAnswer[i]){
+            this.tmRightCnt.htt++;
+            this.boolLists.htt.push(true);
+          }else{
+            this.boolLists.htt.push(false);
+          }
+        }
+      });
+    },
 
 
   }
