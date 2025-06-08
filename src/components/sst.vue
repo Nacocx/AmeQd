@@ -83,8 +83,8 @@ export default {
 }
 
 .item-display img {
-  width: 100px;
-  height: 100px;
+  width: 250px;
+  height: 250px;
   object-fit: contain;
   border: 1px solid #eee;
 }
