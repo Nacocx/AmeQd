@@ -56,10 +56,10 @@
         </el-main>
       </el-container>
     </el-container>
-    
+
     <el-dialog v-model="dialogTableVisible" title="答题统计结果:" width="800">
       <span>整体对了{{ finalJson.totalR }}题,正确率: <el-progress :percentage="finalJson.totalP" /></span>
-      <!-- <span>选择题对了{{finalJson.xztR}}题,正确率: <el-progress :percentage="finalJson.xztP" /></span> -->
+      <span>选择题对了{{ finalJson.xztR }}题,正确率: <el-progress :percentage="finalJson.xztP" /></span>
       <span>填空题对了{{ finalJson.tktR }}题,正确率: <el-progress :percentage="finalJson.tktP" /></span>
       <span>连线题对了{{ finalJson.lxtR }}题,正确率: <el-progress :percentage="finalJson.lxtP" /></span>
       <span>画图题对了{{ finalJson.httR }}题,正确率: <el-progress :percentage="finalJson.httP" /></span>
@@ -88,6 +88,7 @@ const basePath = import.meta.env.VITE_IMG_BASE_PATH;
 //实际使用中数据从后端获取
 // import logo from "/static/img/T1_tkt_ok/tkt_1.jpeg";   // 必须用 import
 // /static2/sx-01-s-01-01-01/img/xx.png
+
 const mockQuestions = {
   "sst": [
     {
@@ -290,7 +291,7 @@ const mockQuestions = {
           "connected": false
         }
       ]
-  }],
+    }],
 
   "tht": {
     "items": [
@@ -388,11 +389,11 @@ export default {
       questions: mockQuestions,
       studentInfo: mockStudentInfo,
       dialogTableVisible: false,
-      boolLists: {
-      },
+      boolLists: {},
       finalJson: {},
       TmBoolinfo: {},
       createdReady: false,
+      countTm: {},
     };
   },
   components: {
@@ -402,7 +403,7 @@ export default {
     tkt,
     xzt,
     sidebar,
-    circleDrawing: Sst,
+    Sst,
     lxt,
     qst,
     htt_tuo
@@ -411,29 +412,106 @@ export default {
   async created() {
 
     await Promise.all([
-      this.generateJson(),
+      this.calTotalTm(),
 
 
     ]);
-  }, methods: {
-    async generateJson() {
+  },
+  computed: {
+
+
+
+
+
+  },
+  methods: {
+    async calTotalTm() {
       const keys = Object.keys(this.questions);
       console.log(keys);
-      //把长键名放在前面，以免被当成基础键名
-      const possibleKeys = ["htt_tuo", "xzt", "sst", "tkt", "htt", "lxt", "tht", "qst"];
-      keys.forEach(key => {
-        const matchedKey = possibleKeys.find(possibleKey => key.includes(possibleKey));
-        if (matchedKey) {
-          console.log(matchedKey);
-          this.TmBoolinfo[matchedKey] = true;
-        }
+      this.countTm.totalTm = 0;
+      keys.forEach(e => {
+        this.TmBoolinfo[e] = true;
+        if (e === "xzt")
+          this.countTm.totalTm += this.questions.xzt.length;
+        else if (e === "sst")
+          this.countTm.totalTm += this.questions.sst.length;
+        else if (e === "tkt")
+          this.countTm.totalTm += this.questions.tkt.reduce((sum, el) => sum + el.answers.length, 0);
+        else if (e === "htt")
+          this.countTm.totalTm += this.questions.htt.reduce((sum, el) => sum + el.subQuestion.length, 0);
+        else if (e === "lxt")
+          this.countTm.totalTm += this.questions.lxt.reduce((sum, el) => sum + el.imgU.length, 0);
+        else if (e === "tht")
+          this.countTm.totalTm += this.questions.tht.items.length;
+        else if (e === "qst")
+          this.countTm.totalTm += this.questions.qst.length;
+        else if (e === "htt_tuo")
+          this.countTm.totalTm += this.questions.htt_tuo.reduce((sum, el) => sum + el.subQuestion.length, 0);
       });
-
+      console.log(this.countTm);
     },
     willSubmit() {
-      console.log(this.questions);
-      console.log(this.TmBoolinfo)
+      let remainTm = 0;
+      ElMessageBox.confirm(
+        // 提示内容
+        remainTm !== 0
+          ? `你确定要提交答案吗?你还剩下${remainTm}个题目没写`
+          : `你确定要提交答案吗?`,
+        // 提示标题
+        "提示",
+        {
+          confirmButtonText: "确定",
+          cancelButtonText: "取消",
+          type: "warning",
+        }
+      )
+        // 确定
+        .then(() => {
+          // this.calcTotal();
+          
+          
+
+          console.log(this.questions);
+          console.log(this.TmBoolinfo);
+          console.log(this.countTm);
+          this.getTktBoolList();
+          console.log(this.boolLists);
+          ElMessage({
+            type: "success",
+            message: "提交成功!",
+          })
+        })
+        // 取消或报错(e)
+        // .catch((e) => {
+        //   console.log("!ERROR:" + e);
+        //   ElMessage({
+        //     type: "info",
+        //     message: "已取消提交",
+        //   })
+        // });
     },
+    getXztBoolList() {
+      const xztAns = [];
+      this.boolLists.xzt=[];
+      this.questions.xzt.forEach((e, index) => {
+        xztAns.push(e.userAnswer);
+        this.boolLists.xzt[index] = e.userAnswer === e.answer ? true : false;
+      });
+    },
+    getTktBoolList() {
+      let tktAns = [];
+      this.boolLists.tkt=[];
+      this.questions.tkt.forEach((e, index) => {
+        let obj=e.userAnswer;
+          let values = Object.values(obj);
+          tktAns=tktAns.concat(values);
+          for(let i=0;i<e.answers.length;i++){
+            this.boolLists.tkt.push(values[i]===e.answers[i]?true:false);
+          }
+      })
+
+    }
+
 
   }
 }

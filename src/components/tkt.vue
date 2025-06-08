@@ -8,14 +8,12 @@
       <div class="question-content">
         <div v-for="(title, titleIndex) in questionGroup.title" :key="'title-' + titleIndex" class="question-item">
           <h2 class="question-subtitle">{{ title }}</h2>
-          <div v-for="(subPart, subIndex) in splitByTSPL(questionGroup.subQuestions[titleIndex])" :key="'sub-' + subIndex">
+          <div v-for="(subPart, subIndex) in splitByTSPL(questionGroup.subQuestions[titleIndex])"
+            :key="'sub-' + subIndex">
             <span v-for="(segment, segmentIndex) in splitByTNUM(subPart)" :key="'segment-' + segmentIndex">
               <template v-if="segment !== 'TNUM'">{{ segment }}</template>
-              <el-input
-                v-else
-                v-model="questionGroup.userAnswer[`${titleIndex}-${subIndex}-${segmentIndex}`]"
-                style="width: 60px;"
-              />
+              <el-input v-else v-model="questionGroup.userAnswer[`${titleIndex}-${subIndex}-${segmentIndex}`]"
+                style="width: 60px;" />
             </span>
           </div>
         </div>
@@ -42,9 +40,36 @@ export default {
       return text.split('TSPL');
     },
     splitByTNUM(text) {
-    // 保留 TNUM 用于判断，但渲染时隐藏
-    return text.split(/(TNUM)/g);
-  }
+      // 保留 TNUM 用于判断，但渲染时隐藏
+      return text.split(/(TNUM)/g);
+    }
+  }, watch: {
+    allQuestions: {
+      immediate: true,
+      deep: true,
+      handler(newVal) {
+        newVal.forEach(questionGroup => {
+          if (!questionGroup.userAnswer) {
+            questionGroup.userAnswer={};
+          }
+
+          questionGroup.title.forEach((_, titleIndex) => {
+            const subParts = this.splitByTSPL(questionGroup.subQuestions[titleIndex]);
+            subParts.forEach((subPart, subIndex) => {
+              const segments = this.splitByTNUM(subPart);
+              segments.forEach((segment, segmentIndex) => {
+                if (segment === 'TNUM') {
+                  const key = `${titleIndex}-${subIndex}-${segmentIndex}`;
+                  if (!questionGroup.userAnswer[key]) {
+                    questionGroup.userAnswer[key]='';
+                  }
+                }
+              });
+            });
+          });
+        });
+      }
+    }
   }
 }
 </script>
