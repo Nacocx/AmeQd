@@ -411,6 +411,53 @@ const mockStudentInfo = {
   teacher: "Bob",
 };
 
+export default {
+  data() {
+    return {
+      questions: mockQuestions,
+      studentInfo: mockStudentInfo,
+      dialogTableVisible: false,
+      boolLists: {
+      },
+      finalJson: {},
+      Tminfo: {},
+      createdReady: false,
+    };
+  },
+  components: {
+    Tht,
+    Htt,
+    Sst,
+    tkt,
+    xzt,
+    sidebar,
+    circleDrawing: Sst,
+    lxt,
+    qst,
+    htt_tuo
+
+  },
+  async created() {
+    this.generateJson(),
+      await Promise.all([
+
+
+      ]);
+  }, methods: {
+    generateJson() {
+
+
+    },
+    willSubmit(){
+      console.log(this.questions);
+      
+    },
+
+  }
+}
+
+
+
 
 
 // export default {
@@ -868,46 +915,7 @@ const mockStudentInfo = {
 //   },
 // };
 
-export default {
-  data() {
-    return {
-      questions: mockQuestions,
-      studentInfo: mockStudentInfo,
-      dialogTableVisible: false,
-      boolLists: {
-      },
-      finalJson: {},
-      Tminfo: {},
-      createdReady: false,
-    };
-  },
-  components: {
-    Tht,
-    Htt,
-    Sst,
-    tkt,
-    xzt,
-    sidebar,
-    circleDrawing: Sst,
-    lxt,
-    qst,
-    htt_tuo
 
-  },
-  async created() {
-    this.generateJson(),
-      await Promise.all([
-
-
-      ]);
-  }, methods: {
-    generateJson() {
-
-
-    }
-
-  }
-}
 
 </script>
 <style>
