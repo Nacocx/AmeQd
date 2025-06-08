@@ -5,13 +5,9 @@
         <!-- 侧边栏模板 -->
         <!-- <sidebar :student-info="studentInfo" :count-tm="countTm" /> -->
         <el-main>
-        <!-- 题目部分 -->
+          <!-- 题目部分 -->
           <div id="chose">
             <div class="question-container">
-
-
-
-
               <!-- part1_选择题 -->
               <xzt :questions="questions.xzt" v-if="questions.xzt && questions.xzt.length" />
               <!-- part2_填空题 -->
@@ -53,7 +49,6 @@
                 </div>
               </template>
 
-
               <el-button type="primary" @click="willSubmit" id="Submit" size="large">提交答案</el-button>
 
             </div>
@@ -61,6 +56,7 @@
         </el-main>
       </el-container>
     </el-container>
+    
     <el-dialog v-model="dialogTableVisible" title="答题统计结果:" width="800">
       <span>整体对了{{ finalJson.totalR }}题,正确率: <el-progress :percentage="finalJson.totalP" /></span>
       <!-- <span>选择题对了{{finalJson.xztR}}题,正确率: <el-progress :percentage="finalJson.xztP" /></span> -->
@@ -294,7 +290,7 @@ const mockQuestions = {
           "connected": false
         }
       ]
-    }],
+  }],
 
   "tht": {
     "items": [
@@ -323,6 +319,7 @@ const mockQuestions = {
       { "noneCircle": `${basePath}/noneCircle_2.png` }
     ]
   },
+
   "qst": [{
     "title": "拓展应用2：对照上面图片根据左边的图形数量圈出右边的数量",
     "example": {
@@ -339,6 +336,7 @@ const mockQuestions = {
     "result": false,
     "changed": false
   }],
+
   "htt_tuo": [{
     "id": [1, 2, 3],
     "title": "根据数字提示，把缺少的图形拖进来",
@@ -393,7 +391,7 @@ export default {
       boolLists: {
       },
       finalJson: {},
-      Tminfo: {},
+      TmBoolinfo: {},
       createdReady: false,
     };
   },
@@ -411,20 +409,30 @@ export default {
 
   },
   async created() {
-    this.generateJson(),
-      await Promise.all([
+
+    await Promise.all([
+      this.generateJson(),
 
 
-      ]);
+    ]);
   }, methods: {
-    generateJson() {
+    async generateJson() {
       const keys = Object.keys(this.questions);
       console.log(keys);
+      //把长键名放在前面，以免被当成基础键名
+      const possibleKeys = ["htt_tuo", "xzt", "sst", "tkt", "htt", "lxt", "tht", "qst"];
+      keys.forEach(key => {
+        const matchedKey = possibleKeys.find(possibleKey => key.includes(possibleKey));
+        if (matchedKey) {
+          console.log(matchedKey);
+          this.TmBoolinfo[matchedKey] = true;
+        }
+      });
 
     },
     willSubmit() {
       console.log(this.questions);
-
+      console.log(this.TmBoolinfo)
     },
 
   }
