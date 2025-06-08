@@ -161,7 +161,9 @@ const mockQuestions = {
         ["3", "3"],
         ["4", "4"],
         ["5", "5"]
-      ]
+      ],
+      fltUserAnswer:[],
+      fltAnswer:[],
     }
   ],
 
