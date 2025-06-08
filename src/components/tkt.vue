@@ -74,8 +74,8 @@ export default {
   name:"tkt",
   data(){
     return{// 所有问题
-      currentPage:1, //当前页面
-      tkt_nowPos: 1, // 当前问题的索引
+      // currentPage:1, //当前页面
+      // tkt_nowPos: 1, // 当前问题的索引
       results: [], // 存储每个问题的结果
 
     }
@@ -86,18 +86,39 @@ export default {
       required:true,
     }
   },
-  methods: {
-    pageAdd(){
-      if(this.currentPage<this.allQuestions.length) {
-        this.currentPage++;
-        document.documentElement.scrollTop = 0;
-      }
+  computed: {
+    // 扁平化用户答案数组
+    flattenedUserAnswers() {
+      return this.processAnswers('userAnswer');
     },
-    pageSub(){
-      if(this.currentPage>1) {
-        this.currentPage--;
-        document.documentElement.scrollTop = 0;
-      }
+    // 扁平化标准答案数组
+    flattenedCorrectAnswers() {
+      return this.processAnswers('answers');
+    }
+  },
+  methods: {
+    // 统一处理答案数组
+    processAnswers(answerType) {
+      const result = [];
+      
+      this.allQuestions.forEach(questionGroup => {
+        questionGroup.title.forEach((_, titleIndex) => {
+          const answers = questionGroup[answerType][titleIndex];
+          const subQText = questionGroup.subQuestions[titleIndex];
+          
+          if (answers.type === 'simple') {
+            // 简单类型直接添加答案
+            result.push(...answers.answers);
+          } else {
+            // 复杂类型合并所有section的答案
+            answers.sections.forEach(section => {
+              result.push(...section.answers);
+            });
+          }
+        });
+      });
+      
+      return result;
     },
     splitQuestion(text) {
       return text.split('TNUM');
@@ -111,7 +132,18 @@ export default {
 
 
 
-
+// pageAdd(){
+    //   if(this.currentPage<this.allQuestions.length) {
+    //     this.currentPage++;
+    //     document.documentElement.scrollTop = 0;
+    //   }
+    // },
+    // pageSub(){
+    //   if(this.currentPage>1) {
+    //     this.currentPage--;
+    //     document.documentElement.scrollTop = 0;
+    //   }
+    // },
     // 验证是否所有问题都已回答
     // validateAnswers() {
     //   return this.allQuestions[this.currentPage - 1].userAnswer.every(answer => {
@@ -124,7 +156,6 @@ export default {
     //     }
     //   });
     // },
-
     /**
      * 触发提交答案的确认操作
      * 弹出确认对话框，询问用户是否确定提交答案
@@ -156,7 +187,6 @@ export default {
     //         });
     //       });
     // },
-
     /**
      * 执行答案提交操作，对比用户答案和正确答案，并存储对比结果
      * 后续会将结果返回给后端
