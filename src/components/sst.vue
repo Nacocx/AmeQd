@@ -1,6 +1,6 @@
 <template>
   <div class="circle-drawing-game">
-    <h1>part4:接着点出与事物数量相等的<span>
+    <h1>接着点出与事物数量相等的<span>
         <img alt="Missing Image" :src="item.tuXingPath"  style="width: 20px" />
       </span></h1>
 

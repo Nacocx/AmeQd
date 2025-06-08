@@ -1,55 +1,61 @@
 <template>
   <div id="app">
-    <!-- <el-header>
-      <img src="./assets/logo.png" width="50px" height="50px" alt="Logo Missing!" />
-      <span style="margin-left: 15px; font-size: 18px">熊猫沉浸</span>
-    </el-header> -->
-
     <el-container>
       <el-container>
         <!-- 侧边栏模板 -->
         <!-- <sidebar :student-info="studentInfo" :count-tm="countTm" /> -->
-        <!-- 题目部分 -->
         <el-main>
+        <!-- 题目部分 -->
           <div id="chose">
             <div class="question-container">
 
 
 
-              
+
               <!-- part1_选择题 -->
-              <xzt :questions="questions.xzt" v-if="questions.xzt" />
+              <xzt :questions="questions.xzt" v-if="questions.xzt && questions.xzt.length" />
               <!-- part2_填空题 -->
-              <tkt :all-questions="questions.tkt" v-if="questions.tkt" />
-              <!-- part3_画图题 -->
-              <div v-for="htt in questions.htt" :key="htt">
-                <htt :message="htt" />
-              </div>
-              <div v-for="htt_tuo in questions.htt_tuo" :key="htt_tuo">
-                <htt_tuo :message="htt_tuo" />
-              </div>
-              <!-- part4_连线题 -->
-              <div v-for="lxt in questions.lxt" :key="lxt">
-                <lxt :message="lxt" />
-              </div>
-              <!-- part5_数数题 -->
-              <div v-for="sst in questions.sst" :key="sst">
-                <sst :item="sst" />
-              </div>
-              <!-- part6_涂画题 -->
+              <tkt :all-questions="questions.tkt" v-if="questions.tkt && questions.tkt.length" />
+              <!-- 涂画题 部分 -->
               <tht :items="questions.tht.items" :tuxing-path="questions.tht.tuxingpath" v-if="questions.tht.items" />
-              <!-- part7_圈数题 -->
-              <div v-for="qst in questions.qst" :key="qst">
-                <qst :message="qst" />
-              </div>
+              <!-- 画图题 部分 -->
+              <template v-if="questions.htt && questions.htt.length">
+                <div v-for="htt in questions.htt" :key="htt">
+                  <htt :message="htt" />
+                </div>
+              </template>
 
+              <!-- htt_tuo 部分 -->
+              <template v-if="questions.htt_tuo && questions.htt_tuo.length">
+                <div v-for="htt_tuo in questions.htt_tuo" :key="htt_tuo">
+                  <htt_tuo :message="htt_tuo" />
+                </div>
+              </template>
 
+              <!-- lxt 部分 -->
+              <template v-if="questions.lxt && questions.lxt.length">
+                <div v-for="lxt in questions.lxt" :key="lxt">
+                  <lxt :message="lxt" />
+                </div>
+              </template>
 
+              <!-- sst 部分 -->
+              <template v-if="questions.sst && questions.sst.length">
+                <div v-for="sst in questions.sst" :key="sst">
+                  <sst :item="sst" />
+                </div>
+              </template>
 
-
+              <!-- qst 部分 -->
+              <template v-if="questions.qst && questions.qst.length">
+                <div v-for="qst in questions.qst" :key="qst">
+                  <qst :message="qst" />
+                </div>
+              </template>
 
 
               <el-button type="primary" @click="willSubmit" id="Submit" size="large">提交答案</el-button>
+
             </div>
           </div>
         </el-main>
@@ -111,7 +117,7 @@ const mockQuestions = {
   "tkt": [
     {
       "id": 1,
-      "title_main": "Part1: 认识数字1、2、3，理解基数含义",
+      "title_main": "",
       "title": [
         "1.认识数字\"1\"",
         "2.认识数字\"2",
@@ -127,49 +133,14 @@ const mockQuestions = {
         "有四个萝卜，四朵花，可以用数字TNUM表示，也可以用TNUM个小圆片表示。",
         "有五只鸭子，可以用数字TNUM表示，也可以用TNUM个小圆片表示。"
       ],
-      "userAnswer": [
-        {
-          "type": "complex",
-          "sections": [
-            { "answers": ["", ""] },
-            { "answers": ["", ""] }
-          ]
-        },
-        {
-          "type": "simple",
-          "answers": ["", ""]
-        },
-        {
-          "type": "simple",
-          "answers": ["", ""]
-        },
-        {
-          "type": "simple",
-          "answers": ["", ""]
-        },
-        {
-          "type": "simple",
-          "answers": ["", ""]
-        }
-      ],
-      "answers": [
-        [
-          ["1", "1"],
-          ["小船", "小狗"]
-        ],
-        ["2", "2"],
-        ["3", "3"],
-        ["4", "4"],
-        ["5", "5"]
-      ],
-      fltUserAnswer:[],
-      fltAnswer:[],
+      "userAnswer": {},
+      "answers": ["1", "1", "小船", "小狗", "2", "2", "3", "3", "4", "4", "5", "5"],
     }
   ],
 
   "htt": [{
     "id": 2,
-    "title": "Part2",
+    "title": "",
     "subQuestion": [
       {
         "id": 1,
@@ -208,7 +179,7 @@ const mockQuestions = {
   "lxt": [
     {
       "id": 1,
-      "title": "part3：请连接和图片中物品数量一致的圆的图片",
+      "title": "请连接和图片中物品数量一致的圆的图片",
       "flag": "t3",
       "changed": false,
       "result": [],
@@ -267,7 +238,7 @@ const mockQuestions = {
     },
     {
       "id": 2,
-      "title": "拓展应用3：请连接对应物品数量的数字",
+      "title": "请连接对应物品数量的数字",
       "flag": "tuo3",
       "changed": false,
       "result": [],
@@ -325,7 +296,7 @@ const mockQuestions = {
       ]
     }],
 
-  "tht": [{
+  "tht": {
     "items": [
       {
         "rightItem": `${basePath}/rightItem1_3.png`,
@@ -351,7 +322,7 @@ const mockQuestions = {
       { "redCircle": `${basePath}/redCircle_2.png` },
       { "noneCircle": `${basePath}/noneCircle_2.png` }
     ]
-  }],
+  },
   "qst": [{
     "title": "拓展应用2：对照上面图片根据左边的图形数量圈出右边的数量",
     "example": {
@@ -370,7 +341,7 @@ const mockQuestions = {
   }],
   "htt_tuo": [{
     "id": [1, 2, 3],
-    "title": "拓展应用1：根据数字提示，把缺少的图形拖进来",
+    "title": "根据数字提示，把缺少的图形拖进来",
     "subQuestion": [
       {
         "id": 1,
@@ -447,12 +418,13 @@ export default {
       ]);
   }, methods: {
     generateJson() {
-
+      const keys = Object.keys(this.questions);
+      console.log(keys);
 
     },
-    willSubmit(){
+    willSubmit() {
       console.log(this.questions);
-      
+
     },
 
   }
