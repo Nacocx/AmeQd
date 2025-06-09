@@ -61,6 +61,8 @@ export default {
     //拖拽事件一开始就监听
     document.addEventListener('mousemove', this.mousemove);
     document.addEventListener('mouseup', this.mouseup);
+
+    
   },
 
   beforeDestroy() {
@@ -120,7 +122,7 @@ export default {
             }
             // 
             // 存储用户答案
-            this.message.userAnswer[e.dataset.value - 1].push(this.message.draggedElement.dataset.value);
+            this.userAnswer[e.dataset.value - 1].push(this.message.draggedElement.dataset.value);
             this.message.draggedElement = null;
             // console.log(this.message.userAnswer);
             this.message.startX = 0;
@@ -145,7 +147,7 @@ export default {
       // console.log(this.message.userAnswer);
 
 
-      this.message.userAnswer.forEach((e, index) => {
+      this.userAnswer.forEach((e, index) => {
         // console.log(e);
 
         var num = 0;
