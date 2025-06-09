@@ -425,7 +425,7 @@ export default {
 
 
 
-    
+
   },
   methods: {
     async calTotalTm() {
@@ -474,10 +474,18 @@ export default {
 
 
 
-          console.log(this.questions);
-          console.log(this.TmBoolinfo);
-          console.log(this.countTm);
+          // console.log(this.questions);
+          // console.log(this.TmBoolinfo);
+          // console.log(this.countTm);
           this.getTktBoolList();
+          this.getSstBoolList();
+          this.getHttBoolList();
+          this.getLxtBoolList();
+          this.getThtBoolList();
+          this.getQsrBoolList();
+          this.getHttTuoBoolList();
+
+
           console.log(this.boolLists);
           ElMessage({
             type: "success",
@@ -536,22 +544,92 @@ export default {
         }
       })
     },
-    getHttBoolList(){
-      this.tmRightCnt.htt=0;
-      this.boolLists.htt=[];
+    getHttBoolList() {
+      this.tmRightCnt.htt = 0;
+      this.boolLists.htt = [];
       this.questions.htt.forEach(e => {
-        for(let i=0;i<e.subQuestion.length;i++){
-          if(e.subQuestion[i].answer===e.userAnswer[i]){
+        for (let i = 0; i < e.subQuestion.length; i++) {
+          if (e.subQuestion[i].answer === e.userAnswer[i]) {
             this.tmRightCnt.htt++;
             this.boolLists.htt.push(true);
-          }else{
+          } else {
             this.boolLists.htt.push(false);
           }
         }
       });
     },
+    getLxtBoolList() {
+      this, this.tmRightCnt.lxt = 0;
+      this.boolLists.lxt = [];
+      this.questions.lxt.forEach(e => {
+        e.result.forEach(el => {
+          if (el === true) this.tmRightCnt.lxt++;
+          this.boolLists.lxt.push(el);
+        })
+      })
+    },
+    getThtBoolList() {
+      this.tmRightCnt.tht = 0;
+      this.boolLists.tht = [];
+      this.questions.tht.items.forEach(e => {
+        let cnt = 0; e.flag.forEach(el => {
+          if (el) cnt++;
+        })
+        if (cnt === e.cnt) {
+          this.tmRightCnt.tht++;
+          this.boolLists.tht.push(true);
+        } else {
+          this.boolLists.tht.push(false);
+        }
+      })
+    },
+    getQsrBoolList() {
+      this.tmRightCnt.qst = 0;
+      this.boolLists.qst = [];
+      this.questions.qst.forEach(e => {
+        if (e.result === true) {
+          this.tmRightCnt.qst++;
+          this.boolLists.qst.push(true);
+        } else {
+          this.boolLists.qst.push(false);
+        }
+      })
+    },
+    getHttTuoBoolList() {
+      this.tmRightCnt.htt_tuo = 0;
+      let httAns = [];
+      this.questions.htt.forEach(a => {
+        a.userAnswer.forEach((e, index) => {
+          let num = 0;
+          let flag = false;
+          e.forEach((e1, index1) => {
+            if (e1 != a.id[index]) {
+              if (flag === false) {
+                httAns.push(false);
+                flag = true;
+              }
+            } else {
+              num++;
+            }
+          });
+
+          if (num == a.subQuestion[index].answer && flag === false) {
+            httAns.push(true);
+            this.tmRightCnt++;
+            flag = true;
+          }
+
+          if (flag === false) {
+            httAns.push(false);
+            flag = true;
+          }
+        })
+      });
+      this.boolLists.htt_tuo = httAns;
 
 
+
+    }
   }
 }
 
