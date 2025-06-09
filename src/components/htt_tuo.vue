@@ -151,26 +151,26 @@ export default {
         // console.log(e);
 
         var num = 0;
-        var flag = 0;
+        var flag = false;
         e.forEach((e1, index1) => {
 
           if (e1 != this.message.subQuestion[index].trueShape) {
-            if (flag == 0) {
-              this.message.answer.push(0);
-              flag = 1;
+            if (flag == false) {
+              this.message.answer.push(false);
+              flag =true;
             }
           }
           else {
             num++;
           }
         })
-        if (num == this.message.subQuestion[index].answer && flag == 0) {
-          this.message.answer.push(1);
-          flag = 1;
+        if (num == this.message.subQuestion[index].answer && flag == false) {
+          this.message.answer.push(true);
+          flag = true;
         }
-        if (flag == 0) {
-          this.message.answer.push(0);
-          flag = 1;
+        if (flag == false) {
+          this.message.answer.push(false);
+          flag = true;
         }
       })
       // console.log(this.message.answer);//返回给后端的结果 对应每道题是否正确
