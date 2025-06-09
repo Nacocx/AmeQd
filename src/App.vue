@@ -59,13 +59,13 @@
 
     <el-dialog v-model="dialogTableVisible" title="答题统计结果:" width="800">
       <span>整体对了{{ finalJson.totalR }}题,正确率: <el-progress :percentage="finalJson.totalP" /></span>
-      <span>选择题对了{{ finalJson.xztR }}题,正确率: <el-progress :percentage="finalJson.xztP" /></span>
-      <span>填空题对了{{ finalJson.tktR }}题,正确率: <el-progress :percentage="finalJson.tktP" /></span>
-      <span>连线题对了{{ finalJson.lxtR }}题,正确率: <el-progress :percentage="finalJson.lxtP" /></span>
-      <span>画图题对了{{ finalJson.httR }}题,正确率: <el-progress :percentage="finalJson.httP" /></span>
-      <span>涂画题对了{{ finalJson.thtR }}题,正确率: <el-progress :percentage="finalJson.thtP" /></span>
-      <span>数数题对了{{ finalJson.sstR }}题,正确率: <el-progress :percentage="finalJson.sstP" /></span>
-      <span>画圈题对了{{ finalJson.hqtR }}题,正确率: <el-progress :percentage="finalJson.qstP" /></span>
+      <span v-if="questions.xzt && questions.xzt.length">选择题对了{{ finalJson.xztR }}题,正确率: <el-progress :percentage="finalJson.xztP" /></span>
+      <span v-if="questions.tkt && questions.tkt.length">填空题对了{{ finalJson.tktR }}题,正确率: <el-progress :percentage="finalJson.tktP" /></span>
+      <span v-if="questions.lxt && questions.lxt.length">连线题对了{{ finalJson.lxtR }}题,正确率: <el-progress :percentage="finalJson.lxtP" /></span>
+      <span v-if="questions.htt && questions.htt.length">画图题对了{{ finalJson.httR }}题,正确率: <el-progress :percentage="finalJson.httP" /></span>
+      <span v-if="questions.tht && questions.tht.length">涂画题对了{{ finalJson.thtR }}题,正确率: <el-progress :percentage="finalJson.thtP" /></span>
+      <span v-if="questions.sst && questions.sst.length">数数题对了{{ finalJson.sstR }}题,正确率: <el-progress :percentage="finalJson.sstP" /></span>
+      <span v-if="questions.qst && questions.qst.length">画圈题对了{{ finalJson.hqtR }}题,正确率: <el-progress :percentage="finalJson.qstP" /></span>
     </el-dialog>
 
 
