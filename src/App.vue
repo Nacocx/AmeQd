@@ -549,7 +549,7 @@ export default {
       this.boolLists.htt = [];
       this.questions.htt.forEach(e => {
         for (let i = 0; i < e.subQuestion.length; i++) {
-          if (e.subQuestion[i].answer === e.userAnswer[i]) {
+          if (e.subQuestion[i].answer === e.userAnswer[i].length) {
             this.tmRightCnt.htt++;
             this.boolLists.htt.push(true);
           } else {
@@ -595,40 +595,13 @@ export default {
         }
       })
     },
+
     getHttTuoBoolList() {
       this.tmRightCnt.htt_tuo = 0;
-      let httAns = [];
-      this.questions.htt.forEach(a => {
-        a.userAnswer.forEach((e, index) => {
-          let num = 0;
-          let flag = false;
-          e.forEach((e1, index1) => {
-            if (e1 != a.id[index]) {
-              if (flag === false) {
-                httAns.push(false);
-                flag = true;
-              }
-            } else {
-              num++;
-            }
-          });
-
-          if (num == a.subQuestion[index].answer && flag === false) {
-            httAns.push(true);
-            this.tmRightCnt++;
-            flag = true;
-          }
-
-          if (flag === false) {
-            httAns.push(false);
-            flag = true;
-          }
-        })
+      this.boolLists.htt_tuo=[];
+      this.questions.htt_tuo.forEach(a => {
+        this.boolLists.htt_tuo.push(...a.answer);
       });
-      this.boolLists.htt_tuo = httAns;
-
-
-
     }
   }
 }
