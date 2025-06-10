@@ -1,6 +1,6 @@
 <template>
   <div class="htt_main_body">
-    <h1>{{ message.title }}:请拖进与图片物品数量一样的:<img :src="message.shape[message.id - 1]" alt="" class="shape">
+    <h1>{{ message.title }}请拖进与图片物品数量一样的:<img :src="message.shape[message.id - 1]" alt="" class="shape">
       <div class="questions">
 
       </div>
@@ -14,7 +14,7 @@
         </div>
         <!-- 这里加了data-value属性 匹配那个框 -->
         <div class="down target-area" :data-value="index + 1">
-          {{ index }}
+          <!-- {{ index }} -->
         </div>
       </div>
     </div>

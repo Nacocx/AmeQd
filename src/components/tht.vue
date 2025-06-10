@@ -1,6 +1,6 @@
     <template >
         <div>
-            <h1>part5:数一数，涂一涂，填一填</h1>
+            <h1>数一数，涂一涂，填一填</h1>
             <!-- <h3>（思维训练）数一数，涂一涂，填一填</h3> -->
             <div class="container">
                 <div class="left-area">
