@@ -14,7 +14,7 @@
         </div>
         <!-- 这里加了data-value属性 匹配那个框 -->
         <div class="down target-area" :data-value="index + 1">
-          {{ index }}
+          <!-- {{ index }} -->
         </div>
       </div>
     </div>
