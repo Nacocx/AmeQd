@@ -1,10 +1,14 @@
 <template>
   <div class="circle-drawing-game">
-    <h1>接着点出与事物数量相等的<span>
-        <img alt="Missing Image" :src="item.tuXingPath"  style="width: 20px" />
-      </span>
-    </h1>
+    <div class="title">
+       <h1>接着点出与事物数量相等的圆：</h1>
+    <div>
+        <img alt="Missing Image" :src="item.tuXingPath" class="title_img"/>
+    </div>
 
+
+    </div>
+   
     <div class="item-display">
       <div class="left_img">
       <img :src="item.title.image" alt="物品图片" />
@@ -25,7 +29,7 @@
     </div>
     <el-button @click="resetCircles" type="primary" class="btn">重新画</el-button>
   </div>
-  <!-- <hr> -->
+  <hr>
 </template>
 
 <script>
@@ -79,11 +83,23 @@ export default {
   margin: 0;
   padding: 0;
 }
+.title{
+  display: flex;
+  justify-content: center;
+  height: 20px;
+  position: relative;
+  margin-bottom: 30px;
+}
+.title_img{
+  width: 50px;
+  position: absolute;
+  top: -10px;
+}
 .circle-drawing-game {
   /* background-color: #4caf50; */
   font-family: Arial, sans-serif;
   max-width:890px;
-  height: 320px;
+  height: 330px;
   margin: 0 auto;
   padding: 20px;
   text-align: center;

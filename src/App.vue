@@ -40,8 +40,6 @@
                 <div v-for="sst in questions.sst" :key="sst">
                   <sst :item="sst" />
                 </div>
-                
-                <hr>
               </template>
 
               <!-- qst 部分 -->
