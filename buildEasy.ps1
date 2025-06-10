@@ -28,4 +28,5 @@ if (Test-Path $sourcePath) {
 
 # 显示目录结构
 Write-Host "`n./dist 目录结构：" -ForegroundColor Green
-tree /F ./dist
+tree ./dist
+# tree /F ./dist
