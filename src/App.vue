@@ -15,11 +15,11 @@
               <!-- 涂画题 部分 -->
               <tht :items="questions.tht.items" :tuxing-path="questions.tht.tuxingpath" v-if="questions.tht.items" />
               <!-- 画图题 部分 -->
-              <template v-if="questions.htt && questions.htt.length">
-                <div v-for="htt in questions.htt" :key="htt">
-                  <htt :message="htt" />
-                </div>
-              </template>
+                <template v-if="questions.htt && questions.htt.length">
+                  <div v-for="htt in questions.htt" :key="htt">
+                    <htt :message="htt" />
+                  </div>
+                </template>
 
               <!-- htt_tuo 部分 -->
               <template v-if="questions.htt_tuo && questions.htt_tuo.length">
@@ -414,8 +414,7 @@ export default {
     Sst,
     lxt,
     qst,
-    htt_tuo
-
+    htt_tuo,
   },
   async created() {
 
