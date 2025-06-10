@@ -1,24 +1,33 @@
 <template>
   <div class="circle-drawing-game">
-    <h1>接着点出与事物数量相等的<span>
-        <img alt="Missing Image" :src="item.tuXingPath"  style="width: 20px" />
-      </span></h1>
-
-    <div class="item-display">
-      <img :src="item.title.image" alt="物品图片" />
-      <div class="count">Your Answer: {{ item.userAnswer }}</div>
+    <div class="title">
+       <h1>接着点出与事物数量相等的圆：</h1>
+    <div>
+        <img alt="Missing Image" :src="item.tuXingPath" class="title_img"/>
     </div>
 
-    <div class="drawing-area" @click="addCircle" @touchstart.passive="addCircle">
+
+    </div>
+   
+    <div class="item-display">
+      <div class="left_img">
+      <img :src="item.title.image" alt="物品图片" />
+      </div>
+      <div class="right_body">
+      <div class="count">Your Answer: {{ item.userAnswer }}</div>
+      <div class="drawing-area" @click="addCircle" @touchstart.passive="addCircle">
       <div v-for="(circle, index) in circles" :key="index" class="circle" :style="{
         left: circle.x + 'px',
         top: circle.y + 'px',
       }">
-        <img :src="item.tuXingPath" style="width: 40%" alt="O" />
+        <img :src="item.tuXingPath" style="width: 50px ;height: 50px;" alt="O" />
       </div>
 
+      </div>
+      
+      </div>
     </div>
-    <el-button @click="resetCircles" type="primary">重新画</el-button>
+    <el-button @click="resetCircles" type="primary" class="btn">重新画</el-button>
   </div>
   <hr>
 </template>
@@ -70,41 +79,79 @@ export default {
 </script>
 
 <style scoped>
+*{
+  margin: 0;
+  padding: 0;
+}
+.title{
+  display: flex;
+  justify-content: center;
+  height: 20px;
+  position: relative;
+  margin-bottom: 30px;
+}
+.title_img{
+  width: 50px;
+  position: absolute;
+  top: -10px;
+}
 .circle-drawing-game {
+  /* background-color: #4caf50; */
   font-family: Arial, sans-serif;
-  max-width: 500px;
+  max-width:890px;
+  height: 330px;
   margin: 0 auto;
   padding: 20px;
   text-align: center;
+  position: relative;
 }
 
-.item-display {
-  margin: 20px 0;
-}
 
-.item-display img {
-  width: 250px;
+ .circle-drawing-game .item-display {
+  margin: 10px 0;
+  display: flex;
+  /* background-color: #4caf50; */
+
+}
+.circle-drawing-game .left_img{
+  width: 350px;
   height: 250px;
-  object-fit: contain;
-  border: 1px solid #eee;
+  /* background-color: #ccc; */
+  /* text-align: center; */
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
+.circle-drawing-game .left_img img{
+  margin-top: 30px;
 
-.count {
+}
+.circle-drawing-game .item-display img {
+  width: 200px;
+  height: 200px;
+  object-fit: contain;
+  /* border: 1px solid #eee; */
+}
+.circle-drawing-game .right_body{
+width: 550px;
+height: 250px;
+}
+.circle-drawing-game .count {
   font-size: 18px;
   margin-top: 10px;
   font-weight: bold;
 }
 
-.drawing-area {
+.circle-drawing-game .drawing-area {
   position: relative;
   width: 100%;
-  height: 300px;
+  height: 200px;
   border: 2px dashed #ccc;
-  margin: 20px 0;
+  margin: 10px 0;
   cursor: pointer;
 }
 
-.circle {
+.circle-drawing-game .circle {
   position: absolute;
   font-size: 50px;
   transform: translate(-50%, -50%);
@@ -112,22 +159,28 @@ export default {
   /*用户无法选中绘画区域的文本 */
 }
 
-.controls {
+.circle-drawing-game .controls {
   margin-top: 20px;
 }
 
-button {
+.circle-drawing-game button {
   padding: 8px 16px;
   margin: 0 10px;
   background-color: #4caf50;
+  
   color: white;
   border: none;
   border-radius: 4px;
   cursor: pointer;
 }
 
-button:disabled {
+.circle-drawing-game button:disabled {
   background-color: #cccccc;
   cursor: not-allowed;
+}
+.btn{
+ position: absolute;
+ right: 275px;
+ transform: translateX(50%);
 }
 </style>
