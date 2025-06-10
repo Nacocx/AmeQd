@@ -59,13 +59,20 @@
 
     <el-dialog v-model="dialogTableVisible" title="答题统计结果:" width="800">
       <span>整体对了{{ finalJson.totalR }}题,正确率: <el-progress :percentage="finalJson.totalP" /></span>
-      <span v-if="questions.xzt && questions.xzt.length">选择题对了{{ finalJson.xztR }}题,正确率: <el-progress :percentage="finalJson.xztP" /></span>
-      <span v-if="questions.tkt && questions.tkt.length">填空题对了{{ finalJson.tktR }}题,正确率: <el-progress :percentage="finalJson.tktP" /></span>
-      <span v-if="questions.lxt && questions.lxt.length">连线题对了{{ finalJson.lxtR }}题,正确率: <el-progress :percentage="finalJson.lxtP" /></span>
-      <span v-if="questions.htt && questions.htt.length">画图题对了{{ finalJson.httR }}题,正确率: <el-progress :percentage="finalJson.httP" /></span>
-      <span v-if="questions.tht && questions.tht.length">涂画题对了{{ finalJson.thtR }}题,正确率: <el-progress :percentage="finalJson.thtP" /></span>
-      <span v-if="questions.sst && questions.sst.length">数数题对了{{ finalJson.sstR }}题,正确率: <el-progress :percentage="finalJson.sstP" /></span>
-      <span v-if="questions.qst && questions.qst.length">画圈题对了{{ finalJson.hqtR }}题,正确率: <el-progress :percentage="finalJson.qstP" /></span>
+      <span v-if="questions.xzt && questions.xzt.length">选择题对了{{ finalJson.xztR }}题,正确率: <el-progress
+          :percentage="finalJson.xztP" /></span>
+      <span v-if="questions.tkt && questions.tkt.length">填空题对了{{ finalJson.tktR }}题,正确率: <el-progress
+          :percentage="finalJson.tktP" /></span>
+      <span v-if="questions.lxt && questions.lxt.length">连线题对了{{ finalJson.lxtR }}题,正确率: <el-progress
+          :percentage="finalJson.lxtP" /></span>
+      <span v-if="questions.htt && questions.htt.length">画图题对了{{ finalJson.httR }}题,正确率: <el-progress
+          :percentage="finalJson.httP" /></span>
+      <span v-if="questions.tht && questions.tht.length">涂画题对了{{ finalJson.thtR }}题,正确率: <el-progress
+          :percentage="finalJson.thtP" /></span>
+      <span v-if="questions.sst && questions.sst.length">数数题对了{{ finalJson.sstR }}题,正确率: <el-progress
+          :percentage="finalJson.sstP" /></span>
+      <span v-if="questions.qst && questions.qst.length">画圈题对了{{ finalJson.hqtR }}题,正确率: <el-progress
+          :percentage="finalJson.qstP" /></span>
     </el-dialog>
 
 
@@ -434,22 +441,45 @@ export default {
       this.countTm.totalTm = 0;
       keys.forEach(e => {
         this.TmBoolinfo[e] = true;
-        if (e === "xzt")
-          this.countTm.totalTm += this.questions.xzt.length;
-        else if (e === "sst")
-          this.countTm.totalTm += this.questions.sst.length;
-        else if (e === "tkt")
-          this.countTm.totalTm += this.questions.tkt.reduce((sum, el) => sum + el.answers.length, 0);
-        else if (e === "htt")
-          this.countTm.totalTm += this.questions.htt.reduce((sum, el) => sum + el.subQuestion.length, 0);
-        else if (e === "lxt")
-          this.countTm.totalTm += this.questions.lxt.reduce((sum, el) => sum + el.imgU.length, 0);
-        else if (e === "tht")
-          this.countTm.totalTm += this.questions.tht.items.length;
-        else if (e === "qst")
-          this.countTm.totalTm += this.questions.qst.length;
-        else if (e === "htt_tuo")
-          this.countTm.totalTm += this.questions.htt_tuo.reduce((sum, el) => sum + el.subQuestion.length, 0);
+
+        // 初始化 countTm 的题型计数（如果不存在）
+        if (!this.countTm[e]) {
+          this.countTm[e] = 0;
+        }
+
+        // 根据题目类型计算数量并存储到 countTm
+        if (e === "xzt") {
+          this.countTm.xzt = this.questions.xzt.length;
+          this.countTm.totalTm += this.countTm.xzt;
+        }
+        else if (e === "sst") {
+          this.countTm.sst = this.questions.sst.length;
+          this.countTm.totalTm += this.countTm.sst;
+        }
+        else if (e === "tkt") {
+          this.countTm.tkt = this.questions.tkt.reduce((sum, el) => sum + el.answers.length, 0);
+          this.countTm.totalTm += this.countTm.tkt;
+        }
+        else if (e === "htt") {
+          this.countTm.htt = this.questions.htt.reduce((sum, el) => sum + el.subQuestion.length, 0);
+          this.countTm.totalTm += this.countTm.htt;
+        }
+        else if (e === "lxt") {
+          this.countTm.lxt = this.questions.lxt.reduce((sum, el) => sum + el.imgU.length, 0);
+          this.countTm.totalTm += this.countTm.lxt;
+        }
+        else if (e === "tht") {
+          this.countTm.tht = this.questions.tht.items.length;
+          this.countTm.totalTm += this.countTm.tht;
+        }
+        else if (e === "qst") {
+          this.countTm.qst = this.questions.qst.length;
+          this.countTm.totalTm += this.countTm.qst;
+        }
+        else if (e === "htt_tuo") {
+          this.countTm.htt_tuo = this.questions.htt_tuo.reduce((sum, el) => sum + el.subQuestion.length, 0);
+          this.countTm.totalTm += this.countTm.htt_tuo;
+        }
       });
       console.log(this.countTm);
     },
@@ -487,6 +517,8 @@ export default {
 
 
           console.log(this.boolLists);
+          console.log(this.tmRightCnt);
+
           ElMessage({
             type: "success",
             message: "提交成功!",
@@ -598,9 +630,16 @@ export default {
 
     getHttTuoBoolList() {
       this.tmRightCnt.htt_tuo = 0;
-      this.boolLists.htt_tuo=[];
+      this.boolLists.htt_tuo = [];
       this.questions.htt_tuo.forEach(a => {
-        this.boolLists.htt_tuo.push(...a.answer);
+        a.answer.forEach(el => {
+          if (el === true) {
+            this.tmRightCnt.htt_tuo++;
+            this.boolLists.htt_tuo.push(true);
+          } else {
+            this.boolLists.htt_tuo.push(false);
+          }
+        })
       });
     }
   }
