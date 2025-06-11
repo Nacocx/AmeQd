@@ -15,11 +15,11 @@
               <!-- 涂画题 部分 -->
               <tht :items="questions.tht.items" :tuxing-path="questions.tht.tuxingpath" v-if="questions.tht.items" />
               <!-- 画图题 部分 -->
-                <template v-if="questions.htt && questions.htt.length">
-                  <div v-for="htt in questions.htt" :key="htt">
-                    <htt :message="htt" />
-                  </div>
-                </template>
+              <template v-if="questions.htt && questions.htt.length">
+                <div v-for="htt in questions.htt" :key="htt">
+                  <htt :message="htt" />
+                </div>
+              </template>
 
               <!-- htt_tuo 部分 -->
               <template v-if="questions.htt_tuo && questions.htt_tuo.length">
@@ -441,43 +441,47 @@ export default {
       keys.forEach(e => {
         this.TmBoolinfo[e] = true;
 
-        // 初始化 countTm 的题型计数（如果不存在）
+        // 初始化 countTm 的题型对象
         if (!this.countTm[e]) {
-          this.countTm[e] = 0;
+          this.countTm[e] = {
+            cnt: 0,
+            right: 0,
+            percentage: 0
+          };
         }
 
-        // 根据题目类型计算数量并存储到 countTm
+        // 根据题目类型计算数量
         if (e === "xzt") {
-          this.countTm.xzt = this.questions.xzt.length;
-          this.countTm.totalTm += this.countTm.xzt;
+          this.countTm.xzt.cnt = this.questions.xzt.length;
+          this.countTm.totalTm += this.countTm.xzt.cnt;
         }
         else if (e === "sst") {
-          this.countTm.sst = this.questions.sst.length;
-          this.countTm.totalTm += this.countTm.sst;
+          this.countTm.sst.cnt = this.questions.sst.length;
+          this.countTm.totalTm += this.countTm.sst.cnt;
         }
         else if (e === "tkt") {
-          this.countTm.tkt = this.questions.tkt.reduce((sum, el) => sum + el.answers.length, 0);
-          this.countTm.totalTm += this.countTm.tkt;
+          this.countTm.tkt.cnt = this.questions.tkt.reduce((sum, el) => sum + el.answers.length, 0);
+          this.countTm.totalTm += this.countTm.tkt.cnt;
         }
         else if (e === "htt") {
-          this.countTm.htt = this.questions.htt.reduce((sum, el) => sum + el.subQuestion.length, 0);
-          this.countTm.totalTm += this.countTm.htt;
+          this.countTm.htt.cnt = this.questions.htt.reduce((sum, el) => sum + el.subQuestion.length, 0);
+          this.countTm.totalTm += this.countTm.htt.cnt;
         }
         else if (e === "lxt") {
-          this.countTm.lxt = this.questions.lxt.reduce((sum, el) => sum + el.imgU.length, 0);
-          this.countTm.totalTm += this.countTm.lxt;
+          this.countTm.lxt.cnt = this.questions.lxt.reduce((sum, el) => sum + el.imgU.length, 0);
+          this.countTm.totalTm += this.countTm.lxt.cnt;
         }
         else if (e === "tht") {
-          this.countTm.tht = this.questions.tht.items.length;
-          this.countTm.totalTm += this.countTm.tht;
+          this.countTm.tht.cnt = this.questions.tht.items.length;
+          this.countTm.totalTm += this.countTm.tht.cnt;
         }
         else if (e === "qst") {
-          this.countTm.qst = this.questions.qst.length;
-          this.countTm.totalTm += this.countTm.qst;
+          this.countTm.qst.cnt = this.questions.qst.length;
+          this.countTm.totalTm += this.countTm.qst.cnt;
         }
         else if (e === "htt_tuo") {
-          this.countTm.htt_tuo = this.questions.htt_tuo.reduce((sum, el) => sum + el.subQuestion.length, 0);
-          this.countTm.totalTm += this.countTm.htt_tuo;
+          this.countTm.htt_tuo.cnt = this.questions.htt_tuo.reduce((sum, el) => sum + el.subQuestion.length, 0);
+          this.countTm.totalTm += this.countTm.htt_tuo.cnt;
         }
       });
       console.log(this.countTm);
@@ -533,114 +537,120 @@ export default {
       // });
     },
     getXztBoolList() {
-      this.tmRightCnt.xzt = 0;
+      this.countTm.xzt.right = 0;
       this.boolLists.xzt = [];
       this.questions.xzt.forEach((e, index) => {
         if (e.userAnswer === e.answer) {
-          this.tmRightCnt.xzt++;
+          this.countTm.xzt.right++;
           this.boolLists.xzt[index] = true;
         } else {
           this.boolLists.xzt[index] = false;
         }
-
       });
+      this.countTm.xzt.percentage = parseFloat((this.countTm.xzt.right / this.countTm.xzt.cnt * 100).toFixed(2));
     },
     getTktBoolList() {
-      this.tmRightCnt.tkt = 0;
+      this.countTm.tkt.right = 0;
       this.boolLists.tkt = [];
       this.questions.tkt.forEach((e, index) => {
         let obj = e.userAnswer;
         let values = Object.values(obj);
         for (let i = 0; i < e.answers.length; i++) {
           if (values[i] === e.answers[i]) {
-            this.tmRightCnt.tkt++;
+            this.countTm.tkt.right++;
             this.boolLists.tkt.push(true);
           } else {
             this.boolLists.tkt.push(false);
           }
         }
-      })
-
+      });
+      this.countTm.tkt.percentage = parseFloat((this.countTm.tkt.right / this.countTm.tkt.cnt * 100).toFixed(2));
     },
     getSstBoolList() {
-      this.tmRightCnt.sst = 0;
+      this.countTm.sst.right = 0;
       this.boolLists.sst = [];
       this.questions.sst.forEach(e => {
         if (e.userAnswer === e.title.count) {
-          this.tmRightCnt.sst++;
+          this.countTm.sst.right++;
           this.boolLists.sst.push(true);
         }
         else {
           this.boolLists.sst.push(false);
         }
-      })
+      });
+      this.countTm.sst.percentage = parseFloat((this.countTm.sst.right / this.countTm.sst.cnt * 100).toFixed(2));
     },
     getHttBoolList() {
-      this.tmRightCnt.htt = 0;
+      this.countTm.htt.right = 0;
       this.boolLists.htt = [];
       this.questions.htt.forEach(e => {
         for (let i = 0; i < e.subQuestion.length; i++) {
           if (e.subQuestion[i].answer === e.userAnswer[i].length) {
-            this.tmRightCnt.htt++;
+            this.countTm.htt.right++;
             this.boolLists.htt.push(true);
           } else {
             this.boolLists.htt.push(false);
           }
         }
       });
+      this.countTm.htt.percentage = parseFloat((this.countTm.htt.right / this.countTm.htt.cnt * 100).toFixed(2));
     },
     getLxtBoolList() {
-      this, this.tmRightCnt.lxt = 0;
+      this.countTm.lxt.right = 0;
       this.boolLists.lxt = [];
       this.questions.lxt.forEach(e => {
         e.result.forEach(el => {
-          if (el === true) this.tmRightCnt.lxt++;
+          if (el === true) this.countTm.lxt.right++;
           this.boolLists.lxt.push(el);
         })
-      })
+      });
+      this.countTm.lxt.percentage = parseFloat((this.countTm.lxt.right / this.countTm.lxt.cnt * 100).toFixed(2));
     },
     getThtBoolList() {
-      this.tmRightCnt.tht = 0;
+      this.countTm.tht.right = 0;
       this.boolLists.tht = [];
       this.questions.tht.items.forEach(e => {
         let cnt = 0; e.flag.forEach(el => {
           if (el) cnt++;
         })
         if (cnt === e.cnt) {
-          this.tmRightCnt.tht++;
+          this.countTm.tht.right++;
           this.boolLists.tht.push(true);
         } else {
           this.boolLists.tht.push(false);
         }
-      })
+      });
+      this.countTm.tht.percentage = parseFloat((this.countTm.tht.right / this.countTm.tht.cnt * 100).toFixed(2));
     },
     getQsrBoolList() {
-      this.tmRightCnt.qst = 0;
+      this.countTm.qst.right = 0;
       this.boolLists.qst = [];
       this.questions.qst.forEach(e => {
         if (e.result === true) {
-          this.tmRightCnt.qst++;
+          this.countTm.qst.right++;
           this.boolLists.qst.push(true);
         } else {
           this.boolLists.qst.push(false);
         }
-      })
+      });
+      this.countTm.qst.percentage = parseFloat((this.countTm.qst.right / this.countTm.qst.cnt * 100).toFixed(2));
     },
-
     getHttTuoBoolList() {
-      this.tmRightCnt.htt_tuo = 0;
+      this.countTm.htt_tuo.right = 0;
       this.boolLists.htt_tuo = [];
       this.questions.htt_tuo.forEach(a => {
         a.answer.forEach(el => {
           if (el === true) {
-            this.tmRightCnt.htt_tuo++;
+            this.countTm.htt_tuo.right++;
             this.boolLists.htt_tuo.push(true);
           } else {
             this.boolLists.htt_tuo.push(false);
           }
         })
       });
+      this.countTm.htt_tuo.percentage = parseFloat((this.countTm.htt_tuo.right / this.countTm.htt_tuo.cnt * 100).toFixed(2));
     }
+
   }
 }
 
