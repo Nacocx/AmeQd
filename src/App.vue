@@ -438,6 +438,7 @@ export default {
       const keys = Object.keys(this.questions);
       console.log(keys);
       this.countTm.totalTm = 0;
+      this.countTm.rightCnt= 0;
       keys.forEach(e => {
         this.TmBoolinfo[e] = true;
 
@@ -484,7 +485,6 @@ export default {
           this.countTm.totalTm += this.countTm.htt_tuo.cnt;
         }
       });
-      console.log(this.countTm);
     },
     willSubmit() {
       let remainTm = 0;
@@ -521,6 +521,7 @@ export default {
 
           console.log(this.boolLists);
           console.log(this.tmRightCnt);
+      console.log(this.countTm);
 
           ElMessage({
             type: "success",
@@ -542,6 +543,7 @@ export default {
       this.questions.xzt.forEach((e, index) => {
         if (e.userAnswer === e.answer) {
           this.countTm.xzt.right++;
+          this.countTm.rightCnt++;
           this.boolLists.xzt[index] = true;
         } else {
           this.boolLists.xzt[index] = false;
@@ -558,6 +560,7 @@ export default {
         for (let i = 0; i < e.answers.length; i++) {
           if (values[i] === e.answers[i]) {
             this.countTm.tkt.right++;
+          this.countTm.rightCnt++;
             this.boolLists.tkt.push(true);
           } else {
             this.boolLists.tkt.push(false);
@@ -572,6 +575,7 @@ export default {
       this.questions.sst.forEach(e => {
         if (e.userAnswer === e.title.count) {
           this.countTm.sst.right++;
+          this.countTm.rightCnt++;
           this.boolLists.sst.push(true);
         }
         else {
@@ -587,6 +591,7 @@ export default {
         for (let i = 0; i < e.subQuestion.length; i++) {
           if (e.subQuestion[i].answer === e.userAnswer[i].length) {
             this.countTm.htt.right++;
+          this.countTm.rightCnt++;
             this.boolLists.htt.push(true);
           } else {
             this.boolLists.htt.push(false);
@@ -600,7 +605,8 @@ export default {
       this.boolLists.lxt = [];
       this.questions.lxt.forEach(e => {
         e.result.forEach(el => {
-          if (el === true) this.countTm.lxt.right++;
+          
+          if (el === true) {this.countTm.lxt.right++;this.countTm.rightCnt++;}
           this.boolLists.lxt.push(el);
         })
       });
@@ -615,6 +621,7 @@ export default {
         })
         if (cnt === e.cnt) {
           this.countTm.tht.right++;
+          this.countTm.rightCnt++;
           this.boolLists.tht.push(true);
         } else {
           this.boolLists.tht.push(false);
@@ -628,6 +635,7 @@ export default {
       this.questions.qst.forEach(e => {
         if (e.result === true) {
           this.countTm.qst.right++;
+          this.countTm.rightCnt++;
           this.boolLists.qst.push(true);
         } else {
           this.boolLists.qst.push(false);
@@ -642,6 +650,7 @@ export default {
         a.answer.forEach(el => {
           if (el === true) {
             this.countTm.htt_tuo.right++;
+          this.countTm.rightCnt++;
             this.boolLists.htt_tuo.push(true);
           } else {
             this.boolLists.htt_tuo.push(false);
