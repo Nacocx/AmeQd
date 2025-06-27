@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+    <p v-if="isOnloading">Loading......</p>
     <el-container>
       <el-container>
         <!-- 侧边栏模板 -->
@@ -384,8 +385,6 @@ const mockQuestions = {
   }],
 }
 
-
-
 const mockStudentInfo = {
   name: "Jack",
   class: "202",
@@ -398,7 +397,7 @@ export default {
       questions: {},
       studentInfo: {},
       boolLists: {},
-      TmBoolinfo: {},
+      TmBoolInfo: {},
       countTm: {},
       tmRightCnt: {},
       dialogTableVisible: false,
@@ -420,7 +419,7 @@ export default {
   async created() {
     await this.loadInfo();
     await Promise.all([
-    this.calTotalTm(),
+      this.calTotalTm(),
 
 
     ]);
@@ -440,8 +439,7 @@ export default {
       this.keys=keys;
       // console.log(keys);
       this.countTm.totalTm = 0;
-      this.countTm.rightCnt = 0;
-      this.countTm.allP = 0.0;
+
 
       const typeHandlers = {
         xzt: (questions) => questions.xzt.length,
@@ -455,7 +453,7 @@ export default {
       };
 
       keys.forEach(e => {
-        this.TmBoolinfo[e] = true;
+        this.TmBoolInfo[e] = true;
 
         if (!this.countTm[e]) {
           this.countTm[e] = { cnt: 0, right: 0, percentage: 0 };
@@ -491,24 +489,39 @@ export default {
       )
         // 确定
         .then(() => {
-          // this.calcTotal();
-
-
-
-          // console.log(this.questions);
-          // console.log(this.TmBoolinfo);
-          // console.log(this.countTm);
-          this.keys.forEach(e=>{
-
+          this.countTm.rightCnt = 0;
+          this.countTm.allP = 0.0;
+          this.keys.forEach(key => {
+            switch (key) {
+              case 'xzt':
+                this.getXztBoolList();
+                break;
+              case 'tkt':
+                this.getTktBoolList();
+                break;
+              case 'sst':
+                this.getSstBoolList();
+                break;
+              case 'htt':
+                this.getHttBoolList();
+                break;
+              case 'lxt':
+                this.getLxtBoolList();
+                break;
+              case 'tht':
+                this.getThtBoolList();
+                break;
+              case 'qst':
+                this.getQstBoolList(); // 注意函数名是 getQsrBoolList
+                break;
+              case 'htt_tuo':
+                this.getHttTuoBoolList();
+                break;
+              default:
+                console.warn(`未处理 ${key} 类型的函数调用`);
+            }
           });
-          // this.getXztBoolList();
-          this.getTktBoolList();
-          this.getSstBoolList();
-          this.getHttBoolList();
-          this.getLxtBoolList();
-          this.getThtBoolList();
-          this.getQstBoolList();
-          this.getHttTuoBoolList();
+
 
           this.countTm.allP = parseFloat((this.countTm.rightCnt / this.countTm.totalTm * 100).toFixed(2));
 
