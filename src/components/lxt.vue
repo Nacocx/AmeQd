@@ -88,7 +88,7 @@ export default {
       result: [],
       localMessage: { ...this.message },
       audio_isPlay: false,
-      audio_url: false,
+      audio_id: -1,
       audioEle: "",
 
     };
@@ -120,30 +120,37 @@ export default {
     playAudio(index) {
       var url_now;
       var audio_now;
+      var url_id;
+      if (this.audio_isPlay) {
+        if (index == this.audio_id) {
+          console.log("zai");
+          // 停止播放并重置到开始位置
+          this.audioEle.pause();         // 暂停播放
+          this.audioEle.currentTime = 0; // 重置播放位置到 0 秒
+
+          this.audioEle = "";
+          this.audio_isPlay=false;
+          return;
+        }
+        else {
+          this.audioEle = "";
+        }
+      }
       if (index == 0) {
-        console.log(2);
+        console.log(23);
 
-        url_now = this.message.audios[0];
+        url_now = this.message.audios[index];
+        url_id = index;
+        console.log(url_id);
+
         console.log("url+", url_now);
-
-        audio_now = document.createElement('audio');
-        audio_now.src = url_now;
-        audio_now.play();
-        this.audio_isPlay = true;
-        this.audio_url = url_now;
-        this.audioEle=audio;
       }
-      else { }
-
-      if (false) {
-        console.log(1);
-
-
-      }
-      else {
-        
-
-      }
+      audio_now = document.createElement('audio');
+      audio_now.src = url_now;
+      audio_now.play();
+      this.audio_isPlay = true;
+      this.audio_id = url_id;
+      this.audioEle = audio_now;
 
 
     },
