@@ -105,25 +105,29 @@ export default {
 
       // 获取画布相对于视口的位置
       const rect = canvas.getBoundingClientRect();
-      // 计算鼠标在画布内的相对坐标
-      const x = e.clientX - rect.left;
-      const y = e.clientY - rect.top;
+      // 判断是触摸事件还是鼠标事件，分别获取对应的 x 坐标
+      const x = (e.touches ? e.touches[0].clientX : e.clientX) - rect.left;
+      // 判断是触摸事件还是鼠标事件，分别获取对应的 y 坐标
+      const y = (e.touches ? e.touches[0].clientY : e.clientY) - rect.top;
 
       document.addEventListener('mousemove', this.mouseMove);
-      document.addEventListener('touchmove', this.mouseMove);
+      document.addEventListener('touchmove', this.mouseMove, { passive: false });
       this.ctx.beginPath();
       // 使用计算后的相对坐标
       this.ctx.moveTo(x, y);
       // console.log("x=", x, "y=", y);
     },
     mouseMove(e) {
+      e.preventDefault();
       // console.log("123");
       const canvas = this.$refs.canvas;
       // 获取画布相对于视口的位置
       const rect = canvas.getBoundingClientRect();
       // 计算鼠标在画布内的相对坐标
-      const x = e.clientX - rect.left;
-      const y = e.clientY - rect.top;
+      // 判断是触摸事件还是鼠标事件，分别获取对应的 x 坐标
+      const x = (e.touches ? e.touches[0].clientX : e.clientX) - rect.left;
+      // 判断是触摸事件还是鼠标事件，分别获取对应的 y 坐标
+      const y = (e.touches ? e.touches[0].clientY : e.clientY) - rect.top;
 
       this.ctx.lineTo(x, y); // 直线
       this.ctx.stroke();
@@ -132,7 +136,7 @@ export default {
       if (this.flag) {
         //this.message.ctx.closePath();
         document.removeEventListener('mousemove', this.mouseMove);
-        document.removeEventListener('touchmove', this.mouseMove);
+        document.removeEventListener('touchmove', this.mouseMove, { passive: false });
         // console.log(this.shapeXY);
         // console.log("this.message.ctx=", this.ctx);
         this.shapeXY.forEach(e => {
@@ -153,7 +157,7 @@ export default {
       }
       else {
         document.removeEventListener('mousemove', this.mouseMove);
-        document.removeEventListener('touchmove', this.mouseMove);
+        document.removeEventListener('touchmove', this.mouseMove, { passive: false });
       }
 
 

@@ -39,8 +39,8 @@
 
     <!-- 按钮移至图片下方 -->
     <div class="buttons">
-      <button class="button" @click="resetAllConnections">全部重新画</button>
-      <button class="button" @click="resetLastConnection">后退一步</button>
+      <button class="button" @touchend="resetAllConnections">全部重新画</button>
+      <button class="button" @touchend="resetLastConnection">后退一步</button>
     </div>
 
     <div class="submitDiv">
@@ -220,10 +220,10 @@ export default {
       // 清除所有选项的悬停状态
       this.clearHoverStates();
 
-      // 计算鼠标相对于画布的 x 坐标
-      const mouseX = event.clientX - this.canvasRect.left;
-      // 计算鼠标相对于画布的 y 坐标
-      const mouseY = event.clientY - this.canvasRect.top;
+      // 判断是触摸事件还是鼠标事件，分别获取对应的 x 坐标
+      const mouseX = (event.touches ? event.touches[0].clientX : event.clientX) - this.canvasRect.left;
+      // 判断是触摸事件还是鼠标事件，分别获取对应的 y 坐标
+      const mouseY = (event.touches ? event.touches[0].clientY : event.clientY) - this.canvasRect.top;
 
 
       // console.log("event.clientX", event.clientX);
@@ -284,10 +284,10 @@ export default {
      */
     checkHoverTarget(event) {
 
-      // 计算鼠标相对于画布的 x 坐标
-      const mouseX = event.clientX - this.canvasRect.left;
-      // 计算鼠标相对于画布的 y 坐标
-      const mouseY = event.clientY - this.canvasRect.top;
+      // 判断是触摸事件还是鼠标事件，分别获取对应的 x 坐标
+      const mouseX = (event.touches ? event.touches[0].clientX : event.clientX) - this.canvasRect.left;
+      // 判断是触摸事件还是鼠标事件，分别获取对应的 y 坐标
+      const mouseY = (event.touches ? event.touches[0].clientY : event.clientY) - this.canvasRect.top;
       // 清空结束选项
       this.endItem = null;
 
