@@ -521,8 +521,6 @@ export default {
                 console.warn(`未处理 ${key} 类型的函数调用`);
             }
           });
-
-
           this.countTm.allP = parseFloat((this.countTm.rightCnt / this.countTm.totalTm * 100).toFixed(2));
 
           console.log(this.boolLists);
@@ -536,13 +534,13 @@ export default {
           })
         })
       // 取消或报错(e)
-      // .catch((e) => {
-      //   console.error("!EVENT:" + e);
-      //   ElMessage({
-      //     type: "info",
-      //     message: "已取消提交",
-      //   })
-      // });
+      .catch((e) => {
+        console.warn("!EVENT:" + e);
+        ElMessage({
+          type: "info",
+          message: "已取消提交",
+        })
+      });
     },
     getXztBoolList() {
       this.countTm.xzt.right = 0;
