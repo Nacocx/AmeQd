@@ -576,7 +576,7 @@ export default {
           this.countTm.rightCnt++;
           this.boolLists.xzt[index] = true;
         } else {
-          this.boolLists.xzt[index] = false;// 
+          this.boolLists.xzt[index] = false;//
         }
       });
       this.countTm.xzt.percentage = parseFloat((this.countTm.xzt.right / this.countTm.xzt.cnt * 100).toFixed(2));
