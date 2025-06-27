@@ -308,6 +308,8 @@ export default {
     await this.loadInfo();
     if (this.questions) { // 确保数据存在
       await this.calTotalTm();
+    }else{
+      alert("Network error");
     }
   },
   computed: {
