@@ -111,7 +111,7 @@ export default {
       const y = (e.touches ? e.touches[0].clientY : e.clientY) - rect.top;
 
       document.addEventListener('mousemove', this.mouseMove);
-      document.addEventListener('touchmove', this.mouseMove);
+      document.addEventListener('touchmove', this.mouseMove, { passive: false });
       this.ctx.beginPath();
       // 使用计算后的相对坐标
       this.ctx.moveTo(x, y);
@@ -136,7 +136,7 @@ export default {
       if (this.flag) {
         //this.message.ctx.closePath();
         document.removeEventListener('mousemove', this.mouseMove);
-        document.removeEventListener('touchmove', this.mouseMove);
+        document.removeEventListener('touchmove', this.mouseMove, { passive: false });
         // console.log(this.shapeXY);
         // console.log("this.message.ctx=", this.ctx);
         this.shapeXY.forEach(e => {
@@ -157,7 +157,7 @@ export default {
       }
       else {
         document.removeEventListener('mousemove', this.mouseMove);
-        document.removeEventListener('touchmove', this.mouseMove);
+        document.removeEventListener('touchmove', this.mouseMove, { passive: false });
       }
 
 
