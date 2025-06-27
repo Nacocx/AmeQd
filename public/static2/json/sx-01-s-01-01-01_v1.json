@@ -1,6 +1,7 @@
 {
   "qst": [
     {
+      "id": "1",
       "audio_img": "/static2/assets/laba.png",
       "audios": [
         "VITE_RES_BASE_PATH/audio/tuo2.wav",
@@ -19,27 +20,41 @@
       },
       "img": "VITE_RES_BASE_PATH/img/jian_v.png",
       "result": false,
-      "changed": false
+      "changed": false,
+      "ctx": "",
+      "shapeXY": [],
+      "allXY": [],
+      "useAnswer": [],
+      "userNum": 0,
+      "flag": 0
     },
     {
+      "id": "2",
       "audio_img": "/static2/assets/laba.png",
       "audios": [
         "VITE_RES_BASE_PATH/audio/tuo2.wav",
         ""
       ],
-    "title": "part 2 对照上面图片根据左边的图形数量圈出右边的数量",
-    "example": {
-      "t_img":"VITE_RES_BASE_PATH/img/t1_23_v.png",
-      "a_img":"VITE_RES_BASE_PATH/img/a1_48_v.png"
-    },
-    "question": {
-      "t_img": "VITE_RES_BASE_PATH/img/left2_v.png",
-      "n_img":"VITE_RES_BASE_PATH/img/right2_v.png",
-      "num": 8,
-      "tureNum": 3
-    },
-    "img":"VITE_RES_BASE_PATH/img/jian_v.png",
-    "result": false,
-    "changed": false
-  }]
+      "title": "part 2 对照上面图片根据左边的图形数量圈出右边的数量",
+      "example": {
+        "t_img": "VITE_RES_BASE_PATH/img/t1_23_v.png",
+        "a_img": "VITE_RES_BASE_PATH/img/a1_48_v.png"
+      },
+      "question": {
+        "t_img": "VITE_RES_BASE_PATH/img/left2_v.png",
+        "n_img": "VITE_RES_BASE_PATH/img/right2_v.png",
+        "num": 8,
+        "tureNum": 3
+      },
+      "img": "VITE_RES_BASE_PATH/img/jian_v.png",
+      "result": false,
+      "changed": false,
+      "ctx": "",
+      "shapeXY": [],
+      "allXY": [],
+      "useAnswer": [],
+      "userNum": 0,
+      "flag": 0
+    }
+  ]
 }

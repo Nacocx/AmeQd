@@ -27,7 +27,7 @@
         <img :src="message.question.t_img" alt="" class="img1">
         <div class="right_r">
           <div class="options">
-            <div class="qst_option" v-for="e in message.question.num">
+            <div class="qst_option" ref="optionElements"  v-for="e in message.question.num">
               <img :src="message.question.n_img" alt="">
             </div>
           </div>
@@ -47,26 +47,20 @@ export default {
   name: "qst",
   data() {
     return {
-      ctx: "",
-      shapeXY: [],//所有点的中心坐标
-      allXY: [],
-      useAnswer: [],
-      userNum: 0,
-      flag: 0,
+
     }
   },
   props: {
     message: {
       required: true,
     }
-
   },
   mounted() {
     try {
       // 获取画布上下文
-      this.ctx = this.$refs.canvas.getContext("2d");
+      this.message.ctx = this.$refs.canvas.getContext("2d");
       // console.log("this.message.ctx=", this.ctx);
-      if (!this.ctx) {
+      if (!this.message.ctx) {
         throw new Error('无法获取画布 2D 上下文');
       }
       // 添加 mouseup 事件监听器
@@ -81,7 +75,7 @@ export default {
       const canvasOffsetLeft = canvas.offsetLeft;
 
       // 获取所有 .option 元素
-      const optionElements = document.querySelectorAll(".qst_option");
+      const optionElements =  this.$refs.optionElements;
       if (optionElements.length === 0) {
         console.warn('未找到 .qst_option 元素');
       }
@@ -90,7 +84,7 @@ export default {
       optionElements.forEach(e => {
         const centerX = e.offsetLeft + 30 - canvasOffsetLeft;
         const centerY = e.offsetTop + 30;
-        this.shapeXY.push({ x: centerX, y: centerY });
+        this.message.shapeXY.push({ x: centerX, y: centerY });
       });
 
       // 打印存储的中心坐标，可在调试完成后移除
@@ -136,12 +130,12 @@ export default {
 
     },
     mouseDown(e) {
-      this.flag = 1
+      this.message.flag = 1
       // 获取画布元素
       const canvas = this.$refs.canvas;
       // console.log("canvas=", canvas);
       // console.log("this.message.ctx=", this.ctx);
-      this.ctx = this.$refs.canvas.getContext("2d");
+      this.message.ctx = this.$refs.canvas.getContext("2d");
 
 
       // 获取画布相对于视口的位置
@@ -153,9 +147,9 @@ export default {
 
       document.addEventListener('mousemove', this.mouseMove);
       document.addEventListener('touchmove', this.mouseMove, { passive: false });
-      this.ctx.beginPath();
+      this.message.ctx.beginPath();
       // 使用计算后的相对坐标
-      this.ctx.moveTo(x, y);
+      this.message.ctx.moveTo(x, y);
       // console.log("x=", x, "y=", y);
     },
     mouseMove(e) {
@@ -170,40 +164,39 @@ export default {
       // 判断是触摸事件还是鼠标事件，分别获取对应的 y 坐标
       const y = (e.touches ? e.touches[0].clientY : e.clientY) - rect.top;
 
-      this.ctx.lineTo(x, y); // 直线
-      this.ctx.stroke();
+      this.message.ctx.lineTo(x, y); // 直线
+      this.message.ctx.stroke();
     },
     mouseUp() {
-      if (this.flag) {
+      if (this.message.flag) {
         //this.message.ctx.closePath();
         document.removeEventListener('mousemove', this.mouseMove);
         document.removeEventListener('touchmove', this.mouseMove, { passive: false });
         // console.log(this.shapeXY);
         // console.log("this.message.ctx=", this.ctx);
-        this.shapeXY.forEach(e => {
-          this.useAnswer.push({ ist: this.ctx.isPointInPath(e.x, e.y), x: e.x, y: e.y })
-          this.userNum += this.ctx.isPointInPath(e.x, e.y);
+        this.message.shapeXY.forEach(e => {
+          this.message.useAnswer.push({ ist: this.message.ctx.isPointInPath(e.x, e.y), x: e.x, y: e.y })
+          this.message.userNum += this.message.ctx.isPointInPath(e.x, e.y);
         })
         // console.log(this.useAnswer);
         // console.log("this.message.userNum=", this.userNum);
 
-        this.flag = 0;
+        this.message.flag = 0;
         this.message.changed = true;
-        if (this.userNum == this.message.question.tureNum) {
+        if (this.message.userNum == this.message.question.tureNum) {
           this.message.result = true;  //圈图题就返回一个值就行 1 对 0 错
           // console.log("你对了！");
         } else {
           // console.log("你错了！");
         }
+        // console.log(this.message.userNum);
+
       }
       else {
         document.removeEventListener('mousemove', this.mouseMove);
         document.removeEventListener('touchmove', this.mouseMove, { passive: false });
       }
-
-
-
-
+      // console.log(this.message.shapeXY);
     }
 
   }
