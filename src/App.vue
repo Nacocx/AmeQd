@@ -14,7 +14,9 @@
               <!-- part2_填空题 -->
               <tkt :all-questions="questions.tkt" v-if="questions.tkt && questions.tkt.length" />
               <!-- 涂画题 部分 -->
-              <tht :items="questions.tht.items" :tuxing-path="questions.tht.tuxingpath" v-if="questions.tht.items" />
+              <template  v-if="questions.tht">
+                <tht :items="questions.tht.items" :tuxing-path="questions.tht.tuxingpath" />
+              </template>
               <!-- 画图题 部分 -->
               <template v-if="questions.htt && questions.htt.length">
                 <div v-for="htt in questions.htt" :key="htt">
@@ -95,6 +97,7 @@ import htt_tuo from "@/components/htt_tuo.vue";
 import axios from "axios";
 
 const basePath = import.meta.env.VITE_IMG_BASE_PATH;
+const baseJsonPath =import.meta.env.VITE_JSON_BASE_PATH;
 
 //实际使用中数据从后端获取
 // import logo from "/static/img/T1_tkt_ok/tkt_1.jpeg";   // 必须用 import
@@ -350,15 +353,15 @@ export default {
       });
     },
     async loadInfo(){
-      // this.questions= await this.fetchData();
+      this.questions= await this.fetchData();
 
-      this.questions=mockQuestions;
+      // this.questions=mockQuestions;
       this.studentInfo=mockStudentInfo;
     },
     // 获取并处理数据
     async  fetchData() {
       try {
-        const response = await axios.get('/TmJson/testjson.json');
+        const response = await axios.get(`${baseJsonPath}.json`);
         this.isOnloading=false;
         return this.processPaths(response.data);
       } catch (error) {
