@@ -96,7 +96,7 @@ import Tht from "@/components/tht.vue";
 import htt_tuo from "@/components/htt_tuo.vue";
 import axios from "axios";
 
-const basePath = import.meta.env.VITE_IMG_BASE_PATH;
+const basePath = import.meta.env.VITE_RES_BASE_PATH;
 const baseJsonPath =import.meta.env.VITE_JSON_BASE_PATH;
 
 //实际使用中数据从后端获取
@@ -371,29 +371,30 @@ export default {
     },
 
 // 处理路径占位符
-processPaths(data) {
-  const basePath = import.meta.env.VITE_IMG_BASE_PATH;
+    processPaths(data) {
+      const basePath = import.meta.env.VITE_RES_BASE_PATH;
 
-  // 深度遍历对象，替换所有占位符
-  const process = (obj) => {
-    if (typeof obj === 'string') {
-      return obj.replace(/VITE_IMG_BASE_PATH/g, basePath);
-    }
-    if (Array.isArray(obj)) {
-      return obj.map(item => process(item));
-    }
-    if (typeof obj === 'object' && obj !== null) {
-      const result = {};
-      for (const key in obj) {
-        result[key] = process(obj[key]);
-      }
-      return result;
-    }
-    return obj;
-  };
+      // 深度遍历对象，只替换VITE_RES_BASE_PATH部分
+      const process = (obj) => {
+        if (typeof obj === 'string') {
+          // 简单替换VITE_RES_BASE_PATH为实际basePath，保留后面的/img/路径
+          return obj.replace('VITE_RES_BASE_PATH', basePath);
+        }
+        if (Array.isArray(obj)) {
+          return obj.map(item => process(item));
+        }
+        if (typeof obj === 'object' && obj !== null) {
+          const result = {};
+          for (const key in obj) {
+            result[key] = process(obj[key]);
+          }
+          return result;
+        }
+        return obj;
+      };
 
-  return process(data);
-},
+      return process(data);
+    },
     willSubmit() {
       let remainTm = 0;
       ElMessageBox.confirm(

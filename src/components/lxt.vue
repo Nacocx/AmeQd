@@ -1,10 +1,20 @@
 <!-- 连线题 -->
-
+const basePath = import.meta.env.VITE_IMG_BASE_PATH;
 <template>
 
   <div class="lxt_main_body">
     <!-- <div class="header"></div> -->
-    <h1>{{ message.title }}</h1>
+    <div class="title">
+      <h1>{{ message.title }}</h1>
+
+      <img :src="message.audio_img" alt="" class="laba" @click="playAudio(0)" @touchend="playAudio(0)">
+      <!-- <div class="laba_div">
+        
+      </div> -->
+    </div>
+
+
+
 
     <!-- <div class="questions">请连接和图片中物品数量一致的圆的图片</div> -->
 
@@ -77,6 +87,10 @@ export default {
       // 存储用户连线答案检查结果的数组，初始为空数组
       result: [],
       localMessage: { ...this.message },
+      audio_isPlay: false,
+      audio_url: false,
+      audioEle: "",
+
     };
   },
   props: {
@@ -103,6 +117,36 @@ export default {
     this.$nextTick(() => this.updateItemPositions());
   },
   methods: {
+    playAudio(index) {
+      var url_now;
+      var audio_now;
+      if (index == 0) {
+        console.log(2);
+
+        url_now = this.message.audios[0];
+        console.log("url+", url_now);
+
+        audio_now = document.createElement('audio');
+        audio_now.src = url_now;
+        audio_now.play();
+        this.audio_isPlay = true;
+        this.audio_url = url_now;
+        this.audioEle=audio;
+      }
+      else { }
+
+      if (false) {
+        console.log(1);
+
+
+      }
+      else {
+        
+
+      }
+
+
+    },
 
     /**
      * 调整画布大小以适应父容器
@@ -610,6 +654,25 @@ export default {
 </script>
 
 <style>
+.title {
+  text-align: center;
+
+
+
+}
+
+.laba_div {
+  float: right;
+  width: 30px;
+  height: 30px;
+}
+
+.laba {
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+}
+
 .lxt_main_body .container {
   width: 1000px;
   height: 850px;
