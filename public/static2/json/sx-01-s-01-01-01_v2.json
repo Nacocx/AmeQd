@@ -23,7 +23,7 @@
       "id": 2,
       "title": {
         "str": "part 2 接着点出与事物数量相等的",
-        "image": "VITE_RES_BASE_PATH/img/sst2.png",
+        "image": "VITE_RES_BASE_PATH/img/sst2_v.png",
         "count": 3
       },
       "tuXingPath": "VITE_RES_BASE_PATH/img/circle_2.png",
@@ -38,7 +38,7 @@
       "id": 3,
       "title": {
         "str": "part 3 接着点出与事物数量相等的",
-        "image": "VITE_RES_BASE_PATH/img/sst3.png",
+        "image": "VITE_RES_BASE_PATH/img/sst3_v.png",
         "count": 4
       },
       "tuXingPath": "VITE_RES_BASE_PATH/img/circle_2.png",
@@ -53,7 +53,7 @@
       "id": 4,
       "title": {
         "str": "part 4 接着点出与事物数量相等的",
-        "image": "VITE_RES_BASE_PATH/img/sst4.png",
+        "image": "VITE_RES_BASE_PATH/img/sst4_v.png",
         "count": 5
       },
       "tuXingPath": "VITE_RES_BASE_PATH/img/circle_2.png",
