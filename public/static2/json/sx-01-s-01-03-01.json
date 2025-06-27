@@ -1,7 +1,7 @@
 {
      "tkt": [
     {
-      "audio_img": "/static2/assets/laba.png",
+      "audio_img": "../static/static2/assets/laba.png",
       "audios": [
         "VITE_RES_BASE_PATH/audio/part2.wav",
         ""
@@ -33,7 +33,7 @@
       ]
     },
      {
-      "audio_img": "/static2/assets/laba.png",
+      "audio_img": "../static/static2/assets/laba.png",
       "audios": [
         "VITE_RES_BASE_PATH/audio/part2.wav",
         ""
@@ -59,7 +59,7 @@
       ]
     },
     {
-      "audio_img": "/static2/assets/laba.png",
+      "audio_img": "../static/static2/assets/laba.png",
       "audios": [
         "VITE_RES_BASE_PATH/audio/part2.wav",
         ""
@@ -78,7 +78,7 @@
       ]
     },
     {
-      "audio_img": "/static2/assets/laba.png",
+      "audio_img": "../static/static2/assets/laba.png",
       "audios": [
         "VITE_RES_BASE_PATH/audio/part2.wav",
         ""
@@ -106,7 +106,7 @@
   ],
   "htt_tuo": [
     {
-    "audio_img": "/static2/assets/laba.png",
+    "audio_img": "../static/static2/assets/laba.png",
       "audios": [
         "VITE_RES_BASE_PATH/audio/part2.wav",
         ""
