@@ -38,7 +38,7 @@
               <div>
                 <!-- {{ jia() }} -->
                 <img :src="allQuestions[0].audio_img" alt="" class="laba" @click="playAudio(titleIndex)"
-                  @touchend="playAudio(subIndex)">
+                  @touchend="playAudio(titleIndex)">
               </div>
             </div>
           </div>
