@@ -361,7 +361,7 @@ export default {
     // 获取并处理数据
     async  fetchData() {
       try {
-        const response = await axios.get(`${baseJsonPath}/testjson.json`);
+        const response = await axios.get(`${baseJsonPath}.json`);
         this.isOnloading=false;
         return this.processPaths(response.data);
       } catch (error) {
