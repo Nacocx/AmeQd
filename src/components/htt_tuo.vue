@@ -64,7 +64,7 @@ export default {
     document.addEventListener('mouseup', this.mouseup);
     document.addEventListener('touchend', this.mouseup);
 
-    
+
   },
 
   beforeDestroy() {
@@ -82,8 +82,10 @@ export default {
       //ee.target.offsetLeft; 是获取元素相对于父元素的偏移量 如果无父元素则相对于页面的偏移量 这个重要就是要获取元素相对于页面的偏移量
       //否则则还需要监听父元素相对于页面的偏移量 更加麻烦
       //ee.clientX; 是获取鼠标相对于页面的偏移量
-      this.message.startX = ee.clientX - ee.target.offsetLeft;//获取元素相对于页面的偏移量 也就是相当于匹配鼠标在元素上的位置
-      this.message.startY = ee.clientY - ee.target.offsetTop;
+      // 判断是触摸事件还是鼠标事件，分别获取对应的 x 坐标，计算相对于元素左上角的偏移量
+      this.message.startX = (ee.touches ? ee.touches[0].clientX : ee.clientX) - ee.target.offsetLeft;
+      // 判断是触摸事件还是鼠标事件，分别获取对应的 y 坐标，计算相对于元素左上角的偏移量
+      this.message.startY = (ee.touches ? ee.touches[0].clientY : ee.clientY) - ee.target.offsetTop;
       this.message.draggedElement = ee.target.cloneNode(true);//克隆元素
       this.message.draggedElement.style.position = 'absolute';
       this.message.draggedElement.style.zIndex = 100;
@@ -92,9 +94,10 @@ export default {
     // 移动事件处理函数
     mousemove(ee) {
       if (this.message.isDragging) {
-        // 使用传递进来的事件对象
-        const x = ee.clientX - this.message.startX;
-        const y = ee.clientY - this.message.startY;
+        // Determine whether it's a touch event or a mouse event, and get the corresponding x - coordinate
+        const x = (ee.touches ? ee.touches[0].clientX : ee.clientX) - this.message.startX;
+        // Determine whether it's a touch event or a mouse event, and get the corresponding y - coordinate
+        const y = (ee.touches ? ee.touches[0].clientY : ee.clientY) - this.message.startY;
         this.message.draggedElement.style.left = x + 'px';
         this.message.draggedElement.style.top = y + 'px';
       }
@@ -110,8 +113,10 @@ export default {
           // console.log("e", e);
 
           const rect = e.getBoundingClientRect();
-          //判断鼠标是否在目标区域内
-          if (ee.clientX >= rect.left && ee.clientX <= rect.right && ee.clientY >= rect.top && ee.clientY <= rect.bottom) {
+          // Determine whether it's a touch event or a mouse event, and get the corresponding x and y coordinates
+          const x = ee.touches ? ee.touches[0].clientX : ee.clientX;
+          const y = ee.touches ? ee.touches[0].clientY : ee.clientY;
+          if (x >= rect.left && x <= rect.right && y >= rect.top && y <= rect.bottom) {
             // console.log("e", e);
             if (this.message.draggedElement) {
               e.appendChild(this.message.draggedElement);//将元素添加到目标区域
@@ -138,9 +143,9 @@ export default {
               this.message.draggedElement.remove();//没有在目标区域内，移除元素
             }
           }
-           
+
         })
-    
+
 
       }
       this.yes()
@@ -161,7 +166,7 @@ export default {
           if (e1 != this.message.subQuestion[index].trueShape) {
             if (flag == false) {
               this.message.answer.push(false);
-              flag =true;
+              flag = true;
             }
           }
           else {
