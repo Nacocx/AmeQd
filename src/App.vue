@@ -68,7 +68,7 @@
           :percentage="countTm.lxt.percentage" /></span>
       <span v-if="questions.htt && questions.htt.length">画图题对了{{ countTm.htt.right }}题,正确率: <el-progress
           :percentage="countTm.htt.percentage" /></span>
-      <span v-if="questions.tht && questions.tht.length">涂画题对了{{ countTm.tht.right }}题,正确率: <el-progress
+      <span v-if="questions.tht">涂画题对了{{ countTm.tht.right }}题,正确率: <el-progress
           :percentage="countTm.tht.percentage" /></span>
       <span v-if="questions.sst && questions.sst.length">数数题对了{{ countTm.sst.right }}题,正确率: <el-progress
           :percentage="countTm.sst.percentage" /></span>
@@ -350,9 +350,9 @@ export default {
       });
     },
     async loadInfo(){
-      // this.questions= await this.fetchData();
+      this.questions= await this.fetchData();
 
-      this.questions=mockQuestions;
+      // this.questions=mockQuestions;
       this.studentInfo=mockStudentInfo;
     },
     // 获取并处理数据
