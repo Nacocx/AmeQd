@@ -287,7 +287,6 @@ export default {
       countTm: {},
       tmRightCnt: {},
       keys:[],
-
       dialogTableVisible: false,
       isOnloading:true,
     };
@@ -312,12 +311,10 @@ export default {
     }
   },
   computed: {
+    countTmStatus(){
+      
 
-
-
-
-
-
+    },
 
   },
   methods: {
