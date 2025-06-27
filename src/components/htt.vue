@@ -70,8 +70,10 @@ export default {
     mousedown(ee) {
       ee.preventDefault();//加个这个就可以了 不然会有个默认的行为 阻止拖动
       this.message.isDragging = true;
-      this.message.startX = ee.clientX - ee.target.offsetLeft;
-      this.message.startY = ee.clientY - ee.target.offsetTop;
+      // 判断是触摸事件还是鼠标事件，分别获取对应的 x 坐标，计算相对于元素左上角的偏移量
+      this.message.startX = (ee.touches ? ee.touches[0].clientX : ee.clientX) - ee.target.offsetLeft;
+      // 判断是触摸事件还是鼠标事件，分别获取对应的 y 坐标，计算相对于元素左上角的偏移量
+      this.message.startY = (ee.touches ? ee.touches[0].clientY : ee.clientY) - ee.target.offsetTop;
       this.message.draggedElement = ee.target.cloneNode(true);
       this.message.draggedElement.style.position = 'absolute';
       this.message.draggedElement.style.zIndex = 100;
@@ -83,8 +85,10 @@ export default {
     // 移动事件处理函数
     mousemove(ee) {
       if (this.message.isDragging) {
-        const x = ee.clientX - this.message.startX;
-        const y = ee.clientY - this.message.startY;
+        // Determine whether it's a touch event or a mouse event, and get the corresponding x - coordinate
+        const x = (ee.touches ? ee.touches[0].clientX : ee.clientX) - this.message.startX;
+        // Determine whether it's a touch event or a mouse event, and get the corresponding y - coordinate
+        const y = (ee.touches ? ee.touches[0].clientY : ee.clientY) - this.message.startY;
         this.message.draggedElement.style.left = x + 'px';
         this.message.draggedElement.style.top = y + 'px';
       }
@@ -98,8 +102,11 @@ export default {
 
         targetArea.forEach(e => {
           const rect = e.getBoundingClientRect();
-          //判断鼠标是否在目标区域内
-          if (ee.clientX >= rect.left && ee.clientX <= rect.right && ee.clientY >= rect.top && ee.clientY <= rect.bottom) {
+          // 判断是触摸事件还是鼠标事件，分别获取对应的 x 和 y 坐标
+          const x = ee.touches ? ee.touches[0].clientX : ee.clientX;
+          const y = ee.touches ? ee.touches[0].clientY : ee.clientY;
+          // 判断鼠标或触摸点是否在目标区域内
+          if (x >= rect.left && x <= rect.right && y >= rect.top && y <= rect.bottom) {
             if (this.message.draggedElement) {
               e.appendChild(this.message.draggedElement);
               // 记录操作历史
