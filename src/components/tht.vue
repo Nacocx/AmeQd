@@ -9,23 +9,23 @@
                 <div class="right-area">
                     <div v-for="(item, index) in items" :key="index">
                         <div class="col">
-                            <div @click="changeFlag(item, 0)" @touchend="changeFlag(item, 0)">
+                            <div @click.stop.prevent="changeFlag(item, 0)" @touchstart.stop.prevent="changeFlag(item, 0)">
                                 <img :src="tuxingPath[2].noneCircle" alt="图片" v-if="!item.flag[0]" draggable="false">
                                 <img :src="tuxingPath[1].redCircle" alt="图片" v-if="item.flag[0]" draggable="false">
                             </div>
-                            <div @click="changeFlag(item, 1)" @touchend="changeFlag(item, 1)">
+                            <div @click.stop.prevent="changeFlag(item, 1)" @touchstart.stop.prevent="changeFlag(item, 1)">
                                 <img :src="tuxingPath[2].noneCircle" alt="图片" v-if="!item.flag[1]" draggable="false">
                                 <img :src="tuxingPath[1].redCircle" alt="图片" v-if="item.flag[1]" draggable="false">
                             </div>
-                            <div @click="changeFlag(item, 2)" @touchend="changeFlag(item, 2)">
+                            <div @click.stop.prevent="changeFlag(item, 2)" @touchstart.stop.prevent="changeFlag(item, 2)">
                                 <img :src="tuxingPath[2].noneCircle" alt="图片" v-if="!item.flag[2]" draggable="false">
                                 <img :src="tuxingPath[1].redCircle" alt="图片" v-if="item.flag[2]" draggable="false">
                             </div>
-                            <div @click="changeFlag(item, 3)" @touchend="changeFlag(item, 3)">
+                            <div @click.stop.prevent="changeFlag(item, 3)" @touchstart.stop.prevent="changeFlag(item, 3)">
                                 <img :src="tuxingPath[2].noneCircle" alt="图片" v-if="!item.flag[3]" draggable="false">
                                 <img :src="tuxingPath[1].redCircle" alt="图片" v-if="item.flag[3]" draggable="false">
                             </div>
-                            <div @click="changeFlag(item, 4)" @touchend="changeFlag(item, 4)">
+                            <div @click.stop.prevent="changeFlag(item, 4)" @touchstart.stop.prevent="changeFlag(item, 4)">
                                 <img :src="tuxingPath[2].noneCircle" alt="图片" v-if="!item.flag[4]" draggable="false">
                                 <img :src="tuxingPath[1].redCircle" alt="图片" v-if="item.flag[4]" draggable="false">
                             </div>
