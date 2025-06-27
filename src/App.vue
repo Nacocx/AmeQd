@@ -3,8 +3,7 @@
 <!--    <div v-if="isOnloading">Loading......</div>-->
     <el-container >
       <el-container>
-        <!-- 侧边栏模板 -->
-        <!-- <sidebar :student-info="studentInfo" :count-tm="countTm" /> -->
+         <sidebar :student-info="studentInfo" :count-tm="countTm" />
         <el-main>
           <!-- 题目部分 -->
           <div id="chose">
@@ -285,12 +284,12 @@ export default {
       questions: {},
       studentInfo: {},
       boolLists: {},
-      TmBoolInfo: {},
       countTm: {},
       tmRightCnt: {},
+      keys:[],
+
       dialogTableVisible: false,
       isOnloading:true,
-      keys:[],
     };
   },
   components: {
@@ -341,7 +340,6 @@ export default {
       };
 
       keys.forEach(e => {
-        this.TmBoolInfo[e] = true;
 
         if (!this.countTm[e]) {
           this.countTm[e] = { cnt: 0, right: 0, percentage: 0 };
