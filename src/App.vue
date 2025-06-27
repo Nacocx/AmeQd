@@ -350,9 +350,9 @@ export default {
       });
     },
     async loadInfo(){
-      this.questions= await this.fetchData();
+      // this.questions= await this.fetchData();
 
-      // this.questions=mockQuestions;
+      this.questions=mockQuestions;
       this.studentInfo=mockStudentInfo;
     },
     // 获取并处理数据
