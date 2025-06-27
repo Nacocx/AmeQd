@@ -3,7 +3,7 @@
 <!--    <div v-if="isOnloading">Loading......</div>-->
     <el-container >
       <el-container>
-         <sidebar :student-info="studentInfo" :count-tm="answerStatus" />
+<!--         <sidebar :student-info="studentInfo" :count-tm="answerStatus" />-->
         <el-main>
           <!-- 题目部分 -->
           <div id="chose">
@@ -312,93 +312,93 @@ export default {
       alert("Network error");
     }
   },
-  computed: {
-    answerStatus() {
-      const answeredInfo = {
-        answeredCount: 0,
-        totalCount: this.countTm.totalTm || 0,
-        percentage: 0
-      };
-
-      // 如果没有题目数据，直接返回
-      if (!this.questions || answeredInfo.totalCount === 0) {
-        return answeredInfo;
-      }
-
-      // 计算选择题已作答数
-      if (this.questions.xzt && this.questions.xzt.length) {
-        const { xzt = []} = this.questions;
-        answeredInfo.answeredCount+=[...xzt.filter((e) => e.userAnswer)].length;
-      }
-
-      // 计算填空题已作答数
-      if (this.questions.tkt) {
-        this.questions.tkt.forEach((e, index) => {
-          let obj = e.userAnswer;
-          let values = Object.values(obj);
-          values.forEach(el=>{
-            if(el!==""){
-              answeredInfo.answeredCount++;
-            }
-          })
-        })
-      }
-
-      // 计算涂画题已作答数
-      if (this.questions.tht && this.questions.tht.items) {
-        answeredInfo.answeredCount +=this.questions.tht.items.filter(e=>e.changed).length;
-      }
-
-      // 计算画图题已作答数
-      if (this.questions.htt && this.questions.htt.length) {
-        let prev = [];
-        this.questions.htt.forEach(e=>{
-          e.userAnswer.forEach((ans, index) => {
-            ans.forEach((e) => {
-              if (e !== null && prev[index] == null) {
-                answeredInfo.answeredCount++;
-                prev[index] = e;
-              }
-            });
-          });
-        })
-      }
-
-      // 计算连线题已作答数
-      if (this.questions.lxt && this.questions.lxt.length) {
-        // 你的处理逻辑
-      }
-
-      // 计算数数题已作答数
-      if (this.questions.sst && this.questions.sst.length) {
-        const { sst = [] } = this.questions;
-        answeredInfo.answeredCount+=[...sst.filter((e) => e.userAnswer)].length;
-      }
-
-      // 计算画圈题已作答数
-      if (this.questions.qst && this.questions.qst.length) {
-        answeredInfo.answeredCount += this.questions.qst.filter(q => q.changed).length;
-      }
-
-      // 计算画图题2已作答数
-      if (this.questions.htt_tuo && this.questions.htt_tuo.length) {
-        let prev = [];
-        this.questions.htt_tuo.forEach(e=>{
-          e.answer.forEach((ans, index) => {
-              if (ans !== null && prev[index] == null) {
-                answeredInfo.answeredCount++;
-                prev[index] = ans;
-              }
-          });
-        })
-      }
-
-      // 计算已作答比例
-      answeredInfo.percentage = parseFloat((answeredInfo.answeredCount / answeredInfo.totalCount * 100).toFixed(2));
-
-      return answeredInfo;
-    }
-  },
+  // computed: {
+  //   answerStatus() {
+  //     const answeredInfo = {
+  //       answeredCount: 0,
+  //       totalCount: this.countTm.totalTm || 0,
+  //       percentage: 0
+  //     };
+  //
+  //     // 如果没有题目数据，直接返回
+  //     if (!this.questions || answeredInfo.totalCount === 0) {
+  //       return answeredInfo;
+  //     }
+  //
+  //     // 计算选择题已作答数
+  //     if (this.questions.xzt && this.questions.xzt.length) {
+  //       const { xzt = []} = this.questions;
+  //       answeredInfo.answeredCount+=[...xzt.filter((e) => e.userAnswer)].length;
+  //     }
+  //
+  //     // 计算填空题已作答数
+  //     if (this.questions.tkt) {
+  //       this.questions.tkt.forEach((e, index) => {
+  //         let obj = e.userAnswer;
+  //         let values = Object.values(obj);
+  //         values.forEach(el=>{
+  //           if(el!==""){
+  //             answeredInfo.answeredCount++;
+  //           }
+  //         })
+  //       })
+  //     }
+  //
+  //     // 计算涂画题已作答数
+  //     if (this.questions.tht && this.questions.tht.items) {
+  //       answeredInfo.answeredCount +=this.questions.tht.items.filter(e=>e.changed).length;
+  //     }
+  //
+  //     // 计算画图题已作答数
+  //     if (this.questions.htt && this.questions.htt.length) {
+  //       let prev = [];
+  //       this.questions.htt.forEach(e=>{
+  //         e.userAnswer.forEach((ans, index) => {
+  //           ans.forEach((e) => {
+  //             if (e !== null && prev[index] == null) {
+  //               answeredInfo.answeredCount++;
+  //               prev[index] = e;
+  //             }
+  //           });
+  //         });
+  //       })
+  //     }
+  //
+  //     // 计算连线题已作答数
+  //     if (this.questions.lxt && this.questions.lxt.length) {
+  //       // 你的处理逻辑
+  //     }
+  //
+  //     // 计算数数题已作答数
+  //     if (this.questions.sst && this.questions.sst.length) {
+  //       const { sst = [] } = this.questions;
+  //       answeredInfo.answeredCount+=[...sst.filter((e) => e.userAnswer)].length;
+  //     }
+  //
+  //     // 计算画圈题已作答数
+  //     if (this.questions.qst && this.questions.qst.length) {
+  //       answeredInfo.answeredCount += this.questions.qst.filter(q => q.changed).length;
+  //     }
+  //
+  //     // 计算画图题2已作答数
+  //     if (this.questions.htt_tuo && this.questions.htt_tuo.length) {
+  //       let prev = [];
+  //       this.questions.htt_tuo.forEach(e=>{
+  //         e.answer.forEach((ans, index) => {
+  //             if (ans !== null && prev[index] == null) {
+  //               answeredInfo.answeredCount++;
+  //               prev[index] = ans;
+  //             }
+  //         });
+  //       })
+  //     }
+  //
+  //     // 计算已作答比例
+  //     answeredInfo.percentage = parseFloat((answeredInfo.answeredCount / answeredInfo.totalCount * 100).toFixed(2));
+  //
+  //     return answeredInfo;
+  //   }
+  // },
   methods: {
     /**
      * 计算所有题目的数量
