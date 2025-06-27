@@ -564,16 +564,19 @@ export default {
         })
       });
     },
+    /**
+     * 获取选择题正确列表
+     */
     getXztBoolList() {
-      this.countTm.xzt.right = 0;
-      this.boolLists.xzt = [];
+      this.countTm.xzt.right = 0;// 初始化选择题正确个数
+      this.boolLists.xzt = [];// 初始化选择题正确列表
       this.questions.xzt.forEach((e, index) => {
         if (e.userAnswer === e.answer) {
           this.countTm.xzt.right++;
           this.countTm.rightCnt++;
           this.boolLists.xzt[index] = true;
         } else {
-          this.boolLists.xzt[index] = false;
+          this.boolLists.xzt[index] = false;// 
         }
       });
       this.countTm.xzt.percentage = parseFloat((this.countTm.xzt.right / this.countTm.xzt.cnt * 100).toFixed(2));
