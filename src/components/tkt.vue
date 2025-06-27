@@ -1,20 +1,46 @@
 <template>
   <section class="question-container">
     <div v-for="(questionGroup) in allQuestions" :key="'group-' + questionGroup.id" class="question-part">
-      <h1 class="question-title" v-if="questionGroup.title_main">{{ questionGroup.title_main }}</h1>
+
+      <div>
+        <h1 v-if="questionGroup.title_main">{{ questionGroup.title_main }}</h1>
+        <!-- <img :src="allQuestions[0].audio_img" alt="" class="laba" @click="playAudio(0)" @touchend="playAudio()"> -->
+      </div>
+
       <div v-if="questionGroup.img" class="question-image">
         <img :src="questionGroup.img" :alt="'第' + questionGroup.id + '题图片'">
       </div>
       <div class="question-content">
         <div v-for="(title, titleIndex) in questionGroup.title" :key="'title-' + titleIndex" class="question-item">
-          <h2 class="question-subtitle">{{ title }}</h2>
+
+          <div class="title">
+            <div>
+              <h2 class="question-subtitle">{{ title }}</h2>
+            </div>
+            <!-- <div>
+              <img :src="allQuestions[0].audio_img" alt="" class="laba" @click="playAudio(0)" @touchend="playAudio(0)">
+            </div> -->
+
+          </div>
           <div v-for="(subPart, subIndex) in splitByTSPL(questionGroup.subQuestions[titleIndex])"
             :key="'sub-' + subIndex">
-            <span v-for="(segment, segmentIndex) in splitByTNUM(subPart)" :key="'segment-' + segmentIndex">
-              <template v-if="segment !== 'TNUM'">{{ segment }}</template>
-              <el-input v-else v-model="questionGroup.userAnswer[`${titleIndex}-${subIndex}-${segmentIndex}`]"
-                style="width: 60px;" />
-            </span>
+
+            <div class="title">
+              <div>
+                <span v-for="(segment, segmentIndex) in splitByTNUM(subPart)" :key="'segment-' + segmentIndex">
+
+                  <template v-if="segment !== 'TNUM'">{{ segment }}</template>
+                  <el-input v-else v-model="questionGroup.userAnswer[`${titleIndex}-${subIndex}-${segmentIndex}`]"
+                    style="width: 60px;" />
+
+                </span>
+              </div>
+              <div>
+                <!-- {{ jia() }} -->
+                <img :src="allQuestions[0].audio_img" alt="" class="laba" @click="playAudio(titleIndex)"
+                  @touchend="playAudio(subIndex)">
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -28,6 +54,7 @@ export default {
   name: "tkt",
   data() {
     return {
+      num: "0",
     }
   },
   props: {
@@ -37,7 +64,54 @@ export default {
     }
   },
   methods: {
+    jia() {
+      this.num++;
+      console.log(this.num);
+
+    },
+
+    playAudio(index) {
+      console.log(index);
+
+      var url_now;
+      var audio_now;
+      var url_id;
+      if (this.audio_isPlay) {
+        if (index == this.audio_id) {
+          // console.log("zai");
+          // 停止播放并重置到开始位置
+          this.audioEle.pause();         // 暂停播放
+          this.audioEle.currentTime = 0; // 重置播放位置到 0 秒
+
+          this.audioEle = "";
+          this.audio_isPlay = false;
+          return;
+        }
+        else {
+          this.audioEle.pause();         // 暂停播放
+          this.audioEle.currentTime = 0;
+          this.audioEle = "";
+        }
+      }
+      url_now = this.allQuestions[0].audios[index];
+      url_id = index;
+      audio_now = document.createElement('audio');
+      audio_now.src = url_now;
+      audio_now.play();
+      this.audio_isPlay = true;
+      this.audio_id = url_id;
+      this.audioEle = audio_now;
+
+
+    },
+
+
+
     splitByTSPL(text) {
+      // console.log(this.allQuestions);
+      // console.log("??", this.allQuestions[0].audio_img);
+
+
       return text.split('TSPL');
     },
     splitByTNUM(text) {
@@ -51,7 +125,7 @@ export default {
       handler(newVal) {
         newVal.forEach(questionGroup => {
           if (!questionGroup.userAnswer) {
-            questionGroup.userAnswer={};
+            questionGroup.userAnswer = {};
           }
 
           questionGroup.title.forEach((_, titleIndex) => {
@@ -62,7 +136,7 @@ export default {
                 if (segment === 'TNUM') {
                   const key = `${titleIndex}-${subIndex}-${segmentIndex}`;
                   if (!questionGroup.userAnswer[key]) {
-                    questionGroup.userAnswer[key]='';
+                    questionGroup.userAnswer[key] = '';
                   }
                 }
               });
@@ -76,6 +150,22 @@ export default {
 </script>
 
 <style scoped>
+.title {
+
+  display: flex;
+  /* 使用 flex 布局 */
+
+  gap: 10px;
+}
+
+
+.laba {
+  width: 30px;
+  height: 30px;
+  margin: -2px;
+  cursor: pointer;
+}
+
 .question-subtitle {
   font-size: 19px;
 }

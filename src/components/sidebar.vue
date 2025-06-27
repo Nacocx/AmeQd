@@ -9,7 +9,7 @@
 ></el-progress>
     <p>
       已作答:{{ countTm.answeredCount }}题 剩余:{{
-        countTm.totalTm - countTm.answeredCount
+        countTm.totalCount - countTm.answeredCount
       }}题
     </p>
     <p v-for="(value, key) in studentInfo" :key="key">{{ key }}:{{ value }}</p>

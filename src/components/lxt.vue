@@ -5,12 +5,9 @@ const basePath = import.meta.env.VITE_IMG_BASE_PATH;
   <div class="lxt_main_body">
     <!-- <div class="header"></div> -->
     <div class="title">
+      
       <h1>{{ message.title }}</h1>
-
-      <img :src="message.audio_img" alt="" class="laba" @click="playAudio(0)" @touchend="playAudio(0)">
-      <!-- <div class="laba_div">
-        
-      </div> -->
+      <img  :src="message.audio_img" alt="" class="laba" @click="playAudio(0)" @touchend="playAudio(0)">
     </div>
 
 
@@ -129,7 +126,7 @@ export default {
           this.audioEle.currentTime = 0; // 重置播放位置到 0 秒
 
           this.audioEle = "";
-          this.audio_isPlay=false;
+          this.audio_isPlay = false;
           return;
         }
         else {
@@ -660,16 +657,26 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
+
 .title {
+  /* background-color: #4CAF50; */
   text-align: center;
+  display: flex;
+  /* 使用 flex 布局 */
+  align-items: center;
+  /* 垂直居中对齐 */
+  justify-content: center;
+  gap: 10px;
+}
 
-
-
+.title h1 {
+  margin: 0;
+  /* 移除 h1 默认的外边距 */
+  padding: 0;
 }
 
 .laba_div {
-  float: right;
   width: 30px;
   height: 30px;
 }
