@@ -384,13 +384,11 @@ export default {
       if (this.questions.htt_tuo && this.questions.htt_tuo.length) {
         let prev = [];
         this.questions.htt_tuo.forEach(e=>{
-          e.userAnswer.forEach((ans, index) => {
-            ans.forEach((e) => {
-              if (e !== null && prev[index] == null) {
+          e.answer.forEach((ans, index) => {
+              if (ans !== null && prev[index] == null) {
                 answeredInfo.answeredCount++;
-                prev[index] = e;
+                prev[index] = ans;
               }
-            });
           });
         })
       }
