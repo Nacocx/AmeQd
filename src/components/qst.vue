@@ -118,6 +118,7 @@ export default {
       // console.log("x=", x, "y=", y);
     },
     mouseMove(e) {
+      e.preventDefault();
       // console.log("123");
       const canvas = this.$refs.canvas;
       // 获取画布相对于视口的位置
