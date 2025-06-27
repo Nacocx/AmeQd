@@ -13,8 +13,8 @@
       <!-- 上侧选项 -->
       <div class="options upOptions">
         <div v-for="(item, index) in localMessage.imgU" :key="index" class="option"
-          :class="{ 'active': item.connected }" @mousedown="onMousedown($event, item)" :data-value="item.value"
-
+          :class="{ 'active': item.connected }" @mousedown="onMousedown($event, item)"
+          @touchstart="onMousedown($event, item)" :data-value="item.value"
           :data-ownership="item.ownership + message.flag">
 
           <img :src="item.src">
@@ -24,7 +24,8 @@
       <!-- 下侧选项 -->
       <div class="options downOptions">
         <div v-for="(item, index) in localMessage.imgD" :key="index" class="option"
-          :class="{ 'active': item.connected }" @mousedown="onMousedown($event, item)" :data-value="item.value"
+          :class="{ 'active': item.connected }" @mousedown="onMousedown($event, item)"
+          @touchstart="onMousedown($event, item)" :data-value="item.value"
           :data-ownership="item.ownership + message.flag">
           <img :src="item.src">
         </div>
@@ -37,8 +38,8 @@
 
     <!-- 按钮移至图片下方 -->
     <div class="buttons">
-      <button class="button" @click="resetAllConnections">全部重新画</button>
-      <button class="button" @click="resetLastConnection">后退一步</button>
+      <button class="button" @click="resetAllConnections" @touchend="resetAllConnections">全部重新画</button>
+      <button class="button" @click="resetLastConnection" @touchend="resetLastConnection">后退一步</button>
     </div>
 
     <div class="submitDiv">
@@ -195,8 +196,10 @@ export default {
 
       // 添加鼠标移动事件监听
       document.addEventListener('mousemove', this.onMousemove);
+      document.addEventListener('touchmove', this.onMousemove);
       // 添加鼠标抬起事件监听
       document.addEventListener('mouseup', this.onMouseup);
+      document.addEventListener('touchend', this.onMouseup);
     },
 
     /**
@@ -366,8 +369,10 @@ export default {
       this.ctx.clearRect(0, 0, this.$refs.canvas.width, this.$refs.canvas.height);
       // 移除鼠标移动事件监听
       document.removeEventListener('mousemove', this.onMousemove);
+      document.removeEventListener('touchmove', this.onMousemove);
       // 移除鼠标抬起事件监听
       document.removeEventListener('mouseup', this.onMouseup);
+      document.removeEventListener('touchend', this.onMouseup);
       // 清除所有选项的悬停状态
       this.clearHoverStates();
 
@@ -518,8 +523,8 @@ export default {
           // 如果没有连线，结果为 0
           this.result[index] = (false);
         }
-        this.message.result=this.result;
-        this.message.changed=true;
+        this.message.result = this.result;
+        this.message.changed = true;
         // 如果当前选项的结果不为 1，说明有错误
         // if (this.message.result[index] !== 1) {
         //   allCorrect = false;
@@ -595,8 +600,10 @@ export default {
     window.removeEventListener('resize', this.resizeCanvas);
     // 移除鼠标移动事件监听
     document.removeEventListener('mousemove', this.onMousemove);
+    document.removeEventListener('touchmove', this.onMousemove);
     // 移除鼠标抬起事件监听
     document.removeEventListener('mouseup', this.onMouseup);
+    document.removeEventListener('touchend', this.onMouseup);
   }
 
 }
@@ -662,9 +669,11 @@ export default {
   z-index: 1;
   transition: border-color 0.2s;
   border-radius: 20px;
-    display: flex;
-  justify-content: center; /* 水平居中 */
-  align-items: center; /* 垂直居中 */
+  display: flex;
+  justify-content: center;
+  /* 水平居中 */
+  align-items: center;
+  /* 垂直居中 */
 }
 
 .lxt_main_body .option img {

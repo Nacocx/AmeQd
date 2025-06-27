@@ -26,8 +26,8 @@
             </div>
           </div>
         </div>
-        <canvas width="350" height="250" id="c1" ref="canvas" class="qst" @mousedown="mouseDown"
-          @mouseup="mouseUp"></canvas>
+        <canvas width="350" height="250" id="c1" ref="canvas" class="qst" @mousedown="mouseDown" @touchstart="mouseDown"
+          @mouseup="mouseUp" @touchend="mouseUp"></canvas>
       </div>
     </div>
   </div>
@@ -65,6 +65,7 @@ export default {
       }
       // 添加 mouseup 事件监听器
       document.addEventListener('mouseup', this.mouseUp);
+      document.addEventListener('touchend', this.mouseUp);
 
       // 获取画布和 .right 容器元素
       const canvas = this.$refs.canvas;
@@ -109,6 +110,7 @@ export default {
       const y = e.clientY - rect.top;
 
       document.addEventListener('mousemove', this.mouseMove);
+      document.addEventListener('touchmove', this.mouseMove);
       this.ctx.beginPath();
       // 使用计算后的相对坐标
       this.ctx.moveTo(x, y);
@@ -130,6 +132,7 @@ export default {
       if (this.flag) {
         //this.message.ctx.closePath();
         document.removeEventListener('mousemove', this.mouseMove);
+        document.removeEventListener('touchmove', this.mouseMove);
         // console.log(this.shapeXY);
         // console.log("this.message.ctx=", this.ctx);
         this.shapeXY.forEach(e => {
@@ -140,7 +143,7 @@ export default {
         // console.log("this.message.userNum=", this.userNum);
 
         this.flag = 0;
-        this.message.changed=true;
+        this.message.changed = true;
         if (this.userNum == this.message.question.tureNum) {
           this.message.result = true;  //圈图题就返回一个值就行 1 对 0 错
           // console.log("你对了！");
@@ -150,6 +153,7 @@ export default {
       }
       else {
         document.removeEventListener('mousemove', this.mouseMove);
+        document.removeEventListener('touchmove', this.mouseMove);
       }
 
 

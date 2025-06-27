@@ -23,7 +23,7 @@
     </div>
     <!-- 选择图形部分 -->
     <div class="chose" id="source-area">
-      <div v-for="(e, index) in message.shape" @mousedown="mousedown">
+      <div v-for="(e, index) in message.shape" @mousedown="mousedown" @touchstart="mousedown">
         <!-- 添加 data-value 属性 -->
         <div>
           <!-- 加了data-value属性更好监听是那个图形 -->
@@ -33,7 +33,7 @@
     </div>
     <!-- 添加撤销按钮 -->
     <div class="undo-button">
-      <button @click="undo" :disabled="actionHistory.length === 0">撤销</button>
+      <button @click="undo" @touchend="undo" :disabled="actionHistory.length === 0">撤销</button>
     </div>
     <br>
   </div>
@@ -60,7 +60,9 @@ export default {
     // 初始化拖拽事件监听
     //拖拽事件一开始就监听
     document.addEventListener('mousemove', this.mousemove);
+    document.addEventListener('touchmove', this.mousemove);
     document.addEventListener('mouseup', this.mouseup);
+    document.addEventListener('touchend', this.mouseup);
 
     
   },
@@ -68,7 +70,9 @@ export default {
   beforeDestroy() {
     // 清理事件监听
     document.removeEventListener('mousemove', this.mousemove);
+    document.removeEventListener('touchmove', this.mousemove);
     document.removeEventListener('mouseup', this.mouseup);
+    document.removeEventListener('touchend', this.mouseup);
   },
   methods: {
     mousedown(ee) {

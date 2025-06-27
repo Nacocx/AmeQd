@@ -19,7 +19,7 @@
       </div>
     </div>
     <div class="chose" id="source-area">
-      <div @mousedown="mousedown">
+      <div @mousedown="mousedown" @touchstart="mousedown">
 
         <img :src="message.shape[message.id - 1]" class="shape" :data-value="message.id" alt="图片加载失败">
 
@@ -28,7 +28,7 @@
     </div>
     <!-- 添加撤销按钮 -->
     <div class="undo-button">
-      <button @click="undo" :disabled="actionHistory.length === 0">撤销</button>
+      <button @click="undo" @touchend="undo" :disabled="actionHistory.length === 0">撤销</button>
     </div>
     <br>
   </div>
@@ -54,13 +54,17 @@ export default {
     // 初始化拖拽事件监听
     //拖拽事件一开始就监听
     document.addEventListener('mousemove', this.mousemove);
+    document.addEventListener('touchmove', this.mousemove);
     document.addEventListener('mouseup', this.mouseup);
+    document.addEventListener('touchend', this.mouseup);
   },
 
   beforeDestroy() {
     // 清理事件监听
-    document.removeEventListener('mousemove', this.mousemove);
-    document.removeEventListener('mouseup', this.mouseup);
+    document.addEventListener('mousemove', this.mousemove);
+    document.addEventListener('touchmove', this.mousemove);
+    document.addEventListener('mouseup', this.mouseup);
+    document.addEventListener('touchend', this.mouseup);
   },
   methods: {
     mousedown(ee) {
@@ -139,7 +143,7 @@ export default {
         }
       }
       console.log(this.message.userAnswer);
-      
+
     }
   }
 }
