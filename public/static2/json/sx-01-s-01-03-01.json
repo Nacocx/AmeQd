@@ -1,0 +1,156 @@
+{
+     "tkt": [
+    {
+      "id": 1,
+      "title_main": "part_1 小朋友，先数一数有几颗珠子，再写一写。",
+      "title": [
+        "1.第一小题",
+        "2.第二小题",
+        "3.第三小题",
+        "4.第四小题",
+        "5.第五小题"
+      ],
+      "img": "VITE_RES_BASE_PATH/img/tkt1.png",
+      "subQuestions": [
+        "第一张图片有TNUM个珠子",
+        "第二张图片有TNUM个珠子",
+        "第三张图片有TNUM个珠子",
+        "第四张图片有TNUM个珠子",
+        "第五张图片有TNUM个珠子"
+      ],
+      "userAnswer": [
+        {
+          "type": "simple",
+          "answers": [""]
+        },
+        {
+          "type": "simple",
+          "answers": [""]
+        },
+        {
+          "type": "simple",
+          "answers": [""]
+        },
+        {
+          "type": "simple",
+          "answers": [""]
+        },
+        {
+          "type": "simple",
+          "answers": [""]
+        }
+      ],
+      "answers": [
+        ["4"],
+        ["3"],
+        ["2"],
+        ["1"],
+        ["0"]
+      ]
+    },
+     {
+      "id": 2,
+      "title_main": "part_2从左往右，按照从小到大的顺序在尺子中填一填。",
+      "title": [
+        "1.第一小题",
+        "2.第二小题",
+        "3.第三小题"
+      ],
+      "img": "VITE_RES_BASE_PATH/img/tkt2.png",
+      "subQuestions": [
+        "第一空填TNUM",
+        "第二空填TNUM",
+        "第三空填TNUM"
+      ],
+      "userAnswer": [
+        {
+          "type": "simple",
+          "answers": [""]
+        },
+        {
+          "type": "simple",
+          "answers": [""]
+        },
+        {
+          "type": "simple",
+          "answers": [""]
+        }
+      ],
+      "answers": [
+        ["0"],
+        ["2"],
+        ["5"]
+      ]
+    },
+    {
+      "id": 3,
+      "title_main": "part_3 数一数圆点的个数，在下方写一写，各个圆点个数即为小平电话的号码数。",
+      "title": [
+      ],
+      "img": "VITE_RES_BASE_PATH/img/tkt3.png",
+      "subQuestions": [
+        "小平家的电话号码是TNUM。"
+      ],
+      "userAnswer": [
+        {
+          "type": "simple",
+          "answers": [""]
+        }
+      ],
+      "answers": [
+        ["3105204"]
+      ]
+    },
+    {
+      "id": 4,
+      "title_main": "part_4 你知道蜜蜂采的是几号花吗？填一填。",
+      "title": ["1.","2.","3."
+      ],
+      "img": "VITE_RES_BASE_PATH/img/tkt4.png",
+      "subQuestions": [
+        "从左往右数，小蜜蜂采的第一朵花是TNUM号",
+        "从左往右数，小蜜蜂采的第二朵花是TNUM号",
+        "从左往右数，小蜜蜂采的第三朵花是TNUM号"
+      ],
+      "userAnswer": {},
+      "answers": [
+        "0","2","4"
+      ]
+    }
+  ],
+  "htt_tuo": [{
+    "id": [1, 2, 3],
+    "title": "part_5 根据数字提示，把缺少的图形拖进来",
+    "subQuestion": [
+      {
+        "id": 1,
+        "img": "VITE_RES_BASE_PATH/img/htt_d1.png",
+        "answer": 4,
+        "trueShape": 1
+      },
+      {
+        "id": 2,
+        "img":"VITE_RES_BASE_PATH/img/htt_d2.png",
+        "answer": 1,
+        "trueShape": 2
+      },
+      {
+        "id": 3,
+        "img": "VITE_RES_BASE_PATH/img/htt_d3.png",
+        "answer": 5,
+        "trueShape": 3
+      }
+    ],
+    "shape": [
+     "VITE_RES_BASE_PATH/img/jx.png",
+     "VITE_RES_BASE_PATH/img/sjx.png",
+     "VITE_RES_BASE_PATH/img/yuan.png"
+    ],
+    "userAnswer": [[], [], []],
+    "isDragging": false,
+    "startX": 0,
+    "startY": 0,
+    "draggedElement": null,
+    "answer": []
+  }]
+}
