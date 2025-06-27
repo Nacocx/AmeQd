@@ -105,9 +105,10 @@ export default {
 
       // 获取画布相对于视口的位置
       const rect = canvas.getBoundingClientRect();
-      // 计算鼠标在画布内的相对坐标
-      const x = e.clientX - rect.left;
-      const y = e.clientY - rect.top;
+      // 判断是触摸事件还是鼠标事件，分别获取对应的 x 坐标
+      const x = (e.touches ? e.touches[0].clientX : e.clientX) - rect.left;
+      // 判断是触摸事件还是鼠标事件，分别获取对应的 y 坐标
+      const y = (e.touches ? e.touches[0].clientY : e.clientY) - rect.top;
 
       document.addEventListener('mousemove', this.mouseMove);
       document.addEventListener('touchmove', this.mouseMove);
@@ -122,8 +123,10 @@ export default {
       // 获取画布相对于视口的位置
       const rect = canvas.getBoundingClientRect();
       // 计算鼠标在画布内的相对坐标
-      const x = e.clientX - rect.left;
-      const y = e.clientY - rect.top;
+      // 判断是触摸事件还是鼠标事件，分别获取对应的 x 坐标
+      const x = (e.touches ? e.touches[0].clientX : e.clientX) - rect.left;
+      // 判断是触摸事件还是鼠标事件，分别获取对应的 y 坐标
+      const y = (e.touches ? e.touches[0].clientY : e.clientY) - rect.top;
 
       this.ctx.lineTo(x, y); // 直线
       this.ctx.stroke();
