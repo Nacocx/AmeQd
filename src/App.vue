@@ -58,7 +58,7 @@
     </el-container>
 
     <el-dialog v-model="dialogTableVisible" title="答题统计结果:" width="800">
-      <span>整体对了{{ countTm.totalR }}题,正确率: <el-progress :percentage="countTm.allP" /></span>
+      <span>整体对了{{ countTm.rightCnt }}题,正确率: <el-progress :percentage="countTm.allP" /></span>
       <span v-if="questions.xzt && questions.xzt.length">选择题对了{{ countTm.xzt.right }}题,正确率: <el-progress
           :percentage="countTm.xzt.percentage" /></span>
       <span v-if="questions.tkt && questions.tkt.length">填空题对了{{ countTm.tkt.right }}题,正确率: <el-progress
@@ -93,6 +93,7 @@ import Tht from "@/components/tht.vue";
 import htt_tuo from "@/components/htt_tuo.vue";
 import axios from "axios";
 const basePath = import.meta.env.VITE_IMG_BASE_PATH;
+
 //实际使用中数据从后端获取
 // import logo from "/static/img/T1_tkt_ok/tkt_1.jpeg";   // 必须用 import
 // /static2/sx-01-s-01-01-01/img/xx.png
@@ -395,14 +396,14 @@ export default {
   data() {
     return {
       questions: {},
-      studentInfo: mockStudentInfo,
-      dialogTableVisible: false,
+      studentInfo: {},
       boolLists: {},
-      finalJson: {},
       TmBoolinfo: {},
-      createdReady: false,
       countTm: {},
       tmRightCnt: {},
+      dialogTableVisible: false,
+      isOnloading:true,
+      keys:[],
     };
   },
   components: {
@@ -412,15 +413,14 @@ export default {
     tkt,
     xzt,
     sidebar,
-    Sst,
     lxt,
     qst,
     htt_tuo,
   },
   async created() {
-    this.questions=mockQuestions;
+    await this.loadInfo();
     await Promise.all([
-      this.calTotalTm(),
+    this.calTotalTm(),
 
 
     ]);
@@ -437,57 +437,43 @@ export default {
   methods: {
     async calTotalTm() {
       const keys = Object.keys(this.questions);
-      console.log(keys);
+      this.keys=keys;
+      // console.log(keys);
       this.countTm.totalTm = 0;
       this.countTm.rightCnt = 0;
       this.countTm.allP = 0.0;
+
+      const typeHandlers = {
+        xzt: (questions) => questions.xzt.length,
+        sst: (questions) => questions.sst.length,
+        tkt: (questions) => questions.tkt.reduce((sum, el) => sum + el.answers.length, 0),
+        htt: (questions) => questions.htt.reduce((sum, el) => sum + el.subQuestion.length, 0),
+        lxt: (questions) => questions.lxt.reduce((sum, el) => sum + el.imgU.length, 0),
+        tht: (questions) => questions.tht.items.length,
+        qst: (questions) => questions.qst.length,
+        htt_tuo: (questions) => questions.htt_tuo.reduce((sum, el) => sum + el.subQuestion.length, 0)
+      };
+
       keys.forEach(e => {
         this.TmBoolinfo[e] = true;
 
-        // 初始化 countTm 的题型对象
         if (!this.countTm[e]) {
-          this.countTm[e] = {
-            cnt: 0,
-            right: 0,
-            percentage: 0
-          };
+          this.countTm[e] = { cnt: 0, right: 0, percentage: 0 };
         }
 
-        // 根据题目类型计算数量
-        if (e === "xzt") {
-          this.countTm.xzt.cnt = this.questions.xzt.length;
-          this.countTm.totalTm += this.countTm.xzt.cnt;
-        }
-        else if (e === "sst") {
-          this.countTm.sst.cnt = this.questions.sst.length;
-          this.countTm.totalTm += this.countTm.sst.cnt;
-        }
-        else if (e === "tkt") {
-          this.countTm.tkt.cnt = this.questions.tkt.reduce((sum, el) => sum + el.answers.length, 0);
-          this.countTm.totalTm += this.countTm.tkt.cnt;
-        }
-        else if (e === "htt") {
-          this.countTm.htt.cnt = this.questions.htt.reduce((sum, el) => sum + el.subQuestion.length, 0);
-          this.countTm.totalTm += this.countTm.htt.cnt;
-        }
-        else if (e === "lxt") {
-          this.countTm.lxt.cnt = this.questions.lxt.reduce((sum, el) => sum + el.imgU.length, 0);
-          this.countTm.totalTm += this.countTm.lxt.cnt;
-        }
-        else if (e === "tht") {
-          this.countTm.tht.cnt = this.questions.tht.items.length;
-          this.countTm.totalTm += this.countTm.tht.cnt;
-        }
-        else if (e === "qst") {
-          this.countTm.qst.cnt = this.questions.qst.length;
-          this.countTm.totalTm += this.countTm.qst.cnt;
-        }
-        else if (e === "htt_tuo") {
-          this.countTm.htt_tuo.cnt = this.questions.htt_tuo.reduce((sum, el) => sum + el.subQuestion.length, 0);
-          this.countTm.totalTm += this.countTm.htt_tuo.cnt;
+        const handler = typeHandlers[e];
+        if (handler) {
+          this.countTm[e].cnt = handler(this.questions);
+          this.countTm.totalTm += this.countTm[e].cnt;
         }
       });
     },
+    async loadInfo(){
+      this.questions=mockQuestions;
+      this.studentInfo=mockStudentInfo;
+      this.isOnloading=false;
+    },
+
     willSubmit() {
       let remainTm = 0;
       ElMessageBox.confirm(
@@ -512,13 +498,18 @@ export default {
           // console.log(this.questions);
           // console.log(this.TmBoolinfo);
           // console.log(this.countTm);
+          this.keys.forEach(e=>{
+
+          });
+          // this.getXztBoolList();
           this.getTktBoolList();
           this.getSstBoolList();
           this.getHttBoolList();
           this.getLxtBoolList();
           this.getThtBoolList();
-          this.getQsrBoolList();
+          this.getQstBoolList();
           this.getHttTuoBoolList();
+
           this.countTm.allP = parseFloat((this.countTm.rightCnt / this.countTm.totalTm * 100).toFixed(2));
 
           console.log(this.boolLists);
@@ -533,7 +524,7 @@ export default {
         })
       // 取消或报错(e)
       // .catch((e) => {
-      //   console.log("!ERROR:" + e);
+      //   console.error("!EVENT:" + e);
       //   ElMessage({
       //     type: "info",
       //     message: "已取消提交",
@@ -632,7 +623,7 @@ export default {
       });
       this.countTm.tht.percentage = parseFloat((this.countTm.tht.right / this.countTm.tht.cnt * 100).toFixed(2));
     },
-    getQsrBoolList() {
+    getQstBoolList() {
       this.countTm.qst.right = 0;
       this.boolLists.qst = [];
       this.questions.qst.forEach(e => {
