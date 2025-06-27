@@ -13,8 +13,8 @@
       <!-- 上侧选项 -->
       <div class="options upOptions">
         <div v-for="(item, index) in localMessage.imgU" :key="index" class="option"
-          :class="{ 'active': item.connected }" @mousedown="onMousedown($event, item)" :data-value="item.value"
-
+          :class="{ 'active': item.connected }" @mousedown="onMousedown($event, item)"
+          @touchstart="onMousedown($event, item)" :data-value="item.value"
           :data-ownership="item.ownership + message.flag">
 
           <img :src="item.src">
@@ -24,8 +24,8 @@
       <!-- 下侧选项 -->
       <div class="options downOptions">
         <div v-for="(item, index) in localMessage.imgD" :key="index" class="option"
-          :class="{ 'active': item.connected }" @mousedown="onMousedown($event, item)" :data-value="item.value"
-
+          :class="{ 'active': item.connected }" @mousedown="onMousedown($event, item)"
+          @touchstart="onMousedown($event, item)" :data-value="item.value"
           :data-ownership="item.ownership + message.flag">
 
           <img :src="item.src">
@@ -194,11 +194,13 @@ export default {
       this.currentLine.x1 = this.startItem.x;
       this.currentLine.y1 = this.startItem.y;
       // console.log("this.currentLine.x1", this.currentLine.x1);
-// console.log(1);
+      // console.log(1);
       // 添加鼠标移动事件监听
       document.addEventListener('mousemove', this.onMousemove);
+      document.addEventListener('touchmove', this.onMousemove);
       // 添加鼠标抬起事件监听
       document.addEventListener('mouseup', this.onMouseup);
+      document.addEventListener('touchend', this.onMouseup);
     },
 
     /**
@@ -208,7 +210,7 @@ export default {
      */
     onMousemove(event) {
       console.log(1);
-      
+
       //在 onMousemove(event) 方法里，event 代表原生的鼠标移动事件对象。虽然在代码里看起来没有显式传参，但这是浏览器事件监听机制自动处理的
       // 如果没有开始绘制连线，直接返回
       if (!this.isDrawing) return;
@@ -369,8 +371,10 @@ export default {
       this.ctx.clearRect(0, 0, this.$refs.canvas.width, this.$refs.canvas.height);
       // 移除鼠标移动事件监听
       document.removeEventListener('mousemove', this.onMousemove);
+      document.removeEventListener('touchmove', this.onMousemove);
       // 移除鼠标抬起事件监听
       document.removeEventListener('mouseup', this.onMouseup);
+      document.removeEventListener('touchend', this.onMouseup);
       // 清除所有选项的悬停状态
       this.clearHoverStates();
       //this.message.changed=true;
@@ -468,7 +472,7 @@ export default {
      * @param {number} width - 直线的宽度
      */
     drawLine(context, line, color, width) {
-console.log(line);
+      console.log(line);
 
       // console.log("lxt line", line);
 
@@ -600,6 +604,7 @@ console.log(line);
     // document.removeEventListener('mousemove', this.onMousemove);
     // 移除鼠标抬起事件监听
     document.removeEventListener('mouseup', this.onMouseup);
+    document.removeEventListener('touchend', this.onMouseup);
   }
 
 }
@@ -666,9 +671,11 @@ console.log(line);
   z-index: 1;
   transition: border-color 0.2s;
   border-radius: 20px;
-    display: flex;
-  justify-content: center; /* 水平居中 */
-  align-items: center; /* 垂直居中 */
+  display: flex;
+  justify-content: center;
+  /* 水平居中 */
+  align-items: center;
+  /* 垂直居中 */
 }
 
 .lxt_main_body .option img {
@@ -678,7 +685,7 @@ console.log(line);
 }
 
 .lxt_main_body .tuo3 {
-  width:60px !important;
+  width: 60px !important;
   height: 60px !important;
 
 }
