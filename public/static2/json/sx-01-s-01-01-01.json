@@ -8,6 +8,7 @@
       ],
       "id": 1,
       "title": {
+        "str": "part 7 接着点出与事物数量相等的",
         "image": "VITE_RES_BASE_PATH/img/icecream_28.png",
         "count": 5
       },
@@ -22,6 +23,7 @@
       ],
       "id": 2,
       "title": {
+        "str": "part 8 接着点出与事物数量相等的",
         "image": "VITE_RES_BASE_PATH/img/plane_21.png",
         "count": 4
       },
@@ -36,6 +38,7 @@
       ],
       "id": 3,
       "title": {
+        "str": "part 9 接着点出与事物数量相等的",
         "image": "VITE_RES_BASE_PATH/img/tree_13.png",
         "count": 3
       },
@@ -51,7 +54,7 @@
         ""
       ],
       "id": 1,
-      "title_main": "",
+      "title_main": "part 1",
       "title": [
         "1.认识数字\"1\"",
         "2.认识数字\"2",
@@ -92,7 +95,7 @@
         ""
       ],
       "id": 2,
-      "title": "",
+      "title": "part 3",
       "subQuestion": [
         {
           "id": 1,
@@ -141,7 +144,7 @@
         ""
       ],
       "id": 1,
-      "title": "请连接和图片中物品数量一致的圆的图片",
+      "title": "part 5请连接和图片中物品数量一致的圆的图片",
       "flag": "t3",
       "changed": false,
       "result": [],
@@ -205,7 +208,7 @@
         ""
       ],
       "id": 2,
-      "title": "请连接对应物品数量的数字",
+      "title": "part 6 请连接对应物品数量的数字",
       "flag": "tuo3",
       "changed": false,
       "result": [],
@@ -264,11 +267,15 @@
     }
   ],
   "tht": {
-    "audio_img": "/static2/assets/laba.png",
-    "audios": [
-      "VITE_RES_BASE_PATH/audio/part5.wav",
-      ""
-    ],
+    "another":{
+      "title":"part 2",
+      "audio_img": "/static2/assets/laba.png",
+      "audios": [
+        "VITE_RES_BASE_PATH/audio/part5.wav",
+        ""
+      ]
+    },
+
     "items": [
       {
         "rightItem": "VITE_RES_BASE_PATH/img/rightItem1_3.png",
@@ -326,7 +333,7 @@
         "VITE_RES_BASE_PATH/audio/tuo2.wav",
         ""
       ],
-      "title": "拓展应用2：对照上面图片根据左边的图形数量圈出右边的数量",
+      "title": "part 10 ：对照上面图片根据左边的图形数量圈出右边的数量",
       "example": {
         "t_img": "VITE_RES_BASE_PATH/img/t1_23.png",
         "a_img": "VITE_RES_BASE_PATH/img/a1_48.png"
@@ -354,7 +361,7 @@
         2,
         3
       ],
-      "title": "根据数字提示，把缺少的图形拖进来",
+      "title": "part 4 根据数字提示，把缺少的图形拖进来",
       "subQuestion": [
         {
           "id": 1,

@@ -14,7 +14,7 @@
               <tkt :all-questions="questions.tkt" v-if="questions.tkt && questions.tkt.length" />
               <!-- 涂画题 部分 -->
               <template  v-if="questions.tht">
-                <tht :items="questions.tht.items" :tuxing-path="questions.tht.tuxingpath" />
+                <tht :items="questions.tht.items" :tuxing-path="questions.tht.tuxingpath" :another="questions.tht.another"/>
               </template>
               <!-- 画图题 部分 -->
               <template v-if="questions.htt && questions.htt.length">
@@ -312,7 +312,7 @@ export default {
   },
   computed: {
     countTmStatus(){
-      
+
 
     },
 

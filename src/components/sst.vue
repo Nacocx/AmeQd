@@ -1,7 +1,7 @@
 <template>
   <div class="circle-drawing-game">
     <div class="title">
-       <h1>接着点出与事物数量相等的圆：</h1>
+       <h1>{{item.title.str}}</h1>
     <div>
         <img alt="Missing Image" :src="item.tuXingPath" class="title_img"/>
     </div>
