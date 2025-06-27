@@ -1,6 +1,12 @@
     <template >
         <div>
-            <h1>{{ another.title }}</h1>
+            <div class="title">
+
+                <h1>{{ another.title }}</h1>
+                <img :src="another.audio_img" alt="" class="laba" @click="playAudio(0)" @touchend="playAudio(0)">
+            </div>
+
+
             <!-- <h3>（思维训练）数一数，涂一涂，填一填</h3> -->
             <div class="container">
                 <div class="left-area">
@@ -9,23 +15,28 @@
                 <div class="right-area">
                     <div v-for="(item, index) in items" :key="index">
                         <div class="col">
-                            <div @click.stop.prevent="changeFlag(item, 0)" @touchstart.stop.prevent="changeFlag(item, 0)">
+                            <div @click.stop.prevent="changeFlag(item, 0)"
+                                @touchstart.stop.prevent="changeFlag(item, 0)">
                                 <img :src="tuxingPath[2].noneCircle" alt="图片" v-if="!item.flag[0]" draggable="false">
                                 <img :src="tuxingPath[1].redCircle" alt="图片" v-if="item.flag[0]" draggable="false">
                             </div>
-                            <div @click.stop.prevent="changeFlag(item, 1)" @touchstart.stop.prevent="changeFlag(item, 1)">
+                            <div @click.stop.prevent="changeFlag(item, 1)"
+                                @touchstart.stop.prevent="changeFlag(item, 1)">
                                 <img :src="tuxingPath[2].noneCircle" alt="图片" v-if="!item.flag[1]" draggable="false">
                                 <img :src="tuxingPath[1].redCircle" alt="图片" v-if="item.flag[1]" draggable="false">
                             </div>
-                            <div @click.stop.prevent="changeFlag(item, 2)" @touchstart.stop.prevent="changeFlag(item, 2)">
+                            <div @click.stop.prevent="changeFlag(item, 2)"
+                                @touchstart.stop.prevent="changeFlag(item, 2)">
                                 <img :src="tuxingPath[2].noneCircle" alt="图片" v-if="!item.flag[2]" draggable="false">
                                 <img :src="tuxingPath[1].redCircle" alt="图片" v-if="item.flag[2]" draggable="false">
                             </div>
-                            <div @click.stop.prevent="changeFlag(item, 3)" @touchstart.stop.prevent="changeFlag(item, 3)">
+                            <div @click.stop.prevent="changeFlag(item, 3)"
+                                @touchstart.stop.prevent="changeFlag(item, 3)">
                                 <img :src="tuxingPath[2].noneCircle" alt="图片" v-if="!item.flag[3]" draggable="false">
                                 <img :src="tuxingPath[1].redCircle" alt="图片" v-if="item.flag[3]" draggable="false">
                             </div>
-                            <div @click.stop.prevent="changeFlag(item, 4)" @touchstart.stop.prevent="changeFlag(item, 4)">
+                            <div @click.stop.prevent="changeFlag(item, 4)"
+                                @touchstart.stop.prevent="changeFlag(item, 4)">
                                 <img :src="tuxingPath[2].noneCircle" alt="图片" v-if="!item.flag[4]" draggable="false">
                                 <img :src="tuxingPath[1].redCircle" alt="图片" v-if="item.flag[4]" draggable="false">
                             </div>
@@ -61,12 +72,47 @@ export default {
                 { noneCircle: './static/img/tht/noneCircle.png' },
             ]
         },
-        another:{
-          type:Object,
-          require: true,
+        another: {
+            type: Object,
+            require: true,
         }
     },
     methods: {
+
+        playAudio(index) {
+            console.log(index);
+
+            var url_now;
+            var audio_now;
+            var url_id;
+            if (this.audio_isPlay) {
+                if (index == this.audio_id) {
+                    // console.log("zai");
+                    // 停止播放并重置到开始位置
+                    this.audioEle.pause();         // 暂停播放
+                    this.audioEle.currentTime = 0; // 重置播放位置到 0 秒
+
+                    this.audioEle = "";
+                    this.audio_isPlay = false;
+                    return;
+                }
+                else {
+                    this.audioEle.pause();         // 暂停播放
+                    this.audioEle.currentTime = 0;
+                    this.audioEle = "";
+                }
+            }
+            url_now = this.another.audios[index];
+            url_id = index;
+            audio_now = document.createElement('audio');
+            audio_now.src = url_now;
+            audio_now.play();
+            this.audio_isPlay = true;
+            this.audio_id = url_id;
+            this.audioEle = audio_now;
+
+
+        },
         changeFlag(item, index) {
 
             item.flag[index] = !item.flag[index];
@@ -80,6 +126,34 @@ export default {
 </script>
 
 <style scoped>
+.title {
+    /* background-color: #4CAF50; */
+    text-align: center;
+    display: flex;
+    /* 使用 flex 布局 */
+    align-items: center;
+    /* 垂直居中对齐 */
+    justify-content: center;
+    gap: 10px;
+}
+
+.title h1 {
+    margin: 0;
+    /* 移除 h1 默认的外边距 */
+    padding: 0;
+}
+
+.laba_div {
+    width: 30px;
+    height: 30px;
+}
+
+.laba {
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+}
+
 body {
     font-family: 'Arial Rounded MT Bold', 'Arial', sans-serif;
     background-color: #f9f3ff;
