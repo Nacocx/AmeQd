@@ -1,10 +1,16 @@
 <template>
   <div class="htt_main_body">
-    <h1>{{ message.title }}请拖进与图片物品数量一样的:<img :src="message.shape[message.id - 1]" alt="" class="shape">
-      <div class="questions">
+    <div class="title">
 
-      </div>
-    </h1>
+
+      <h1>{{ message.title }}请拖进与图片物品数量一样的:<img :src="message.shape[message.id - 1]" alt="" class="shape">
+        <div class="questions">
+
+        </div>
+      </h1>
+      <img :src="message.audio_img" alt="" class="laba" @click="playAudio(0)" @touchend="playAudio(0)">
+    </div>
+
 
     <!-- 主要问题部分 -->
     <div class="main_body">
@@ -67,6 +73,41 @@ export default {
     document.addEventListener('touchend', this.mouseup);
   },
   methods: {
+
+    playAudio(index) {
+      console.log(index);
+
+      var url_now;
+      var audio_now;
+      var url_id;
+      if (this.audio_isPlay) {
+        if (index == this.audio_id) {
+          // console.log("zai");
+          // 停止播放并重置到开始位置
+          this.audioEle.pause();         // 暂停播放
+          this.audioEle.currentTime = 0; // 重置播放位置到 0 秒
+
+          this.audioEle = "";
+          this.audio_isPlay = false;
+          return;
+        }
+        else {
+          this.audioEle.pause();         // 暂停播放
+          this.audioEle.currentTime = 0;
+          this.audioEle = "";
+        }
+      }
+      url_now = this.message.audios[index];
+      url_id = index;
+      audio_now = document.createElement('audio');
+      audio_now.src = url_now;
+      audio_now.play();
+      this.audio_isPlay = true;
+      this.audio_id = url_id;
+      this.audioEle = audio_now;
+
+
+    },
     mousedown(ee) {
       ee.preventDefault();//加个这个就可以了 不然会有个默认的行为 阻止拖动
       this.message.isDragging = true;
@@ -156,6 +197,34 @@ export default {
 }
 </script>
 <style scoped>
+.title {
+  /* background-color: #4CAF50; */
+  text-align: center;
+  display: flex;
+  /* 使用 flex 布局 */
+  align-items: center;
+  /* 垂直居中对齐 */
+  justify-content: center;
+  gap: 10px;
+}
+
+.title h1 {
+  margin: 0;
+  /* 移除 h1 默认的外边距 */
+  padding: 0;
+}
+
+.laba_div {
+  width: 30px;
+  height: 30px;
+}
+
+.laba {
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+}
+
 /* 样式部分保持不变 */
 html,
 body {

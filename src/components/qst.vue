@@ -2,7 +2,13 @@
 <template>
   <div class="qst_mian_body" id="qst">
     <header>
-      <h1> {{ message.title }}</h1>
+      <div class="title">
+
+
+        <h1> {{ message.title }}</h1>
+        <img :src="message.audio_img" alt="" class="laba" @click="playAudio(0)" @touchend="playAudio(0)">
+      </div>
+
       <div>
 
       </div>
@@ -94,6 +100,41 @@ export default {
     }
   },
   methods: {
+
+    playAudio(index) {
+      console.log(index);
+
+      var url_now;
+      var audio_now;
+      var url_id;
+      if (this.audio_isPlay) {
+        if (index == this.audio_id) {
+          // console.log("zai");
+          // 停止播放并重置到开始位置
+          this.audioEle.pause();         // 暂停播放
+          this.audioEle.currentTime = 0; // 重置播放位置到 0 秒
+
+          this.audioEle = "";
+          this.audio_isPlay = false;
+          return;
+        }
+        else {
+          this.audioEle.pause();         // 暂停播放
+          this.audioEle.currentTime = 0;
+          this.audioEle = "";
+        }
+      }
+      url_now = this.message.audios[index];
+      url_id = index;
+      audio_now = document.createElement('audio');
+      audio_now.src = url_now;
+      audio_now.play();
+      this.audio_isPlay = true;
+      this.audio_id = url_id;
+      this.audioEle = audio_now;
+
+
+    },
     mouseDown(e) {
       this.flag = 1
       // 获取画布元素
@@ -168,14 +209,44 @@ export default {
   }
 };
 </script>
-<style>
+<style scoped>
+.title {
+  /* background-color: #4CAF50; */
+  text-align: center;
+  display: flex;
+  /* 使用 flex 布局 */
+  align-items: center;
+  /* 垂直居中对齐 */
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.title h1 {
+  margin: 0;
+  /* 移除 h1 默认的外边距 */
+  padding: 0;
+}
+
+.laba_div {
+  width: 30px;
+  height: 30px;
+}
+
+.laba {
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+}
+
 .qst_mian_body {
 
   width: 850px;
-  height: 700px;
+  height: 600px;
   /* border: 1px solid black; */
   margin: auto;
   text-align: center;
+  margin-top: 20px;
 }
 
 .qst_mian_body .main_body {
