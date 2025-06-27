@@ -1,7 +1,7 @@
 <template>
   <div id="app">
-    <p v-if="isOnloading">Loading......</p>
-    <el-container>
+<!--    <div v-if="isOnloading">Loading......</div>-->
+    <el-container >
       <el-container>
         <!-- 侧边栏模板 -->
         <!-- <sidebar :student-info="studentInfo" :count-tm="countTm" /> -->
@@ -85,7 +85,7 @@
 import xzt from "@/components/xzt.vue";
 import sidebar from "@/components/sidebar.vue";
 import tkt from "@/components/tkt.vue";
-import { ElMessage } from "element-plus";
+import {ElMessage} from "element-plus";
 import Sst from "@/components/sst.vue";
 import Htt from "@/components/htt.vue";
 import lxt from "@/components/lxt.vue";
@@ -93,6 +93,7 @@ import qst from "@/components/qst.vue";
 import Tht from "@/components/tht.vue";
 import htt_tuo from "@/components/htt_tuo.vue";
 import axios from "axios";
+
 const basePath = import.meta.env.VITE_IMG_BASE_PATH;
 
 //实际使用中数据从后端获取
@@ -100,88 +101,6 @@ const basePath = import.meta.env.VITE_IMG_BASE_PATH;
 // /static2/sx-01-s-01-01-01/img/xx.png
 
 const mockQuestions = {
-  "sst": [
-    {
-      "id": 1,
-      "title": { "image": `${basePath}/icecream_28.png`, "count": 5 },
-      "tuXingPath": `${basePath}/circle_2.png`,
-      "userAnswer": ""
-    },
-    {
-      "id": 2,
-      "title": { "image": `${basePath}/plane_21.png`, "count": 4 },
-      "tuXingPath": `${basePath}/circle_2.png`,
-      "userAnswer": ""
-    },
-    {
-      "id": 3,
-      "title": { "image": `${basePath}/tree_13.png`, "count": 3 },
-      "tuXingPath": `${basePath}/circle_2.png`,
-      "userAnswer": ""
-    }
-  ],
-
-  "tkt": [
-    {
-      "id": 1,
-      "title_main": "",
-      "title": [
-        "1.认识数字\"1\"",
-        "2.认识数字\"2",
-        "3.认识数字\"3\"",
-        "4.认识数字\"4\"",
-        "5.认识数字\"5\""
-      ],
-      "img": `${basePath}/tkt_1_90.jpeg`,
-      "subQuestions": [
-        "（1）一个太阳、一座房子、一棵果树可以用数字TNUM表示，也可以用TNUM个小圆片表示。TSPL（2）看看图中，还有什么可以用数字\"1\"表示呢TNUM和TNUM都可以用数字\"1\"表示。",
-        "两只鸟、两个人，可以用数字TNUM表示，也可以用TNUM个小圆片表示。",
-        "有三朵云，三个苹果，可以用数字TNUM表示，也可以用TNUM个小圆片表示。",
-        "有四个萝卜，四朵花，可以用数字TNUM表示，也可以用TNUM个小圆片表示。",
-        "有五只鸭子，可以用数字TNUM表示，也可以用TNUM个小圆片表示。"
-      ],
-      "userAnswer": {},
-      "answers": ["1", "1", "小船", "小狗", "2", "2", "3", "3", "4", "4", "5", "5"],
-    }
-  ],
-
-  "htt": [{
-    "id": 2,
-    "title": "",
-    "subQuestion": [
-      {
-        "id": 1,
-        "img": `${basePath}/t1_9.jpeg`,
-        "answer": 2
-      },
-      {
-        "id": 2,
-        "img": `${basePath}/t2_9.jpeg`,
-        "answer": 3
-      },
-      {
-        "id": 3,
-        "img": `${basePath}/t3_10.jpeg`,
-        "answer": 5
-      },
-      {
-        "id": 4,
-        "img": `${basePath}/t4_9.jpeg`,
-        "answer": 4
-      }
-    ],
-    "shape": [
-      `${basePath}/jx_6.png`,
-      `${basePath}/sjx_17.png`,
-      `${basePath}/yx_15.png`
-    ],
-    "trueShape": 1,
-    "userAnswer": [[], [], [], []],
-    "isDragging": false,
-    "startX": 0,
-    "startY": 0,
-    "draggedElement": null
-  }],
 
   "lxt": [
     {
@@ -348,41 +267,7 @@ const mockQuestions = {
     "changed": false
   }],
 
-  "htt_tuo": [{
-    "id": [1, 2, 3],
-    "title": "根据数字提示，把缺少的图形拖进来",
-    "subQuestion": [
-      {
-        "id": 1,
-        "img": `${basePath}/t1.png`,
-        "answer": 4,
-        "trueShape": 1
-      },
-      {
-        "id": 2,
-        "img": `${basePath}/t2.png`,
-        "answer": 3,
-        "trueShape": 2
-      },
-      {
-        "id": 3,
-        "img": `${basePath}/t3.png`,
-        "answer": 1,
-        "trueShape": 3
-      }
-    ],
-    "shape": [
-      `${basePath}/jx.png`,
-      `${basePath}/sjx_10.png`,
-      `${basePath}/yuan.png`
-    ],
-    "userAnswer": [[], [], []],
-    "isDragging": false,
-    "startX": 0,
-    "startY": 0,
-    "draggedElement": null,
-    "answer": []
-  }],
+
 }
 
 const mockStudentInfo = {
@@ -420,8 +305,6 @@ export default {
     await this.loadInfo();
     await Promise.all([
       this.calTotalTm(),
-
-
     ]);
   },
   computed: {
@@ -467,11 +350,47 @@ export default {
       });
     },
     async loadInfo(){
+      // this.questions= await this.fetchData();
+
       this.questions=mockQuestions;
       this.studentInfo=mockStudentInfo;
-      this.isOnloading=false;
+    },
+    // 获取并处理数据
+    async  fetchData() {
+      try {
+        const response = await axios.get('/TmJson/testjson.json');
+        this.isOnloading=false;
+        return this.processPaths(response.data);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+        return null;
+      }
     },
 
+// 处理路径占位符
+processPaths(data) {
+  const basePath = import.meta.env.VITE_IMG_BASE_PATH;
+
+  // 深度遍历对象，替换所有占位符
+  const process = (obj) => {
+    if (typeof obj === 'string') {
+      return obj.replace(/VITE_IMG_BASE_PATH/g, basePath);
+    }
+    if (Array.isArray(obj)) {
+      return obj.map(item => process(item));
+    }
+    if (typeof obj === 'object' && obj !== null) {
+      const result = {};
+      for (const key in obj) {
+        result[key] = process(obj[key]);
+      }
+      return result;
+    }
+    return obj;
+  };
+
+  return process(data);
+},
     willSubmit() {
       let remainTm = 0;
       ElMessageBox.confirm(
