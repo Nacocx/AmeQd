@@ -303,9 +303,9 @@ export default {
   },
   async created() {
     await this.loadInfo();
-    await Promise.all([
-      this.calTotalTm(),
-    ]);
+    if (this.questions) { // 确保数据存在
+      await this.calTotalTm();
+    }
   },
   computed: {
 
