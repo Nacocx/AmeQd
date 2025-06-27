@@ -1,30 +1,40 @@
 <template>
   <div class="circle-drawing-game">
-    <div class="title">
-       <h1>{{item.title.str}}</h1>
-    <div>
-        <img alt="Missing Image" :src="item.tuXingPath" class="title_img"/>
+
+
+    <div class="title1">
+
+
+      <div class="title">
+        <h1>{{ item.title.str }}</h1>
+        <div>
+          <img alt="Missing Image" :src="item.tuXingPath" class="title_img" />
+        </div>
+
+
+      </div>
+      <img :src="item.audio_img" alt="" class="laba" @click="playAudio(0)" @touchend="playAudio(0)">
     </div>
 
 
-    </div>
-   
+
+
     <div class="item-display">
       <div class="left_img">
-      <img :src="item.title.image" alt="物品图片" />
+        <img :src="item.title.image" alt="物品图片" />
       </div>
       <div class="right_body">
-      <div class="count">Your Answer: {{ item.userAnswer }}</div>
-      <div class="drawing-area" @click.stop.prevent="addCircle" @touchstart.stop.prevent="addCircle">
-      <div v-for="(circle, index) in circles" :key="index" class="circle" :style="{
-        left: circle.x + 'px',
-        top: circle.y + 'px',
-      }">
-        <img :src="item.tuXingPath" style="width: 50px ;height: 50px;" alt="O" />
-      </div>
+        <div class="count">Your Answer: {{ item.userAnswer }}</div>
+        <div class="drawing-area" @click.stop.prevent="addCircle" @touchstart.stop.prevent="addCircle">
+          <div v-for="(circle, index) in circles" :key="index" class="circle" :style="{
+            left: circle.x + 'px',
+            top: circle.y + 'px',
+          }">
+            <img :src="item.tuXingPath" style="width: 50px ;height: 50px;" alt="O" />
+          </div>
 
-      </div>
-      
+        </div>
+
       </div>
     </div>
     <el-button @click="resetCircles" type="primary" class="btn">重新画</el-button>
@@ -54,6 +64,42 @@ export default {
 
   },
   methods: {
+
+    playAudio(index) {
+      console.log(index);
+
+      var url_now;
+      var audio_now;
+      var url_id;
+      if (this.audio_isPlay) {
+        if (index == this.audio_id) {
+          // console.log("zai");
+          // 停止播放并重置到开始位置
+          this.audioEle.pause();         // 暂停播放
+          this.audioEle.currentTime = 0; // 重置播放位置到 0 秒
+
+          this.audioEle = "";
+          this.audio_isPlay = false;
+          return;
+        }
+        else {
+          this.audioEle.pause();         // 暂停播放
+          this.audioEle.currentTime = 0;
+          this.audioEle = "";
+        }
+      }
+      url_now = this.item.audios[index];
+      url_id = index;
+      audio_now = document.createElement('audio');
+      audio_now.src = url_now;
+      audio_now.play();
+      this.audio_isPlay = true;
+      this.audio_id = url_id;
+      this.audioEle = audio_now;
+
+
+    },
+
     addCircle(event) {
       if (this.circles.length < 10) {// 处理触摸事件和鼠标事件的兼容性
         const clientX = event.clientX || event.touches[0].clientX;
@@ -79,27 +125,62 @@ export default {
 </script>
 
 <style scoped>
-*{
+* {
   margin: 0;
   padding: 0;
 }
-.title{
+
+.title1 {
+  /* background-color: #4CAF50; */
+  text-align: center;
+  display: flex;
+  /* 使用 flex 布局 */
+  align-items: center;
+  /* 垂直居中对齐 */
+  justify-content: center;
+  gap: 10px;
+}
+
+.title1 h1 {
+  margin: 0;
+  /* 移除 h1 默认的外边距 */
+  padding: 0;
+}
+
+.laba_div {
+  width: 30px;
+  height: 30px;
+}
+
+.laba {
+  margin-top: -20px;
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+}
+
+.title {
   display: flex;
   justify-content: center;
   height: 20px;
   position: relative;
   margin-bottom: 30px;
+  width: 370px;
+  /* background-color: #4caf50; */
 }
-.title_img{
+
+.title_img {
   width: 50px;
   position: absolute;
   top: -10px;
+  /* background-color: #4caf50; */
 }
+
 .circle-drawing-game {
   /* background-color: #4caf50; */
   font-family: Arial, sans-serif;
-  max-width:890px;
-  height: 330px;
+  max-width: 890px;
+  height: 350px;
   margin: 0 auto;
   padding: 20px;
   text-align: center;
@@ -107,13 +188,14 @@ export default {
 }
 
 
- .circle-drawing-game .item-display {
+.circle-drawing-game .item-display {
   margin: 10px 0;
   display: flex;
   /* background-color: #4caf50; */
 
 }
-.circle-drawing-game .left_img{
+
+.circle-drawing-game .left_img {
   width: 350px;
   height: 250px;
   /* background-color: #ccc; */
@@ -122,20 +204,24 @@ export default {
   align-items: center;
   justify-content: center;
 }
-.circle-drawing-game .left_img img{
+
+.circle-drawing-game .left_img img {
   margin-top: 30px;
 
 }
+
 .circle-drawing-game .item-display img {
   width: 200px;
   height: 200px;
   object-fit: contain;
   /* border: 1px solid #eee; */
 }
-.circle-drawing-game .right_body{
-width: 550px;
-height: 250px;
+
+.circle-drawing-game .right_body {
+  width: 550px;
+  height: 250px;
 }
+
 .circle-drawing-game .count {
   font-size: 18px;
   margin-top: 10px;
@@ -167,7 +253,7 @@ height: 250px;
   padding: 8px 16px;
   margin: 0 10px;
   background-color: #4caf50;
-  
+
   color: white;
   border: none;
   border-radius: 4px;
@@ -178,9 +264,10 @@ height: 250px;
   background-color: #cccccc;
   cursor: not-allowed;
 }
-.btn{
- position: absolute;
- right: 275px;
- transform: translateX(50%);
+
+.btn {
+  position: absolute;
+  right: 275px;
+  transform: translateX(50%);
 }
 </style>
