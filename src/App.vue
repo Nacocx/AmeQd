@@ -3,8 +3,7 @@
 <!--    <div v-if="isOnloading">Loading......</div>-->
     <el-container >
       <el-container>
-        <!-- 侧边栏模板 -->
-        <!-- <sidebar :student-info="studentInfo" :count-tm="countTm" /> -->
+         <sidebar :student-info="studentInfo" :count-tm="countTm" />
         <el-main>
           <!-- 题目部分 -->
           <div id="chose">
@@ -15,7 +14,7 @@
               <tkt :all-questions="questions.tkt" v-if="questions.tkt && questions.tkt.length" />
               <!-- 涂画题 部分 -->
               <template  v-if="questions.tht">
-                <tht :items="questions.tht.items" :tuxing-path="questions.tht.tuxingpath" />
+                <tht :items="questions.tht.items" :tuxing-path="questions.tht.tuxingpath" :another="questions.tht.another"/>
               </template>
               <!-- 画图题 部分 -->
               <template v-if="questions.htt && questions.htt.length">
@@ -285,12 +284,11 @@ export default {
       questions: {},
       studentInfo: {},
       boolLists: {},
-      TmBoolInfo: {},
       countTm: {},
       tmRightCnt: {},
+      keys:[],
       dialogTableVisible: false,
       isOnloading:true,
-      keys:[],
     };
   },
   components: {
@@ -308,15 +306,15 @@ export default {
     await this.loadInfo();
     if (this.questions) { // 确保数据存在
       await this.calTotalTm();
+    }else{
+      alert("Network error");
     }
   },
   computed: {
+    countTmStatus(){
 
 
-
-
-
-
+    },
 
   },
   methods: {
@@ -339,7 +337,6 @@ export default {
       };
 
       keys.forEach(e => {
-        this.TmBoolInfo[e] = true;
 
         if (!this.countTm[e]) {
           this.countTm[e] = { cnt: 0, right: 0, percentage: 0 };

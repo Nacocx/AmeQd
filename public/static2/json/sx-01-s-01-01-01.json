@@ -1,29 +1,60 @@
 {
-  "sst" : [
+  "sst": [
     {
+      "audio_img": "/static2/assets/laba.png",
+      "audios": [
+        "VITE_RES_BASE_PATH/audio/part3.wav",
+        ""
+      ],
       "id": 1,
-      "title": { "image": "VITE_RES_BASE_PATH/img/icecream_28.png", "count": 5 },
+      "title": {
+        "str": "part 7 接着点出与事物数量相等的",
+        "image": "VITE_RES_BASE_PATH/img/icecream_28.png",
+        "count": 5
+      },
       "tuXingPath": "VITE_RES_BASE_PATH/img/circle_2.png",
       "userAnswer": ""
     },
     {
+      "audio_img": "/static2/assets/laba.png",
+      "audios": [
+        "VITE_RES_BASE_PATH/audio/part3.wav",
+        ""
+      ],
       "id": 2,
-      "title": { "image": "VITE_RES_BASE_PATH/img/plane_21.png", "count": 4 },
+      "title": {
+        "str": "part 8 接着点出与事物数量相等的",
+        "image": "VITE_RES_BASE_PATH/img/plane_21.png",
+        "count": 4
+      },
       "tuXingPath": "VITE_RES_BASE_PATH/img/circle_2.png",
       "userAnswer": ""
     },
     {
+      "audio_img": "/static2/assets/laba.png",
+      "audios": [
+        "VITE_RES_BASE_PATH/audio/part3.wav",
+        ""
+      ],
       "id": 3,
-      "title": { "image": "VITE_RES_BASE_PATH/img/tree_13.png", "count": 3 },
+      "title": {
+        "str": "part 9 接着点出与事物数量相等的",
+        "image": "VITE_RES_BASE_PATH/img/tree_13.png",
+        "count": 3
+      },
       "tuXingPath": "VITE_RES_BASE_PATH/img/circle_2.png",
       "userAnswer": ""
     }
   ],
-
   "tkt": [
     {
+      "audio_img": "/static2/assets/laba.png",
+      "audios": [
+        "VITE_RES_BASE_PATH/audio/part3.wav",
+        ""
+      ],
       "id": 1,
-      "title_main": "",
+      "title_main": "part 1",
       "title": [
         "1.认识数字\"1\"",
         "2.认识数字\"2",
@@ -33,59 +64,87 @@
       ],
       "img": "VITE_RES_BASE_PATH/img/tkt_1_90.jpeg",
       "subQuestions": [
-        "（1）一个太阳、一座房子、一棵果树可以用数字TNUM表示，也可以用TNUM个小圆片表示。TSPL（2）看看图中，还有什么可以用数字\"1\"表示呢TNUM和TNUM都可以用数字\"1\"表示。",
+        "（1）一个太阳、一座房子、一棵果树可以用数字TNUM表示，也可以用TNUM个小圆片表示。TSPL（2）看看图中，还有什么可以用数字\"1\"表示呢？ 比如TNUM和TNUM都可以用数字\"1\"表示。",
         "两只鸟、两个人，可以用数字TNUM表示，也可以用TNUM个小圆片表示。",
         "有三朵云，三个苹果，可以用数字TNUM表示，也可以用TNUM个小圆片表示。",
         "有四个萝卜，四朵花，可以用数字TNUM表示，也可以用TNUM个小圆片表示。",
         "有五只鸭子，可以用数字TNUM表示，也可以用TNUM个小圆片表示。"
       ],
       "userAnswer": {},
-      "answers": ["1", "1", "小船", "小狗", "2", "2", "3", "3", "4", "4", "5", "5"]
+      "answers": [
+        "1",
+        "1",
+        "小船",
+        "小狗",
+        "2",
+        "2",
+        "3",
+        "3",
+        "4",
+        "4",
+        "5",
+        "5"
+      ]
     }
   ],
-
-  "htt": [{
-    "id": 2,
-    "title": "",
-    "subQuestion": [
-      {
-        "id": 1,
-        "img": "VITE_RES_BASE_PATH/img/t1_9.jpeg",
-        "answer": 2
-      },
-      {
-        "id": 2,
-        "img": "VITE_RES_BASE_PATH/img/t2_9.jpeg",
-        "answer": 3
-      },
-      {
-        "id": 3,
-        "img": "VITE_RES_BASE_PATH/img/t3_10.jpeg",
-        "answer": 5
-      },
-      {
-        "id": 4,
-        "img": "VITE_RES_BASE_PATH/img/t4_9.jpeg",
-        "answer": 4
-      }
-    ],
-    "shape": [
-      "VITE_RES_BASE_PATH/img/jx_6.png",
-      "VITE_RES_BASE_PATH/img/sjx_17.png",
-      "VITE_RES_BASE_PATH/img/yx_15.png"
-    ],
-    "trueShape": 1,
-    "userAnswer": [[], [], [], []],
-    "isDragging": false,
-    "startX": 0,
-    "startY": 0,
-    "draggedElement": null
-  }],
-
+  "htt": [
+    {
+      "audio_img": "/static2/assets/laba.png",
+      "audios": [
+        "VITE_RES_BASE_PATH/audio/part3.wav",
+        ""
+      ],
+      "id": 2,
+      "title": "part 3",
+      "subQuestion": [
+        {
+          "id": 1,
+          "img": "VITE_RES_BASE_PATH/img/t1_9.jpeg",
+          "answer": 2
+        },
+        {
+          "id": 2,
+          "img": "VITE_RES_BASE_PATH/img/t2_9.jpeg",
+          "answer": 3
+        },
+        {
+          "id": 3,
+          "img": "VITE_RES_BASE_PATH/img/t3_10.jpeg",
+          "answer": 5
+        },
+        {
+          "id": 4,
+          "img": "VITE_RES_BASE_PATH/img/t4_9.jpeg",
+          "answer": 4
+        }
+      ],
+      "shape": [
+        "VITE_RES_BASE_PATH/img/jx_6.png",
+        "VITE_RES_BASE_PATH/img/sjx_17.png",
+        "VITE_RES_BASE_PATH/img/yx_15.png"
+      ],
+      "trueShape": 1,
+      "userAnswer": [
+        [],
+        [],
+        [],
+        []
+      ],
+      "isDragging": false,
+      "startX": 0,
+      "startY": 0,
+      "draggedElement": null
+    }
+  ],
   "lxt": [
     {
+      "audio_img": "/static2/assets/laba.png",
+      "audios": [
+        "VITE_RES_BASE_PATH/audio/part3.wav",
+        ""
+      ],
       "id": 1,
-      "title": "请连接和图片中物品数量一致的圆的图片",
+      "title": "part 5请连接和图片中物品数量一致的圆的图片",
       "flag": "t3",
       "changed": false,
       "result": [],
@@ -143,8 +202,13 @@
       ]
     },
     {
+      "audio_img": "/static2/assets/laba.png",
+      "audios": [
+        "VITE_RES_BASE_PATH/audio/part3.wav",
+        ""
+      ],
       "id": 2,
-      "title": "请连接对应物品数量的数字",
+      "title": "part 6 请连接对应物品数量的数字",
       "flag": "tuo3",
       "changed": false,
       "result": [],
@@ -200,86 +264,139 @@
           "connected": false
         }
       ]
-    }],
-
+    }
+  ],
   "tht": {
+    "another":{
+      "title":"part 2",
+      "audio_img": "/static2/assets/laba.png",
+      "audios": [
+        "VITE_RES_BASE_PATH/audio/part5.wav",
+        ""
+      ]
+    },
+
     "items": [
       {
         "rightItem": "VITE_RES_BASE_PATH/img/rightItem1_3.png",
         "cnt": 2,
-        "flag": [false, false, false, false, false],
+        "flag": [
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
         "changed": false
       },
       {
         "rightItem": "VITE_RES_BASE_PATH/img/rightItem2_2.png",
         "cnt": 1,
-        "flag": [false, false, false, false, false],
+        "flag": [
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
         "changed": false
       },
       {
         "rightItem": "VITE_RES_BASE_PATH/img/rightItem3_2.png",
         "cnt": 3,
-        "flag": [false, false, false, false, false],
+        "flag": [
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
         "changed": false
       }
     ],
     "tuxingpath": [
-      { "leftImage": "VITE_RES_BASE_PATH/img/left_11.png" },
-      { "redCircle": "VITE_RES_BASE_PATH/img/redCircle_2.png" },
-      { "noneCircle": "VITE_RES_BASE_PATH/img/noneCircle_2.png" }
+      {
+        "leftImage": "VITE_RES_BASE_PATH/img/left_11.png"
+      },
+      {
+        "redCircle": "VITE_RES_BASE_PATH/img/redCircle_2.png"
+      },
+      {
+        "noneCircle": "VITE_RES_BASE_PATH/img/noneCircle_2.png"
+      }
     ]
   },
-
-  "qst": [{
-    "title": "拓展应用2：对照上面图片根据左边的图形数量圈出右边的数量",
-    "example": {
-      "t_img": "VITE_RES_BASE_PATH/img/t1_23.png",
-      "a_img": "VITE_RES_BASE_PATH/img/a1_48.png"
-    },
-    "question": {
-      "t_img": "VITE_RES_BASE_PATH/img/t2_45.png",
-      "n_img": "VITE_RES_BASE_PATH/img/n2_16.png",
-      "num": 8,
-      "tureNum": 5
-    },
-    "img": "VITE_RES_BASE_PATH/img/jian_10.png",
-    "result": false,
-    "changed": false
-  }],
-
-  "htt_tuo": [{
-    "id": [1, 2, 3],
-    "title": "根据数字提示，把缺少的图形拖进来",
-    "subQuestion": [
-      {
-        "id": 1,
-        "img": "VITE_RES_BASE_PATH/img/t1.png",
-        "answer": 4,
-        "trueShape": 1
+  "qst": [
+    {
+      "audio_img": "/static2/assets/laba.png",
+      "audios": [
+        "VITE_RES_BASE_PATH/audio/tuo2.wav",
+        ""
+      ],
+      "title": "part 10 ：对照上面图片根据左边的图形数量圈出右边的数量",
+      "example": {
+        "t_img": "VITE_RES_BASE_PATH/img/t1_23.png",
+        "a_img": "VITE_RES_BASE_PATH/img/a1_48.png"
       },
-      {
-        "id": 2,
-        "img": "VITE_RES_BASE_PATH/img/t2.png",
-        "answer": 3,
-        "trueShape": 2
+      "question": {
+        "t_img": "VITE_RES_BASE_PATH/img/t2_45.png",
+        "n_img": "VITE_RES_BASE_PATH/img/n2_16.png",
+        "num": 8,
+        "tureNum": 5
       },
-      {
-        "id": 3,
-        "img": "VITE_RES_BASE_PATH/img/t3.png",
-        "answer": 1,
-        "trueShape": 3
-      }
-    ],
-    "shape": [
-      "VITE_RES_BASE_PATH/img/jx.png",
-      "VITE_RES_BASE_PATH/img/sjx_10.png",
-      "VITE_RES_BASE_PATH/img/yuan.png"
-    ],
-    "userAnswer": [[], [], []],
-    "isDragging": false,
-    "startX": 0,
-    "startY": 0,
-    "draggedElement": null,
-    "answer": []
-  }]
+      "img": "VITE_RES_BASE_PATH/img/jian_10.png",
+      "result": false,
+      "changed": false
+    }
+  ],
+  "htt_tuo": [
+    {
+      "audio_img": "/static2/assets/tuo3.png",
+      "audios": [
+        "VITE_RES_BASE_PATH/audio/part3.wav",
+        ""
+      ],
+      "id": [
+        1,
+        2,
+        3
+      ],
+      "title": "part 4 根据数字提示，把缺少的图形拖进来",
+      "subQuestion": [
+        {
+          "id": 1,
+          "img": "VITE_RES_BASE_PATH/img/t1.png",
+          "answer": 4,
+          "trueShape": 1
+        },
+        {
+          "id": 2,
+          "img": "VITE_RES_BASE_PATH/img/t2.png",
+          "answer": 3,
+          "trueShape": 2
+        },
+        {
+          "id": 3,
+          "img": "VITE_RES_BASE_PATH/img/t3.png",
+          "answer": 1,
+          "trueShape": 3
+        }
+      ],
+      "shape": [
+        "VITE_RES_BASE_PATH/img/jx.png",
+        "VITE_RES_BASE_PATH/img/sjx_10.png",
+        "VITE_RES_BASE_PATH/img/yuan.png"
+      ],
+      "userAnswer": [
+        [],
+        [],
+        []
+      ],
+      "isDragging": false,
+      "startX": 0,
+      "startY": 0,
+      "draggedElement": null,
+      "answer": []
+    }
+  ]
 }

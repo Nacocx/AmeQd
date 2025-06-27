@@ -1,6 +1,6 @@
     <template >
         <div>
-            <h1>数一数，涂一涂，填一填</h1>
+            <h1>{{ another.title }}</h1>
             <!-- <h3>（思维训练）数一数，涂一涂，填一填</h3> -->
             <div class="container">
                 <div class="left-area">
@@ -54,12 +54,16 @@ export default {
         },
         tuxingPath: {
             type: Array,
-            requir: true,
+            require: true,
             default: () => [
                 { leftImage: './static/img/tht/left.png' },
                 { redCircle: './static/img/tht/redCircle.png' },
                 { noneCircle: './static/img/tht/noneCircle.png' },
             ]
+        },
+        another:{
+          type:Object,
+          require: true,
         }
     },
     methods: {
