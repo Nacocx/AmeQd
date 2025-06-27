@@ -85,7 +85,7 @@
 import xzt from "@/components/xzt.vue";
 import sidebar from "@/components/sidebar.vue";
 import tkt from "@/components/tkt.vue";
-import { ElMessage } from "element-plus";
+import {ElMessage} from "element-plus";
 import Sst from "@/components/sst.vue";
 import Htt from "@/components/htt.vue";
 import lxt from "@/components/lxt.vue";
@@ -93,6 +93,7 @@ import qst from "@/components/qst.vue";
 import Tht from "@/components/tht.vue";
 import htt_tuo from "@/components/htt_tuo.vue";
 import axios from "axios";
+
 const basePath = import.meta.env.VITE_IMG_BASE_PATH;
 
 //实际使用中数据从后端获取
@@ -420,8 +421,6 @@ export default {
     await this.loadInfo();
     await Promise.all([
       this.calTotalTm(),
-
-
     ]);
   },
   computed: {
@@ -467,11 +466,47 @@ export default {
       });
     },
     async loadInfo(){
+      // this.questions= await this.fetchData();
+
       this.questions=mockQuestions;
       this.studentInfo=mockStudentInfo;
       this.isOnloading=false;
     },
+    // 获取并处理数据
+    async  fetchData() {
+      try {
+        const response = await axios.get('/home/sora/docs/AmeQd/TmJson/testjson.json');
+        return this.processPaths(response.data);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+        return null;
+      }
+    },
 
+// 处理路径占位符
+processPaths(data) {
+  const basePath = import.meta.env.VITE_IMG_BASE_PATH;
+
+  // 深度遍历对象，替换所有占位符
+  const process = (obj) => {
+    if (typeof obj === 'string') {
+      return obj.replace(/VITE_IMG_BASE_PATH/g, basePath);
+    }
+    if (Array.isArray(obj)) {
+      return obj.map(item => process(item));
+    }
+    if (typeof obj === 'object' && obj !== null) {
+      const result = {};
+      for (const key in obj) {
+        result[key] = process(obj[key]);
+      }
+      return result;
+    }
+    return obj;
+  };
+
+  return process(data);
+},
     willSubmit() {
       let remainTm = 0;
       ElMessageBox.confirm(
