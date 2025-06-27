@@ -3,7 +3,7 @@
 <!--    <div v-if="isOnloading">Loading......</div>-->
     <el-container >
       <el-container>
-         <sidebar :student-info="studentInfo" :count-tm="countTm" />
+         <sidebar :student-info="studentInfo" :count-tm="answerStatus" />
         <el-main>
           <!-- 题目部分 -->
           <div id="chose">
@@ -69,6 +69,8 @@
           :percentage="countTm.lxt.percentage" /></span>
       <span v-if="questions.htt && questions.htt.length">画图题对了{{ countTm.htt.right }}题,正确率: <el-progress
           :percentage="countTm.htt.percentage" /></span>
+      <span v-if="questions.htt_tuo && questions.htt_tuo.length">画图题对了{{ countTm.htt_tuo.right }}题,正确率: <el-progress
+          :percentage="countTm.htt_tuo.percentage" /></span>
       <span v-if="questions.tht">涂画题对了{{ countTm.tht.right }}题,正确率: <el-progress
           :percentage="countTm.tht.percentage" /></span>
       <span v-if="questions.sst && questions.sst.length">数数题对了{{ countTm.sst.right }}题,正确率: <el-progress
@@ -86,7 +88,7 @@
 import xzt from "@/components/xzt.vue";
 import sidebar from "@/components/sidebar.vue";
 import tkt from "@/components/tkt.vue";
-import {ElMessage} from "element-plus";
+import {ElMessage, ElMessageBox} from "element-plus";
 import Sst from "@/components/sst.vue";
 import Htt from "@/components/htt.vue";
 import lxt from "@/components/lxt.vue";
@@ -311,13 +313,99 @@ export default {
     }
   },
   computed: {
-    countTmStatus(){
+    answerStatus() {
+      const answeredInfo = {
+        answeredCount: 0,
+        totalCount: this.countTm.totalTm || 0,
+        percentage: 0
+      };
 
+      // 如果没有题目数据，直接返回
+      if (!this.questions || answeredInfo.totalCount === 0) {
+        return answeredInfo;
+      }
 
-    },
+      // 计算选择题已作答数
+      if (this.questions.xzt && this.questions.xzt.length) {
+        const { xzt = []} = this.questions;
+        answeredInfo.answeredCount+=[...xzt.filter((e) => e.userAnswer)].length;
+      }
 
+      // 计算填空题已作答数
+      if (this.questions.tkt) {
+        this.questions.tkt.forEach((e, index) => {
+          let obj = e.userAnswer;
+          let values = Object.values(obj);
+          values.forEach(el=>{
+            if(el!==""){
+              answeredInfo.answeredCount++;
+            }
+          })
+        })
+      }
+
+      // 计算涂画题已作答数
+      if (this.questions.tht && this.questions.tht.items) {
+        answeredInfo.answeredCount +=this.questions.tht.items.filter(e=>e.changed).length;
+      }
+
+      // 计算画图题已作答数
+      if (this.questions.htt && this.questions.htt.length) {
+        let prev = [];
+        this.questions.htt.forEach(e=>{
+          e.userAnswer.forEach((ans, index) => {
+            ans.forEach((e) => {
+              if (e !== null && prev[index] == null) {
+                answeredInfo.answeredCount++;
+                prev[index] = e;
+              }
+            });
+          });
+        })
+      }
+
+      // 计算连线题已作答数
+      if (this.questions.lxt && this.questions.lxt.length) {
+        // 你的处理逻辑
+      }
+
+      // 计算数数题已作答数
+      if (this.questions.sst && this.questions.sst.length) {
+        const { sst = [] } = this.questions;
+        answeredInfo.answeredCount+=[...sst.filter((e) => e.userAnswer)].length;
+      }
+
+      // 计算画圈题已作答数
+      if (this.questions.qst && this.questions.qst.length) {
+        answeredInfo.answeredCount += this.questions.qst.filter(q => q.changed).length;
+      }
+
+      // 计算画图题2已作答数
+      if (this.questions.htt_tuo && this.questions.htt_tuo.length) {
+        let prev = [];
+        this.questions.htt_tuo.forEach(e=>{
+          e.userAnswer.forEach((ans, index) => {
+            ans.forEach((e) => {
+              if (e !== null && prev[index] == null) {
+                answeredInfo.answeredCount++;
+                prev[index] = e;
+              }
+            });
+          });
+        })
+      }
+
+      // 计算已作答比例
+      answeredInfo.percentage = parseFloat((answeredInfo.answeredCount / answeredInfo.totalCount * 100).toFixed(2));
+
+      return answeredInfo;
+    }
   },
   methods: {
+    /**
+     * 计算所有题目的数量
+     * @returns {Promise<void>}
+     */
     async calTotalTm() {
       const keys = Object.keys(this.questions);
       this.keys=keys;
@@ -349,16 +437,24 @@ export default {
         }
       });
     },
+    /**
+     * 获得JSON文件
+     * @returns {Promise<void>}
+     */
     async loadInfo(){
-      this.questions= await this.fetchData();
+      this.questions= await this.fetchData(`${baseJsonPath}.json`);
 
       // this.questions=mockQuestions;
       this.studentInfo=mockStudentInfo;
     },
-    // 获取并处理数据
-    async  fetchData() {
+    /**
+     * 获取并处理数据
+     * @param url :string
+     * @returns {Promise<*|{}|null>}
+     */
+    async  fetchData(url) {
       try {
-        const response = await axios.get(`${baseJsonPath}.json`);
+        const response = await axios.get(url);
         this.isOnloading=false;
         return this.processPaths(response.data);
       } catch (error) {
@@ -367,7 +463,11 @@ export default {
       }
     },
 
-// 处理路径占位符
+    /**
+     * 处理路径占位符
+     * @param data
+     * @returns {*|{}}
+     */
     processPaths(data) {
       const basePath = import.meta.env.VITE_RES_BASE_PATH;
 
@@ -392,6 +492,9 @@ export default {
 
       return process(data);
     },
+    /**
+     * 确定是否提交答案
+     */
     willSubmit() {
       let remainTm = 0;
       ElMessageBox.confirm(
@@ -446,6 +549,7 @@ export default {
           console.log(this.boolLists);
           console.log(this.tmRightCnt);
           console.log(this.countTm);
+          console.log(this.questions);
           this.dialogTableVisible = true;
 
           ElMessage({
