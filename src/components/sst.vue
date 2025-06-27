@@ -15,7 +15,7 @@
       </div>
       <div class="right_body">
       <div class="count">Your Answer: {{ item.userAnswer }}</div>
-      <div class="drawing-area" @click="addCircle" @touchstart.passive="addCircle">
+      <div class="drawing-area" @click.stop.prevent="addCircle" @touchstart.stop.prevent="addCircle">
       <div v-for="(circle, index) in circles" :key="index" class="circle" :style="{
         left: circle.x + 'px',
         top: circle.y + 'px',
