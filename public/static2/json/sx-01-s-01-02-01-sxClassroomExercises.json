@@ -1,10 +1,9 @@
 {
-    "lxt": [
+  "lxt": [
     {
       "audio_img": "../static/static2/assets/laba.png",
       "audios": [
-        "VITE_RES_BASE_PATH/audio/part3.wav"
-    
+        "VITE_RES_BASE_PATH/audio/part6_s.mp3"
       ],
       "id": 1,
       "title": "part 6 请连接和图片中物品数量一致的圆的图片",
@@ -64,13 +63,12 @@
         }
       ]
     }
-    ],
-
-    "sst": [
+  ],
+  "sst": [
     {
       "audio_img": "../static/static2/assets/laba.png",
       "audios": [
-        "VITE_RES_BASE_PATH/audio/part4.wav"
+        "VITE_RES_BASE_PATH/audio/part7_s.mp3"
       ],
       "id": 1,
       "title": {
@@ -84,8 +82,7 @@
     {
       "audio_img": "../static/static2/assets/laba.png",
       "audios": [
-        "VITE_RES_BASE_PATH/audio/part4.wav"
-  
+        "VITE_RES_BASE_PATH/audio/part8_s.mp3"
       ],
       "id": 2,
       "title": {
@@ -99,8 +96,7 @@
     {
       "audio_img": "../static/static2/assets/laba.png",
       "audios": [
-        "VITE_RES_BASE_PATH/audio/part3.wav"
-     
+        "VITE_RES_BASE_PATH/audio/part9_s.mp3"
       ],
       "id": 3,
       "title": {
@@ -110,14 +106,14 @@
       },
       "tuXingPath": "VITE_RES_BASE_PATH/img/circle_2.png",
       "userAnswer": ""
-    }],
-
+    }
+  ],
   "tht": {
     "another": {
       "title": "part 5 看一看 涂一涂",
       "audio_img": "../static/static2/assets/laba.png",
       "audios": [
-        "VITE_RES_BASE_PATH/audio/part5.wav",
+        "VITE_RES_BASE_PATH/audio/part5_s.mp3",
         ""
       ]
     },
@@ -171,118 +167,113 @@
       }
     ]
   },
-
-"tkt": [
-  {
-    "audio_img": "../static/static2/assets/laba.png",
-    "audios": [
-      "VITE_RES_BASE_PATH/audio/1.1.wav",
-      "VITE_RES_BASE_PATH/audio/2.wav"
-    ],
-    "id": 1,
-    "title_main": "part 3 看图片，来填一填。",
-    "title": [
-      "1.第一小题",
-      "2.第二小题"
-    ],
-    "img": "VITE_RES_BASE_PATH/img/tkt1.png",
-    "subQuestions": [
-      "（1）一共有TNUM个人赛跑。",
-      "（2）TNUM号跑第1名，2号跑第TNUM名。"
-    ],
-    "userAnswer": {},
-    "answers": [
-      "5",
-      "5",
-      "4"
-    ]
-  },
-
-  {
-    "audio_img": "../static/static2/assets/laba.png",
-    "audios": [
-      "VITE_RES_BASE_PATH/audio/1.1.wav",
-      "VITE_RES_BASE_PATH/audio/2.wav"
-    ],
-    "id": 2,
-    "title_main": "part 4 看图片，来填一填。",
-    "title": [
-      "1.第一小题"
-    ],
-    "img": "VITE_RES_BASE_PATH/img/tkt2.png",
-    "subQuestions": [
-      "（1）一共有TNUM只动物。从小鸡开始数，第TNUM只动物是羊。从小猴子开始数，第TNUM只动物是大象。"
-    ],
-    "userAnswer": {},
-    "answers": [
-      "9",
-      "2",
-      "7"
-    ]
-  }
-],
-
-
-    "xzt": [
-      {
-        "audio_img": "../static/static2/assets/laba.png",
-        "audios": [
-          "VITE_RES_BASE_PATH/audio/1.1.wav",
-          "VITE_RES_BASE_PATH/audio/2.wav"
-        ],
-        "id": 1,
-        "title": "part 1 哪个圈里的物品数量和其他圈是不一样的？",
-        "img": "VITE_RES_BASE_PATH/img/xzt1.png",
-        "options": [
-          {
-            "value": "A",
-            "label": "第一个"
-          },
-          {
-            "value": "B",
-            "label": "第二个"
-          },
-          {
-            "value": "C",
-            "label": "第三个"
-          },
-          {
-            "value": "D",
-            "label": "第四个"
-          }
-        ],
-        "userAnswer": "",
-        "answer": "B"
-      },
-      {
-        "audio_img": "../static/static2/assets/laba.png",
-        "audios": [
-          "VITE_RES_BASE_PATH/audio/1.1.wav",
-          "VITE_RES_BASE_PATH/audio/2.wav"
-        ],
-        "id": 2,
-        "title": "part 2 哪个圈里的物品数量和其他圈是不一样的？",
-        "img": "VITE_RES_BASE_PATH/img/xzt2.png",
-        "options": [
-          {
-            "value": "A",
-            "label": "第一个"
-          },
-          {
-            "value": "B",
-            "label": "第二个"
-          },
-          {
-            "value": "C",
-            "label": "第三个"
-          },
-          {
-            "value": "D",
-            "label": "第四个"
-          }
-        ],
-        "userAnswer": "",
-        "answer": "C"
-      }]
-
-  }
+  "tkt": [
+    {
+      "audio_img": "../static/static2/assets/laba.png",
+      "audios": [
+        "VITE_RES_BASE_PATH/audio/part3-1_s.mp3",
+        "VITE_RES_BASE_PATH/audio/part3-2_s.mp3"
+      ],
+      "audio_title": "VITE_RES_BASE_PATH/audio/part3_s.mp3",
+      "id": 1,
+      "title_main": "part 3 看图片，来填一填。",
+      "title": [
+        "1.第一小题",
+        "2.第二小题"
+      ],
+      "img": "VITE_RES_BASE_PATH/img/tkt1.png",
+      "subQuestions": [
+        "（1）一共有TNUM个人赛跑。",
+        "（2）TNUM号跑第1名，2号跑第TNUM名。"
+      ],
+      "userAnswer": {},
+      "answers": [
+        "5",
+        "5",
+        "4"
+      ]
+    },
+    {
+      "audio_img": "../static/static2/assets/laba.png",
+      "audios": [
+        "VITE_RES_BASE_PATH/audio/part4-1_s.mp3"
+      ],
+      "audio_title": "VITE_RES_BASE_PATH/audio/part4_s.mp3",
+      "id": 2,
+      "title_main": "part 4 看图片，来填一填。",
+      "title": [
+        "1.第一小题"
+      ],
+      "img": "VITE_RES_BASE_PATH/img/tkt2.png",
+      "subQuestions": [
+        "（1）一共有TNUM只动物。从小鸡开始数，第TNUM只动物是羊。从小猴子开始数，第TNUM只动物是大象。"
+      ],
+      "userAnswer": {},
+      "answers": [
+        "9",
+        "2",
+        "7"
+      ]
+    }
+  ],
+  "xzt": [
+    {
+      "audio_img": "../static/static2/assets/laba.png",
+      "audios": [
+        "VITE_RES_BASE_PATH/audio/part1_s.mp3"
+      ],
+      "id": 1,
+      "title": "part 1 哪个圈里的物品数量和其他圈是不一样的？",
+      "img": "VITE_RES_BASE_PATH/img/xzt1.png",
+      "options": [
+        {
+          "value": "A",
+          "label": "第一个"
+        },
+        {
+          "value": "B",
+          "label": "第二个"
+        },
+        {
+          "value": "C",
+          "label": "第三个"
+        },
+        {
+          "value": "D",
+          "label": "第四个"
+        }
+      ],
+      "userAnswer": "",
+      "answer": "B"
+    },
+    {
+      "audio_img": "../static/static2/assets/laba.png",
+      "audios": [
+        "VITE_RES_BASE_PATH/audio/part2_s.mp3"
+      ],
+      "id": 2,
+      "title": "part 2 哪个圈里的物品数量和其他圈是不一样的？",
+      "img": "VITE_RES_BASE_PATH/img/xzt2.png",
+      "options": [
+        {
+          "value": "A",
+          "label": "第一个"
+        },
+        {
+          "value": "B",
+          "label": "第二个"
+        },
+        {
+          "value": "C",
+          "label": "第三个"
+        },
+        {
+          "value": "D",
+          "label": "第四个"
+        }
+      ],
+      "userAnswer": "",
+      "answer": "C"
+    }
+  ]
+}

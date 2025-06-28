@@ -3,10 +3,13 @@
     {
       "audio_img": "../static/static2/assets/laba.png",
       "audios": [
-        "VITE_RES_BASE_PATH/audio/part2.wav",
-        ""
+        "VITE_RES_BASE_PATH/audio/part1-1_s.mp3",
+        "VITE_RES_BASE_PATH/audio/part1-2_s.mp3",
+        "VITE_RES_BASE_PATH/audio/part1-3_s.mp3",
+        "VITE_RES_BASE_PATH/audio/part1-4_s.mp3",
+        "VITE_RES_BASE_PATH/audio/part1-5_s.mp3"
       ],
-      "audio_title": "",
+      "audio_title": "VITE_RES_BASE_PATH/audio/part1_s.mp3",
       "id": 1,
       "title_main": "part_1 小朋友，先数一数有几颗珠子，再写一写。",
       "title": [
@@ -36,9 +39,11 @@
     {
       "audio_img": "../static/static2/assets/laba.png",
       "audios": [
-        "VITE_RES_BASE_PATH/audio/part2.wav",
-        ""
+        "VITE_RES_BASE_PATH/audio/part2-1_s.wav",
+        "VITE_RES_BASE_PATH/audio/part2-2_s.mp3",
+        "VITE_RES_BASE_PATH/audio/part2-3_s.mp3"
       ],
+      "audio_title": "VITE_RES_BASE_PATH/audio/part2_s.wav",
       "id": 2,
       "title_main": "part_2从左往右，按照从小到大的顺序在尺子中填一填。",
       "title": [
@@ -62,9 +67,9 @@
     {
       "audio_img": "../static/static2/assets/laba.png",
       "audios": [
-        "VITE_RES_BASE_PATH/audio/part2.wav",
-        ""
+        "VITE_RES_BASE_PATH/audio/part3-1_s.mp3"
       ],
+      "audio_title": "VITE_RES_BASE_PATH/audio/part3_s.wav",
       "id": 3,
       "title_main": "part_3 数一数圆点的个数，在下方写一写，各个圆点个数即为小平电话的号码数。",
       "title": [
@@ -82,9 +87,11 @@
     {
       "audio_img": "../static/static2/assets/laba.png",
       "audios": [
-        "VITE_RES_BASE_PATH/audio/part2.wav",
-        ""
+        "VITE_RES_BASE_PATH/audio/part4-1_s.mp3",
+        "VITE_RES_BASE_PATH/audio/part4-2_s.mp3",
+        "VITE_RES_BASE_PATH/audio/part4-3_s.mp3"
       ],
+      "audio_title": "VITE_RES_BASE_PATH/audio/part4_s.mp3",
       "id": 4,
       "title_main": "part_4 你知道蜜蜂采的是几号花吗？填一填。",
       "title": [
@@ -110,8 +117,7 @@
     {
       "audio_img": "../static/static2/assets/laba.png",
       "audios": [
-        "VITE_RES_BASE_PATH/audio/part2.wav",
-        ""
+        "VITE_RES_BASE_PATH/audio/part5_s.mp3"
       ],
       "id": [
         1,
