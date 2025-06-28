@@ -29,6 +29,7 @@ coverage
 *.sw?
 
 *.tsbuildinfo
+
 .env
 .env.development
 .env.production
