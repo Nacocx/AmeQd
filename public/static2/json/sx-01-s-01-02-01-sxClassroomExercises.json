@@ -115,7 +115,7 @@
   "tht": {
     "another": {
       "title": "part 5 看一看 涂一涂",
-      "audio_img": "/static2/assets/laba.png",
+      "audio_img": "../static/static2/assets/laba.png",
       "audios": [
         "VITE_RES_BASE_PATH/audio/part5.wav",
         ""
@@ -174,7 +174,7 @@
 
 "tkt": [
   {
-    "audio_img": "/static2/assets/laba.png",
+    "audio_img": "../static/static2/assets/laba.png",
     "audios": [
       "VITE_RES_BASE_PATH/audio/1.1.wav",
       "VITE_RES_BASE_PATH/audio/2.wav"
@@ -199,7 +199,7 @@
   },
 
   {
-    "audio_img": "/static2/assets/laba.png",
+    "audio_img": "../static/static2/assets/laba.png",
     "audios": [
       "VITE_RES_BASE_PATH/audio/1.1.wav",
       "VITE_RES_BASE_PATH/audio/2.wav"
@@ -225,7 +225,7 @@
 
     "xzt": [
       {
-        "audio_img": "/static2/assets/laba.png",
+        "audio_img": "../static/static2/assets/laba.png",
         "audios": [
           "VITE_RES_BASE_PATH/audio/1.1.wav",
           "VITE_RES_BASE_PATH/audio/2.wav"
@@ -255,7 +255,7 @@
         "answer": "B"
       },
       {
-        "audio_img": "/static2/assets/laba.png",
+        "audio_img": "../static/static2/assets/laba.png",
         "audios": [
           "VITE_RES_BASE_PATH/audio/1.1.wav",
           "VITE_RES_BASE_PATH/audio/2.wav"
