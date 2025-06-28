@@ -6,7 +6,7 @@
         <h1>选择题部分</h1>
       </div>
       <div>
-        <img :src="questions[0].audio_img" alt="" class="laba" @click="playAudio(0)" @touchend="playAudio(-1)">
+        <img :src="questions[0].audio_img" alt="" class="laba" @click="playAudio(0)" @touchend="playAudio(0)">
       </div>
 
     </div>
@@ -52,49 +52,38 @@ export default {
       type: Array,
       required: true,
     },
-  },
-  methods: {
-
+  }, methods: {
     playAudio(index) {
-      console.log(index);
-
       var url_now;
       var audio_now;
       var url_id;
-      if (this.audio_isPlay) {
-        if (index == this.audio_id) {
-          // console.log("zai");
-          // 停止播放并重置到开始位置
-          this.audioEle.pause();         // 暂停播放
-          this.audioEle.currentTime = 0; // 重置播放位置到 0 秒
-
-          this.audioEle = "";
-          this.audio_isPlay = false;
-          return;
-        }
-        else {
-          this.audioEle.pause();         // 暂停播放
-          this.audioEle.currentTime = 0;
-          this.audioEle = "";
-        }
+      var a2 = document.querySelectorAll(".newAudio");
+      console.log("a2", a2);
+      if (a2) {
+        a2.forEach(e => {
+          e.pause();         // 暂停播放
+          e.currentTime = 0;
+          e.remove();
+        })
       }
       if (index == -1) {
-        url_now = this.message.audio_title;
+        // url_now = this.allQuestions[0].;
+        // url_id = index;
       }
       else {
         url_now = this.message.audios[index];
+        url_id = index;
       }
-
-      url_id = index;
       audio_now = document.createElement('audio');
+      audio_now.classList.add("newAudio");
       audio_now.src = url_now;
+      document.body.appendChild(audio_now);
       audio_now.play();
       this.audio_isPlay = true;
       this.audio_id = url_id;
       this.audioEle = audio_now;
-
-
     },
+
   }
 
 };
