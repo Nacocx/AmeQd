@@ -2,7 +2,7 @@
   "qst": [
     {
       "id": "1",
-      "audio_img": "/static2/assets/laba.png",
+      "audio_img": "../static/static2/assets/laba.png",
       "audios": [
         "VITE_RES_BASE_PATH/audio/tuo2.wav",
         ""
@@ -30,7 +30,7 @@
     },
     {
       "id": "2",
-      "audio_img": "/static2/assets/laba.png",
+      "audio_img": "../static/static2/assets/laba.png",
       "audios": [
         "VITE_RES_BASE_PATH/audio/tuo2.wav",
         ""
@@ -60,7 +60,7 @@
 
   "sst": [
     {
-      "audio_img": "/static2/assets/laba.png",
+      "audio_img": "../static/static2/assets/laba.png",
       "audios": [
         "VITE_RES_BASE_PATH/audio/part4.wav",
         ""
@@ -75,7 +75,7 @@
       "userAnswer": ""
     },
     {
-      "audio_img": "/static2/assets/laba.png",
+      "audio_img": "../static/static2/assets/laba.png",
       "audios": [
         "VITE_RES_BASE_PATH/audio/part4.wav",
         ""
@@ -90,7 +90,7 @@
       "userAnswer": ""
     },
     {
-      "audio_img": "/static2/assets/laba.png",
+      "audio_img": "../static/static2/assets/laba.png",
       "audios": [
         "VITE_RES_BASE_PATH/audio/part3.wav",
         ""
@@ -105,7 +105,7 @@
       "userAnswer": ""
     },
        {
-      "audio_img": "/static2/assets/laba.png",
+      "audio_img": "../static/static2/assets/laba.png",
       "audios": [
         "VITE_RES_BASE_PATH/audio/part3.wav",
         ""

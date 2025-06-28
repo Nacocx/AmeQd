@@ -1,7 +1,7 @@
 {
   "tkt": [
     {
-      "audio_img": "/static2/assets/laba.png",
+      "audio_img": "../static/static2/assets/laba.png",
       "audios": [
         "VITE_RES_BASE_PATH/audio/1.1.wav",
         "VITE_RES_BASE_PATH/audio/2.wav",
