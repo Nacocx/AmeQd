@@ -1,10 +1,10 @@
 {
-      "tht": {
+  "tht": {
     "another": {
       "title": "part 1 看一看 涂一涂",
       "audio_img": "../static/static2/assets/laba.png",
       "audios": [
-        "VITE_RES_BASE_PATH/audio/part5.wav",
+        "VITE_RES_BASE_PATH/audio/part1.mp3",
         ""
       ]
     },
@@ -58,11 +58,11 @@
       }
     ]
   },
-    "sst": [
+  "sst": [
     {
       "audio_img": "../static/static2/assets/laba.png",
       "audios": [
-        "VITE_RES_BASE_PATH/audio/part4.wav",
+        "VITE_RES_BASE_PATH/audio/part2.mp3",
         ""
       ],
       "id": 1,
@@ -77,7 +77,7 @@
     {
       "audio_img": "../static/static2/assets/laba.png",
       "audios": [
-        "VITE_RES_BASE_PATH/audio/part4.wav",
+        "VITE_RES_BASE_PATH/audio/part2_2.mp3",
         ""
       ],
       "id": 2,
@@ -92,7 +92,7 @@
     {
       "audio_img": "../static/static2/assets/laba.png",
       "audios": [
-        "VITE_RES_BASE_PATH/audio/part3.wav",
+        "VITE_RES_BASE_PATH/audio/part2_3.mp3",
         ""
       ],
       "id": 3,
