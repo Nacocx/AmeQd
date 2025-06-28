@@ -58,7 +58,7 @@ export default {
       // 记录操作历史
       actionHistory: [],
       // 初始化 userAnswer
-      userAnswer: this.message.subQuestion.map(() => [])
+      // userAnswer: this.message.subQuestion.map(() => [])
 
     };
   },
@@ -172,7 +172,7 @@ export default {
             }
             // 
             // 存储用户答案
-            this.userAnswer[e.dataset.value - 1].push(this.message.draggedElement.dataset.value);
+            this.message.userAnswer[e.dataset.value - 1].push(this.message.draggedElement.dataset.value);
             this.message.draggedElement = null;
             // console.log(this.message.userAnswer);
             this.message.startX = 0;
@@ -197,7 +197,7 @@ export default {
       // console.log(this.message.userAnswer);
 
 
-      this.userAnswer.forEach((e, index) => {
+      this.message.userAnswer.forEach((e, index) => {
         // console.log(e);
 
         var num = 0;
@@ -235,12 +235,12 @@ export default {
         // 从目标区域移除元素
         lastAction.element.remove();
         // 从用户答案中移除对应的值
-        const index = this.userAnswer[lastAction.index].indexOf(lastAction.value);
+        const index = this.message.userAnswer[lastAction.index].indexOf(lastAction.value);
         if (index > -1) {
-          this.userAnswer[lastAction.index].splice(index, 1);
+          this.message.userAnswer[lastAction.index].splice(index, 1);
         }
       }
-      console.log(this.userAnswer);
+      console.log(this.message.userAnswer);
 
     }
   },
