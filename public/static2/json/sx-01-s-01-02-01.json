@@ -3,7 +3,6 @@
     {
       "audio_img": "/static2/assets/laba.png",
       "audios": [
-        "VITE_RES_BASE_PATH/audio/part3.wav",
         ""
       ],
       "id": 1,
@@ -70,7 +69,6 @@
     {
       "audio_img": "/static2/assets/laba.png",
       "audios": [
-        "VITE_RES_BASE_PATH/audio/part4.wav",
         ""
       ],
       "id": 1,
@@ -85,7 +83,6 @@
     {
       "audio_img": "/static2/assets/laba.png",
       "audios": [
-        "VITE_RES_BASE_PATH/audio/part4.wav",
         ""
       ],
       "id": 2,
@@ -118,7 +115,6 @@
       "title": "part 5 看一看 涂一涂",
       "audio_img": "/static2/assets/laba.png",
       "audios": [
-        "VITE_RES_BASE_PATH/audio/part5.wav",
         ""
       ]
     },
@@ -177,9 +173,8 @@
   {
     "audio_img": "/static2/assets/laba.png",
     "audios": [
-      "VITE_RES_BASE_PATH/audio/1.1.wav",
-      "VITE_RES_BASE_PATH/audio/2.wav"
-    ],
+
+    ""],
     "id": 1,
     "title_main": "part 6 看图片，来填一填。",
     "title": [
@@ -202,8 +197,7 @@
   {
     "audio_img": "/static2/assets/laba.png",
     "audios": [
-      "VITE_RES_BASE_PATH/audio/1.1.wav",
-      "VITE_RES_BASE_PATH/audio/2.wav"
+    ""
     ],
     "id": 2,
     "title_main": "part 7 看图片，来填一填。",
@@ -228,8 +222,7 @@
       {
         "audio_img": "/static2/assets/laba.png",
         "audios": [
-          "VITE_RES_BASE_PATH/audio/1.1.wav",
-          "VITE_RES_BASE_PATH/audio/2.wav"
+        ""
         ],
         "id": 1,
         "title": "part 8 哪个圈里的物品数量和其他圈是不一样的？",
@@ -258,8 +251,7 @@
       {
         "audio_img": "/static2/assets/laba.png",
         "audios": [
-          "VITE_RES_BASE_PATH/audio/1.1.wav",
-          "VITE_RES_BASE_PATH/audio/2.wav"
+        ""
         ],
         "id": 2,
         "title": "part 9 哪个圈里的物品数量和其他圈是不一样的？",
