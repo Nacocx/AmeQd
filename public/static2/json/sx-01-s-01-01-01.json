@@ -346,7 +346,13 @@
       },
       "img": "VITE_RES_BASE_PATH/img/jian_10.png",
       "result": false,
-      "changed": false
+      "changed": false,
+      "ctx": "",
+      "shapeXY": [],
+      "allXY": [],
+      "useAnswer": [],
+      "userNum": 0,
+      "flag": 0
     }
   ],
   "htt_tuo": [
