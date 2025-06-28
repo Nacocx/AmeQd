@@ -1,12 +1,10 @@
 <template>
   <div id="app">
-<!--    <div v-if="isOnloading">Loading......</div>-->
     <el-container >
       <el-container>
-         <sidebar :student-info="studentInfo" :count-tm="answerStatus" />
+         <sidebar :student-info="studentInfo" :count-tm="answerStatus" v-if="!isInVideo"/>
         <el-main>
           <!-- 题目部分 -->
-          <div id="chose">
             <div class="question-container">
               <!-- part1_选择题 -->
               <xzt :questions="questions.xzt" v-if="questions.xzt && questions.xzt.length" />
@@ -53,7 +51,6 @@
 
               <el-button type="primary" @click="willSubmit" id="Submit" size="large">提交答案</el-button>
 
-            </div>
           </div>
         </el-main>
       </el-container>
@@ -291,6 +288,7 @@ export default {
       keys:[],
       dialogTableVisible: false,
       isOnloading:true,
+      isInVideo:false,
     };
   },
   components: {
@@ -309,7 +307,7 @@ export default {
     if (this.questions) { // 确保数据存在
       await this.calTotalTm();
     }else{
-      alert("Network error");
+      alert("Network error!");
     }
   },
   computed: {
@@ -449,7 +447,9 @@ export default {
      */
     async loadInfo(){
       this.questions= await this.fetchData(`${baseJsonPath}.json`);
-
+      if(baseJsonPath.includes("video")){
+        this.isInVideo = true;
+      }
       // this.questions=mockQuestions;
       this.studentInfo=mockStudentInfo;
     },
