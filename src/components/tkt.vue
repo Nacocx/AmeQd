@@ -2,9 +2,16 @@
   <section class="question-container">
     <div v-for="(questionGroup) in allQuestions" :key="'group-' + questionGroup.id" class="question-part">
 
-      <div>
-        <h1 v-if="questionGroup.title_main">{{ questionGroup.title_main }}</h1>
-        <!-- <img :src="allQuestions[0].audio_img" alt="" class="laba" @click="playAudio(0)" @touchend="playAudio()"> -->
+      <div class="title2">
+
+        <div>
+          <h1 v-if="questionGroup.title_main">{{ questionGroup.title_main }}</h1>
+        </div>
+
+        <div>
+          <!-- {{ jia() }} -->
+          <img :src="allQuestions[0].audio_img" alt="" class="laba" @click="playAudio(-1)" @touchend="playAudio(-1)">
+        </div>
       </div>
 
       <div v-if="questionGroup.img" class="question-image">
@@ -80,8 +87,8 @@ export default {
         a2.currentTime = 0;
       }
       if (index == -1) {
-        // url_now = this.allQuestions[0].;
-        // url_id = index;
+        url_now = this.allQuestions[0].audio_title;
+        url_id = index;
       }
       else {
         url_now = this.allQuestions[0].audios[index];
@@ -94,7 +101,7 @@ export default {
       console.log("a2", a2);
       console.log("audio_now", audio_now);
       if (a2) {
-        if (a2.src != audio_now.src||this.audio_isPlay == false) {
+        if (a2.src != audio_now.src || this.audio_isPlay == false) {
           a2.remove();
           audio_now.play();
           this.audio_isPlay = true;
@@ -156,19 +163,44 @@ export default {
 </script>
 
 <style scoped>
-.title {
-
+.title2 {
+  /* background-color: #4CAF50; */
+  text-align: center;
   display: flex;
   /* 使用 flex 布局 */
-
+  align-items: center;
+  /* 垂直居中对齐 */
+  justify-content: center;
   gap: 10px;
+  margin-bottom: 20px;
 }
 
+.title {
+  /* background-color: #4CAF50; */
+  /* text-align: center; */
+  display: flex;
+  /* 使用 flex 布局 */
+  /* align-items: center; */
+  /* 垂直居中对齐 */
+  /* justify-content: center; */
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.title h1 {
+  margin: 0;
+  /* 移除 h1 默认的外边距 */
+  padding: 0;
+}
+
+.laba_div {
+  width: 30px;
+  height: 30px;
+}
 
 .laba {
   width: 30px;
   height: 30px;
-  margin: -2px;
   cursor: pointer;
 }
 
