@@ -166,7 +166,7 @@ export default {
                 value: this.message.draggedElement.dataset.value
               });
             }
-            // console.log(1);
+            console.log(this.actionHistory);
 
             // 存储用户答案
             this.message.userAnswer[e.dataset.value - 1].push(this.message.draggedElement.dataset.value);
