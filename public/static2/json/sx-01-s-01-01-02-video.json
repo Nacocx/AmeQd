@@ -1,0 +1,120 @@
+{
+    "xzt": [
+        {
+            "audio_img": "../static/static2/assets/laba.png",
+            "audios": [
+                ""
+            ],
+            "id": 1,
+            "img": "VITE_RES_BASE_PATH/img/xzt1_timu_v.png",
+            "title": "part 1 ",
+            "options": [
+                {
+                    "value": "A",
+                    "label": "4  5"
+                },
+                {
+                    "value": "B",
+                    "label": "5  3"
+                },
+                {
+                    "value": "C",
+                    "label": "4  2"
+                }
+            ],
+            "userAnswer": "",
+            "answer": "B"
+        },
+        {
+            "audio_img": "../static/static2/assets/laba.png",
+            "audios": [
+                ""
+            ],
+            "id": 2,
+            "img": "VITE_RES_BASE_PATH/img/xzt2_timu_v.png",
+            "title": "part 2 ",
+            "options": [
+                {
+                    "value": "A",
+                    "label": "4  5"
+                },
+                {
+                    "value": "B",
+                    "label": "6  3"
+                },
+                {
+                    "value": "C",
+                    "label": "5  4"
+                }
+            ],
+            "userAnswer": "",
+            "answer": "C"
+        }
+    ],
+     "lxt": [
+    {
+      "audio_img": "../static/static2/assets/laba.png",
+      "audios": [
+        "VITE_RES_BASE_PATH/audio/part3.wav"
+    
+      ],
+      "id": 1,
+      "title": "part 3 请连接和图片中物品数量一致的圆的图片",
+      "flag": "t3",
+      "changed": false,
+      "result": [],
+      "imgU": [
+        {
+          "src": "VITE_RES_BASE_PATH/img/lxt_u1_v.png",
+          "value": "2",
+          "ownership": "U",
+          "connected": false
+        },
+        {
+          "src": "VITE_RES_BASE_PATH/img/lxt_u2_v.png",
+          "value": "3",
+          "ownership": "U",
+          "connected": false
+        },
+        {
+          "src": "VITE_RES_BASE_PATH/img/lxt_u3_v.png",
+          "value": "4",
+          "ownership": "U",
+          "connected": false
+        },
+        {
+          "src": "VITE_RES_BASE_PATH/img/lxt_u4_v.png",
+          "value": "5",
+          "ownership": "U",
+          "connected": false
+        }
+      ],
+      "imgD": [
+        {
+          "src": "VITE_RES_BASE_PATH/img/lxt_d1_v.png",
+          "value": "4",
+          "ownership": "D",
+          "connected": false
+        },
+        {
+          "src": "VITE_RES_BASE_PATH/img/lxt_d2_v.png",
+          "value": "5",
+          "ownership": "D",
+          "connected": false
+        },
+        {
+          "src": "VITE_RES_BASE_PATH/img/lxt_d3_v.png",
+          "value": "2",
+          "ownership": "D",
+          "connected": false
+        },
+        {
+          "src": "VITE_RES_BASE_PATH/img/lxt_d4_v.png",
+          "value": "3",
+          "ownership": "D",
+          "connected": false
+        }
+      ]
+    }
+    ]
+}
