@@ -1,15 +1,7 @@
 <template id="xzt">
   <div class="xzt_main">
+    <h1>选择题部分</h1>
 
-    <div class="title">
-      <div>
-        <h1>选择题部分</h1>
-      </div>
-      <div>
-        <img :src="questions[0].audio_img" alt="" class="laba" @click="playAudio(0)" @touchend="playAudio(0)">
-      </div>
-
-    </div>
 
     <div class="xzt_question-item" v-for="(question, index) in questions" :key="question.id">
 
@@ -148,9 +140,10 @@ export default {
   /* 题目间增加间距 */
 }
 
-.imagediv{
+.imagediv {
   width: 150px;
 }
+
 /* 全局限制图片 */
 .xzt_question-item img {
   /* background-color: #117f7d; */
