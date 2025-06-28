@@ -27,7 +27,7 @@
         <img :src="message.question.t_img" alt="" class="img1">
         <div class="right_r">
           <div class="options">
-            <div class="qst_option" ref="optionElements"  v-for="e in message.question.num">
+            <div class="qst_option" ref="optionElements" v-for="e in message.question.num">
               <img :src="message.question.n_img" alt="">
             </div>
           </div>
@@ -75,7 +75,7 @@ export default {
       const canvasOffsetLeft = canvas.offsetLeft;
 
       // 获取所有 .option 元素
-      const optionElements =  this.$refs.optionElements;
+      const optionElements = this.$refs.optionElements;
       if (optionElements.length === 0) {
         console.warn('未找到 .qst_option 元素');
       }
@@ -96,39 +96,37 @@ export default {
   methods: {
 
     playAudio(index) {
-      console.log(index);
-
       var url_now;
       var audio_now;
       var url_id;
-      if (this.audio_isPlay) {
-        if (index == this.audio_id) {
-          // console.log("zai");
-          // 停止播放并重置到开始位置
-          this.audioEle.pause();         // 暂停播放
-          this.audioEle.currentTime = 0; // 重置播放位置到 0 秒
-
-          this.audioEle = "";
-          this.audio_isPlay = false;
-          return;
-        }
-        else {
-          this.audioEle.pause();         // 暂停播放
-          this.audioEle.currentTime = 0;
-          this.audioEle = "";
-        }
+      var a2 = document.querySelectorAll(".newAudio");
+      console.log("a2", a2);
+      if (a2) {
+        a2.forEach(e => {
+          e.pause();         // 暂停播放
+          e.currentTime = 0;
+          e.remove();
+        })
       }
-      url_now = this.message.audios[index];
-      url_id = index;
+      if (index == -1) {
+        // url_now = this.allQuestions[0].;
+        // url_id = index;
+      }
+      else {
+        url_now = this.message.audios[index];
+        url_id = index;
+      }
       audio_now = document.createElement('audio');
+      audio_now.classList.add("newAudio");
       audio_now.src = url_now;
+      document.body.appendChild(audio_now);
       audio_now.play();
       this.audio_isPlay = true;
       this.audio_id = url_id;
       this.audioEle = audio_now;
-
-
     },
+
+
     mouseDown(e) {
       this.message.flag = 1
       // 获取画布元素
