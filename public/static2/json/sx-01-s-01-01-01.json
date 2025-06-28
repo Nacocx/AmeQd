@@ -1,7 +1,7 @@
 {
   "sst": [
     {
-      "audio_img": "/static2/assets/laba.png",
+      "audio_img": "../static/static2/assets/laba.png",
       "audios": [
         "VITE_RES_BASE_PATH/audio/part4.wav",
         ""
@@ -16,7 +16,7 @@
       "userAnswer": ""
     },
     {
-      "audio_img": "/static2/assets/laba.png",
+      "audio_img": "../static/static2/assets/laba.png",
       "audios": [
         "VITE_RES_BASE_PATH/audio/part4.wav",
         ""
@@ -31,7 +31,7 @@
       "userAnswer": ""
     },
     {
-      "audio_img": "/static2/assets/laba.png",
+      "audio_img": "../static/static2/assets/laba.png",
       "audios": [
         "VITE_RES_BASE_PATH/audio/part3.wav",
         ""
@@ -48,7 +48,7 @@
   ],
   "tkt": [
     {
-      "audio_img": "/static2/assets/laba.png",
+      "audio_img": "../static/static2/assets/laba.png",
       "audios": [
         "VITE_RES_BASE_PATH/audio/1.1.wav",
         "VITE_RES_BASE_PATH/audio/2.wav",
@@ -90,7 +90,7 @@
   ],
   "htt": [
     {
-      "audio_img": "/static2/assets/laba.png",
+      "audio_img": "../static/static2/assets/laba.png",
       "audios": [
         "VITE_RES_BASE_PATH/audio/part2.wav",
         ""
@@ -139,7 +139,7 @@
   ],
   "lxt": [
     {
-      "audio_img": "/static2/assets/laba.png",
+      "audio_img": "../static/static2/assets/laba.png",
       "audios": [
         "VITE_RES_BASE_PATH/audio/part3.wav",
         ""
@@ -203,7 +203,7 @@
       ]
     },
     {
-      "audio_img": "/static2/assets/laba.png",
+      "audio_img": "../static/static2/assets/laba.png",
       "audios": [
         "VITE_RES_BASE_PATH/audio/part3.wav",
         ""
@@ -270,7 +270,7 @@
   "tht": {
     "another": {
       "title": "part 2 看一看 涂一涂",
-      "audio_img": "/static2/assets/laba.png",
+      "audio_img": "../static/static2/assets/laba.png",
       "audios": [
         "VITE_RES_BASE_PATH/audio/part5.wav",
         ""
@@ -328,7 +328,7 @@
   },
   "qst": [
     {
-      "audio_img": "/static2/assets/laba.png",
+      "audio_img": "../static/static2/assets/laba.png",
       "audios": [
         "VITE_RES_BASE_PATH/audio/tuo2.wav",
         ""
@@ -357,7 +357,7 @@
   ],
   "htt_tuo": [
     {
-      "audio_img": "/static2/assets/laba.png",
+      "audio_img": "../static/static2/assets/laba.png",
       "audios": [
         "VITE_RES_BASE_PATH/audio/tuo1.wav",
         ""
