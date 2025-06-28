@@ -7,7 +7,7 @@
         "VITE_RES_BASE_PATH/audio/tuo2.wav",
         ""
       ],
-      "title": "part 1 ：对照上面图片根据左边的图形数量圈出右边的数量",
+      "title": "part 5 ：对照上面图片根据左边的图形数量圈出右边的数量",
       "example": {
         "t_img": "VITE_RES_BASE_PATH/img/t1_23_v.png",
         "a_img": "VITE_RES_BASE_PATH/img/a1_48_v.png"
@@ -35,7 +35,7 @@
         "VITE_RES_BASE_PATH/audio/tuo2.wav",
         ""
       ],
-      "title": "part 2 对照上面图片根据左边的图形数量圈出右边的数量",
+      "title": "part 6 对照上面图片根据左边的图形数量圈出右边的数量",
       "example": {
         "t_img": "VITE_RES_BASE_PATH/img/t1_23_v.png",
         "a_img": "VITE_RES_BASE_PATH/img/a1_48_v.png"

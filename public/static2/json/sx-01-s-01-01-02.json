@@ -6,6 +6,7 @@
         ""
       ],
       "id": 1,
+      "img":"VITE_RES_BASE_PATH/img/xzt_timu.png",
       "title": "如果一个小猴吃一个香蕉，选哪一堆正好合适呢？",
       "options": [
         { "value": "A", "img": "VITE_RES_BASE_PATH/img/xzt_A.png" },
