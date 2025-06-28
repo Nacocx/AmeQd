@@ -10,8 +10,8 @@
     },
     "items": [
       {
-        "rightItem": "VITE_RES_BASE_PATH/img/rightImg1.png",
-        "cnt": 2,
+        "rightItem": "VITE_RES_BASE_PATH/img/rightImg1_v.png",
+        "cnt": 4,
         "flag": [
           false,
           false,
@@ -22,20 +22,20 @@
         "changed": false
       },
       {
-        "rightItem": "VITE_RES_BASE_PATH/img/rightImg2.png",
+        "rightItem": "VITE_RES_BASE_PATH/img/rightImg2_v.png",
+        "cnt": 5,
+        "flag": [
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "changed": false
+      },
+      {
+        "rightItem": "VITE_RES_BASE_PATH/img/rightImg3_v.png",
         "cnt": 1,
-        "flag": [
-          false,
-          false,
-          false,
-          false,
-          false
-        ],
-        "changed": false
-      },
-      {
-        "rightItem": "VITE_RES_BASE_PATH/img/rightImg3.png",
-        "cnt": 3,
         "flag": [
           false,
           false,
@@ -48,13 +48,13 @@
     ],
     "tuxingpath": [
       {
-        "leftImage": "VITE_RES_BASE_PATH/img/left_11.png"
+        "leftImage": "VITE_RES_BASE_PATH/img/left_v.png"
       },
       {
-        "redCircle": "VITE_RES_BASE_PATH/img/redCircle_2.png"
+        "redCircle": "VITE_RES_BASE_PATH/img/tht_redCircle.png"
       },
       {
-        "noneCircle": "VITE_RES_BASE_PATH/img/noneCircle_2.png"
+        "noneCircle": "VITE_RES_BASE_PATH/img/tht_noneCircle.png"
       }
     ]
   },
@@ -67,7 +67,7 @@
       ],
       "id": 1,
       "title": {
-        "str": "part 2 接着点出与事物数量相等的",
+        "str": "part 2 看一看数字 点出数量相同的",
         "image": "VITE_RES_BASE_PATH/img/sst1_v.png",
         "count": 5
       },
@@ -82,7 +82,7 @@
       ],
       "id": 2,
       "title": {
-        "str": "part 3 接着点出与事物数量相等的",
+        "str": "part 3 看一看数字 点出数量相同的",
         "image": "VITE_RES_BASE_PATH/img/sst2_v.png",
         "count": 3
       },
@@ -97,7 +97,7 @@
       ],
       "id": 3,
       "title": {
-        "str": "part 4 接着点出与事物数量相等的",
+        "str": "part 4 看一看数字 点出数量相同的",
         "image": "VITE_RES_BASE_PATH/img/sst3_v.png",
         "count": 2
       },
