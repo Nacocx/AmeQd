@@ -1,6 +1,10 @@
 {
   "xzt": [
     {
+      "audio_img": "/static2/assets/laba.png",
+      "audios": [
+        ""
+      ],
       "id": 1,
       "title": "如果一个小猴吃一个香蕉，选哪一堆正好合适呢？",
       "options": [
