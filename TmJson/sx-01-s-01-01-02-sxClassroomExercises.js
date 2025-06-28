@@ -129,8 +129,6 @@ const classroom={
       ],
       "answers": [
         ["6","5","3"],
-
-
       ]
     }
   ],
