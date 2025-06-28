@@ -262,6 +262,8 @@ export default {
      * @param {MouseEvent} event - 鼠标移动事件对象
      */
     onMousemove(event) {
+      
+      
       //在 onMousemove(event) 方法里，event 代表原生的鼠标移动事件对象。虽然在代码里看起来没有显式传参，但这是浏览器事件监听机制自动处理的
       // 如果没有开始绘制连线，直接返回
       if (!this.isDrawing) return;
