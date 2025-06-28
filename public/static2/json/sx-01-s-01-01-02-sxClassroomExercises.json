@@ -7,7 +7,7 @@
       ],
       "id": 1,
       "img":"VITE_RES_BASE_PATH/img/xzt_timu.png",
-      "title": "如果一个小猴吃一个香蕉，选哪一堆正好合适呢？",
+      "title": "part 1 如果一个小猴吃一个香蕉，选哪一堆正好合适呢？",
       "options": [
         { "value": "A", "img": "VITE_RES_BASE_PATH/img/xzt_A.png" },
         { "value": "B", "img": "VITE_RES_BASE_PATH/img/xzt_B.png" },
@@ -26,7 +26,7 @@
       ""
     ],
     "id": 1,
-    "title": "数一数，连一连。",
+    "title": "part 4 数一数，连一连。",
     "flag": "t3",
     "changed": false,
     "imgU": [
@@ -91,7 +91,7 @@
         ""
       ],
       "id": 1,
-      "title_main": "1. 理解“几”和“第几”的含义",
+      "title_main": "part 2 理解“几”和“第几”的含义",
       "title": [
         "1.第一小题",
         "2.第二小题"
@@ -114,7 +114,7 @@
         ""
       ],
       "id": 2,
-      "title_main": "看图填空。",
+      "title_main": "part 3 看图填空。",
       "title": [
         "1.第一小题"
       ],
