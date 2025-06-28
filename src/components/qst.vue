@@ -178,7 +178,7 @@ export default {
           this.message.useAnswer.push({ ist: this.message.ctx.isPointInPath(e.x, e.y), x: e.x, y: e.y })
           this.message.userNum += this.message.ctx.isPointInPath(e.x, e.y);
         })
-        // console.log(this.useAnswer);
+        console.log(this.useAnswer);
         // console.log("this.message.userNum=", this.userNum);
 
         this.message.flag = 0;

@@ -1,6 +1,4 @@
 const home={
-
-
    "lxt_part3": {
     "id": 1,
     "title": "数一数，连一连。",
