@@ -1,46 +1,108 @@
 {
-  "tkt": [
+      "tht": {
+    "another": {
+      "title": "part 1 看一看 涂一涂",
+      "audio_img": "../static/static2/assets/laba.png",
+      "audios": [
+        "VITE_RES_BASE_PATH/audio/part5.wav",
+        ""
+      ]
+    },
+    "items": [
+      {
+        "rightItem": "VITE_RES_BASE_PATH/img/rightImg1_v.png",
+        "cnt": 4,
+        "flag": [
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "changed": false
+      },
+      {
+        "rightItem": "VITE_RES_BASE_PATH/img/rightImg2_v.png",
+        "cnt": 5,
+        "flag": [
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "changed": false
+      },
+      {
+        "rightItem": "VITE_RES_BASE_PATH/img/rightImg3_v.png",
+        "cnt": 1,
+        "flag": [
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "changed": false
+      }
+    ],
+    "tuxingpath": [
+      {
+        "leftImage": "VITE_RES_BASE_PATH/img/left_v.png"
+      },
+      {
+        "redCircle": "VITE_RES_BASE_PATH/img/redCircle.png"
+      },
+      {
+        "noneCircle": "VITE_RES_BASE_PATH/img/noneCircle.png"
+      }
+    ]
+  },
+    "sst": [
     {
       "audio_img": "../static/static2/assets/laba.png",
       "audios": [
-        "VITE_RES_BASE_PATH/audio/1.1.wav",
-        "VITE_RES_BASE_PATH/audio/2.wav",
-        "VITE_RES_BASE_PATH/audio/3.wav",
-        "VITE_RES_BASE_PATH/audio/4.wav",
-        "VITE_RES_BASE_PATH/audio/5.wav"
+        "VITE_RES_BASE_PATH/audio/part4.wav",
+        ""
       ],
       "id": 1,
-      "title_main": "part 1",
-      "title": [
-        "1.小朋友们，数一数，胡罗卜有几根呢？",
-        "2.认识数字\"2",
-        "3.认识数字\"3\"",
-        "4.认识数字\"4\"",
-        "5.认识数字\"5\""
+      "title": {
+        "str": "part 2 看一看数字 点出数量相同的",
+        "image": "VITE_RES_BASE_PATH/img/sst1_v.png",
+        "count": 5
+      },
+      "tuXingPath": "VITE_RES_BASE_PATH/img/jx.png",
+      "userAnswer": ""
+    },
+    {
+      "audio_img": "../static/static2/assets/laba.png",
+      "audios": [
+        "VITE_RES_BASE_PATH/audio/part4.wav",
+        ""
       ],
-      "img": "VITE_RES_BASE_PATH/img/tkt_1_90.jpeg",
-      "subQuestions": [
-        "一个太阳、一座房子、一棵果树可以用数字TNUM表示，也可以用TNUM个小圆片表示。",
-        "两只鸟、两个人，可以用数字TNUM表示，也可以用TNUM个小圆片表示。",
-        "有三朵云，三个苹果，可以用数字TNUM表示，也可以用TNUM个小圆片表示。",
-        "有四个萝卜，四朵花，可以用数字TNUM表示，也可以用TNUM个小圆片表示。",
-        "有五只鸭子，可以用数字TNUM表示，也可以用TNUM个小圆片表示。"
+      "id": 2,
+      "title": {
+        "str": "part 3 看一看数字 点出数量相同的",
+        "image": "VITE_RES_BASE_PATH/img/sst2_v.png",
+        "count": 3
+      },
+      "tuXingPath": "VITE_RES_BASE_PATH/img/yuan.png",
+      "userAnswer": ""
+    },
+    {
+      "audio_img": "../static/static2/assets/laba.png",
+      "audios": [
+        "VITE_RES_BASE_PATH/audio/part3.wav",
+        ""
       ],
-      "userAnswer": {},
-      "answers": [
-        "1",
-        "1",
-        "小船",
-        "小狗",
-        "2",
-        "2",
-        "3",
-        "3",
-        "4",
-        "4",
-        "5",
-        "5"
-      ]
+      "id": 3,
+      "title": {
+        "str": "part 4 看一看数字 点出数量相同的",
+        "image": "VITE_RES_BASE_PATH/img/sst3_v.png",
+        "count": 2
+      },
+      "tuXingPath": "VITE_RES_BASE_PATH/img/sjx.png",
+      "userAnswer": ""
     }
   ]
 }
