@@ -6,6 +6,83 @@
         <el-main>
           <!-- 题目部分 -->
             <div class="question-container">
+              <el-pagination
+                  v-if="isInVideo && showPagination"
+                  @current-change="handlePageChange"
+                  :current-page="currentPage"
+                  :page-size="pageSize"
+                  :total="totalQuestions"
+                  layout="prev, pager, next, jumper"
+                  background
+                  class="question-pagination"
+              />
+              <template v-if="isInVideo">
+                <template v-if="currentPageQuestions">
+                  <!-- 选择题 -->
+                  <xzt
+                      :questions="currentPageQuestions.xzt"
+                      v-if="currentPageQuestions.xzt?.length"
+                      key="xzt-page"
+                  />
+
+                  <!-- 填空题 -->
+                  <tkt
+                      :all-questions="currentPageQuestions.tkt"
+                      v-if="currentPageQuestions.tkt?.length"
+                      key="tkt-page"
+                  />
+
+                  <!-- 涂画题 -->
+                  <tht
+                      v-if="currentPageQuestions.tht"
+                      :items="currentPageQuestions.tht.items"
+                      :tuxing-path="currentPageQuestions.tht.tuxingpath"
+                      :another="currentPageQuestions.tht.another"
+                      key="tht-page"
+                  />
+
+                  <!-- 画图题 -->
+                  <template v-if="currentPageQuestions.htt?.length">
+                    <div v-for="(htt, index) in currentPageQuestions.htt" :key="`htt-${index}`">
+                      <htt :message="htt" />
+                    </div>
+                  </template>
+
+                  <!-- 拖拽画图题 -->
+                  <template v-if="currentPageQuestions.htt_tuo?.length">
+                    <div v-for="(htt_tuo, index) in currentPageQuestions.htt_tuo" :key="`htt_tuo-${index}`">
+                      <htt_tuo :message="htt_tuo" />
+                    </div>
+                  </template>
+
+                  <!-- 连线题 -->
+                  <template v-if="currentPageQuestions.lxt?.length">
+                    <div v-for="(lxt, index) in currentPageQuestions.lxt" :key="`lxt-${index}`">
+                      <lxt :message="lxt" />
+                    </div>
+                  </template>
+
+                  <!-- 数数题 -->
+                  <template v-if="currentPageQuestions.sst?.length">
+                    <div v-for="(sst, index) in currentPageQuestions.sst" :key="`sst-${index}`">
+                      <sst :item="sst" />
+                    </div>
+                  </template>
+
+                  <!-- 圈数题 -->
+                  <template v-if="currentPageQuestions.qst?.length">
+                    <div v-for="(qst, index) in currentPageQuestions.qst" :key="`qst-${index}`">
+                      <qst :message="qst" />
+                    </div>
+                  </template>
+                </template>
+
+                <!-- 无题目提示 -->
+                <div v-else class="no-questions-tip">
+                  <el-empty description="当前没有可显示的题目" />
+                </div>
+              </template>
+              <template v-else>
               <!-- part1_选择题 -->
               <xzt :questions="questions.xzt" v-if="questions.xzt && questions.xzt.length" />
               <!-- part2_填空题 -->
@@ -48,7 +125,7 @@
                   <qst :message="qst" />
                 </div>
               </template>
-
+              </template>
               <el-button type="primary" @click="willSubmit" id="Submit" size="large">提交答案</el-button>
 
           </div>
@@ -289,6 +366,9 @@ export default {
       dialogTableVisible: false,
       isOnloading:true,
       isInVideo:false,
+      currentPage: 1,
+      pageSize: 1,
+      paginatedQuestions: [],
     };
   },
   components: {
@@ -403,6 +483,53 @@ export default {
       answeredInfo.percentage = parseFloat((answeredInfo.answeredCount / answeredInfo.totalCount * 100).toFixed(2));
 
       return answeredInfo;
+    },
+    currentPageQuestions() {
+      if (!this.isInVideo) return null;
+      if (this.paginatedQuestions.length > 0 && this.currentPage <= this.paginatedQuestions.length) {
+        return this.paginatedQuestions[this.currentPage - 1];
+      }
+      return null;
+    },
+    // 是否显示分页（仅在视频模式且题目多于1页时）
+    showPagination() {
+      return this.isInVideo && this.totalQuestions > 1;
+    },
+
+    // 总页数（按题型分类）
+    totalQuestions() {
+      if (!this.isInVideo) return 0;
+
+      let count = 0;
+      const q = this.questions;
+      if (q.xzt?.length) count++;
+      if (q.tkt?.length) count++;
+      if (q.tht) count++;
+      if (q.htt?.length) count++;
+      if (q.htt_tuo?.length) count++;
+      if (q.lxt?.length) count++;
+      if (q.sst?.length) count++;
+      if (q.qst?.length) count++;
+      return count;
+    },
+  },
+  watch: {
+    questions: {
+      deep: true,
+      handler() {
+        if (this.isInVideo) {
+          this.paginateQuestions();
+        }
+      }
+    },
+    isInVideo(newVal) {
+      if (newVal) {
+        this.paginateQuestions();
+      } else {
+        // 退出视频模式时重置分页状态
+        this.currentPage = 1;
+        this.paginatedQuestions = [];
+      }
     }
   },
   methods: {
@@ -467,6 +594,53 @@ export default {
         console.error('Error fetching data:', error);
         return null;
       }
+    },
+    paginateQuestions() {
+      if (!this.isInVideo) return;
+
+      this.paginatedQuestions = [];
+      const q = this.questions;
+
+      // 每种题型作为独立一页
+      if (q.xzt?.length) {
+        this.paginatedQuestions.push({ xzt: q.xzt });
+      }
+      if (q.tkt?.length) {
+        this.paginatedQuestions.push({ tkt: q.tkt });
+      }
+      if (q.tht) {
+        this.paginatedQuestions.push({ tht: q.tht });
+      }
+      if (q.htt?.length) {
+        this.paginatedQuestions.push({ htt: q.htt });
+      }
+      if (q.htt_tuo?.length) {
+        this.paginatedQuestions.push({ htt_tuo: q.htt_tuo });
+      }
+      if (q.lxt?.length) {
+        this.paginatedQuestions.push({ lxt: q.lxt });
+      }
+      if (q.sst?.length) {
+        this.paginatedQuestions.push({ sst: q.sst });
+      }
+      if (q.qst?.length) {
+        this.paginatedQuestions.push({ qst: q.qst });
+      }
+
+      // 确保当前页码有效
+      if (this.currentPage > this.paginatedQuestions.length) {
+        this.currentPage = 1;
+      }
+    },
+
+    // 切换页码
+    handlePageChange(page) {
+      this.currentPage = page;
+      // 滚动到顶部
+      this.$nextTick(() => {
+        const container = document.querySelector('.question-container');
+        if (container) container.scrollTop = 0;
+      });
     },
 
     /**
