@@ -49,6 +49,7 @@
   "tkt": [
     {
       "audio_img": "../static/static2/assets/laba.png",
+      "audio_title": "VITE_RES_BASE_PATH/audio/audio_tkt.wav",
       "audios": [
         "VITE_RES_BASE_PATH/audio/1.1.wav",
         "VITE_RES_BASE_PATH/audio/2.wav",
