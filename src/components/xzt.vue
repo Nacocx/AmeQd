@@ -1,6 +1,16 @@
 <template id="xzt">
   <div class="xzt_main">
-    <h1>选择题部分</h1>
+
+    <div class="title">
+      <div>
+        <h1>选择题部分</h1>
+      </div>
+      <div>
+        <img :src="questions[0].audio_img" alt="" class="laba" @click="playAudio(0)" @touchend="playAudio(-1)">
+      </div>
+
+    </div>
+
     <div class="xzt_question-item" v-for="(question, index) in questions" :key="question.id">
 
       <div class="title">
@@ -43,6 +53,49 @@ export default {
       required: true,
     },
   },
+  methods: {
+
+    playAudio(index) {
+      console.log(index);
+
+      var url_now;
+      var audio_now;
+      var url_id;
+      if (this.audio_isPlay) {
+        if (index == this.audio_id) {
+          // console.log("zai");
+          // 停止播放并重置到开始位置
+          this.audioEle.pause();         // 暂停播放
+          this.audioEle.currentTime = 0; // 重置播放位置到 0 秒
+
+          this.audioEle = "";
+          this.audio_isPlay = false;
+          return;
+        }
+        else {
+          this.audioEle.pause();         // 暂停播放
+          this.audioEle.currentTime = 0;
+          this.audioEle = "";
+        }
+      }
+      if (index == -1) {
+        url_now = this.message.audio_title;
+      }
+      else {
+        url_now = this.message.audios[index];
+      }
+
+      url_id = index;
+      audio_now = document.createElement('audio');
+      audio_now.src = url_now;
+      audio_now.play();
+      this.audio_isPlay = true;
+      this.audio_id = url_id;
+      this.audioEle = audio_now;
+
+
+    },
+  }
 
 };
 
