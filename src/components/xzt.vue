@@ -32,8 +32,10 @@
           <el-radio v-for="option in question.options" :key="option.value" :value="option.value"
             :name="'question_' + question.id">
             <!-- 若有img，就渲染img，若无就渲染label -->
-            <img v-if="option.img" :src="option.img" alt="Image Missing!" />
-            <span v-else style="font-size: 20px">{{ option.value }}:{{ option.label }}</span>
+            <div class="imagediv">
+              <img v-if="option.img" :src="option.img" alt="Image Missing!" />
+              <span v-else style="font-size: 20px">{{ option.value }}:{{ option.label }}</span>
+            </div>
           </el-radio>
         </el-radio-group>
       </div>
@@ -146,7 +148,9 @@ export default {
   /* 题目间增加间距 */
 }
 
-
+.imagediv{
+  width: 150px;
+}
 /* 全局限制图片 */
 .xzt_question-item img {
   /* background-color: #117f7d; */
