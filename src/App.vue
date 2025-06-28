@@ -3,7 +3,7 @@
 <!--    <div v-if="isOnloading">Loading......</div>-->
     <el-container >
       <el-container>
-         <sidebar :student-info="studentInfo" :count-tm="answerStatus" />
+<!--         <sidebar :student-info="studentInfo" :count-tm="answerStatus" />-->
         <el-main>
           <!-- 题目部分 -->
           <div id="chose">
@@ -366,7 +366,10 @@ export default {
 
       // 计算连线题已作答数
       if (this.questions.lxt && this.questions.lxt.length) {
-        // 你的处理逻辑
+
+
+
+
       }
 
       // 计算数数题已作答数
@@ -385,7 +388,7 @@ export default {
         let prev = [];
         this.questions.htt_tuo.forEach(e=>{
           e.userAnswer.forEach((ans, index) => {
-              if (ans !== null && prev[index] == null) {
+              if (ans.length !== 0 && prev[index] == null) {
                 answeredInfo.answeredCount++;
                 prev[index] = ans;
               }

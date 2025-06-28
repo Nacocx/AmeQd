@@ -10,76 +10,68 @@
       ],
       "userAnswer": "",
       "answer": "C"
-    },
+    }
   ],
 
-  "lxt_part3": {
+  "lxt": [{
     "id": 1,
     "title": "数一数，连一连。",
     "flag": "t3",
+    "changed": false,
     "imgU": [
       {
         "src": "VITE_RES_BASE_PATH/img/lxt_u1.png",
-      "value": "6",
-      "ownership": "U",
-      "connected": false
+        "value": "6",
+        "ownership": "U",
+        "connected": false
       },
       {
-        "src":"VITE_RES_BASE_PATH/img/lxt_u2.png",
-      "value": "5",
-      "ownership": "U",
-      "connected": false
+        "src":"VITE_RES_BASE_PATH/img/lxt_u2.jpg",
+        "value": "5",
+        "ownership": "U",
+        "connected": false
       },
       {
         "src":"VITE_RES_BASE_PATH/img/lxt_u3.png",
-      "value": "10",
-      "ownership": "U",
-      "connected": false
+        "value": "10",
+        "ownership": "U",
+        "connected": false
       },
       {
-        "src": "VITE_RES_BASE_PATH/img/lxt_u4.png",
-      "value": "2",
-      "ownership": "U",
-      "connected": false
+        "src": "VITE_RES_BASE_PATH/img/lxt_u4.jpg",
+        "value": "2",
+        "ownership": "U",
+        "connected": false
       }
     ],
     "imgD": [
       {
         "src": "VITE_RES_BASE_PATH/img/lxt_d1.png",
-      "value": "10",
-      "ownership": "D",
-      "connected": false
+        "value": "10",
+        "ownership": "D",
+        "connected": false
       },
       {
         "src": "VITE_RES_BASE_PATH/img/lxt_d2.png",
-      "value": "2",
-      "ownership": "D",
-      "connected": false
+        "value": "2",
+        "ownership": "D",
+        "connected": false
       },
       {
         "src": "VITE_RES_BASE_PATH/img/lxt_d3.png",
-      "value": "5",
-      "ownership": "D",
-      "connected": false
+        "value": "5",
+        "ownership": "D",
+        "connected": false
       },
       {
         "src": "VITE_RES_BASE_PATH/img/lxt_d4.png",
-      "value": "6",
-      "ownership": "D",
-      "connected": false
+        "value": "6",
+        "ownership": "D",
+        "connected": false
       }
     ],
-    "isDrawing": false,
-    "startItem": null,
-    "endItem": null,
-    "currentLine": { "x1": 0, "y1": 0, "x2": 0, "y2": 0 },
-    "connections": [],
-    "ctx": null,
-    "backCtx": null,
-    "canvasRect": null,
-    "isDebug": true,
     "result": []
-  },
+  }],
 
   "tkt": [
     {
@@ -109,7 +101,7 @@
       ],
       "img": "VITE_RES_BASE_PATH/img/tkt2.png",
     "subQuestions": [
-      "上面一共有TNUM只小动物。从左往右数，蜗牛排第1，兔子排第TNUM,小鸡排第TNUM",
+      "上面一共有TNUM只小动物。从左往右数，蜗牛排第1，兔子排第TNUM,小鸡排第TNUM"
     ],
     "userAnswer": {},
     "answers": [
