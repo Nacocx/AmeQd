@@ -152,8 +152,8 @@ export default {
         targetArea.forEach(e => {
           const rect = e.getBoundingClientRect();
           // 判断是触摸事件还是鼠标事件，分别获取对应的 x 和 y 坐标
-          const x = ee.touches ? ee.touches[0].clientX : ee.clientX;
-          const y = ee.touches ? ee.touches[0].clientY : ee.clientY;
+          const x = e.touches ? e.touches[0].clientX : e.clientX;
+          const y = e.touches ? e.touches[0].clientY : e.clientY;
           // 判断鼠标或触摸点是否在目标区域内
           if (x >= rect.left && x <= rect.right && y >= rect.top && y <= rect.bottom) {
             if (this.message.draggedElement) {
