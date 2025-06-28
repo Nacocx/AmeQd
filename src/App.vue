@@ -289,6 +289,7 @@ export default {
       dialogTableVisible: false,
       isOnloading:true,
       isInVideo:false,
+      currentPage:1,
     };
   },
   components: {
