@@ -164,8 +164,8 @@ export default {
 
           const rect = e.getBoundingClientRect();
           // Determine whether it's a touch event or a mouse event, and get the corresponding x and y coordinates
-          const x = e.touches ? e.touches[0].clientX : e.clientX;
-          const y = e.touches ? e.touches[0].clientY : e.clientY;
+          const x = ee.changedTouches ? ee.changedTouches[0].clientX : ee.clientX;
+          const y = ee.changedTouches ? ee.changedTouches[0].clientY : ee.clientY;
           if (x >= rect.left && x <= rect.right && y >= rect.top && y <= rect.bottom) {
             // console.log("e", e);
             if (this.message.draggedElement) {
