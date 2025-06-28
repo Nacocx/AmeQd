@@ -7,7 +7,7 @@
 
       <div class="title">
         <div>
-          <h2>{{ question.title }}</h2>
+          <h2>第{{ index + 1 }}题: {{ question.title }}</h2>
         </div>
         <div>
           <img :src="question.audio_img" alt="" class="laba" @click="playAudio(0)" @touchend="playAudio(0)">
