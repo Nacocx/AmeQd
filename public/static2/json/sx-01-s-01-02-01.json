@@ -1,7 +1,7 @@
 {
     "lxt": [
     {
-      "audio_img": "/static2/assets/laba.png",
+      "audio_img": "../static/static2/assets/laba.png",
       "audios": [
         ""
       ],
@@ -67,7 +67,7 @@
 
     "sst": [
     {
-      "audio_img": "/static2/assets/laba.png",
+      "audio_img": "../static/static2/assets/laba.png",
       "audios": [
         ""
       ],
@@ -81,7 +81,7 @@
       "userAnswer": ""
     },
     {
-      "audio_img": "/static2/assets/laba.png",
+      "audio_img": "../static/static2/assets/laba.png",
       "audios": [
         ""
       ],
@@ -95,7 +95,7 @@
       "userAnswer": ""
     },
     {
-      "audio_img": "/static2/assets/laba.png",
+      "audio_img": "../static/static2/assets/laba.png",
       "audios": [
         "VITE_RES_BASE_PATH/audio/part3.wav",
         ""
@@ -113,7 +113,7 @@
   "tht": {
     "another": {
       "title": "part 5 看一看 涂一涂",
-      "audio_img": "/static2/assets/laba.png",
+      "audio_img": "../static/static2/assets/laba.png",
       "audios": [
         ""
       ]
@@ -171,7 +171,7 @@
 
 "tkt": [
   {
-    "audio_img": "/static2/assets/laba.png",
+    "audio_img": "../static/static2/assets/laba.png",
     "audios": [
 
     ""],
@@ -195,7 +195,7 @@
   },
 
   {
-    "audio_img": "/static2/assets/laba.png",
+    "audio_img": "../static/static2/assets/laba.png",
     "audios": [
     ""
     ],
@@ -220,8 +220,7 @@
 
     "xzt": [
       {
-        "audio_img": "/static2/assets/laba.png",
-        "audio_title":"",
+        "audio_img": "../static/static2/assets/laba.png",
         "audios": [
         ""
         ],
@@ -250,7 +249,7 @@
         "answer": "B"
       },
       {
-        "audio_img": "/static2/assets/laba.png",
+        "audio_img": "../static/static2/assets/laba.png",
         "audios": [
         ""
         ],

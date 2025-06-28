@@ -1,7 +1,7 @@
 {
   "xzt": [
     {
-      "audio_img": "/static2/assets/laba.png",
+      "audio_img": "../static/static2/assets/laba.png",
       "audios": [
         ""
       ],
@@ -18,7 +18,7 @@
   ],
 
   "lxt": [{
-    "audio_img": "/static2/assets/laba.png",
+    "audio_img": "../static/static2/assets/laba.png",
     "audios": [
       
 
@@ -85,7 +85,7 @@
 
   "tkt": [
     {
-      "audio_img": "/static2/assets/laba.png",
+      "audio_img": "../static/static2/assets/laba.png",
       "audios": [
         ""
       ],
@@ -108,7 +108,7 @@
     },
 
     {
-      "audio_img": "/static2/assets/laba.png",
+      "audio_img": "../static/static2/assets/laba.png",
       "audios": [
         ""
       ],
