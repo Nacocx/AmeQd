@@ -3,7 +3,7 @@
 <!--    <div v-if="isOnloading">Loading......</div>-->
     <el-container >
       <el-container>
-<!--         <sidebar :student-info="studentInfo" :count-tm="answerStatus" />-->
+         <sidebar :student-info="studentInfo" :count-tm="answerStatus" />
         <el-main>
           <!-- 题目部分 -->
           <div id="chose">
@@ -366,7 +366,12 @@ export default {
 
       // 计算连线题已作答数
       if (this.questions.lxt && this.questions.lxt.length) {
-
+        this.questions.lxt.forEach(e=>{
+          e.imgU.forEach((img)=>{
+            if(img.connected)
+              answeredInfo.answeredCount++;
+          })
+        })
 
 
 
