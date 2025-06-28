@@ -18,7 +18,7 @@
     {
       "audio_img": "../static/static2/assets/laba.png",
       "audios": [
-        "VITE_RES_BASE_PATH/audio/part4.wav",
+        "VITE_RES_BASE_PATH/audio/audio_2.wav",
         ""
       ],
       "id": 2,
@@ -33,7 +33,7 @@
     {
       "audio_img": "../static/static2/assets/laba.png",
       "audios": [
-        "VITE_RES_BASE_PATH/audio/part3.wav",
+        "VITE_RES_BASE_PATH/audio/audio.wav",
         ""
       ],
       "id": 3,
@@ -205,7 +205,7 @@
     {
       "audio_img": "../static/static2/assets/laba.png",
       "audios": [
-        "VITE_RES_BASE_PATH/audio/part3.wav",
+        "VITE_RES_BASE_PATH/audio/tuo3.wav",
         ""
       ],
       "id": 2,
