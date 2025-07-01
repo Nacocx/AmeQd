@@ -42,8 +42,6 @@
 </template>
 
 <script>
-import { ref, computed } from 'vue';
-
 /**
  * 拼音教学组件，用于练习汉语拼音声调
  * @typedef {Object} PinyinItem
@@ -73,90 +71,86 @@ export default {
             }
         }
     },
-    setup(props) {
-        /**
-         * 声调符号映射表
-         * @type {Object<number, string>}
-         */
-        const toneMarks = {
-            0: '',
-            1: '¯',
-            2: '´',
-            3: 'ˇ',
-            4: '`'
+    data() {
+        return {
+            /**
+             * 声调符号映射表
+             * @type {Object<number, string>}
+             */
+            toneMarks: {
+                0: '',
+                1: '¯',
+                2: '´',
+                3: 'ˇ',
+                4: '`'
+            },
+            /**
+             * 记录每个字符上的声调
+             * @type {Object<number, Object<number, number>>}
+             */
+            tonePositions: {},
+            /**
+             * 操作历史记录栈
+             * @type {Array<{
+             *   itemIndex: number,
+             *   charIndex: number,
+             *   previousState: Object
+             * }>}
+             */
+            historyStack: [],
+
         };
-
-        /**
-         * 记录每个字符上的声调
-         * @type {import('vue').Ref<Object<number, Object<number, number>>>}
-         */
-        const tonePositions = ref({});
-
-        /**
-         * 操作历史记录栈
-         * @type {import('vue').Ref<Array<{
-         *   itemIndex: number,
-         *   charIndex: number,
-         *   previousState: Object
-         * }>>}
-         */
-        const historyStack = ref([]);
-
-        /**
-         * 当前拖动的声调
-         * @type {import('vue').Ref<number|null>}
-         */
-        const currentDraggingTone = ref(null);
-
+    },
+    computed: {
         /**
          * 是否可以执行撤销操作
-         * @type {import('vue').ComputedRef<boolean>}
+         * @type {boolean}
          */
-        const canUndo = computed(() => historyStack.value.length > 0);
-
+        canUndo() {
+            return this.historyStack.length > 0;
+        }
+    },
+    methods: {
         /**
          * 检查指定位置是否可以接受声调标记
          * @param {number} itemIndex - 拼音项索引
          * @param {number} charIndex - 字符索引(0-based)
          * @returns {boolean} 是否可以放置声调
          */
-        const canAcceptTone = (itemIndex, charIndex) => {
-            const positions = props.pinyinData[itemIndex].pos;
+        canAcceptTone(itemIndex, charIndex) {
+            const positions = this.pinyinData[itemIndex].pos;
             return positions.includes(charIndex + 1);
-        };
-
+        },
         /**
          * 处理声调拖动开始事件
          * @param {number} tone - 声调值(1-4)
          */
-        const handleDragStart = (tone) => {
-            currentDraggingTone.value = tone;
-        };
-
+        handleDragStart(tone) {
+            this.currentDraggingTone = tone;
+        },
         /**
          * 处理拖拽悬停事件
          * @param {DragEvent} event - 拖拽事件
          * @param {number} itemIndex - 拼音项索引
          * @param {number} charIndex - 字符索引
          */
-        const handleDragOver = (event, itemIndex, charIndex) => {
-            if (canAcceptTone(itemIndex, charIndex)) {
+        handleDragOver(event, itemIndex, charIndex) {
+            if (this.canAcceptTone(itemIndex, charIndex)) {
                 event.preventDefault();
             }
-        };
-
+        },
         /**
          * 检查答案并更新isRight状态
          * @param {number} itemIndex - 要检查的拼音项索引
          */
-        const checkAndUpdate = (itemIndex) => {
-            const item = props.pinyinData[itemIndex];
+        checkAndUpdate(itemIndex) {
+            const item = this.pinyinData[itemIndex];
             let isCorrect = true;
 
             // 检查是否所有必需的位置都有声调
             for (let i = 0; i < item.pos.length; i++) {
                 const pos = item.pos[i] - 1;
-                if (!tonePositions.value[itemIndex]?.[pos]) {
+                if (!this.tonePositions[itemIndex]?.[pos]) {
                     isCorrect = false;
                     break;
                 }
@@ -167,7 +161,7 @@ export default {
                 for (let i = 0; i < item.pos.length; i++) {
                     const pos = item.pos[i] - 1;
                     const correctTone = item.correctTones[i];
-                    const userTone = tonePositions.value[itemIndex][pos];
+                    const userTone = this.tonePositions[itemIndex][pos];
 
                     if (correctTone !== 0 && userTone !== correctTone) {
                         isCorrect = false;
@@ -178,80 +172,76 @@ export default {
 
             // 直接修改原始数据
             item.isRight = isCorrect;
-        };
-
+        },
         /**
          * 处理声调放置事件
          * @param {number} itemIndex - 拼音项索引
          * @param {number} charIndex - 字符索引
          */
-        const handleDrop = (itemIndex, charIndex) => {
-            if (currentDraggingTone.value && canAcceptTone(itemIndex, charIndex)) {
+        handleDrop(itemIndex, charIndex) {
+            if (this.currentDraggingTone && this.canAcceptTone(itemIndex, charIndex)) {
                 // 保存当前状态到历史记录
-                const currentState = JSON.parse(JSON.stringify(tonePositions.value));
-                historyStack.value.push({
+                const currentState = JSON.parse(JSON.stringify(this.tonePositions));
+                this.historyStack.push({
                     itemIndex,
                     charIndex,
                     previousState: currentState
                 });
 
                 // 更新声调位置
-                const newTonePositions = { ...tonePositions.value };
+                const newTonePositions = { ...this.tonePositions };
                 if (!newTonePositions[itemIndex]) {
                     newTonePositions[itemIndex] = {};
                 }
-                newTonePositions[itemIndex][charIndex] = currentDraggingTone.value;
-                tonePositions.value = newTonePositions;
+                newTonePositions[itemIndex][charIndex] = this.currentDraggingTone;
+                this.tonePositions = newTonePositions;
 
                 // 自动检查并更新
-                checkAndUpdate(itemIndex);
+                this.checkAndUpdate(itemIndex);
 
-                currentDraggingTone.value = null;
+                this.currentDraggingTone = null;
             }
-        };
-
+        },
         /**
          * 撤销上一次操作
          */
-        const undo = () => {
-            if (historyStack.value.length > 0) {
-                const { itemIndex, previousState } = historyStack.value.pop();
-                tonePositions.value = previousState;
+        undo() {
+            if (this.historyStack.length > 0) {
+                const { itemIndex, previousState } = this.historyStack.pop();
+                this.tonePositions = previousState;
 
                 // 撤销后重新检查
-                checkAndUpdate(itemIndex);
+                this.checkAndUpdate(itemIndex);
             }
-        };
+        },
 
-        const playAudio = (a1, index, e) => {
+        playAudio(index, e) {
             if (e.touches) {
                 e.preventDefault();
             }
-            // console.log(this.allQuestions[a1].audios[index]);
-            console.log(this.allQuestions);
-
             var url_now;
             var audio_now;
             var url_id;
             var a2 = document.querySelector(".newAudio");
+            console.log("a2", a2);
             if (a2) {
                 a2.pause();         // 暂停播放
                 a2.currentTime = 0;
             }
             if (index == -1) {
-                url_now = this.allQuestions[a1].audio_title;
-                url_id = index;
+                // url_now = this.allQuestions[0].;
+                // url_id = index;
             }
             else {
-                url_now = this.allQuestions[a1].audios[index];
+                url_now = this.message.audios[index];
                 url_id = index;
             }
             audio_now = document.createElement('audio');
             audio_now.classList.add("newAudio");
             audio_now.src = url_now;
             document.body.appendChild(audio_now);
-            // console.log("a2", a2);
-            // console.log("audio_now", audio_now);
+            console.log("a2", a2);
+            console.log("audio_now", audio_now);
             if (a2) {
                 if (a2.src != audio_now.src || this.audio_isPlay == false) {
                     a2.remove();
@@ -268,21 +258,8 @@ export default {
             }
             this.audio_id = url_id;
             this.audioEle = audio_now;
-        };
+        },
 
-        return {
-            toneMarks,
-            pinyinData: props.pinyinData,
-            tonePositions,
-            currentDraggingTone,
-            canUndo,
-            canAcceptTone,
-            handleDragStart,
-            handleDragOver,
-            handleDrop,
-            undo,
-            playAudio
-        };
     }
 };
 </script>

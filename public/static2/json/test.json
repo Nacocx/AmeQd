@@ -438,8 +438,7 @@
   {
     "audio_img": "../static/static2/assets/laba.png",
       "audios": [
-        "VITE_RES_BASE_PATH/audio/part1_s.mp3",
-        ""
+        "VITE_RES_BASE_PATH/audio/2.wav"
       ],
     "id": 1,
     "pinyin": "ni hao",
@@ -451,9 +450,8 @@
   {
     "audio_img": "../static/static2/assets/laba.png",
       "audios": [
-        "VITE_RES_BASE_PATH/audio/part1_s.mp3",
-        ""
-      ],
+        "VITE_RES_BASE_PATH/audio/3.wav"
+          ],
     "id": 2,
     "pinyin": "wo ai ni",
     "correctTones": [3, 4, 3],
@@ -464,8 +462,7 @@
   {
     "audio_img": "../static/static2/assets/laba.png",
       "audios": [
-        "VITE_RES_BASE_PATH/audio/part1_s.mp3",
-        ""
+        "VITE_RES_BASE_PATH/audio/4.wav"
       ],
     "id": 3,
     "pinyin": "ni hao ma",
