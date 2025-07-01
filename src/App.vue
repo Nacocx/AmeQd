@@ -6,7 +6,11 @@
         <el-main>
           <!-- 题目部分 -->
           <div class="question-container">
-            <h1 v-if="isInVideo">下面请小朋友自己动手做一做吧</h1>
+            <template v-if="isInVideo">
+              <span style="font-size: large;">下面请小朋友自己动手做一做吧 </span>
+              <img src="../static/static2/assets/laba.png" alt="" class="laba" @click="playAudio(0, $event)"
+                @touchend="playAudio(0, $event)">
+            </template>
             <!-- part1_选择题 -->
             <xzt :questions="questions.xzt" v-if="questions.xzt && questions.xzt.length" />
             <!-- part2_填空题 -->
@@ -52,8 +56,7 @@
             </template>
 
             <pyt v-if="questions.pyt && questions.pyt.length" :pinyin-data="questions.pyt" />
-             
-            <!-- <pre>{{ questions.pyt }}</pre> -->
+
             <el-button type="primary" @click="willSubmit" id="Submit" size="large">提交答案</el-button>
 
           </div>
@@ -294,7 +297,7 @@ export default {
       keys: [],
       dialogTableVisible: false,
       isOnloading: true,
-      isInVideo: false,
+      isInVideo: true,
       currentPage: 1,
     };
   },
@@ -706,7 +709,51 @@ export default {
         })
       });
       this.countTm.htt_tuo.percentage = parseFloat((this.countTm.htt_tuo.right / this.countTm.htt_tuo.cnt * 100).toFixed(2));
-    }
+    },
+    playAudio(index, e) {
+      if (e.touches) {
+        e.preventDefault();
+      }
+      var url_now;
+      var audio_now;
+      var url_id;
+      var a2 = document.querySelector(".newAudio");
+      console.log("a2", a2);
+      if (a2) {
+        a2.pause();         // 暂停播放
+        a2.currentTime = 0;
+      }
+      if (index == -1) {
+        // url_now = this.allQuestions[0].;
+        // url_id = index;
+      }
+      else {
+        url_now = "../static/static2/assets/import.wav";
+        url_id = index;
+      }
+      audio_now = document.createElement('audio');
+      audio_now.classList.add("newAudio");
+      audio_now.src = url_now;
+      document.body.appendChild(audio_now);
+      console.log("a2", a2);
+      console.log("audio_now", audio_now);
+      if (a2) {
+        if (a2.src != audio_now.src || this.audio_isPlay == false) {
+          a2.remove();
+          audio_now.play();
+          this.audio_isPlay = true;
+        }
+        else {
+          a2.remove(); this.audio_isPlay = false;
+        }
+      }
+      else {
+        audio_now.play();
+        this.audio_isPlay = true;
+      }
+      this.audio_id = url_id;
+      this.audioEle = audio_now;
+    },
 
   }
 }
@@ -1204,6 +1251,12 @@ export default {
 .el-progress-bar {
   width: 75%;
   margin-top: 30px;
+}
+
+.laba {
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
 }
 
 #app {
