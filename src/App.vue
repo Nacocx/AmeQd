@@ -304,23 +304,27 @@ export default {
     "pinyin": "ni hao",
     "correctTones": [2, 3],
     "meaning": "你好 (Hello)",
-    "pos": [2, 5]  // 位置计算包含空格：n(1),i(2), (3),h(4),a(5),o(6)
+    "pos": [2, 5],  // 位置计算包含空格：n(1),i(2), (3),h(4),a(5),o(6)
+    "isRight": false  // 新增字段，初始为false
   },
   {
     "id": 2,
     "pinyin": "wo ai ni",
     "correctTones": [3, 4, 3],
     "meaning": "我爱你 (I love you)",
-    "pos": [2, 5, 8]  // w(1),o(2), (3),a(4),i(5), (6),n(7),i(8)
+    "pos": [2, 5, 8],  // w(1),o(2), (3),a(4),i(5), (6),n(7),i(8)
+    "isRight": false
   },
   {
     "id": 3,
     "pinyin": "ni hao ma",
     "correctTones": [2, 3, 0],
     "meaning": "你好吗 (How are you)",
-    "pos": [2, 5, 9]  // n(1),i(2), (3),h(4),a(5),o(6), (7),m(8),a(9)
+    "pos": [2, 5, 9],  // n(1),i(2), (3),h(4),a(5),o(6), (7),m(8),a(9)
+    "isRight": false
   }
 ]
+
 
     };
   },
@@ -590,6 +594,8 @@ export default {
           console.log(this.tmRightCnt);
           console.log(this.countTm);
           console.log(this.questions);
+          console.log(this.asd);
+          
           this.dialogTableVisible = true;
 
           ElMessage({
