@@ -6,6 +6,7 @@
         <el-main>
           <!-- 题目部分 -->
             <div class="question-container">
+              <p>下面请小朋友自己动手做一做吧</p>
               <!-- part1_选择题 -->
               <xzt :questions="questions.xzt" v-if="questions.xzt && questions.xzt.length" />
               <!-- part2_填空题 -->
@@ -48,7 +49,13 @@
                   <qst :message="qst" />
                 </div>
               </template>
-
+ <pyt :pinyin-data="asd "/>
+              <template>
+                <div>
+                 
+                </div>
+              </template>
+              <!-- <pre>{{ questions.pyt }}</pre> -->
               <el-button type="primary" @click="willSubmit" id="Submit" size="large">提交答案</el-button>
 
           </div>
@@ -92,6 +99,7 @@ import lxt from "@/components/lxt.vue";
 import qst from "@/components/qst.vue";
 import Tht from "@/components/tht.vue";
 import htt_tuo from "@/components/htt_tuo.vue";
+import pyt from "@/components/pyt.vue";
 import axios from "axios";
 
 const basePath = import.meta.env.VITE_RES_BASE_PATH;
@@ -290,6 +298,30 @@ export default {
       isOnloading:true,
       isInVideo:false,
       currentPage:1,
+      asd:[
+  {
+    "id": 1,
+    "pinyin": "ni hao",
+    "correctTones": [2, 3],
+    "meaning": "你好 (Hello)",
+    "pos": [2, 5]  // 位置计算包含空格：n(1),i(2), (3),h(4),a(5),o(6)
+  },
+  {
+    "id": 2,
+    "pinyin": "wo ai ni",
+    "correctTones": [3, 4, 3],
+    "meaning": "我爱你 (I love you)",
+    "pos": [2, 5, 8]  // w(1),o(2), (3),a(4),i(5), (6),n(7),i(8)
+  },
+  {
+    "id": 3,
+    "pinyin": "ni hao ma",
+    "correctTones": [2, 3, 0],
+    "meaning": "你好吗 (How are you)",
+    "pos": [2, 5, 9]  // n(1),i(2), (3),h(4),a(5),o(6), (7),m(8),a(9)
+  }
+]
+
     };
   },
   components: {
@@ -302,6 +334,7 @@ export default {
     lxt,
     qst,
     htt_tuo,
+    pyt,
   },
   async created() {
     await this.loadInfo();
