@@ -11,8 +11,8 @@
             <div v-for="(item, itemIndex) in pinyinData" :key="item.id" class="pinyin-item">
                 <div class="item-header">
                     <span class="item-meaning">{{ item.meaning }}</span>
-                    <img :src="item.audio_img" alt="" class="laba" @click="playAudio(0, $event)"
-                        @touchend="playAudio(0, $event)" />
+                    <img :src="item.audio_img" alt="" class="laba" @click="playAudio(itemIndex, -1, $event)"
+                        @touchend="playAudio(itemIndex, -1, $event)" @touchsatrt="playAudio(itemIndex, -1, $event)">
 
                 </div>
 
@@ -215,33 +215,35 @@ export default {
             }
         },
 
-        playAudio(index, e) {
+        playAudio(a1, index, e) {
             if (e.touches) {
                 e.preventDefault();
             }
+            // console.log(this.allQuestions[a1].audios[index]);
+            //   console.log(this.pinyinData);
+
             var url_now;
             var audio_now;
             var url_id;
             var a2 = document.querySelector(".newAudio");
-            console.log("a2", a2);
             if (a2) {
                 a2.pause();         // 暂停播放
                 a2.currentTime = 0;
             }
             if (index == -1) {
-                // url_now = this.allQuestions[0].;
-                // url_id = index;
+                url_now = this.pinyinData[a1].audio_title;
+                url_id = index;
             }
             else {
-                url_now = this.message.audios[index];
+                url_now = this.pinyinData[a1].audios[index];
                 url_id = index;
             }
             audio_now = document.createElement('audio');
             audio_now.classList.add("newAudio");
             audio_now.src = url_now;
             document.body.appendChild(audio_now);
-            console.log("a2", a2);
-            console.log("audio_now", audio_now);
+            // console.log("a2", a2);
+            // console.log("audio_now", audio_now);
             if (a2) {
                 if (a2.src != audio_now.src || this.audio_isPlay == false) {
                     a2.remove();
