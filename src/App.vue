@@ -6,7 +6,7 @@
         <el-main>
           <!-- 题目部分 -->
             <div class="question-container">
-              <p>下面请小朋友自己动手做一做吧</p>
+              <h1>下面请小朋友自己动手做一做吧</h1>
               <!-- part1_选择题 -->
               <xzt :questions="questions.xzt" v-if="questions.xzt && questions.xzt.length" />
               <!-- part2_填空题 -->
