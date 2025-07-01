@@ -1,6 +1,6 @@
 <template>
   <section class="question-container">
-    <div v-for="(questionGroup,index) in allQuestions" :key="'group-' + questionGroup.id" class="question-part">
+    <div v-for="(questionGroup, index) in allQuestions" :key="'group-' + questionGroup.id" class="question-part">
 
       <div class="title2">
 
@@ -10,7 +10,8 @@
 
         <div>
           <!-- {{ jia() }} -->
-          <img :src="allQuestions[0].audio_img" alt="" class="laba" @click="playAudio(index,-1,$event)" @touchend="playAudio(index,-1,$event)" @touchsatrt="playAudio(index,-1,$event)">
+          <img :src="allQuestions[0].audio_img" alt="" class="laba" @click="playAudio(index, -1, $event)"
+            @touchend="playAudio(index, -1, $event)" @touchsatrt="playAudio(index, -1, $event)">
         </div>
       </div>
 
@@ -44,8 +45,8 @@
               </div>
               <div>
                 <!-- {{ jia() }} -->
-                <img :src="allQuestions[0].audio_img" alt="" class="laba" @click="playAudio(index,titleIndex,$event)"
-                  @touchend="playAudio(index,titleIndex,$event)"  @touchsatrt="playAudio(index,titleIndex,$event)">
+                <img :src="allQuestions[0].audio_img" alt="" class="laba" @click="playAudio(index, titleIndex, $event)"
+                  @touchend="playAudio(index, titleIndex, $event)" @touchsatrt="playAudio(index, titleIndex, $event)">
               </div>
             </div>
           </div>
@@ -76,13 +77,13 @@ export default {
       // console.log(this.num);
 
     },
-    playAudio(a1,index,e) {
-      if(e.touches){
+    playAudio(a1, index, e) {
+      if (e.touches) {
         e.preventDefault();
       }
       // console.log(this.allQuestions[a1].audios[index]);
       console.log(this.allQuestions);
-      
+
       var url_now;
       var audio_now;
       var url_id;

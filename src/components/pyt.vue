@@ -12,7 +12,7 @@
                 <div class="item-header">
                     <span class="item-meaning">{{ item.meaning }}</span>
                     <img :src="item.audio_img" alt="" class="laba" @click="playAudio(0, $event)"
-                        @touchend="playAudio(0, $event)"/>
+                        @touchend="playAudio(0, $event)" />
 
                 </div>
 
@@ -223,6 +223,53 @@ export default {
             }
         };
 
+        const playAudio = (a1, index, e) => {
+            if (e.touches) {
+                e.preventDefault();
+            }
+            // console.log(this.allQuestions[a1].audios[index]);
+            console.log(this.allQuestions);
+
+            var url_now;
+            var audio_now;
+            var url_id;
+            var a2 = document.querySelector(".newAudio");
+            if (a2) {
+                a2.pause();         // 暂停播放
+                a2.currentTime = 0;
+            }
+            if (index == -1) {
+                url_now = this.allQuestions[a1].audio_title;
+                url_id = index;
+            }
+            else {
+                url_now = this.allQuestions[a1].audios[index];
+                url_id = index;
+            }
+            audio_now = document.createElement('audio');
+            audio_now.classList.add("newAudio");
+            audio_now.src = url_now;
+            document.body.appendChild(audio_now);
+            // console.log("a2", a2);
+            // console.log("audio_now", audio_now);
+            if (a2) {
+                if (a2.src != audio_now.src || this.audio_isPlay == false) {
+                    a2.remove();
+                    audio_now.play();
+                    this.audio_isPlay = true;
+                }
+                else {
+                    a2.remove(); this.audio_isPlay = false;
+                }
+            }
+            else {
+                audio_now.play();
+                this.audio_isPlay = true;
+            }
+            this.audio_id = url_id;
+            this.audioEle = audio_now;
+        };
+
         return {
             toneMarks,
             pinyinData: props.pinyinData,
@@ -233,7 +280,8 @@ export default {
             handleDragStart,
             handleDragOver,
             handleDrop,
-            undo
+            undo,
+            playAudio
         };
     }
 };
@@ -368,8 +416,8 @@ export default {
 }
 
 .laba {
-  width: 30px;
-  height: 30px;
-  cursor: pointer;
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
 }
 </style>
