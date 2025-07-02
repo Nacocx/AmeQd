@@ -1,0 +1,397 @@
+{
+  "sst": [
+    {
+      "audio_img": "../static/static2/assets/laba.png",
+      "audios": ["VITE_RES_BASE_PATH/audio/part4.wav", ""],
+      "id": 1,
+      "title": {
+        "str": "part 7 接着点出与事物数量相等的",
+        "image": "VITE_RES_BASE_PATH/img/icecream_28.png",
+        "count": 5
+      },
+      "tuXingPath": "VITE_RES_BASE_PATH/img/circle_2.png",
+      "userAnswer": ""
+    },
+    {
+      "audio_img": "../static/static2/assets/laba.png",
+      "audios": ["VITE_RES_BASE_PATH/audio/audio_2.wav", ""],
+      "id": 2,
+      "title": {
+        "str": "part 8 接着点出与事物数量相等的",
+        "image": "VITE_RES_BASE_PATH/img/plane_21.png",
+        "count": 4
+      },
+      "tuXingPath": "VITE_RES_BASE_PATH/img/circle_2.png",
+      "userAnswer": ""
+    },
+    {
+      "audio_img": "../static/static2/assets/laba.png",
+      "audios": ["VITE_RES_BASE_PATH/audio/audio.wav", ""],
+      "id": 3,
+      "title": {
+        "str": "part 9 接着点出与事物数量相等的",
+        "image": "VITE_RES_BASE_PATH/img/tree_13.png",
+        "count": 3
+      },
+      "tuXingPath": "VITE_RES_BASE_PATH/img/circle_2.png",
+      "userAnswer": ""
+    }
+  ],
+  "tkt": [
+    {
+      "audio_img": "../static/static2/assets/laba.png",
+      "audio_title": "VITE_RES_BASE_PATH/audio/audio_tkt.wav",
+      "audios": [
+        "VITE_RES_BASE_PATH/audio/1.1.wav",
+        "VITE_RES_BASE_PATH/audio/2.wav",
+        "VITE_RES_BASE_PATH/audio/3.wav",
+        "VITE_RES_BASE_PATH/audio/4.wav",
+        "VITE_RES_BASE_PATH/audio/5.wav"
+      ],
+      "id": 1,
+      "title_main": "part 1",
+      "title": [
+        "1.认识数字\"1\"",
+        "2.认识数字\"2",
+        "3.认识数字\"3\"",
+        "4.认识数字\"4\"",
+        "5.认识数字\"5\""
+      ],
+      "img": "VITE_RES_BASE_PATH/img/tkt_1_90.jpeg",
+      "subQuestions": [
+        "一个太阳、一座房子、一棵果树可以用数字TNUM表示，也可以用TNUM个小圆片表示。",
+        "两只鸟、两个人，可以用数字TNUM表示，也可以用TNUM个小圆片表示。",
+        "有三朵云，三个苹果，可以用数字TNUM表示，也可以用TNUM个小圆片表示。",
+        "有四个萝卜，四朵花，可以用数字TNUM表示，也可以用TNUM个小圆片表示。",
+        "有五只鸭子，可以用数字TNUM表示，也可以用TNUM个小圆片表示。"
+      ],
+      "userAnswer": {},
+      "answers": ["1", "1", "2", "2", "3", "3", "4", "4", "5", "5"]
+    }
+  ],
+  "htt": [
+    {
+      "audio_img": "../static/static2/assets/laba.png",
+      "audios": ["VITE_RES_BASE_PATH/audio/part2.wav", ""],
+      "id": 2,
+      "title": "part 3",
+      "subQuestion": [
+        {
+          "id": 1,
+          "img": "VITE_RES_BASE_PATH/img/t1_9.jpeg",
+          "answer": 2
+        },
+        {
+          "id": 2,
+          "img": "VITE_RES_BASE_PATH/img/t2_9.jpeg",
+          "answer": 3
+        },
+        {
+          "id": 3,
+          "img": "VITE_RES_BASE_PATH/img/t3_10.jpeg",
+          "answer": 5
+        },
+        {
+          "id": 4,
+          "img": "VITE_RES_BASE_PATH/img/t4_9.jpeg",
+          "answer": 4
+        }
+      ],
+      "shape": [
+        "VITE_RES_BASE_PATH/img/jx_6.png",
+        "VITE_RES_BASE_PATH/img/sjx_17.png",
+        "VITE_RES_BASE_PATH/img/yx_15.png"
+      ],
+      "trueShape": 1,
+      "userAnswer": [[], [], [], []],
+      "isDragging": false,
+      "startX": 0,
+      "startY": 0,
+      "draggedElement": null
+    }
+  ],
+  "lxt": [
+    {
+      "audio_img": "../static/static2/assets/laba.png",
+      "audios": ["VITE_RES_BASE_PATH/audio/part3.wav", ""],
+      "id": 1,
+      "title": "part 5请连接和图片中物品数量一致的圆的图片",
+      "flag": "t3",
+      "changed": false,
+      "result": [],
+      "imgU": [
+        {
+          "src": "VITE_RES_BASE_PATH/img/l5_36.png",
+          "value": "5",
+          "ownership": "U",
+          "connected": false
+        },
+        {
+          "src": "VITE_RES_BASE_PATH/img/l1_30.png",
+          "value": "1",
+          "ownership": "U",
+          "connected": false
+        },
+        {
+          "src": "VITE_RES_BASE_PATH/img/l2_8.png",
+          "value": "2",
+          "ownership": "U",
+          "connected": false
+        },
+        {
+          "src": "VITE_RES_BASE_PATH/img/l4_32.png",
+          "value": "4",
+          "ownership": "U",
+          "connected": false
+        }
+      ],
+      "imgD": [
+        {
+          "src": "VITE_RES_BASE_PATH/img/a2_13.png",
+          "value": "2",
+          "ownership": "D",
+          "connected": false
+        },
+        {
+          "src": "VITE_RES_BASE_PATH/img/a1_18.png",
+          "value": "1",
+          "ownership": "D",
+          "connected": false
+        },
+        {
+          "src": "VITE_RES_BASE_PATH/img/a5_18.png",
+          "value": "5",
+          "ownership": "D",
+          "connected": false
+        },
+        {
+          "src": "VITE_RES_BASE_PATH/img/a4_14.png",
+          "value": "4",
+          "ownership": "D",
+          "connected": false
+        }
+      ]
+    },
+    {
+      "audio_img": "../static/static2/assets/laba.png",
+      "audios": ["VITE_RES_BASE_PATH/audio/tuo3.wav", ""],
+      "id": 2,
+      "title": "part 6 请连接对应物品数量的数字",
+      "flag": "tuo3",
+      "changed": false,
+      "result": [],
+      "imgU": [
+        {
+          "src": "VITE_RES_BASE_PATH/img/tuo_l2_23.png",
+          "value": "2",
+          "ownership": "U",
+          "connected": false
+        },
+        {
+          "src": "VITE_RES_BASE_PATH/img/tuo_l5_30.png",
+          "value": "5",
+          "ownership": "U",
+          "connected": false
+        },
+        {
+          "src": "VITE_RES_BASE_PATH/img/tuo_l4_19.png",
+          "value": "4",
+          "ownership": "U",
+          "connected": false
+        },
+        {
+          "src": "VITE_RES_BASE_PATH/img/tuo_l3_13.png",
+          "value": "3",
+          "ownership": "U",
+          "connected": false
+        }
+      ],
+      "imgD": [
+        {
+          "src": "VITE_RES_BASE_PATH/img/tuo_a4.png",
+          "value": "4",
+          "ownership": "D",
+          "connected": false
+        },
+        {
+          "src": "VITE_RES_BASE_PATH/img/tuo_a5.png",
+          "value": "5",
+          "ownership": "D",
+          "connected": false
+        },
+        {
+          "src": "VITE_RES_BASE_PATH/img/tuo_a3.png",
+          "value": "3",
+          "ownership": "D",
+          "connected": false
+        },
+        {
+          "src": "VITE_RES_BASE_PATH/img/tuo_a2.png",
+          "value": "2",
+          "ownership": "D",
+          "connected": false
+        }
+      ]
+    }
+  ],
+  "tht": {
+    "another": {
+      "title": "part 2 看一看 涂一涂",
+      "audio_img": "../static/static2/assets/laba.png",
+      "audios": ["VITE_RES_BASE_PATH/audio/part5.wav", ""]
+    },
+    "items": [
+      {
+        "rightItem": "VITE_RES_BASE_PATH/img/rightItem1_3.png",
+        "cnt": 2,
+        "flag": [false, false, false, false, false],
+        "changed": false
+      },
+      {
+        "rightItem": "VITE_RES_BASE_PATH/img/rightItem2_2.png",
+        "cnt": 1,
+        "flag": [false, false, false, false, false],
+        "changed": false
+      },
+      {
+        "rightItem": "VITE_RES_BASE_PATH/img/rightItem3_2.png",
+        "cnt": 3,
+        "flag": [false, false, false, false, false],
+        "changed": false
+      }
+    ],
+    "tuxingpath": [
+      {
+        "leftImage": "VITE_RES_BASE_PATH/img/left_11.png"
+      },
+      {
+        "redCircle": "VITE_RES_BASE_PATH/img/redCircle_2.png"
+      },
+      {
+        "noneCircle": "VITE_RES_BASE_PATH/img/noneCircle_2.png"
+      }
+    ]
+  },
+  "qst": [
+    {
+      "audio_img": "../static/static2/assets/laba.png",
+      "audios": ["VITE_RES_BASE_PATH/audio/tuo2.wav", ""],
+      "title": "part 10 ：对照上面图片根据左边的图形数量圈出右边的数量",
+      "example": {
+        "t_img": "VITE_RES_BASE_PATH/img/t1_23.png",
+        "a_img": "VITE_RES_BASE_PATH/img/a1_48.png"
+      },
+      "question": {
+        "t_img": "VITE_RES_BASE_PATH/img/t2_45.png",
+        "n_img": "VITE_RES_BASE_PATH/img/n2_16.png",
+        "num": 8,
+        "tureNum": 5
+      },
+      "img": "VITE_RES_BASE_PATH/img/jian_10.png",
+      "result": false,
+      "changed": false,
+      "ctx": "",
+      "shapeXY": [],
+      "allXY": [],
+      "useAnswer": [],
+      "userNum": 0,
+      "flag": 0
+    }
+  ],
+  "htt_tuo": [
+    {
+      "audio_img": "../static/static2/assets/laba.png",
+      "audios": ["VITE_RES_BASE_PATH/audio/tuo1.wav", ""],
+      "id": [1, 2, 3],
+      "title": "part 4 根据数字提示，把缺少的图形拖进来",
+      "subQuestion": [
+        {
+          "id": 1,
+          "img": "VITE_RES_BASE_PATH/img/t1.png",
+          "answer": 4,
+          "trueShape": 1
+        },
+        {
+          "id": 2,
+          "img": "VITE_RES_BASE_PATH/img/t2.png",
+          "answer": 3,
+          "trueShape": 2
+        },
+        {
+          "id": 3,
+          "img": "VITE_RES_BASE_PATH/img/t3.png",
+          "answer": 1,
+          "trueShape": 3
+        }
+      ],
+      "shape": [
+        "VITE_RES_BASE_PATH/img/jx.png",
+        "VITE_RES_BASE_PATH/img/sjx_10.png",
+        "VITE_RES_BASE_PATH/img/yuan.png"
+      ],
+      "userAnswer": [[], [], []],
+      "isDragging": false,
+      "startX": 0,
+      "startY": 0,
+      "draggedElement": null,
+      "answer": []
+    }
+  ],
+  "xzt": [
+    {
+      "audio_img": "../static/static2/assets/laba.png",
+      "audios": ["VITE_RES_BASE_PATH/audio/part1_s.mp3", ""],
+      "id": 1,
+      "img": "VITE_RES_BASE_PATH/img/xzt_timu.png",
+      "title": "part 1 如果一个小猴吃一个香蕉，选哪一堆正好合适呢？",
+      "options": [
+        {
+          "value": "A",
+          "img": "VITE_RES_BASE_PATH/img/xzt_A.png"
+        },
+        {
+          "value": "B",
+          "img": "VITE_RES_BASE_PATH/img/xzt_B.png"
+        },
+        {
+          "value": "C",
+          "img": "VITE_RES_BASE_PATH/img/xzt_C.png"
+        }
+      ],
+      "userAnswer": "",
+      "answer": "C"
+    }
+  ],
+  "pyt": [
+    {
+      "audio_img": "../static/static2/assets/laba.png",
+      "audio_title": "VITE_RES_BASE_PATH/audio/2.wav",
+      "id": 1,
+      "pinyin": "ni hao",
+      "correctTones": [2, 3],
+      "meaning": "你好 (Hello)",
+      "pos": [2, 5],
+      "isRight": false
+    },
+    {
+      "audio_img": "../static/static2/assets/laba.png",
+      "audio_title": "VITE_RES_BASE_PATH/audio/3.wav",
+      "id": 2,
+      "pinyin": "wo ai ni",
+      "correctTones": [3, 4, 3],
+      "meaning": "我爱你 (I love you)",
+      "pos": [2, 5, 8],
+      "isRight": false
+    },
+    {
+      "audio_img": "../static/static2/assets/laba.png",
+      "audio_title": "VITE_RES_BASE_PATH/audio/4.wav",
+      "id": 3,
+      "pinyin": "ni hao ma",
+      "correctTones": [2, 3, 0],
+      "meaning": "你好吗 (How are you)",
+      "pos": [2, 5, 9],
+      "isRight": false
+    }
+  ]
+}

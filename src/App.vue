@@ -1,55 +1,63 @@
 <template>
   <div id="app">
-    <el-container >
+    <el-container>
       <el-container>
-         <sidebar :student-info="studentInfo" :count-tm="answerStatus" v-if="!isInVideo"/>
+        <sidebar :student-info="studentInfo" :count-tm="answerStatus" v-if="!isInVideo" />
         <el-main>
           <!-- 题目部分 -->
-            <div class="question-container">
-              <!-- part1_选择题 -->
-              <xzt :questions="questions.xzt" v-if="questions.xzt && questions.xzt.length" />
-              <!-- part2_填空题 -->
-              <tkt :all-questions="questions.tkt" v-if="questions.tkt && questions.tkt.length" />
-              <!-- 涂画题 部分 -->
-              <template  v-if="questions.tht">
-                <tht :items="questions.tht.items" :tuxing-path="questions.tht.tuxingpath" :another="questions.tht.another"/>
-              </template>
-              <!-- 画图题 部分 -->
-              <template v-if="questions.htt && questions.htt.length">
-                <div v-for="htt in questions.htt" :key="htt">
-                  <htt :message="htt" />
-                </div>
-              </template>
+          <div class="question-container">
+            <template v-if="isInVideo">
+              <span style="font-size: large;">下面请小朋友自己动手做一做吧 </span>
+              <img src="../static/static2/assets/laba.png" alt="" class="laba" @click="playAudio(0, $event)"
+                @touchend="playAudio(0, $event)">
+            </template>
+            <!-- part1_选择题 -->
+            <xzt :questions="questions.xzt" v-if="questions.xzt && questions.xzt.length" />
+            <!-- part2_填空题 -->
+            <tkt :all-questions="questions.tkt" v-if="questions.tkt && questions.tkt.length" />
+            <!-- 涂画题 部分 -->
+            <template v-if="questions.tht">
+              <tht :items="questions.tht.items" :tuxing-path="questions.tht.tuxingpath"
+                :another="questions.tht.another" />
+            </template>
+            <!-- 画图题 部分 -->
+            <template v-if="questions.htt && questions.htt.length">
+              <div v-for="htt in questions.htt" :key="htt">
+                <htt :message="htt" />
+              </div>
+            </template>
 
-              <!-- htt_tuo 部分 -->
-              <template v-if="questions.htt_tuo && questions.htt_tuo.length">
-                <div v-for="htt_tuo in questions.htt_tuo" :key="htt_tuo">
-                  <htt_tuo :message="htt_tuo" />
-                </div>
-              </template>
+            <!-- htt_tuo 部分 -->
+            <template v-if="questions.htt_tuo && questions.htt_tuo.length">
+              <div v-for="htt_tuo in questions.htt_tuo" :key="htt_tuo">
+                <htt_tuo :message="htt_tuo" />
+              </div>
+            </template>
 
-              <!-- lxt 部分 -->
-              <template v-if="questions.lxt && questions.lxt.length">
-                <div v-for="lxt in questions.lxt" :key="lxt">
-                  <lxt :message="lxt" />
-                </div>
-              </template>
+            <!-- lxt 部分 -->
+            <template v-if="questions.lxt && questions.lxt.length">
+              <div v-for="lxt in questions.lxt" :key="lxt">
+                <lxt :message="lxt" />
+              </div>
+            </template>
 
-              <!-- sst 部分 -->
-              <template v-if="questions.sst && questions.sst.length">
-                <div v-for="sst in questions.sst" :key="sst">
-                  <sst :item="sst" />
-                </div>
-              </template>
+            <!-- sst 部分 -->
+            <template v-if="questions.sst && questions.sst.length">
+              <div v-for="sst in questions.sst" :key="sst">
+                <sst :item="sst" />
+              </div>
+            </template>
 
-              <!-- qst 部分 -->
-              <template v-if="questions.qst && questions.qst.length">
-                <div v-for="qst in questions.qst" :key="qst">
-                  <qst :message="qst" />
-                </div>
-              </template>
+            <!-- qst 部分 -->
+            <template v-if="questions.qst && questions.qst.length">
+              <div v-for="qst in questions.qst" :key="qst">
+                <qst :message="qst" />
+              </div>
+            </template>
 
-              <el-button type="primary" @click="willSubmit" id="Submit" size="large">提交答案</el-button>
+            <pyt v-if="questions.pyt && questions.pyt.length" :pinyin-data="questions.pyt" />
+
+            <el-button type="primary" @click="willSubmit" id="Submit" size="large">提交答案</el-button>
 
           </div>
         </el-main>
@@ -85,17 +93,18 @@
 import xzt from "@/components/xzt.vue";
 import sidebar from "@/components/sidebar.vue";
 import tkt from "@/components/tkt.vue";
-import {ElMessage, ElMessageBox} from "element-plus";
+import { ElMessage, ElMessageBox } from "element-plus";
 import Sst from "@/components/sst.vue";
 import Htt from "@/components/htt.vue";
 import lxt from "@/components/lxt.vue";
 import qst from "@/components/qst.vue";
 import Tht from "@/components/tht.vue";
 import htt_tuo from "@/components/htt_tuo.vue";
+import pyt from "@/components/pyt.vue";
 import axios from "axios";
 
 const basePath = import.meta.env.VITE_RES_BASE_PATH;
-const baseJsonPath =import.meta.env.VITE_JSON_BASE_PATH;
+const baseJsonPath = import.meta.env.VITE_JSON_BASE_PATH;
 
 //实际使用中数据从后端获取
 // import logo from "/static/img/T1_tkt_ok/tkt_1.jpeg";   // 必须用 import
@@ -285,10 +294,11 @@ export default {
       boolLists: {},
       countTm: {},
       tmRightCnt: {},
-      keys:[],
+      keys: [],
       dialogTableVisible: false,
-      isOnloading:true,
-      isInVideo:false,
+      isOnloading: true,
+      isInVideo: true,
+      currentPage: 1,
     };
   },
   components: {
@@ -301,12 +311,13 @@ export default {
     lxt,
     qst,
     htt_tuo,
+    pyt,
   },
   async created() {
     await this.loadInfo();
     if (this.questions) { // 确保数据存在
       await this.calTotalTm();
-    }else{
+    } else {
       alert("Network error!");
     }
   },
@@ -325,8 +336,8 @@ export default {
 
       // 计算选择题已作答数
       if (this.questions.xzt && this.questions.xzt.length) {
-        const { xzt = []} = this.questions;
-        answeredInfo.answeredCount+=[...xzt.filter((e) => e.userAnswer)].length;
+        const { xzt = [] } = this.questions;
+        answeredInfo.answeredCount += [...xzt.filter((e) => e.userAnswer)].length;
       }
 
       // 计算填空题已作答数
@@ -334,8 +345,8 @@ export default {
         this.questions.tkt.forEach((e, index) => {
           let obj = e.userAnswer;
           let values = Object.values(obj);
-          values.forEach(el=>{
-            if(el!==""){
+          values.forEach(el => {
+            if (el !== "") {
               answeredInfo.answeredCount++;
             }
           })
@@ -344,13 +355,13 @@ export default {
 
       // 计算涂画题已作答数
       if (this.questions.tht && this.questions.tht.items) {
-        answeredInfo.answeredCount +=this.questions.tht.items.filter(e=>e.changed).length;
+        answeredInfo.answeredCount += this.questions.tht.items.filter(e => e.changed).length;
       }
 
       // 计算画图题已作答数
       if (this.questions.htt && this.questions.htt.length) {
         let prev = [];
-        this.questions.htt.forEach(e=>{
+        this.questions.htt.forEach(e => {
           e.userAnswer.forEach((ans, index) => {
             ans.forEach((e) => {
               if (e !== null && prev[index] == null) {
@@ -364,9 +375,9 @@ export default {
 
       // 计算连线题已作答数
       if (this.questions.lxt && this.questions.lxt.length) {
-        this.questions.lxt.forEach(e=>{
-          e.imgU.forEach((img)=>{
-            if(img.connected)
+        this.questions.lxt.forEach(e => {
+          e.imgU.forEach((img) => {
+            if (img.connected)
               answeredInfo.answeredCount++;
           })
         })
@@ -378,7 +389,7 @@ export default {
       // 计算数数题已作答数
       if (this.questions.sst && this.questions.sst.length) {
         const { sst = [] } = this.questions;
-        answeredInfo.answeredCount+=[...sst.filter((e) => e.userAnswer)].length;
+        answeredInfo.answeredCount += [...sst.filter((e) => e.userAnswer)].length;
       }
 
       // 计算圈数题已作答数
@@ -389,12 +400,12 @@ export default {
       // 计算画图题2已作答数
       if (this.questions.htt_tuo && this.questions.htt_tuo.length) {
         let prev = [];
-        this.questions.htt_tuo.forEach(e=>{
+        this.questions.htt_tuo.forEach(e => {
           e.userAnswer.forEach((ans, index) => {
-              if (ans.length !== 0 && prev[index] == null) {
-                answeredInfo.answeredCount++;
-                prev[index] = ans;
-              }
+            if (ans.length !== 0 && prev[index] == null) {
+              answeredInfo.answeredCount++;
+              prev[index] = ans;
+            }
           });
         })
       }
@@ -412,7 +423,7 @@ export default {
      */
     async calTotalTm() {
       const keys = Object.keys(this.questions);
-      this.keys=keys;
+      this.keys = keys;
       // console.log(keys);
       this.countTm.totalTm = 0;
 
@@ -445,23 +456,23 @@ export default {
      * 获得JSON文件
      * @returns {Promise<void>}
      */
-    async loadInfo(){
-      this.questions= await this.fetchData(`${baseJsonPath}.json`);
-      if(baseJsonPath.includes("video")){
+    async loadInfo() {
+      this.questions = await this.fetchData(`${baseJsonPath}.json`);
+      if (baseJsonPath.includes("video")) {
         this.isInVideo = true;
       }
       // this.questions=mockQuestions;
-      this.studentInfo=mockStudentInfo;
+      this.studentInfo = mockStudentInfo;
     },
     /**
      * 获取并处理数据
      * @param url :string
      * @returns {Promise<*|{}|null>}
      */
-    async  fetchData(url) {
+    async fetchData(url) {
       try {
         const response = await axios.get(url);
-        this.isOnloading=false;
+        this.isOnloading = false;
         return this.processPaths(response.data);
       } catch (error) {
         console.error('Error fetching data:', error);
@@ -556,6 +567,8 @@ export default {
           console.log(this.tmRightCnt);
           console.log(this.countTm);
           console.log(this.questions);
+          console.log(this.asd);
+
           this.dialogTableVisible = true;
 
           ElMessage({
@@ -563,14 +576,14 @@ export default {
             message: "提交成功!",
           })
         })
-      // 取消或报错(e)
-      .catch((e) => {
-        console.warn("!EVENT:" + e);
-        ElMessage({
-          type: "info",
-          message: "已取消提交",
-        })
-      });
+        // 取消或报错(e)
+        .catch((e) => {
+          console.warn("!EVENT:" + e);
+          ElMessage({
+            type: "info",
+            message: "已取消提交",
+          })
+        });
     },
     /**
      * 获取选择题正确列表
@@ -696,7 +709,51 @@ export default {
         })
       });
       this.countTm.htt_tuo.percentage = parseFloat((this.countTm.htt_tuo.right / this.countTm.htt_tuo.cnt * 100).toFixed(2));
-    }
+    },
+    playAudio(index, e) {
+      if (e.touches) {
+        e.preventDefault();
+      }
+      var url_now;
+      var audio_now;
+      var url_id;
+      var a2 = document.querySelector(".newAudio");
+      console.log("a2", a2);
+      if (a2) {
+        a2.pause();         // 暂停播放
+        a2.currentTime = 0;
+      }
+      if (index == -1) {
+        // url_now = this.allQuestions[0].;
+        // url_id = index;
+      }
+      else {
+        url_now = "../static/static2/assets/import.wav";
+        url_id = index;
+      }
+      audio_now = document.createElement('audio');
+      audio_now.classList.add("newAudio");
+      audio_now.src = url_now;
+      document.body.appendChild(audio_now);
+      console.log("a2", a2);
+      console.log("audio_now", audio_now);
+      if (a2) {
+        if (a2.src != audio_now.src || this.audio_isPlay == false) {
+          a2.remove();
+          audio_now.play();
+          this.audio_isPlay = true;
+        }
+        else {
+          a2.remove(); this.audio_isPlay = false;
+        }
+      }
+      else {
+        audio_now.play();
+        this.audio_isPlay = true;
+      }
+      this.audio_id = url_id;
+      this.audioEle = audio_now;
+    },
 
   }
 }
@@ -1194,6 +1251,12 @@ export default {
 .el-progress-bar {
   width: 75%;
   margin-top: 30px;
+}
+
+.laba {
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
 }
 
 #app {
