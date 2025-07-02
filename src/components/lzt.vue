@@ -34,7 +34,7 @@
 </template>
 <script>
 export default {
-  name: 'a',
+  name: 'lzt',
   data() {
     return {
 

@@ -109,8 +109,14 @@ export default {
         canUndo() {
             return this.historyStack.length > 0;
         }
-    },
-    methods: {
+    },created() {
+    this.pinyinData.forEach(e=>{
+      if(e.changed===undefined){
+        e.changed = false;
+      }
+    })
+  },
+  methods: {
         /**
          * 检查指定位置是否可以接受声调标记
          * @param {number} itemIndex - 拼音项索引
@@ -146,7 +152,7 @@ export default {
         checkAndUpdate(itemIndex) {
             const item = this.pinyinData[itemIndex];
             let isCorrect = true;
-
+            item.changed = true;
             // 检查是否所有必需的位置都有声调
             for (let i = 0; i < item.pos.length; i++) {
                 const pos = item.pos[i] - 1;
