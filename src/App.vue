@@ -55,6 +55,13 @@
               </div>
             </template>
 
+            <!-- lzt 部分 -->
+            <template v-if="questions.lzt && questions.lzt.length">
+              <div v-for="lzt in questions.lzt" :key="lzt">
+                <lzt :message="lzt" />
+              </div>
+            </template>
+
             <pyt v-if="questions.pyt && questions.pyt.length" :pinyin-data="questions.pyt" />
 
             <el-button type="primary" @click="willSubmit" id="Submit" size="large">提交答案</el-button>
@@ -101,6 +108,7 @@ import qst from "@/components/qst.vue";
 import Tht from "@/components/tht.vue";
 import htt_tuo from "@/components/htt_tuo.vue";
 import pyt from "@/components/pyt.vue";
+import lzt from "@/components/lzt.vue";
 import axios from "axios";
 
 const basePath = import.meta.env.VITE_RES_BASE_PATH;
@@ -111,7 +119,62 @@ const baseJsonPath = import.meta.env.VITE_JSON_BASE_PATH;
 // /static2/sx-01-s-01-01-01/img/xx.png
 
 const mockQuestions = {
-
+ "lzt": {
+    "title": "拖动汉字，使其组成一个正确句子",
+    "audios": [
+      "../static/static2/assets/laba.png"
+    ],
+    "audio_title": "",
+    "num": 5,
+    "t_imgs": [
+      "VITE_RES_BASE_PATH/img/z1.png",
+      "VITE_RES_BASE_PATH/img/z2.png",
+      "VITE_RES_BASE_PATH/img/z3.png",
+      "VITE_RES_BASE_PATH/img/z4.png",
+      "VITE_RES_BASE_PATH/img/z5.png"
+    ],
+    "pos": [],
+    "pos_block": [],
+    "pos_word": [],
+    "pos_history": [],
+    "userAnswer": [],
+    "trueAnswer": [
+      [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      [
+        3,
+        4,
+        1,
+        2,
+        5
+      ],
+      [
+        1,
+        2,
+        5,
+        3,
+        4
+      ],
+      [
+        3,
+        4,
+        5,
+        1,
+        2
+      ]
+    ],
+    "startX": 0,
+    "startY": 0,
+    "draggingIndex": -1,
+    "wordElement": null,
+    "swapHistory": [],
+    "flag": false
+  },
   "lxt": [
     {
       "id": 1,
@@ -312,10 +375,13 @@ export default {
     qst,
     htt_tuo,
     pyt,
+    lzt
   },
   async created() {
     await this.loadInfo();
     if (this.questions) { // 确保数据存在
+      console.log(this.questions);
+      
       await this.calTotalTm();
     } else {
       alert("Network error!");

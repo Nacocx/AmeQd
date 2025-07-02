@@ -28,6 +28,8 @@
 
 
   </div>
+  <hr>
+  <br>
 
 </template>
 <script>
@@ -256,7 +258,7 @@ export default {
       this.message.draggingIndex = -1;
       this.message.wordElement = null;
       console.log(this.message.userAnswer);
-      this.message.check();
+      this.check();
 
       // 移除事件监听
       document.removeEventListener('mousemove', this.mouseMove);
@@ -359,7 +361,7 @@ export default {
           }
         }
       }
-      this.message.check();
+      this.check();
     },
     check() {
       let flag = false; // 初始化 flag 为 false
@@ -396,7 +398,7 @@ export default {
       this.message.wordElement = null;
       console.log(this.message.userAnswer);
 
-      this.message.check();
+      this.check();
     },
   },
   mounted() {
@@ -418,6 +420,8 @@ export default {
 }
 
 .title {
+  position: absolute;
+  top: 20px;
   /* background-color: #4CAF50; */
   text-align: center;
   display: flex;
@@ -449,11 +453,14 @@ export default {
   width: 850px;
   height: 600px;
   text-align: center;
-  border: 1px solid black;
+  /* border: 1px solid black; */
   position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-bottom: 20px;
+  margin-left: 50px;
+  margin-top: 20px;
 }
 
 .options {
