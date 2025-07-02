@@ -11,6 +11,7 @@
               <img src="../static/static2/assets/laba.png" alt="" class="laba" @click="playAudio(0, $event)"
                 @touchend="playAudio(0, $event)">
             </template>
+            <hr>
             <!-- part1_选择题 -->
             <xzt :questions="questions.xzt" v-if="questions.xzt && questions.xzt.length" />
             <!-- part2_填空题 -->
@@ -119,7 +120,7 @@ const baseJsonPath = import.meta.env.VITE_JSON_BASE_PATH;
 // /static2/sx-01-s-01-01-01/img/xx.png
 
 const mockQuestions = {
- "lzt": {
+  "lzt": {
     "title": "拖动汉字，使其组成一个正确句子",
     "audios": [
       "../static/static2/assets/laba.png"
@@ -381,7 +382,7 @@ export default {
     await this.loadInfo();
     if (this.questions) { // 确保数据存在
       console.log(this.questions);
-      
+
       await this.calTotalTm();
     } else {
       alert("Network error!");
