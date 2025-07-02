@@ -170,7 +170,6 @@ export default {
                 }
             }
 
-            // 直接修改原始数据
             item.isRight = isCorrect;
         },
         /**
