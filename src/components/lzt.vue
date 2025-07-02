@@ -41,7 +41,10 @@ export default {
     }
   },
   props: {
-    message: {}
+    message: {
+      type:Array,
+      required:true
+    }
   },
   methods: {
     playAudio(index, e) {
