@@ -1,0 +1,75 @@
+{
+     "htt_tuo": [
+    {
+      "audio_img": "../static/static2/assets/laba.png",
+      "audios": [
+        "VITE_RES_BASE_PATH/audio/part5_s.mp3"
+      ],
+      "id": [
+        1,
+        2,
+        3
+      ],
+      "title": "part 2  根据数字提示，把缺少的图形拖进来",
+      "subQuestion": [
+        {
+          "id": 1,
+          "img": "VITE_RES_BASE_PATH/img/htt_tuo_u1_v.png",
+          "answer": 8,
+          "trueShape": 1
+        },
+        {
+          "id": 2,
+          "img": "VITE_RES_BASE_PATH/img/htt_tuo_u2_v.png",
+          "answer": 5,
+          "trueShape": 2
+        },
+        {
+          "id": 3,
+          "img": "VITE_RES_BASE_PATH/img/htt_tuo_u3_v.png",
+          "answer": 6,
+          "trueShape": 3
+        }
+      ],
+      "shape": [
+        "VITE_RES_BASE_PATH/img/jx.png",
+        "VITE_RES_BASE_PATH/img/sjx.png",
+        "VITE_RES_BASE_PATH/img/yuan.png"
+      ],
+      "userAnswer": [
+        [],
+        [],
+        []
+      ],
+      "isDragging": false,
+      "startX": 0,
+      "startY": 0,
+      "draggedElement": null,
+      "answer": []
+    }
+  ],
+  "xzt": [
+  {
+    "audio_img": "../static/static2/assets/laba.png",
+    "audios": [
+      "VITE_RES_BASE_PATH/audio/part1_s.mp3",
+      ""
+    ],
+    "id": 1,
+    "img": "VITE_RES_BASE_PATH/img/xzt_timu_v.png",
+    "title": "part 1 ",
+    "options": [
+      {
+        "value": "A",
+        "img": "VITE_RES_BASE_PATH/img/xzt_A_v.png"
+      },
+      {
+        "value": "B",
+        "img": "VITE_RES_BASE_PATH/img/xzt_B_v.png"
+      }
+    ],
+    "userAnswer": "",
+    "answer": "B"
+  }
+]
+}
