@@ -37,61 +37,8 @@ export default {
   name: 'a',
   data() {
     return {
-      "title": "拖动汉字，使其组成一个正确句子",
-      "audios": [
-        "../static/static2/assets/laba.png"
-      ],
-      "audio_title": "",
-      "num": 5,//代表有多少个空
-      "t_imgs": [//汉字图片
-        "VITE_RES_BASE_PATH/img/z1.png",
-        "VITE_RES_BASE_PATH/img/z2.png",
-        "VITE_RES_BASE_PATH/img/z3.png",
-        "VITE_RES_BASE_PATH/img/z4.png",
-        "VITE_RES_BASE_PATH/img/z5.png"
-      ],
-      "pos": [],
-      "pos_block": [],
-      "pos_word": [],
-      "pos_history": [],
-      "userAnswer": [],
-      "trueAnswer": [//就是正确 汉字的排序 和图片顺序对应
-        [
-          1,
-          2,
-          3,
-          4,
-          5
-        ],
-        [
-          3,
-          4,
-          1,
-          2,
-          5
-        ],
-        [
-          1,
-          2,
-          5,
-          3,
-          4
-        ],
-        [
-          3,
-          4,
-          5,
-          1,
-          2
-        ]
-      ],
-      "startX": 0,
-      "startY": 0,
-      "draggingIndex": -1,
-      "wordElement": null,
-      "swapHistory": [],
-      "flag": false//是否答案正确
-    };
+
+    }
   },
   props: {
     message: {}
