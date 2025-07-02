@@ -9,7 +9,7 @@
 
 
       <h1>{{ message.title }}</h1>
-      <img :src="message.audio_img" alt="" class="laba" @click="playAudio(0)" @touchend="playAudio(0)">
+      <img :src="message.audio_img" alt="" class="laba" @click="playAudio(0,$event)" @touchend="playAudio(0,$event)">
     </div>
     <!-- <div class="questions">
       
@@ -82,7 +82,10 @@ export default {
   },
   methods: {
 
-    playAudio(index) {
+    playAudio(index,e) {
+      if(e.touches){
+        e.preventDefault();
+      }
       var url_now;
       var audio_now;
       var url_id;

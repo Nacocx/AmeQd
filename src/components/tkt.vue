@@ -1,6 +1,6 @@
 <template>
   <section class="question-container">
-    <div v-for="(questionGroup) in allQuestions" :key="'group-' + questionGroup.id" class="question-part">
+    <div v-for="(questionGroup, index) in allQuestions" :key="'group-' + questionGroup.id" class="question-part">
 
       <div class="title2">
 
@@ -10,7 +10,8 @@
 
         <div>
           <!-- {{ jia() }} -->
-          <img :src="allQuestions[0].audio_img" alt="" class="laba" @click="playAudio(-1)" @touchend="playAudio(-1)">
+          <img :src="allQuestions[0].audio_img" alt="" class="laba" @click="playAudio(index, -1, $event)"
+            @touchend="playAudio(index, -1, $event)" @touchsatrt="playAudio(index, -1, $event)">
         </div>
       </div>
 
@@ -44,8 +45,8 @@
               </div>
               <div>
                 <!-- {{ jia() }} -->
-                <img :src="allQuestions[0].audio_img" alt="" class="laba" @click="playAudio(titleIndex)"
-                  @touchend="playAudio(titleIndex)">
+                <img :src="allQuestions[0].audio_img" alt="" class="laba" @click="playAudio(index, titleIndex, $event)"
+                  @touchend="playAudio(index, titleIndex, $event)" @touchsatrt="playAudio(index, titleIndex, $event)">
               </div>
             </div>
           </div>
@@ -73,33 +74,38 @@ export default {
   methods: {
     jia() {
       this.num++;
-      console.log(this.num);
+      // console.log(this.num);
 
     },
-    playAudio(index) {
+    playAudio(a1, index, e) {
+      if (e.touches) {
+        e.preventDefault();
+      }
+      // console.log(this.allQuestions[a1].audios[index]);
+      console.log(this.allQuestions);
+
       var url_now;
       var audio_now;
       var url_id;
       var a2 = document.querySelector(".newAudio");
-      console.log("a2", a2);
       if (a2) {
         a2.pause();         // 暂停播放
         a2.currentTime = 0;
       }
       if (index == -1) {
-        url_now = this.allQuestions[0].audio_title;
+        url_now = this.allQuestions[a1].audio_title;
         url_id = index;
       }
       else {
-        url_now = this.allQuestions[0].audios[index];
+        url_now = this.allQuestions[a1].audios[index];
         url_id = index;
       }
       audio_now = document.createElement('audio');
       audio_now.classList.add("newAudio");
       audio_now.src = url_now;
       document.body.appendChild(audio_now);
-      console.log("a2", a2);
-      console.log("audio_now", audio_now);
+      // console.log("a2", a2);
+      // console.log("audio_now", audio_now);
       if (a2) {
         if (a2.src != audio_now.src || this.audio_isPlay == false) {
           a2.remove();
