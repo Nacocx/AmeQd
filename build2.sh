@@ -12,7 +12,7 @@ if [ ! -f ".env.production" ]; then
 fi
 
 # 目标目录
-target_dir="/home/sora/docs/tp/t"
+target_dir="/home/sora/docs/AmeQd/build-dist"
 
 # 创建目标目录（如果不存在）
 mkdir -p "$target_dir"
