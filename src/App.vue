@@ -6,7 +6,7 @@
         <el-main>
           <!-- 题目部分 -->
           <div class="question-container">
-            <generate-tm :questions="questions"/>
+            <generate-tm :questions="questions" :is-in-video="isInVideo"/>
             <el-button type="primary" @click="willSubmit" id="Submit" size="large">提交答案</el-button>
           </div>
         </el-main>
@@ -34,6 +34,7 @@ import lzt from "@/components/lzt.vue";
 import axios from "axios";
 import GenerateTm from "@/components/generateTm.vue";
 import TmPercentage from "@/components/TmPercentage.vue";
+import GameFishing from "@/components/GameFishing.vue";
 
 const basePath = import.meta.env.VITE_RES_BASE_PATH;
 const baseJsonPath = import.meta.env.VITE_JSON_BASE_PATH;

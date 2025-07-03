@@ -451,5 +451,33 @@
       "swapHistory": [],
       "flag": false
     }
+  ],
+  "gmf": [
+    {
+      "question": "hǎo",
+      "answers": ["好", "号", "浩", "耗"],
+      "correct": "好",
+      "fishImages": [
+        "VITE_RES_BASE_PATH/img/fish_1.png",
+        "VITE_RES_BASE_PATH/img/fish_2.png",
+        "VITE_RES_BASE_PATH/img/fish_3.png",
+        "VITE_RES_BASE_PATH/img/fish_4.png"
+      ],
+      "bubbleImage": "VITE_RES_BASE_PATH/img/bubble_1.png"
+    },
+    {
+      "question": "mā",
+      "answers": ["妈", "马", "麻", "吗"],
+      "correct": "妈",
+      "fishImages": [
+        "VITE_RES_BASE_PATH/img/fish_1.png",
+        "VITE_RES_BASE_PATH/img/fish_2.png",
+        "VITE_RES_BASE_PATH/img/fish_3.png",
+        "VITE_RES_BASE_PATH/img/fish_4.png"
+      ],
+      "bubbleImage": "VITE_RES_BASE_PATH/img/bubble_2.png"
+    }
   ]
+
+
 }
