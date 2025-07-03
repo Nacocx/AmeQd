@@ -116,59 +116,8 @@
       }
     ]
     
-  },
-   {
-    "audio_img": "../static/static2/assets/laba.png",
-    "audios": [
-      "VITE_RES_BASE_PATH/audio/part3.wav",
-      ""
-    ],
-    "id": 3,
-    "title": "part 11 连一连",
-    "flag": "t3",
-    "changed": false,
-    "result": [],
-    "imgU": [
-      {
-        "src": "VITE_RES_BASE_PATH/img/lxt3_u1.png",
-        "value": "1",
-        "ownership": "U",
-        "connected": false
-      },
-      {
-        "src": "VITE_RES_BASE_PATH/img/lxt3_u2.png",
-        "value": "2",
-        "ownership": "U",
-        "connected": false
-      },
-         {
-        "src": "VITE_RES_BASE_PATH/img/lxt3_u3.png",
-        "value": "3",
-        "ownership": "U",
-        "connected": false
-      }
-    ],
-    "imgD": [
-      {
-        "src": "VITE_RES_BASE_PATH/img/lxt3_d1.png",
-        "value": "1",
-        "ownership": "D",
-        "connected": false
-      },
-      {
-        "src": "VITE_RES_BASE_PATH/img/lxt3_d2.png",
-        "value": "3",
-        "ownership": "D",
-        "connected": false
-      },
-       {
-        "src": "VITE_RES_BASE_PATH/img/lxt3_d3.png",
-        "value": "2",
-        "ownership": "D",
-        "connected": false
-      }
-    ]
   }
+
 ],
 "xzt": [
   {
