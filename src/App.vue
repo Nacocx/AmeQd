@@ -34,7 +34,6 @@ import lzt from "@/components/lzt.vue";
 import axios from "axios";
 import GenerateTm from "@/components/generateTm.vue";
 import TmPercentage from "@/components/TmPercentage.vue";
-import GameFishing from "@/components/GameFishing.vue";
 
 const basePath = import.meta.env.VITE_RES_BASE_PATH;
 const baseJsonPath = import.meta.env.VITE_JSON_BASE_PATH;
