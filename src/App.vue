@@ -6,7 +6,66 @@
         <el-main>
           <!-- 题目部分 -->
           <div class="question-container">
-            <generate-tm :questions="questions" :is-in-video="isInVideo"/>
+            <template v-if="isInVideo">
+              <span style="font-size: large;">下面请小朋友自己动手做一做吧 </span>
+              <img src="../static/static2/assets/laba.png" alt="" class="laba" @click="playAudio(0, $event)"
+                   @touchend="playAudio(0, $event)">
+            </template>
+            <hr>
+            <!-- part1_选择题 -->
+            <xzt :questions="questions.xzt" v-if="questions.xzt && questions.xzt.length" />
+            <!-- part2_填空题 -->
+            <tkt :all-questions="questions.tkt" v-if="questions.tkt && questions.tkt.length" />
+            <!-- 涂画题 部分 -->
+            <template v-if="questions.tht">
+              <tht :items="questions.tht.items" :tuxing-path="questions.tht.tuxingpath"
+                   :another="questions.tht.another" />
+            </template>
+            <!-- 画图题 部分 -->
+            <template v-if="questions.htt && questions.htt.length">
+              <div v-for="htt in questions.htt" :key="htt">
+                <htt :message="htt" />
+              </div>
+            </template>
+
+            <!-- htt_tuo 部分 -->
+            <template v-if="questions.htt_tuo && questions.htt_tuo.length">
+              <div v-for="htt_tuo in questions.htt_tuo" :key="htt_tuo">
+                <htt_tuo :message="htt_tuo" />
+              </div>
+            </template>
+
+            <!-- lxt 部分 -->
+            <template v-if="questions.lxt && questions.lxt.length">
+              <div v-for="lxt in questions.lxt" :key="lxt">
+                <lxt :message="lxt" />
+              </div>
+            </template>
+
+            <!-- sst 部分 -->
+            <template v-if="questions.sst && questions.sst.length">
+              <div v-for="sst in questions.sst" :key="sst">
+                <sst :item="sst" />
+              </div>
+            </template>
+
+            <!-- qst 部分 -->
+            <template v-if="questions.qst && questions.qst.length">
+              <div v-for="qst in questions.qst" :key="qst">
+                <qst :message="qst" />
+              </div>
+            </template>
+
+            <!-- lzt 部分 -->
+            <template v-if="questions.lzt && questions.lzt.length">
+              <div v-for="lzt in questions.lzt" :key="lzt">
+                <lzt :message="lzt" />
+              </div>
+            </template>
+
+            <pyt v-if="questions.pyt && questions.pyt.length" :pinyin-data="questions.pyt" />
+
+            <!--  <GameFishing  :game-fishing-json-array="questions.gmf"/>-->
             <el-button type="primary" @click="willSubmit" id="Submit" size="large">提交答案</el-button>
           </div>
         </el-main>
@@ -32,7 +91,7 @@ import htt_tuo from "@/components/htt_tuo.vue";
 import pyt from "@/components/pyt.vue";
 import lzt from "@/components/lzt.vue";
 import axios from "axios";
-import GenerateTm from "@/components/generateTm.vue";
+
 import TmPercentage from "@/components/TmPercentage.vue";
 
 const basePath = import.meta.env.VITE_RES_BASE_PATH;
@@ -61,7 +120,6 @@ export default {
   },
   components: {
     TmPercentage,
-    GenerateTm,
     Tht,
     Htt,
     Sst,
