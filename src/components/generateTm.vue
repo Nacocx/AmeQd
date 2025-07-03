@@ -77,7 +77,7 @@ import Lxt from "@/components/lxt.vue";
 // import GameFishing from "@/components/GameFishing.vue";
 
 export default defineComponent({
-  components: {GameFishing, Lxt, Htt_tuo, Lzt, Qst, pyt, tkt, xzt, Tht, Sst, Htt},
+  components: { Lxt, Htt_tuo, Lzt, Qst, pyt, tkt, xzt, Tht, Sst, Htt},
   props:{
     questions:{
       type: Object,
