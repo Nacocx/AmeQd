@@ -1,0 +1,95 @@
+ { "lxt": [
+  {
+    "audio_img": "../static/static2/assets/laba.png",
+    "audios": [
+      "VITE_RES_BASE_PATH/audio/part3.wav",
+      ""
+    ],
+    "id": 1,
+    "title": " 1 连一连",
+    "flag": "t3",
+    "changed": false,
+    "result": [],
+    "imgU": [
+      {
+        "src": "VITE_RES_BASE_PATH/img/lxt1_u1_v.png",
+        "value": "1",
+        "ownership": "U",
+        "connected": false
+      },
+      {
+        "src": "VITE_RES_BASE_PATH/img/lxt1_u2_v.png",
+        "value": "2",
+        "ownership": "U",
+        "connected": false
+      },
+         {
+        "src": "VITE_RES_BASE_PATH/img/lxt1_u3_v.png",
+        "value": "3",
+        "ownership": "U",
+        "connected": false
+      }
+    ],
+    "imgD": [
+      {
+        "src": "VITE_RES_BASE_PATH/img/lxt2_d1.png",
+        "value": "2",
+        "ownership": "D",
+        "connected": false
+      },
+      {
+        "src": "VITE_RES_BASE_PATH/img/lxt2_d2.png",
+        "value": "1",
+        "ownership": "D",
+        "connected": false
+      },
+            {
+        "src": "VITE_RES_BASE_PATH/img/lxt2_d3.png",
+        "value":"3",
+        "ownership": "D",
+        "connected": false
+      }
+    ]
+  },
+  {
+    "audio_img": "../static/static2/assets/laba.png",
+    "audios": [
+      "VITE_RES_BASE_PATH/audio/tuo3.wav",
+      ""
+    ],
+    "id": 2,
+    "title": " 2 连一连",
+    "flag": "tuo3",
+    "changed": false,
+    "result": [],
+    "imgU": [
+      {
+        "src": "VITE_RES_BASE_PATH/img/lxt2_u1_v.png",
+        "value": "1",
+        "ownership": "U",
+        "connected": false
+      },
+      {
+        "src": "VITE_RES_BASE_PATH/img/lxt2_u2_v.png",
+        "value": "2",
+        "ownership": "U",
+        "connected": false
+      }
+    ],
+    "imgD": [
+      {
+        "src": "VITE_RES_BASE_PATH/img/lxt2_d4.png",
+        "value": "1",
+        "ownership": "D",
+        "connected": false
+      },
+      {
+        "src": "VITE_RES_BASE_PATH/img/lxt2_d5.png",
+        "value": "2",
+        "ownership": "D",
+        "connected": false
+      }
+    ]
+  }]
+ }
+
