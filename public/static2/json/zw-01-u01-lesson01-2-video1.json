@@ -3,7 +3,7 @@
     {
       "audio_img": "../static/static2/assets/laba.png",
       "audios": [
-        "VITE_RES_BASE_PATH/audio/part1_s.mp3",
+        "VITE_RES_BASE_PATH/audio/bk1_1.mp3",
         ""
       ],
       "id": 1,
@@ -34,7 +34,7 @@
     {
       "audio_img": "../static/static2/assets/laba.png",
       "audios": [
-        "VITE_RES_BASE_PATH/audio/part1_s.mp3",
+        "VITE_RES_BASE_PATH/audio/bk1_2.mp3",
         ""
       ],
       "id": 2,
@@ -64,7 +64,7 @@
     {
       "audio_img": "../static/static2/assets/laba.png",
       "audios": [
-        "VITE_RES_BASE_PATH/audio/part1_s.mp3",
+        "VITE_RES_BASE_PATH/audio/bk1_3.mp3",
         ""
       ],
       "id": 3,
@@ -94,7 +94,7 @@
     {
       "audio_img": "../static/static2/assets/laba.png",
       "audios": [
-        "VITE_RES_BASE_PATH/audio/part1_s.mp3",
+        "VITE_RES_BASE_PATH/audio/bk1_4.mp3",
         ""
       ],
       "id": 4,

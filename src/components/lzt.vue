@@ -60,14 +60,10 @@ export default {
         a2.pause();         // 暂停播放
         a2.currentTime = 0;
       }
-      if (index == -1) {
-        // url_now = this.message.allQuestions[0].;
-        // url_id = index;
-      }
-      else {
-        url_now = this.message.audios[index];
+      
+        url_now = this.message.audio_title;
         url_id = index;
-      }
+      
       audio_now = document.createElement('audio');
       audio_now.classList.add("newAudio");
       audio_now.src = url_now;
