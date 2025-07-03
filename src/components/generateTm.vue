@@ -58,7 +58,7 @@
 
   <pyt v-if="questions.pyt && questions.pyt.length" :pinyin-data="questions.pyt" />
 
-  <GameFishing  :game-fishing-json-array="questions.gmf"/>
+<!--  <GameFishing  :game-fishing-json-array="questions.gmf"/>-->
 
 </template>
 <script>
@@ -74,7 +74,7 @@ import Qst from "@/components/qst.vue";
 import Lzt from "@/components/lzt.vue";
 import Htt_tuo from "@/components/htt_tuo.vue";
 import Lxt from "@/components/lxt.vue";
-import GameFishing from "@/components/GameFishing.vue";
+// import GameFishing from "@/components/GameFishing.vue";
 
 export default defineComponent({
   components: {GameFishing, Lxt, Htt_tuo, Lzt, Qst, pyt, tkt, xzt, Tht, Sst, Htt},
