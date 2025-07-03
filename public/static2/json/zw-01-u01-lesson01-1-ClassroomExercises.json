@@ -132,19 +132,19 @@
     "options": [
       {
         "value": "A",
-        "label":"A "
+        "label":"再见"
       },
       {
         "value": "B",
-         "label":"B "
+         "label":"你好"
       },
       {
         "value": "C",
-         "label":"C "
+         "label":"老师好"
       },
       {
         "value": "D",
-         "label":"D "
+         "label":"你们好"
       }
     ],
     "userAnswer": "",
@@ -162,19 +162,19 @@
     "options": [
       {
         "value": "A",
-         "label":"A "
+         "label":"再见！"
       },
       {
         "value": "B",
-         "label":"B "
+         "label":"你好！"
       },
       {
         "value": "C",
-         "label":"C "
+         "label":"老师好!"
       },
       {
         "value": "D",
-         "label":"D "
+         "label":"你们好!"
       }
     ],
     "userAnswer": "",
@@ -192,19 +192,19 @@
     "options": [
       {
         "value": "A",
-         "label":"A "
+         "label":""
       },
       {
         "value": "B",
-         "label":"B "
+         "label":""
       },
       {
         "value": "C",
-         "label":"C "
+         "label":""
       },
       {
         "value": "D",
-         "label":"D "
+         "label":""
       }
     ],
     "userAnswer": "",
@@ -222,19 +222,19 @@
     "options": [
       {
         "value": "A",
-         "label":"A"
+         "label":""
       },
       {
         "value": "B",
-         "label":"B"
+         "label":""
       },
       {
         "value": "C",
-        "label":"C"
+        "label":""
       },
       {
         "value": "D",
-        "label":"D"
+        "label":""
       }
     ],
     "userAnswer": "",
@@ -252,19 +252,19 @@
     "options": [
       {
         "value": "A",
-        "label":"A"
+        "label":""
       },
       {
         "value": "B",
-        "label":"B"
+        "label":""
       },
       {
         "value": "C",
-        "label":"C"
+        "label":""
       },
       {
         "value": "D",
-        "label":"D"
+        "label":""
       }
     ],
     "userAnswer": "",
@@ -282,19 +282,19 @@
     "options": [
       {
         "value": "A",
-        "label":"A"
+        "label":""
       },
       {
         "value": "B",
-        "label":"B"
+        "label":""
       },
       {
         "value": "C",
-        "label":"C"
+        "label":""
       },
       {
         "value": "D",
-        "label":"D"
+        "label":""
       }
     ],
     "userAnswer": "",
@@ -312,19 +312,19 @@
     "options": [
       {
         "value": "A",
-        "label":"A"
+        "label":""
       },
       {
         "value": "B",
-        "label":"B"
+        "label":""
       },
       {
         "value": "C",
-       "label":"C"
+       "label":""
       },
       {
         "value": "D",
-        "label":"D"
+        "label":""
       }
     ],
     "userAnswer": "",
@@ -342,19 +342,19 @@
     "options": [
       {
         "value": "A",
-        "label":"A"
+        "label":""
       },
       {
         "value": "B",
-        "label":"B"
+        "label":""
       },
       {
         "value": "C",
-       "label":"C"
+       "label":""
       },
       {
         "value": "D",
-        "label":"D"
+        "label":""
       }
     ],
     "userAnswer": "",
