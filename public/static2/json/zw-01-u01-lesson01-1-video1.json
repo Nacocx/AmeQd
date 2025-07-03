@@ -2,7 +2,7 @@
   {
     "audio_img": "../static/static2/assets/laba.png",
     "audios": [
-      "VITE_RES_BASE_PATH/audio/part3.wav",
+      "VITE_RES_BASE_PATH/audio/bk1_1.mp3",
       ""
     ],
     "id": 1,
@@ -54,7 +54,7 @@
   {
     "audio_img": "../static/static2/assets/laba.png",
     "audios": [
-      "VITE_RES_BASE_PATH/audio/tuo3.wav",
+      "VITE_RES_BASE_PATH/audio/bk1_2.mp3",
       ""
     ],
     "id": 2,
