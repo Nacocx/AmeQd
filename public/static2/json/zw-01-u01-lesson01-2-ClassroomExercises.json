@@ -1,0 +1,358 @@
+ {
+  "xzt": [
+    {
+      "audio_img": "../static/static2/assets/laba.png",
+      "audios": [
+        "VITE_RES_BASE_PATH/audio/part1_s.mp3",
+        ""
+      ],
+      "id": 1,
+      "img": "VITE_RES_BASE_PATH/img/xzt1_timu.png",
+      "title": " 1. 根据图片选拼音",
+      "options": [
+        {
+          "value": "A",
+          "label": "bā"
+        },
+        {
+          "value": "B",
+          "label": "bá"
+        },
+        {
+          "value": "C",
+          "label": "bǎ"
+        },
+        {
+          "value": "D",
+          "label": "bà"
+        }
+      ],
+      "userAnswer": "",
+      "answer": "A"
+    },
+    {
+      "audio_img": "../static/static2/assets/laba.png",
+      "audios": [
+        "VITE_RES_BASE_PATH/audio/part1_s.mp3",
+        ""
+      ],
+      "id": 2,
+      "img": "VITE_RES_BASE_PATH/img/xzt2_timu.png",
+      "title": " 2. 根据图片选拼音",
+      "options": [
+        {
+          "value": "A",
+          "label": "bā"
+        },
+        {
+          "value": "B",
+          "label": "bá"
+        },
+        {
+          "value": "C",
+          "label": "bǎ"
+        },
+        {
+          "value": "D",
+          "label": "bà"
+        }
+      ],
+      "userAnswer": "",
+      "answer": "B"
+    },
+    {
+      "audio_img": "../static/static2/assets/laba.png",
+      "audios": [
+        "VITE_RES_BASE_PATH/audio/part1_s.mp3",
+        ""
+      ],
+      "id": 3,
+      "img": "VITE_RES_BASE_PATH/img/xzt3_timu.png",
+      "title": " 3. 根据图片选拼音",
+      "options": [
+        {
+          "value": "A",
+          "label": "bā"
+        },
+        {
+          "value": "B",
+          "label": "bá"
+        },
+        {
+          "value": "C",
+          "label": "bǎ"
+        },
+        {
+          "value": "D",
+          "label": "bà"
+        }
+      ],
+      "userAnswer": "",
+      "answer": "D"
+    },
+    {
+      "audio_img": "../static/static2/assets/laba.png",
+      "audios": [
+        "VITE_RES_BASE_PATH/audio/part1_s.mp3",
+        ""
+      ],
+      "id": 4,
+      "img": "VITE_RES_BASE_PATH/img/xzt4_timu.png",
+      "title": " 4. 根据图片选拼音",
+      "options": [
+        {
+          "value": "A",
+          "label": "bā"
+        },
+        {
+          "value": "B",
+          "label": "bá"
+        },
+        {
+          "value": "C",
+          "label": "bǎ"
+        },
+        {
+          "value": "D",
+          "label": "bà"
+        }
+      ],
+      "userAnswer": "",
+      "answer": "C"
+    },
+    {
+      "audio_img": "../static/static2/assets/laba.png",
+      "audios": [
+        "VITE_RES_BASE_PATH/audio/part1_s.mp3",
+        "VITE_RES_BASE_PATH/audio/part1_s.mp3"
+      ],
+      "id": 5,
+      "img": "",
+      "title": "5. 听录音选正确的音调",
+      "options": [
+        {
+          "value": "A",
+          "label": "bā"
+        },
+        {
+          "value": "B",
+          "label": "bá"
+        },
+        {
+          "value": "C",
+          "label": "bǎ"
+        },
+        {
+          "value": "D",
+          "label": "bà"
+        }
+      ],
+      "userAnswer": "",
+      "answer": "D"
+    },
+    {
+      "audio_img": "../static/static2/assets/laba.png",
+      "audios": [
+        "VITE_RES_BASE_PATH/audio/part1_s.mp3",
+        "VITE_RES_BASE_PATH/audio/part1_s.mp3"
+      ],
+      "id": 6,
+      "img": "",
+      "title": "6. 听录音选正确的音调",
+      "options": [
+        {
+          "value": "A",
+          "label": "bā"
+        },
+        {
+          "value": "B",
+          "label": "bá"
+        },
+        {
+          "value": "C",
+          "label": "bǎ"
+        },
+        {
+          "value": "D",
+          "label": "bà"
+        }
+      ],
+      "userAnswer": "",
+      "answer": "B"
+    },
+    {
+      "audio_img": "../static/static2/assets/laba.png",
+      "audios": [
+        "VITE_RES_BASE_PATH/audio/part1_s.mp3",
+        "VITE_RES_BASE_PATH/audio/part1_s.mp3"
+      ],
+      "id": 7,
+      "img": "",
+      "title": " 7. 听录音选正确的音调",
+      "options": [
+        {
+          "value": "A",
+          "label": "bā"
+        },
+        {
+          "value": "B",
+          "label": "bá"
+        },
+        {
+          "value": "C",
+          "label": "bǎ"
+        },
+        {
+          "value": "D",
+          "label": "bà"
+        }
+      ],
+      "userAnswer": "",
+      "answer": "A"
+    },
+    {
+      "audio_img": "../static/static2/assets/laba.png",
+      "audios": [
+        "VITE_RES_BASE_PATH/audio/part1_s.mp3",
+        "VITE_RES_BASE_PATH/audio/part1_s.mp3"
+      ],
+      "id": 8,
+      "img": "",
+      "title": "8. 听录音选正确的音调",
+      "options": [
+        {
+          "value": "A",
+          "label": "bā"
+        },
+        {
+          "value": "B",
+          "label": "bá"
+        },
+        {
+          "value": "C",
+          "label": "bǎ"
+        },
+        {
+          "value": "D",
+          "label": "bà"
+        }
+      ],
+      "userAnswer": "",
+      "answer": "C"
+    }
+  ],
+   "lxt": [
+  {
+    "audio_img": "../static/static2/assets/laba.png",
+    "audios": [
+      "VITE_RES_BASE_PATH/audio/part3.wav",
+      ""
+    ],
+    "id": 1,
+    "title": " 9 连一连",
+    "flag": "t3",
+    "changed": false,
+    "result": [],
+    "imgU": [
+      {
+        "src": "VITE_RES_BASE_PATH/img/lxt1_u1.png",
+        "value": "1",
+        "ownership": "U",
+        "connected": false
+      },
+      {
+        "src": "VITE_RES_BASE_PATH/img/lxt1_u2.png",
+        "value": "2",
+        "ownership": "U",
+        "connected": false
+      },
+         {
+        "src": "VITE_RES_BASE_PATH/img/lxt1_u3.png",
+        "value": "3",
+        "ownership": "U",
+        "connected": false
+      },
+         {
+        "src": "VITE_RES_BASE_PATH/img/lxt1_u4.png",
+        "value": "4",
+        "ownership": "U",
+        "connected": false
+      }
+    ],
+    "imgD": [
+      {
+        "src": "VITE_RES_BASE_PATH/img/lxt1_d1.png",
+        "value": "2",
+        "ownership": "D",
+        "connected": false
+      },
+      {
+        "src": "VITE_RES_BASE_PATH/img/lxt1_d2.png",
+        "value": "1",
+        "ownership": "D",
+        "connected": false
+      },
+            {
+        "src": "VITE_RES_BASE_PATH/img/lxt1_d3.png",
+        "value": "4",
+        "ownership": "D",
+        "connected": false
+      },
+            {
+        "src": "VITE_RES_BASE_PATH/img/lxt1_d4.png",
+        "value": "3",
+        "ownership": "D",
+        "connected": false
+      }
+    ]
+  },
+  {
+    "audio_img": "../static/static2/assets/laba.png",
+    "audios": [
+      "VITE_RES_BASE_PATH/audio/tuo3.wav",
+      ""
+    ],
+    "id": 2,
+    "title": " 10 连一连",
+    "flag": "tuo3",
+    "changed": false,
+    "result": [],
+    "imgU": [
+      {
+        "src": "VITE_RES_BASE_PATH/img/lxt2_u1.png",
+        "value": "1",
+        "ownership": "U",
+        "connected": false
+      }
+    ],
+    "imgD": [
+      {
+        "src": "VITE_RES_BASE_PATH/img/lxt1_d1.png",
+        "value": "4",
+        "ownership": "D",
+        "connected": false
+      },
+      {
+        "src": "VITE_RES_BASE_PATH/img/lxt1_d2.png",
+        "value": "3",
+        "ownership": "D",
+        "connected": false
+      },
+      {
+        "src": "VITE_RES_BASE_PATH/img/lxt1_d3.png",
+        "value": "2",
+        "ownership": "D",
+        "connected": false
+      },
+      {
+        "src": "VITE_RES_BASE_PATH/img/lxt1_d4.png",
+        "value": "1",
+        "ownership": "D",
+        "connected": false
+      }
+    ]
+    
+  }
+
+]
+}
