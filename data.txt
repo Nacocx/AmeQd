@@ -29,3 +29,15 @@ VITE_JC_BASE_PATH=static/static2/sx-01-s-01-03-01/
 VITE_RES_BASE_PATH=../static/static2/sx-01-s-01-03-01
 VITE_JSON_BASE_PATH=../static/static2/json/sx-01-s-01-03-01-video
 VITE_JC_BASE_PATH=static/static2/sx-01-s-01-03-01/video/
+
+VITE_RES_BASE_PATH=../static/static2/sx-01-s-01-04-01
+VITE_JSON_BASE_PATH=../static/static2/json/sx-01-s-01-04-01-sxClassroomExercises
+VITE_JC_BASE_PATH=static/static2/sx-01-s-01-04-01/
+
+VITE_RES_BASE_PATH=../static/static2/sx-01-s-01-04-01
+VITE_JSON_BASE_PATH=../static/static2/json/sx-01-s-01-04-01-video
+VITE_JC_BASE_PATH=static/static2/sx-01-s-01-04-01/video/
+
+VITE_RES_BASE_PATH=../static/static2/zw-01-u01-lesson01-1
+VITE_JSON_BASE_PATH=../static/static2/json/zw-01-u01-lesson01-1-ClassroomExercises
+VITE_JC_BASE_PATH=static/static2/zw-01-u01-lesson01-1/
