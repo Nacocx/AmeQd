@@ -1,0 +1,415 @@
+{
+    "lxt": [
+  {
+    "audio_img": "../static/static2/assets/laba.png",
+    "audios": [
+      "VITE_RES_BASE_PATH/audio/part3.wav",
+      ""
+    ],
+    "id": 1,
+    "title": "part 9 连一连",
+    "flag": "t3",
+    "changed": false,
+    "result": [],
+    "imgU": [
+      {
+        "src": "VITE_RES_BASE_PATH/img/lxt1_u1.png",
+        "value": "1",
+        "ownership": "U",
+        "connected": false
+      },
+      {
+        "src": "VITE_RES_BASE_PATH/img/lxt1_u2.png",
+        "value": "2",
+        "ownership": "U",
+        "connected": false
+      }
+    ],
+    "imgD": [
+      {
+        "src": "VITE_RES_BASE_PATH/img/lxt1_d1.png",
+        "value": "2",
+        "ownership": "D",
+        "connected": false
+      },
+      {
+        "src": "VITE_RES_BASE_PATH/img/lxt1_d2.png",
+        "value": "1",
+        "ownership": "D",
+        "connected": false
+      }
+    ]
+  },
+  {
+    "audio_img": "../static/static2/assets/laba.png",
+    "audios": [
+      "VITE_RES_BASE_PATH/audio/tuo3.wav",
+      ""
+    ],
+    "id": 2,
+    "title": "part 10 连一连",
+    "flag": "tuo3",
+    "changed": false,
+    "result": [],
+    "imgU": [
+      {
+        "src": "VITE_RES_BASE_PATH/img/lxt2_u1.png",
+        "value": "1",
+        "ownership": "U",
+        "connected": false
+      },
+      {
+        "src": "VITE_RES_BASE_PATH/img/lxt2_u2.png",
+        "value": "2",
+        "ownership": "U",
+        "connected": false
+      },
+      {
+        "src": "VITE_RES_BASE_PATH/img/lxt2_u3.png",
+        "value": "3",
+        "ownership": "U",
+        "connected": false
+      },
+      {
+        "src": "VITE_RES_BASE_PATH/img/lxt2_u4.png",
+        "value": "4",
+        "ownership": "U",
+        "connected": false
+      },
+      {
+        "src": "VITE_RES_BASE_PATH/img/lxt2_u5.png",
+        "value": "5",
+        "ownership": "U",
+        "connected": false
+      }
+    ],
+    "imgD": [
+      {
+        "src": "VITE_RES_BASE_PATH/img/lxt2_d1.png",
+        "value": "3",
+        "ownership": "D",
+        "connected": false
+      },
+      {
+        "src": "VITE_RES_BASE_PATH/img/lxt2_d2.png",
+        "value": "1",
+        "ownership": "D",
+        "connected": false
+      },
+      {
+        "src": "VITE_RES_BASE_PATH/img/lxt2_d3.png",
+        "value": "4",
+        "ownership": "D",
+        "connected": false
+      },
+      {
+        "src": "VITE_RES_BASE_PATH/img/lxt2_d4.png",
+        "value": "5",
+        "ownership": "D",
+        "connected": false
+      },
+      {
+        "src": "VITE_RES_BASE_PATH/img/lxt2_d5.png",
+        "value": "2",
+        "ownership": "D",
+        "connected": false
+      }
+    ]
+    
+  },
+   {
+    "audio_img": "../static/static2/assets/laba.png",
+    "audios": [
+      "VITE_RES_BASE_PATH/audio/part3.wav",
+      ""
+    ],
+    "id": 3,
+    "title": "part 11 连一连",
+    "flag": "t3",
+    "changed": false,
+    "result": [],
+    "imgU": [
+      {
+        "src": "VITE_RES_BASE_PATH/img/lxt3_u1.png",
+        "value": "1",
+        "ownership": "U",
+        "connected": false
+      },
+      {
+        "src": "VITE_RES_BASE_PATH/img/lxt3_u2.png",
+        "value": "2",
+        "ownership": "U",
+        "connected": false
+      },
+         {
+        "src": "VITE_RES_BASE_PATH/img/lxt3_u3.png",
+        "value": "3",
+        "ownership": "U",
+        "connected": false
+      }
+    ],
+    "imgD": [
+      {
+        "src": "VITE_RES_BASE_PATH/img/lxt3_d1.png",
+        "value": "1",
+        "ownership": "D",
+        "connected": false
+      },
+      {
+        "src": "VITE_RES_BASE_PATH/img/lxt3_d2.png",
+        "value": "3",
+        "ownership": "D",
+        "connected": false
+      },
+       {
+        "src": "VITE_RES_BASE_PATH/img/lxt3_d3.png",
+        "value": "2",
+        "ownership": "D",
+        "connected": false
+      }
+    ]
+  }
+],
+"xzt": [
+  {
+    "audio_img": "../static/static2/assets/laba.png",
+    "audios": [
+      "VITE_RES_BASE_PATH/audio/part1_s.mp3",
+      ""
+    ],
+    "id": 1,
+    "img": "VITE_RES_BASE_PATH/img/xzt1_timu.png",
+    "title": "part 1 同(tóng)学(xué)应(yīng)该(gāi)说(shuō)什(shén)么(me)",
+    "options": [
+      {
+        "value": "A",
+        "label":"A "
+      },
+      {
+        "value": "B",
+         "label":"B "
+      },
+      {
+        "value": "C",
+         "label":"C "
+      },
+      {
+        "value": "D",
+         "label":"D "
+      }
+    ],
+    "userAnswer": "",
+    "answer": "C"
+  },
+  {
+    "audio_img": "../static/static2/assets/laba.png",
+    "audios": [
+      "VITE_RES_BASE_PATH/audio/part1_s.mp3",
+      ""
+    ],
+    "id": 2,
+    "img": "VITE_RES_BASE_PATH/img/xzt2_timu.png",
+    "title": "part 2 老(lǎo)师(shī)会(huì)说(shuō)什(shén)么(me)",
+    "options": [
+      {
+        "value": "A",
+         "label":"A "
+      },
+      {
+        "value": "B",
+         "label":"B "
+      },
+      {
+        "value": "C",
+         "label":"C "
+      },
+      {
+        "value": "D",
+         "label":"D "
+      }
+    ],
+    "userAnswer": "",
+    "answer": "D"
+  },
+  {
+    "audio_img": "../static/static2/assets/laba.png",
+    "audios": [
+      "VITE_RES_BASE_PATH/audio/part1_s.mp3",
+      ""
+    ],
+    "id": 3,
+    "img": "VITE_RES_BASE_PATH/img/xzt3_timu.png",
+    "title": "part 3 “你好”的(de)拼(pīn)音(yīn)是(shì)哪(nǎ)一(yī)个(gè)",
+    "options": [
+      {
+        "value": "A",
+         "label":"A "
+      },
+      {
+        "value": "B",
+         "label":"B "
+      },
+      {
+        "value": "C",
+         "label":"C "
+      },
+      {
+        "value": "D",
+         "label":"D "
+      }
+    ],
+    "userAnswer": "",
+    "answer": "D"
+  },
+  {
+    "audio_img": "../static/static2/assets/laba.png",
+    "audios": [
+      "VITE_RES_BASE_PATH/audio/part1_s.mp3",
+      ""
+    ],
+    "id": 4,
+    "img": "VITE_RES_BASE_PATH/img/xzt4_timu.png",
+    "title": "part 4 “再见”的(de)拼(pīn)音(yīn)是(shì)哪(nǎ)一(yī)个(gè)",
+    "options": [
+      {
+        "value": "A",
+         "label":"A"
+      },
+      {
+        "value": "B",
+         "label":"B"
+      },
+      {
+        "value": "C",
+        "label":"C"
+      },
+      {
+        "value": "D",
+        "label":"D"
+      }
+    ],
+    "userAnswer": "",
+    "answer": "B"
+  },
+  {
+    "audio_img": "../static/static2/assets/laba.png",
+    "audios": [
+      "VITE_RES_BASE_PATH/audio/part1_s.mp3",
+      ""
+    ],
+    "id": 5,
+    "img": "VITE_RES_BASE_PATH/img/xzt5_timu.png",
+    "title": "part 5 “你们”的(de)拼(pīn)音(yīn)是(shì)哪(nǎ)一(yī)个(gè)",
+    "options": [
+      {
+        "value": "A",
+        "label":"A"
+      },
+      {
+        "value": "B",
+        "label":"B"
+      },
+      {
+        "value": "C",
+        "label":"C"
+      },
+      {
+        "value": "D",
+        "label":"D"
+      }
+    ],
+    "userAnswer": "",
+    "answer": "A"
+  },
+  {
+    "audio_img": "../static/static2/assets/laba.png",
+    "audios": [
+      "VITE_RES_BASE_PATH/audio/part1_s.mp3",
+      ""
+    ],
+    "id": 6,
+    "img": "VITE_RES_BASE_PATH/img/xzt6_timu.png",
+    "title": "part 6 “老师”的(de)拼(pīn)音(yīn)是(shì)哪(nǎ)一(yī)个(gè)",
+    "options": [
+      {
+        "value": "A",
+        "label":"A"
+      },
+      {
+        "value": "B",
+        "label":"B"
+      },
+      {
+        "value": "C",
+        "label":"C"
+      },
+      {
+        "value": "D",
+        "label":"D"
+      }
+    ],
+    "userAnswer": "",
+    "answer": "C"
+  },
+  {
+    "audio_img": "../static/static2/assets/laba.png",
+    "audios": [
+      "VITE_RES_BASE_PATH/audio/part1_s.mp3",
+      ""
+    ],
+    "id": 7,
+    "img": "VITE_RES_BASE_PATH/img/xzt7_timu.png",
+    "title": "part 7 “你”的(de)拼(pīn)音(yīn)是(shì)哪(nǎ)一(yī)个(gè)",
+    "options": [
+      {
+        "value": "A",
+        "label":"A"
+      },
+      {
+        "value": "B",
+        "label":"B"
+      },
+      {
+        "value": "C",
+       "label":"C"
+      },
+      {
+        "value": "D",
+        "label":"D"
+      }
+    ],
+    "userAnswer": "",
+    "answer": "B"
+  },
+  {
+    "audio_img": "../static/static2/assets/laba.png",
+    "audios": [
+      "VITE_RES_BASE_PATH/audio/part1_s.mp3",
+      ""
+    ],
+    "id": 8,
+    "img": "VITE_RES_BASE_PATH/img/xzt8_timu.png",
+    "title": "part 8 “好”的(de)拼(pīn)音(yīn)是(shì)哪(nǎ)一(yī)个(gè)",
+    "options": [
+      {
+        "value": "A",
+        "label":"A"
+      },
+      {
+        "value": "B",
+        "label":"B"
+      },
+      {
+        "value": "C",
+       "label":"C"
+      },
+      {
+        "value": "D",
+        "label":"D"
+      }
+    ],
+    "userAnswer": "",
+    "answer": "D"
+  }
+]
+}
