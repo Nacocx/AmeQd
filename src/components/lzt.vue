@@ -42,7 +42,7 @@ export default {
   },
   props: {
     message: {
-      type:Array,
+      type:Object,
       required:true
     }
   },
