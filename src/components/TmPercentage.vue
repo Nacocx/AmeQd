@@ -20,6 +20,8 @@
       :percentage="countTm.lzt.percentage" /></span>
   <span v-if="questions.pyt && questions.pyt.length">拼音题对了{{ countTm.pyt.right }}题,正确率: <el-progress
       :percentage="countTm.pyt.percentage" /></span>
+  <span v-if="questions.tyt && questions.tyt.length">听音题对了{{ countTm.tyt.right }}题,正确率: <el-progress
+      :percentage="countTm.tyt.percentage" /></span>
 </template>
 
 <script>
