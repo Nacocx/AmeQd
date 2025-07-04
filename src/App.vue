@@ -62,9 +62,15 @@
                 <lzt :message="lzt" />
               </div>
             </template>
-
+            <!-- pyt 部分 -->
             <pyt v-if="questions.pyt && questions.pyt.length" :pinyin-data="questions.pyt" />
 
+            <!-- tyt 部分 -->
+            <template v-if="questions.tyt && questions.tyt.length">
+              <div v-for="tyt in questions.tyt" :key="tyt">
+                <tyt :question="tyt"/>
+              </div>
+            </template>
             <!--  <GameFishing  :game-fishing-json-array="questions.gmf"/>-->
             <el-button type="primary" @click="willSubmit" id="Submit" size="large">提交答案</el-button>
           </div>
@@ -93,6 +99,7 @@ import lzt from "@/components/lzt.vue";
 import axios from "axios";
 
 import TmPercentage from "@/components/TmPercentage.vue";
+import Tyt from "@/components/tyt.vue";
 
 const basePath = import.meta.env.VITE_RES_BASE_PATH;
 const baseJsonPath = import.meta.env.VITE_JSON_BASE_PATH;
@@ -119,6 +126,7 @@ export default {
     };
   },
   components: {
+    Tyt,
     TmPercentage,
     Tht,
     Htt,
@@ -238,6 +246,7 @@ export default {
             answeredInfo.answeredCount++;
         })
       }
+
       // 计算连字题已作答数
       if (this.questions.lzt && this.questions.lzt.length) {
         let isAdded=false;
@@ -250,6 +259,14 @@ export default {
           })
         })
       }
+
+      // 计算听音题已作答数
+      if(this.questions.tyt && this.questions.tyt.length) {
+        this.questions.tyt.forEach(e => {
+          if(e.changed) answeredInfo.answeredCount++;
+        })
+      }
+
       // 计算已作答比例
       answeredInfo.percentage = parseFloat((answeredInfo.answeredCount / answeredInfo.totalCount * 100).toFixed(2));
 
@@ -279,6 +296,7 @@ export default {
         htt_tuo: (questions) => questions.htt_tuo.reduce((sum, el) => sum + el.subQuestion.length, 0),
         pyt: (questions) =>questions.pyt.length,
         lzt: (questions) =>questions.lzt.length,
+        tyt: (questions) => questions.tyt.length,
       };
 
       keys.forEach(e => {
@@ -394,7 +412,7 @@ export default {
                 this.getThtBoolList();
                 break;
               case 'qst':
-                this.getQstBoolList(); // 注意函数名是 getQsrBoolList
+                this.getQstBoolList();
                 break;
               case 'htt_tuo':
                 this.getHttTuoBoolList();
@@ -404,6 +422,9 @@ export default {
                 break;
               case 'lzt':
                 this.getLztBoolList();
+                break;
+              case 'tyt':
+                this.getTytBoolList();
                 break;
               default:
                 console.warn(`未处理 ${key} 类型的函数调用`);
@@ -415,7 +436,6 @@ export default {
           console.log(this.tmRightCnt);
           console.log(this.countTm);
           console.log(this.questions);
-          console.log(this.asd);
 
           this.dialogTableVisible = true;
 
@@ -586,6 +606,21 @@ export default {
       });
       this.countTm.lzt.percentage = parseFloat((this.countTm.lzt.right / this.countTm.lzt.cnt * 100).toFixed(2));
     },
+    getTytBoolList() {
+      this.countTm.tyt.right=0;
+      this.boolLists.tyt = [];
+      this.questions.tyt.forEach(e=>{
+        if(e.isRight===true){
+          this.countTm.tyt.right++;
+          this.countTm.rightCnt++;
+          this.boolLists.tyt.push(true);
+        }else{
+          this.boolLists.tyt.push(false);
+        }
+      });
+      this.countTm.tyt.percentage = parseFloat((this.countTm.tyt.right / this.countTm.tyt.cnt * 100).toFixed(2));
+    },
+
     playAudio(index, e) {
       if (e.touches) {
         e.preventDefault();
