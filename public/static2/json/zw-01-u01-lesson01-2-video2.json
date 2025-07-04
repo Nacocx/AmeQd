@@ -63,6 +63,36 @@
       }
     ]
   }
+],
+"pyt": [
+  {
+    "audio_img": "../static/static2/assets/laba.png",
+    "audio_title": "VITE_RES_BASE_PATH/audio/2.wav",
+    "id": 1,
+    "pinyin": "ba",
+    "correctTones": [
+      3
+    ],
+    "meaning": "2 听录音 选音调",
+    "pos": [
+      2
+    ],
+    "isRight": false
+  },
+   {
+    "audio_img": "../static/static2/assets/laba.png",
+    "audio_title": "VITE_RES_BASE_PATH/audio/2.wav",
+    "id": 2,
+    "pinyin": "ba",
+    "correctTones": [
+      2
+    ],
+    "meaning": "3 听录音 选音调",
+    "pos": [
+      2
+    ],
+    "isRight": false
+  }
 ]
  }
 
