@@ -1,8 +1,6 @@
 <template>
   <div class="htt_main_body">
     <div class="title">
-
-
       <h1>{{ message.title }}请拖进与图片物品数量一样的:<img :src="message.shape[message.id - 1]" alt="" class="shape">
         <div class="questions">
 

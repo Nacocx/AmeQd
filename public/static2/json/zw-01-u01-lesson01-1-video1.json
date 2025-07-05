@@ -1,95 +1,134 @@
- { "lxt": [
-  {
-    "audio_img": "../static/static2/assets/laba.png",
-    "audios": [
-      "VITE_RES_BASE_PATH/audio/bk1_1.mp3",
+{
+  "dyt": {
+    "ts": 8,
+    "question_img": [
+      "VITE_RES_BASE_PATH/img/t1_1.png",
+      "VITE_RES_BASE_PATH/img/t1_2.png",
+      "VITE_RES_BASE_PATH/img/t1_3.png",
+      "VITE_RES_BASE_PATH/img/t2_1.png",
+      "VITE_RES_BASE_PATH/img/t2_2.png",
+      "VITE_RES_BASE_PATH/img/t3_1.png",
+      "VITE_RES_BASE_PATH/img/t3_2.png",
+      "VITE_RES_BASE_PATH/img/t3_3.png"
+    ],
+    "questions": [
+      "请根据图片对应情景，选出合适的字或词语",
+      "请根据图片对应情景，选出合适的字或词语",
+      "请根据图片对应情景，选出合适的字或词语",
+      "请根据图片对应情景，选出合适的字或词语",
+      "请根据图片对应情景，选出合适的字或词语",
+      "请根据汉字，选出合适的字组成词语",
+      "请根据汉字，选出合适的字组成词语",
+      "请根据汉字，选出合适的字组成词语"
+    ],
+    "mes": [
+      "恭喜你",
+      "答对4题",
+      "通过",
       ""
     ],
-    "id": 1,
-    "title": " 1 连一连",
-    "flag": "t3",
-    "changed": false,
-    "result": [],
-    "imgU": [
-      {
-        "src": "VITE_RES_BASE_PATH/img/lxt1_u1_v.png",
-        "value": "1",
-        "ownership": "U",
-        "connected": false
-      },
-      {
-        "src": "VITE_RES_BASE_PATH/img/lxt1_u2_v.png",
-        "value": "2",
-        "ownership": "U",
-        "connected": false
-      },
-         {
-        "src": "VITE_RES_BASE_PATH/img/lxt1_u3_v.png",
-        "value": "3",
-        "ownership": "U",
-        "connected": false
-      }
+    "yu": [
+      [
+        "VITE_RES_BASE_PATH/img/y1.png",
+        "VITE_RES_BASE_PATH/img/y2.png",
+        "VITE_RES_BASE_PATH/img/y3.png"
+      ],
+      [
+        "VITE_RES_BASE_PATH/img/y2.png",
+        "VITE_RES_BASE_PATH/img/y3.png",
+        "VITE_RES_BASE_PATH/img/y1.png"
+      ],
+      [
+        "VITE_RES_BASE_PATH/img/y3.png",
+        "VITE_RES_BASE_PATH/img/y1.png",
+        "VITE_RES_BASE_PATH/img/y2.png"
+      ],
+      [
+        "VITE_RES_BASE_PATH/img/y1.png",
+        "VITE_RES_BASE_PATH/img/y2.png",
+        "VITE_RES_BASE_PATH/img/y3.png"
+      ],
+      [
+        "VITE_RES_BASE_PATH/img/y2.png",
+        "VITE_RES_BASE_PATH/img/y3.png",
+        "VITE_RES_BASE_PATH/img/y1.png"
+      ],
+      [
+        "VITE_RES_BASE_PATH/img/y3.png",
+        "VITE_RES_BASE_PATH/img/y1.png",
+        "VITE_RES_BASE_PATH/img/y2.png"
+      ],
+      [
+        "VITE_RES_BASE_PATH/img/y1.png",
+        "VITE_RES_BASE_PATH/img/y2.png",
+        "VITE_RES_BASE_PATH/img/y3.png"
+      ],
+      [
+        "VITE_RES_BASE_PATH/img/y2.png",
+        "VITE_RES_BASE_PATH/img/y3.png",
+        "VITE_RES_BASE_PATH/img/y1.png"
+      ]
     ],
-    "imgD": [
-      {
-        "src": "VITE_RES_BASE_PATH/img/lxt2_d1.png",
-        "value": "2",
-        "ownership": "D",
-        "connected": false
-      },
-      {
-        "src": "VITE_RES_BASE_PATH/img/lxt2_d2.png",
-        "value": "1",
-        "ownership": "D",
-        "connected": false
-      },
-            {
-        "src": "VITE_RES_BASE_PATH/img/lxt2_d3.png",
-        "value":"3",
-        "ownership": "D",
-        "connected": false
-      }
+    "options": [
+      [
+        "VITE_RES_BASE_PATH/img/t1_x1.png",
+        "VITE_RES_BASE_PATH/img/t1_x2.png",
+        "VITE_RES_BASE_PATH/img/t1_x3.png"
+      ],
+      [
+        "VITE_RES_BASE_PATH/img/t1_x2.png",
+        "VITE_RES_BASE_PATH/img/t1_x3.png",
+        "VITE_RES_BASE_PATH/img/t1_x1.png"
+      ],
+      [
+        "VITE_RES_BASE_PATH/img/t1_x1.png",
+        "VITE_RES_BASE_PATH/img/t1_x2.png",
+        "VITE_RES_BASE_PATH/img/t1_x3.png"
+      ],
+      [
+        "VITE_RES_BASE_PATH/img/t2_x2.png",
+        "VITE_RES_BASE_PATH/img/t2_x3.png",
+        "VITE_RES_BASE_PATH/img/t2_x1.png"
+      ],
+      [
+        "VITE_RES_BASE_PATH/img/t2_x1.png",
+        "VITE_RES_BASE_PATH/img/t2_x2.png",
+        "VITE_RES_BASE_PATH/img/t2_x3.png"
+      ],
+      [
+        "VITE_RES_BASE_PATH/img/t3_x1.png",
+        "VITE_RES_BASE_PATH/img/t3_x2.png",
+        "VITE_RES_BASE_PATH/img/t3_x3.png"
+      ],
+      [
+        "VITE_RES_BASE_PATH/img/t3_x2.png",
+        "VITE_RES_BASE_PATH/img/t3_x3.png",
+        "VITE_RES_BASE_PATH/img/t3_x1.png"
+      ],
+      [
+        "VITE_RES_BASE_PATH/img/t3_x1.png",
+        "VITE_RES_BASE_PATH/img/t3_x2.png",
+        "VITE_RES_BASE_PATH/img/t3_x3.png"
+      ]
+    ],
+    "yin": "VITE_RES_BASE_PATH/audio/yin.mp3",
+    "win": "VITE_RES_BASE_PATH/audio/win.wav",
+    "fail": "VITE_RES_BASE_PATH/audio/fail.wav",
+    "trueAnswer": [2,3,3,3,2,2,2,1],
+    "userAnswer": [0,0,0,0,0,0,0,0],
+    "is_show_ren": 1,
+    "t_num": 0,
+    "trueNum": 0,
+    "yu_bpos": [
+      -400,
+      -250,
+      -100
+    ],
+    "is_xun": false,
+    "background_img": "VITE_RES_BASE_PATH/img/all.png",
+    "r_img": [
+      "VITE_RES_BASE_PATH/img/rt1.jpg",
+      "VITE_RES_BASE_PATH/img/r2t.jpg"
     ]
-  },
-  {
-    "audio_img": "../static/static2/assets/laba.png",
-    "audios": [
-      "VITE_RES_BASE_PATH/audio/bk1_2.mp3",
-      ""
-    ],
-    "id": 2,
-    "title": " 2 连一连",
-    "flag": "tuo3",
-    "changed": false,
-    "result": [],
-    "imgU": [
-      {
-        "src": "VITE_RES_BASE_PATH/img/lxt2_u1_v.png",
-        "value": "1",
-        "ownership": "U",
-        "connected": false
-      },
-      {
-        "src": "VITE_RES_BASE_PATH/img/lxt2_u2_v.png",
-        "value": "2",
-        "ownership": "U",
-        "connected": false
-      }
-    ],
-    "imgD": [
-      {
-        "src": "VITE_RES_BASE_PATH/img/lxt2_d4.png",
-        "value": "1",
-        "ownership": "D",
-        "connected": false
-      },
-      {
-        "src": "VITE_RES_BASE_PATH/img/lxt2_d5.png",
-        "value": "2",
-        "ownership": "D",
-        "connected": false
-      }
-    ]
-  }]
- }
-
+  }
+}
