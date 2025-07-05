@@ -1,0 +1,31 @@
+{
+  "qet":{
+    "yin": "VITE_RES_BASE_PATH/audio/yin.mp3",
+     "win": "VITE_RES_BASE_PATH/audio/win.wav",
+      "fail": "VITE_RES_BASE_PATH/audio/fail.wav",   
+      "trueAnswer": [3, 1, 3, 2],
+      "userAnswer": [0, 0, 0, 0],
+      "questions_img": [
+        ["VITE_RES_BASE_PATH/img/t1_a.png", "VITE_RES_BASE_PATH/img/t1_b.png", "VITE_RES_BASE_PATH/img/t1_c.png"],
+        ["VITE_RES_BASE_PATH/img/t2_a.png", "VITE_RES_BASE_PATH/img/t2_b.png", "VITE_RES_BASE_PATH/img/t2_c.png"],
+        ["VITE_RES_BASE_PATH/img/t3_a.png", "VITE_RES_BASE_PATH/img/t3_b.png", "VITE_RES_BASE_PATH/img/t3_c.png"],
+        ["VITE_RES_BASE_PATH/img/t4_a.png", "VITE_RES_BASE_PATH/img/t4_b.png", "VITE_RES_BASE_PATH/img/t4_c.png"]
+      ],
+      "questions_title": [
+        "VITE_RES_BASE_PATH/img/t1.png",
+        "VITE_RES_BASE_PATH/img/t2.png",
+        "VITE_RES_BASE_PATH/img/t3.png",
+        "VITE_RES_BASE_PATH/img/t4.png"
+      ],
+      "place": "VITE_RES_BASE_PATH/img/jia.png",
+      "cha": "VITE_RES_BASE_PATH/img/qi.png",
+      "kuang": "VITE_RES_BASE_PATH/img/kuang.png",
+
+      "t_num": 0,
+      "trueNum": 0,
+      "mes": ["恭喜你", "答对4题", "通过", ""],
+      "goPlace": [{ "bottom": 100, "left": 195 }, { "bottom": 100, "left": 430 }, { "bottom": 100, "left": 660 }],
+      "is_xuan": false,
+      "background_img": "VITE_RES_BASE_PATH/img/back.jpeg"
+  }
+}

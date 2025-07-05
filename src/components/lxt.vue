@@ -764,8 +764,8 @@ export default {
 }
 
 .lxt_main_body .option img {
-  width: 120px;
-  height: 120px;
+  width: 100px;
+  height: 100px;
   object-fit: contain;
 }
 

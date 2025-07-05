@@ -9,7 +9,7 @@
             <template v-if="isInVideo">
               <span style="font-size: large;">下面请小朋友自己动手做一做吧 </span>
               <img src="../static/static2/assets/laba.png" alt="" class="laba" @click="playAudio(0, $event)"
-                   @touchend="playAudio(0, $event)">
+                @touchend="playAudio(0, $event)">
             </template>
             <hr>
             <!-- part1_选择题 -->
@@ -19,7 +19,7 @@
             <!-- 涂画题 部分 -->
             <template v-if="questions.tht">
               <tht :items="questions.tht.items" :tuxing-path="questions.tht.tuxingpath"
-                   :another="questions.tht.another" />
+                :another="questions.tht.another" />
             </template>
             <!-- 画图题 部分 -->
             <template v-if="questions.htt && questions.htt.length">
@@ -65,6 +65,16 @@
 
             <pyt v-if="questions.pyt && questions.pyt.length" :pinyin-data="questions.pyt" />
 
+            <!-- 抓娃娃 -->
+            <zww v-if="questions.zww" :message="questions.zww" />
+            <!-- 钓鱼 -->
+            <dyt v-if="questions.dyt" :message="questions.dyt" />
+            <!-- 企鹅 -->
+            <qet v-if="questions.qet" :message="questions.qet" />
+
+            <!-- 企鹅 加音频 -->
+            <qet_n v-if="questions.qet_n" :message="questions.qet_n" />
+
             <!--  <GameFishing  :game-fishing-json-array="questions.gmf"/>-->
             <el-button type="primary" @click="willSubmit" id="Submit" size="large">提交答案</el-button>
           </div>
@@ -72,7 +82,7 @@
       </el-container>
     </el-container>
     <el-dialog v-model="dialogTableVisible" title="答题统计结果:" width="800">
-      <tm-percentage :count-tm="countTm" :questions="questions"/>
+      <tm-percentage :count-tm="countTm" :questions="questions" />
     </el-dialog>
   </div>
 </template>
@@ -91,6 +101,10 @@ import htt_tuo from "@/components/htt_tuo.vue";
 import pyt from "@/components/pyt.vue";
 import lzt from "@/components/lzt.vue";
 import axios from "axios";
+import zww from "@/components/zww_game.vue";
+import dyt from "@/components/dyt_game.vue";
+import qet from "@/components/qet_game.vue";
+import qet_n from "@/components/qet_game_nomusic.vue";
 
 import TmPercentage from "@/components/TmPercentage.vue";
 
@@ -130,7 +144,11 @@ export default {
     qst,
     htt_tuo,
     pyt,
-    lzt
+    lzt,
+    zww,
+    dyt,
+    qet
+
   },
   async created() {
     await this.loadInfo();
@@ -240,10 +258,10 @@ export default {
       }
       // 计算连字题已作答数
       if (this.questions.lzt && this.questions.lzt.length) {
-        let isAdded=false;
+        let isAdded = false;
         this.questions.lzt.forEach(e => {
           e.userAnswer.forEach((ans, index) => {
-            if(ans!==0&&!isAdded) {
+            if (ans !== 0 && !isAdded) {
               answeredInfo.answeredCount++;
               isAdded = true;
             }
@@ -277,8 +295,8 @@ export default {
         tht: (questions) => questions.tht.items.length,
         qst: (questions) => questions.qst.length,
         htt_tuo: (questions) => questions.htt_tuo.reduce((sum, el) => sum + el.subQuestion.length, 0),
-        pyt: (questions) =>questions.pyt.length,
-        lzt: (questions) =>questions.lzt.length,
+        pyt: (questions) => questions.pyt.length,
+        lzt: (questions) => questions.lzt.length,
       };
 
       keys.forEach(e => {
@@ -561,12 +579,12 @@ export default {
     getPytBoolList() {
       this.countTm.pyt.right = 0;
       this.boolLists.pyt = [];
-      this.questions.pyt.forEach(e=>{
-        if(e.isRight===true){
+      this.questions.pyt.forEach(e => {
+        if (e.isRight === true) {
           this.countTm.pyt.right++;
           this.countTm.rightCnt++;
           this.boolLists.pyt.push(true);
-        }else{
+        } else {
           this.boolLists.pyt.push(false);
         }
       });
@@ -575,12 +593,12 @@ export default {
     getLztBoolList() {
       this.countTm.lzt.right = 0;
       this.boolLists.lzt = [];
-      this.questions.lzt.forEach(e=>{
-        if(e.flag===true){
+      this.questions.lzt.forEach(e => {
+        if (e.flag === true) {
           this.countTm.lzt.right++;
           this.countTm.rightCnt++;
           this.boolLists.lzt.push(true);
-        }else{
+        } else {
           this.boolLists.lzt.push(false);
         }
       });
