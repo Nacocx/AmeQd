@@ -80,7 +80,6 @@
                 <tyt :question="tyt" />
               </div>
             </template>
-            <!--  <GameFishing  :game-fishing-json-array="questions.gmf"/>-->
             <el-button type="primary" @click="willSubmit" id="Submit" size="large">提交答案</el-button>
           </div>
         </el-main>
