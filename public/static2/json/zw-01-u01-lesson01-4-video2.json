@@ -1,0 +1,188 @@
+{
+     "xzt": [
+  {
+    "audio_img": "../static/static2/assets/laba.png",
+    "audios": [
+      "VITE_RES_BASE_PATH/audio/part1_s.mp3",
+      ""
+    ],
+    "id": 1,
+    "img": "VITE_RES_BASE_PATH/img/xzt1_v2.png",
+    "title": "1.根(gēn)据(jù)图(tú)片(piān)选(xuǎn)字(zì)",
+    "options": [
+      {
+        "value": "A",
+        "label":"一"
+      },
+      {
+        "value": "B",
+        "label":"二"
+      },
+      {
+        "value": "C",
+        "label":"三"
+      }
+    ],
+    "userAnswer": "",
+    "answer": "A"
+  },
+  {
+    "audio_img": "../static/static2/assets/laba.png",
+    "audios": [
+      "VITE_RES_BASE_PATH/audio/part1_s.mp3",
+      ""
+    ],
+    "id": 2,
+    "img": "VITE_RES_BASE_PATH/img/xzt2_v2.png",
+    "title": "2.根(gēn)据(jù)图(tú)片(piān)选(xuǎn)字(zì)",
+    "options": [
+      {
+        "value": "A",
+        "label":"一"
+      },
+      {
+        "value": "B",
+        "label":"二"
+      },
+      {
+        "value": "C",
+        "label":"三"
+      }
+    ],
+    "userAnswer": "",
+    "answer": "B"
+  },
+  {
+    "audio_img": "../static/static2/assets/laba.png",
+    "audios": [
+      "VITE_RES_BASE_PATH/audio/part1_s.mp3",
+      ""
+    ],
+    "id": 3,
+    "img": "VITE_RES_BASE_PATH/img/xzt3_v2.png",
+    "title": "3.根(gēn)据(jù)图(tú)片(piān)选(xuǎn)字(zì)",
+    "options": [
+      {
+        "value": "A",
+        "label":"一"
+      },
+      {
+        "value": "B",
+        "label":"二"
+      },
+      {
+        "value": "C",
+        "label":"三"
+      }
+    ],
+    "userAnswer": "",
+    "answer": "C"
+  }],
+   "lxt": [
+  {
+    "audio_img": "../static/static2/assets/laba.png",
+    "audios": [
+      "VITE_RES_BASE_PATH/audio/part3.wav",
+      ""
+    ],
+    "id": 1,
+    "title": "4.将汉字与对应的正确拼音连线",
+    "flag": "t3",
+    "changed": false,
+    "result": [],
+    "imgU": [
+      {
+        "src": "VITE_RES_BASE_PATH/img/lxt1_u1_v2.png",
+        "value": "1",
+        "ownership": "U",
+        "connected": false
+      },
+      {
+        "src": "VITE_RES_BASE_PATH/img/lxt1_u2_v2.png",
+        "value": "2",
+        "ownership": "U",
+        "connected": false
+      },
+      {
+        "src": "VITE_RES_BASE_PATH/img/lxt1_u3_v2.png",
+        "value": "3",
+        "ownership": "U",
+        "connected": false
+      }
+    ],
+    "imgD": [
+      {
+        "src": "VITE_RES_BASE_PATH/img/lxt1_d1_v2.png",
+        "value": "2",
+        "ownership": "D",
+        "connected": false
+      },
+      {
+        "src": "VITE_RES_BASE_PATH/img/lxt1_d2_v2.png",
+        "value": "3",
+        "ownership": "D",
+        "connected": false
+      },
+      {
+        "src": "VITE_RES_BASE_PATH/img/lxt1_d3_v2.png",
+        "value": "1",
+        "ownership": "D",
+        "connected": false
+      }
+    ]
+  },
+  {
+    "audio_img": "../static/static2/assets/laba.png",
+    "audios": [
+      "VITE_RES_BASE_PATH/audio/tuo3.wav",
+      ""
+    ],
+    "id": 2,
+    "title": "5.将拼音所对应的本节课学习的汉字与对应的数量连线。",
+    "flag": "tuo3",
+    "changed": false,
+    "result": [],
+    "imgU": [
+      {
+        "src": "VITE_RES_BASE_PATH/img/lxt1_d3_v2.png",
+        "value": "1",
+        "ownership": "U",
+        "connected": false
+      },
+        {
+        "src": "VITE_RES_BASE_PATH/img/lxt1_d1_v2.png",
+        "value": "2",
+        "ownership": "U",
+        "connected": false
+      },
+        {
+        "src": "VITE_RES_BASE_PATH/img/lxt1_d2_v2.png",
+        "value": "3",
+        "ownership": "U",
+        "connected": false
+      }
+    ],
+    "imgD": [
+      {
+        "src": "VITE_RES_BASE_PATH/img/lxt2_d1_v2.png",
+        "value": "3",
+        "ownership": "D",
+        "connected": false
+      },
+      {
+        "src": "VITE_RES_BASE_PATH/img/lxt2_d2_v2.png",
+        "value": "1",
+        "ownership": "D",
+        "connected": false
+      },
+      {
+        "src": "VITE_RES_BASE_PATH/img/lxt2_d3_v2.png",
+        "value": "2",
+        "ownership": "D",
+        "connected": false
+      }
+    ]
+  }
+]
+  
+}
