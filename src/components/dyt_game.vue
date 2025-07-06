@@ -86,7 +86,7 @@ export default {
       yus.forEach((e, index) => {
         e.style.position = 'absolute';
         e.style.transition = "left 2s ease";
-        e.style.left = `${this.message.yu_bpos[index] + 1200}px`;
+        e.style.left = `${this.message.yu_bpos[index] + 2500}px`;
         // console.log(e);
 
       })
@@ -119,7 +119,7 @@ export default {
         console.log(1);
         yus.position = 'absolute';
         yus.style.transition = "left 2s ease, top 2s ease,opacity 0.2s ease";
-        yus.style.left = `0px`;
+        yus.style.left = `-10px`;
         yus.style.top = `-50px`;
         await wait(2000)
         this.message.is_show_ren = 0;
@@ -187,7 +187,7 @@ export default {
         this.message.mes[1] = `只答对${this.message.trueNum}题`
         this.message.mes[2] = `未通过`
         let n = 3;
-        
+
         // setTimeout(() => {
         //   this.message.mes[3] = `即将重新开始 ${n}`;
         //   n--;
@@ -206,9 +206,20 @@ export default {
   box-sizing: border-box;
 }
 
+html,
+body {
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  width: 100vw;
+
+}
+
 .main_body {
-  width: 960px;
-  height: 600px;
+  margin: auto;
+  padding: 0;
+  height: 923px;
+  width: 1680px;
   text-align: center;
   border: 1px solid black;
   position: relative;
@@ -219,13 +230,13 @@ export default {
   background-size: 100% 100%;
   background-repeat: no-repeat;
   overflow: hidden;
-  margin-bottom: 20px;
+  /* margin-bottom: 20px; */
 
 }
 
 .show {
-  width: 1000px;
-  height: 600px;
+  height: 923px;
+  width: 1680px;
   position: absolute;
   left: 0px;
   top: 0px;
@@ -239,16 +250,17 @@ export default {
   z-index: 9;
   background-color: aliceblue;
   opacity: 0.7;
-  width: 1000px;
-  height: 600px;
+  height: 923px;
+  width: 1680px;
 }
 
 .begin .btn {
   position: absolute;
-  width: 200px;
-  height: 50px;
-  left: 400px;
-  top: 250px;
+  width: 380px;
+  height: 80px;
+  font-size: 30px;
+  left: 680px;
+  top: 400px;
   background-color: whitesmoke;
   border-radius: 20px;
   border: 2px solid rgb(121, 152, 255);
@@ -272,17 +284,17 @@ export default {
   z-index: 9;
   background-color: aliceblue;
   opacity: 0.7;
-  width: 1000px;
-  height: 600px;
+  height: 923px;
+  width: 1680px;
 }
 
 .result {
   position: absolute;
-  left: 50%;
+  left: 53%;
   top: 50%;
   transform: translate(-50%, -50%);
-  width: 500px;
-  height: 400px;
+  width: 750px;
+  height: 600px;
   background-color: rgb(255, 255, 255);
   border-radius: 20px;
   position: absolute;
@@ -294,8 +306,8 @@ export default {
 }
 
 .result .ws {
-  width: 300px;
-  height: 250px;
+  width: 600px;
+  height: 340px;
   text-align: center;
   display: flex;
   justify-content: center;
@@ -305,29 +317,30 @@ export default {
 }
 
 .ws .word1 {
-  width: 300px;
-  font-size: 60px;
+  width: 600px;
+  font-size: 70px;
   font-weight: 750px;
 
 }
 
 .ws .word2 {
-  width: 300px;
-  font-size: 40px;
+  width: 600px;
+  font-size: 60px;
   font-weight: 10px;
 }
 
 .ws .word3 {
-  width: 300px;
-  font-size: 40px;
+  text-align: center;
+  width: 600px;
+  font-size: 60px;
   font-weight: 10px;
 }
 
 .ren {
   position: absolute;
-  left: 60px;
-  top: 230px;
-  width: 300px;
+  left: 120px;
+  top: 350px;
+  width: 500px;
 }
 
 .ren img {
@@ -336,10 +349,10 @@ export default {
 
 .ques {
   position: absolute;
-  top: 20px;
-  right: 200px;
-  width: 300px;
-  height: 300px;
+  top: 100px;
+  right: 400px;
+  width: 500px;
+  height: 440px;
   background-color: rgb(255, 255, 255);
   border-radius: 20px;
   border: 4px solid;
@@ -350,20 +363,20 @@ export default {
 }
 
 .questions {
-  font-size: 30px;
+  font-size: 45px;
   position: absolute;
-  left: 380px;
-  top: 340px;
+  left: 650px;
+  top: 580px;
 }
 
 .ques img {
-  width: 200px;
-  height: 250px;
+  width: 50%;
+  height: 80%;
 }
 
 .options {
-  width: 630px;
-  height: 130px;
+  width: 1100px;
+  height: 205px;
   /* background-color: antiquewhite; */
   position: absolute;
   bottom: 10px;
@@ -375,30 +388,32 @@ export default {
 
   /* background-color: aqua; */
   display: flex;
-  justify-content: center;
+  /* justify-content: center; */
   align-items: center;
-  width: 130px;
+  width: 250px;
+  height: 100px;
 }
 
 .op {
-  width: 60px;
-  height: 60px;
+  /* width: 10px; */
+  height: 100%;
 }
 
 .yu {
-  width: 60px;
+  width: 110px;
 }
 
 .o1 {
   position: absolute;
-  left: -400px;
+  /* background-color: blue; */
+  left: 100px;
   top: 10px;
   transition: left 2s ease;
 }
 
 .o2 {
   position: absolute;
-  left: -250px;
+  left: -20%;
   top: 70px;
   transition: left 2s ease;
 }

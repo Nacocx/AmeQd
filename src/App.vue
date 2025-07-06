@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div id="app" v-if="!hasGame()">
     <el-container>
       <el-container>
         <sidebar :student-info="studentInfo" :count-tm="answerStatus" v-if="!isInVideo" />
@@ -11,7 +11,7 @@
               <img src="../static/static2/assets/laba.png" alt="" class="laba" @click="playAudio(0)"
                 @touchend="playAudio(0)">
             </template>
-            <hr v-if="isInVideo && !hasGame()"/>
+            <hr />
             <!-- part1_选择题 -->
             <xzt :questions="questions.xzt" v-if="questions.xzt && questions.xzt.length" />
             <!-- part2_填空题 -->
@@ -64,15 +64,7 @@
             </template>
             <!-- pyt 部分 -->
             <pyt v-if="questions.pyt && questions.pyt.length" :pinyin-data="questions.pyt" />
-            <!-- 抓娃娃 -->
-            <zww v-if="questions.zww" :message="questions.zww" />
-            <!-- 钓鱼 -->
-            <dyt v-if="questions.dyt" :message="questions.dyt" />
-            <!-- 企鹅 -->
-            <qet v-if="questions.qet" :message="questions.qet" />
 
-            <!-- 企鹅 加音频 -->
-            <qet_n v-if="questions.qet_n" :message="questions.qet_n" />
 
             <!-- tyt 部分 -->
             <template v-if="questions.tyt && questions.tyt.length">
@@ -88,6 +80,17 @@
     <el-dialog v-model="dialogTableVisible" title="答题统计结果:" width="800">
       <tm-percentage :count-tm="countTm" :questions="questions" />
     </el-dialog>
+  </div>
+  <div class="game_body" v-if="hasGame()">
+    <!-- 抓娃娃 -->
+    <zww v-if="questions.zww" :message="questions.zww" />
+    <!-- 钓鱼 -->
+    <dyt v-if="questions.dyt" :message="questions.dyt" />
+    <!-- 企鹅 -->
+    <qet v-if="questions.qet" :message="questions.qet" />
+
+    <!-- 企鹅 加音频 -->
+    <qet_n v-if="questions.qet_n" :message="questions.qet_n" />
   </div>
 </template>
 
@@ -678,20 +681,20 @@ export default {
       this.audio_id = url_id;
       this.audioEle = audio_now;
     },
-    hasGame(){
-      if(this.questions.zww || this.questions.dyt || this.questions.qet || this.questions.qet_n){
+    hasGame() {
+      if (this.questions.zww || this.questions.dyt || this.questions.qet || this.questions.qet_n) {
         return true;
-      }else{
+      } else {
         return false;
       }
     }
   },
-  mounted(){
-    if(this.isInVideo){
-    setTimeout(() => {
-     this.playAudio(0);
-    }, 1000);
-  }
+  mounted() {
+    if (this.isInVideo) {
+      setTimeout(() => {
+        this.playAudio(0);
+      }, 1000);
+    }
   }
 }
 
@@ -702,6 +705,16 @@ export default {
 <style>
 * {
   user-select: none;
+}
+
+body,
+html {
+  /* 移除默认的外边距和内边距 */
+  margin: auto;
+  padding: 0;
+  height: 100vh;
+  width: 99vw;
+  /* background-color: rgb(99, 131, 158); */
 }
 
 .el-aside {
@@ -740,6 +753,11 @@ export default {
 
 #app {
   padding-top: 10px;
+}
+
+.game_body {
+  width: 98%;
+  height: 100%;
 }
 </style>
 
