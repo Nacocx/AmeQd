@@ -42,39 +42,7 @@ npm run preview
 
 ## 主要依赖说明
 
-### Axios 配置示例
-在 `src/utils/request.js` 中创建 axios 实例：
-```javascript
-import axios from 'axios'
 
-const service = axios.create({
-  baseURL: import.meta.env.VITE_API_BASE_URL,
-  timeout: 5000
-})
-
-// 请求拦截器
-service.interceptors.request.use(
-  config => {
-    // 可在此处添加 token 等
-    return config
-  },
-  error => {
-    return Promise.reject(error)
-  }
-)
-
-// 响应拦截器
-service.interceptors.response.use(
-  response => {
-    return response.data
-  },
-  error => {
-    return Promise.reject(error)
-  }
-)
-
-export default service
-```
 
 ### Element Plus 使用
 在 `main.js` 中引入：
@@ -92,8 +60,12 @@ app.mount('#app')
 ## 项目结构
 
 ```
+public/
+├── assets/            # 公共资源
+├── json               # 题目文件
+└── ...                # 题目素材
+
 src/
-├── assets/            # 静态资源
 ├── components/        # 公共组件
 ├── App.vue            # 根组件
 └── main.js            # 入口文件
@@ -103,24 +75,45 @@ src/
 
 ## 代码规范
 
-- 尽量保持代码风格一致
+- 尽量保持代码风格一致(采用`JavaScript`和`OptionAPI`以后慢慢转向`TypeScript`和`CompositionAPI`)
 - 组件命名清晰
-- 单文件组件结构顺序：template -> script -> style
-- 非必须情况下style使用scoped
+- 单文件组件结构顺序：`template -> script -> style`
+- 非必须情况下`style`使用`scoped`
 
-## 部署说明
+## 部署说明(单页)
 
-1. 修改 `.env`中`VITE_IMG_BASE_PATH`和`VITE_JC_BASE_PATH`为正确路径
+1. 修改 `.env.production`中`VITE_RES_BASE_PATH`和`VITE_JSON_BASE_PATH`和`VITE_JC_BASE_PATH`为正确路径,比如
+   ```
+    VITE_RES_BASE_PATH=../static/static2/zw-01-u01-lesson01-01
+    VITE_JSON_BASE_PATH=../static/static2/json/zw-01-u01-lesson01-01-ClassroomExercises
+    VITE_JC_BASE_PATH=static/static2/zw-01-u01-lesson01-01/ #一定要在结尾加上 /
+   ```
 2. 将public中图片文件夹名按照正确路径排好
 3. 运行 `npm run build`
 4. 将 dist 文件夹内容部署到静态服务器
+   
+## 部署说明(SpringBoot)
+1. 在`data.txt`编写正确的配置文件，例如:
+   ```text
+    VITE_RES_BASE_PATH=../static/static2/zw-01-u01-lesson01-4
+    VITE_JSON_BASE_PATH=../static/static2/json/zw-01-u01-lesson01-4-video2
+    VITE_JC_BASE_PATH=static/static2/zw-01-u01-lesson01-4/video2/
+   ```
+   配置文件应该用空行隔开，并且行尾序列必须是`LF`而非`CRLF`
+2. 在linux环境下，运行build2.sh
+3. 将产生的build-dist文件夹内的static2放入`shihua`项目的`static`中
+4. 将产生的html文件放入`shihua`项目的`template`中
+5. 编写对应的控制器，例如：
+   ```java
+    @RequestMapping("/sx-01-s-01-04-01-classroom")
+    public String sx01s010401Class() {return "sx-01-s-01-04-01-classroom";}
+   ```
 
 
-## json
+## JSON 文件格式说明
 ### zww题型（抓娃娃）
-eg:
 
-```
+```json
 
 {//未加注释的可以不用管
   "zww":{
@@ -192,9 +185,7 @@ eg:
 
 ### dyt题型（钓鱼题）
 
-eg:
-
-```
+```json
 {//未加注释可以不用管
   "dyt": {
     "ts": 8,//题目数量
@@ -333,7 +324,7 @@ eg:
 
 ### qet题型（企鹅题）
 
-```
+```json
 {//未加注释不管
   "qet":{
     "yin": "VITE_RES_BASE_PATH/audio/yin.mp3",
