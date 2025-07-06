@@ -114,33 +114,15 @@
     "yin": "VITE_RES_BASE_PATH/audio/yin.mp3",
     "win": "VITE_RES_BASE_PATH/audio/win.wav",
     "fail": "VITE_RES_BASE_PATH/audio/fail.wav",
-    "trueAnswer": [
-      2,
-      3,
-      3,
-      3,
-      2,
-      2,
-      2,
-      1
-    ],
-    "userAnswer": [
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0
-    ],
+    "trueAnswer": [2,3,3,3,2,2,2,1],
+    "userAnswer": [0,0,0,0,0,0,0,0],
     "is_show_ren": 1,
     "t_num": 0,
     "trueNum": 0,
     "yu_bpos": [
       -400,
-      -100,
-      200
+      -250,
+      -100
     ],
     "is_xun": false,
     "background_img": "VITE_RES_BASE_PATH/img/all.png",

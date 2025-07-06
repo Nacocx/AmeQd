@@ -1,160 +1,66 @@
 {
-  "zww": {
-    "tnum": 6,
-    "questions": [
-      "VITE_RES_BASE_PATH/img/t1_v2.png",
-      "VITE_RES_BASE_PATH/img/t2_v2.png",
-      "VITE_RES_BASE_PATH/img/t3_v2.png",
-      "VITE_RES_BASE_PATH/img/t4_v2.png",
-      "VITE_RES_BASE_PATH/img/t5_v2.png",
-      "VITE_RES_BASE_PATH/img/t6_v2.png"
-    ],
-    "yin": "VITE_RES_BASE_PATH/audio/yin.mp3",
-    "win": "VITE_RES_BASE_PATH/audio/win.wav",
-    "fail": "VITE_RES_BASE_PATH/audio/fail.wav",
-    "pd": [
-      "VITE_RES_BASE_PATH/img/dui.png",
-      "VITE_RES_BASE_PATH/img/cuo.png"
-    ],
-    "p": [
-      [
-        -1,
-        -1,
-        -1
+  "zww":{
+    "tnum":6,
+     "questions": [
+       "VITE_RES_BASE_PATH/img/t1_v2.png",
+        "VITE_RES_BASE_PATH/img/t2_v2.png",
+        "VITE_RES_BASE_PATH/img/t3_v2.png",
+        "VITE_RES_BASE_PATH/img/t4_v2.png",
+        "VITE_RES_BASE_PATH/img/t5_v2.png",
+        "VITE_RES_BASE_PATH/img/t6_v2.png"
+
       ],
-      [
-        -1,
-        -1,
-        -1
+      "yin": "VITE_RES_BASE_PATH/audio/yin.mp3",
+      "win": "VITE_RES_BASE_PATH/audio/win.wav",
+      "fail": "VITE_RES_BASE_PATH/audio/fail.wav",
+      "pd": ["VITE_RES_BASE_PATH/img/dui.png", "VITE_RES_BASE_PATH/img/cuo.png"],
+     "p": [
+        [-1, -1, -1],
+        [-1, -1, -1],
+        [-1, -1, -1],
+        [-1, -1, -1],
+        [-1, -1, -1],
+        [-1, -1, -1]
       ],
-      [
-        -1,
-        -1,
-        -1
+      "reply": [
+        ["VITE_RES_BASE_PATH/img/t1_x1_v2.png","VITE_RES_BASE_PATH/img/t1_x2_v2.png", "VITE_RES_BASE_PATH/img/t1_x3_v2.png"],
+        ["VITE_RES_BASE_PATH/img/t2_x1_v2.png","VITE_RES_BASE_PATH/img/t2_x2_v2.png", "VITE_RES_BASE_PATH/img/t2_x3_v2.png"],
+        ["VITE_RES_BASE_PATH/img/t3_x1_v2.png","VITE_RES_BASE_PATH/img/t3_x2_v2.png", "VITE_RES_BASE_PATH/img/t3_x3_v2.png"],
+        ["VITE_RES_BASE_PATH/img/t4_x1_v2.png","VITE_RES_BASE_PATH/img/t4_x2_v2.png", "VITE_RES_BASE_PATH/img/t4_x3_v2.png"],
+        ["VITE_RES_BASE_PATH/img/t5_x1_v2.png","VITE_RES_BASE_PATH/img/t5_x2_v2.png", "VITE_RES_BASE_PATH/img/t5_x3_v2.png"],
+        ["VITE_RES_BASE_PATH/img/t6_x1_v2.png","VITE_RES_BASE_PATH/img/t6_x2_v2.png", "VITE_RES_BASE_PATH/img/t6_x3_v2.png"]
+
       ],
-      [
-        -1,
-        -1,
-        -1
+      "reply_img": [
+        ["VITE_RES_BASE_PATH/img/a.png", "VITE_RES_BASE_PATH/img/b.png", "VITE_RES_BASE_PATH/img/c.png"],
+        ["VITE_RES_BASE_PATH/img/a.png", "VITE_RES_BASE_PATH/img/b.png", "VITE_RES_BASE_PATH/img/c.png"],
+        ["VITE_RES_BASE_PATH/img/a.png", "VITE_RES_BASE_PATH/img/b.png", "VITE_RES_BASE_PATH/img/c.png"],
+        ["VITE_RES_BASE_PATH/img/a.png", "VITE_RES_BASE_PATH/img/b.png", "VITE_RES_BASE_PATH/img/c.png"],
+        ["VITE_RES_BASE_PATH/img/a.png", "VITE_RES_BASE_PATH/img/b.png", "VITE_RES_BASE_PATH/img/c.png"],
+        ["VITE_RES_BASE_PATH/img/a.png", "VITE_RES_BASE_PATH/img/b.png", "VITE_RES_BASE_PATH/img/c.png"]
       ],
-      [
-        -1,
-        -1,
-        -1
-      ],
-      [
-        -1,
-        -1,
-        -1
-      ]
-    ],
-    "reply": [
-      [
-        "VITE_RES_BASE_PATH/img/t1_x1_v2.png",
-        "VITE_RES_BASE_PATH/img/t1_x2_v2.png",
-        "VITE_RES_BASE_PATH/img/t1_x3_v2.png"
-      ],
-      [
-        "VITE_RES_BASE_PATH/img/t2_x1_v2.png",
-        "VITE_RES_BASE_PATH/img/t2_x2_v2.png",
-        "VITE_RES_BASE_PATH/img/t2_x3_v2.png"
-      ],
-      [
-        "VITE_RES_BASE_PATH/img/t3_x1_v2.png",
-        "VITE_RES_BASE_PATH/img/t3_x2_v2.png",
-        "VITE_RES_BASE_PATH/img/t3_x3_v2.png"
-      ],
-      [
-        "VITE_RES_BASE_PATH/img/t4_x1_v2.png",
-        "VITE_RES_BASE_PATH/img/t4_x2_v2.png",
-        "VITE_RES_BASE_PATH/img/t4_x3_v2.png"
-      ],
-      [
-        "VITE_RES_BASE_PATH/img/t5_x1_v2.png",
-        "VITE_RES_BASE_PATH/img/t5_x2_v2.png",
-        "VITE_RES_BASE_PATH/img/t5_x3_v2.png"
-      ],
-      [
-        "VITE_RES_BASE_PATH/img/t6_x1_v2.png",
-        "VITE_RES_BASE_PATH/img/t6_x2_v2.png",
-        "VITE_RES_BASE_PATH/img/t6_x3_v2.png"
-      ]
-    ],
-    "reply_img": [
-      [
-        "VITE_RES_BASE_PATH/img/a.png",
-        "VITE_RES_BASE_PATH/img/b.png",
-        "VITE_RES_BASE_PATH/img/c.png"
-      ],
-      [
-        "VITE_RES_BASE_PATH/img/a.png",
-        "VITE_RES_BASE_PATH/img/b.png",
-        "VITE_RES_BASE_PATH/img/c.png"
-      ],
-      [
-        "VITE_RES_BASE_PATH/img/a.png",
-        "VITE_RES_BASE_PATH/img/b.png",
-        "VITE_RES_BASE_PATH/img/c.png"
-      ],
-      [
-        "VITE_RES_BASE_PATH/img/a.png",
-        "VITE_RES_BASE_PATH/img/b.png",
-        "VITE_RES_BASE_PATH/img/c.png"
-      ],
-      [
-        "VITE_RES_BASE_PATH/img/a.png",
-        "VITE_RES_BASE_PATH/img/b.png",
-        "VITE_RES_BASE_PATH/img/c.png"
-      ],
-      [
-        "VITE_RES_BASE_PATH/img/a.png",
-        "VITE_RES_BASE_PATH/img/b.png",
-        "VITE_RES_BASE_PATH/img/c.png"
-      ]
-    ],
-    "true_answer": [
-      1,
-      2,
-      1,
-      3,
-      1,
-      2
-    ],
-    "userAnswer": [
-      0,
-      0,
-      0,
-      0,
-      0,
-      0
-    ],
-    "gouLeft_begin": "10px",
-    "gouLeft": "10px",
-    "gouTop_begin": "220px",
-    "gouTop": "220px",
-    "tiaoHeight_begin": "10px",
-    "tiaoHeight": "10px",
-    "tiaoLeft_begin": "50px",
-    "tiaoLeft": "50px",
-    "transitionStyleGou": "left 0.5s ease, top 0.5s ease",
-    "transitionStyleTiao": "left 0.5s ease, top 0.5s ease, height 3s ease",
-    "now_t": 0,
-    "trueNum": 0,
-    "is_click": false,
-    "visibleIndices": [
-      0
-    ],
-    "mes": [
-      "恭喜你",
-      "答对4题",
-      "通过",
-      ""
-    ],
-    "background_img": "VITE_RES_BASE_PATH/img/back.jpeg",
-    "Lan_img": "VITE_RES_BASE_PATH/img/L.png",
-    "r_img": "VITE_RES_BASE_PATH/img/r.png",
-    "t1_img": "VITE_RES_BASE_PATH/img/t1.png",
-    "tiao_img": "VITE_RES_BASE_PATH/img/tiao.png",
-    "gou_img": "VITE_RES_BASE_PATH/img/g.png"
+      "true_answer": [1,2,1,3,1,2],
+      "userAnswer": [0, 0, 0, 0,0,0],
+      "gouLeft_begin": "10px",
+      "gouLeft": "10px",
+      "gouTop_begin": "140px",
+      "gouTop": "140px",
+      "tiaoHeight_begin": "10px",
+      "tiaoHeight": "10px",
+      "tiaoLeft_begin": "38px",
+      "tiaoLeft": "38px",
+      "transitionStyleGou": "left 0.5s ease, top 0.5s ease",
+      "transitionStyleTiao": "left 0.5s ease, top 0.5s ease, height 3s ease",
+      "now_t": 0,
+      "trueNum": 0,
+      "is_click": false,
+      "visibleIndices": [0],
+      "mes": ["恭喜你", "答对4题", "通过", ""],
+      "background_img": "VITE_RES_BASE_PATH/img/back.jpeg",
+      "Lan_img": "VITE_RES_BASE_PATH/img/L.png",
+      "r_img":"VITE_RES_BASE_PATH/img/r.png",
+      "t1_img":"VITE_RES_BASE_PATH/img/t1.png",
+      "tiao_img":"VITE_RES_BASE_PATH/img/tiao.png",
+      "gou_img":"VITE_RES_BASE_PATH/img/g.png"
   }
 }

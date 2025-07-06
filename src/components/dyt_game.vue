@@ -86,7 +86,7 @@ export default {
       yus.forEach((e, index) => {
         e.style.position = 'absolute';
         e.style.transition = "left 2s ease";
-        e.style.left = `${this.message.yu_bpos[index] + 2500}px`;
+        e.style.left = `${this.message.yu_bpos[index] + 1200}px`;
         // console.log(e);
 
       })
@@ -119,7 +119,7 @@ export default {
         console.log(1);
         yus.position = 'absolute';
         yus.style.transition = "left 2s ease, top 2s ease,opacity 0.2s ease";
-        yus.style.left = `-10px`;
+        yus.style.left = `0px`;
         yus.style.top = `-50px`;
         await wait(2000)
         this.message.is_show_ren = 0;
@@ -206,20 +206,10 @@ export default {
   box-sizing: border-box;
 }
 
-html,
-body {
-  margin: 0;
-  padding: 0;
-  height: 100vh;
-  width: 100vw;
-
-}
-
 .main_body {
   margin: auto;
-  padding: 0;
-  height: 923px;
-  width: 1680px;
+  width: 960px;
+  height: 600px;
   text-align: center;
   border: 1px solid black;
   position: relative;
@@ -230,13 +220,13 @@ body {
   background-size: 100% 100%;
   background-repeat: no-repeat;
   overflow: hidden;
-  /* margin-bottom: 20px; */
+  margin-bottom: 20px;
 
 }
 
 .show {
-  height: 923px;
-  width: 1680px;
+  width: 1000px;
+  height: 600px;
   position: absolute;
   left: 0px;
   top: 0px;
@@ -250,17 +240,16 @@ body {
   z-index: 9;
   background-color: aliceblue;
   opacity: 0.7;
-  height: 923px;
-  width: 1680px;
+  width: 1000px;
+  height: 600px;
 }
 
 .begin .btn {
   position: absolute;
-  width: 380px;
-  height: 80px;
-  font-size: 30px;
-  left: 680px;
-  top: 400px;
+  width: 200px;
+  height: 50px;
+  left: 400px;
+  top: 250px;
   background-color: whitesmoke;
   border-radius: 20px;
   border: 2px solid rgb(121, 152, 255);
@@ -284,17 +273,17 @@ body {
   z-index: 9;
   background-color: aliceblue;
   opacity: 0.7;
-  height: 923px;
-  width: 1680px;
+  width: 1000px;
+  height: 600px;
 }
 
 .result {
   position: absolute;
-  left: 53%;
+  left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
-  width: 750px;
-  height: 600px;
+  width: 500px;
+  height: 400px;
   background-color: rgb(255, 255, 255);
   border-radius: 20px;
   position: absolute;
@@ -306,8 +295,8 @@ body {
 }
 
 .result .ws {
-  width: 600px;
-  height: 340px;
+  width: 300px;
+  height: 250px;
   text-align: center;
   display: flex;
   justify-content: center;
@@ -317,30 +306,29 @@ body {
 }
 
 .ws .word1 {
-  width: 600px;
-  font-size: 70px;
+  width: 300px;
+  font-size: 60px;
   font-weight: 750px;
 
 }
 
 .ws .word2 {
-  width: 600px;
-  font-size: 60px;
+  width: 300px;
+  font-size: 40px;
   font-weight: 10px;
 }
 
 .ws .word3 {
-  text-align: center;
-  width: 600px;
-  font-size: 60px;
+  width: 300px;
+  font-size: 40px;
   font-weight: 10px;
 }
 
 .ren {
   position: absolute;
-  left: 120px;
-  top: 350px;
-  width: 500px;
+  left: 60px;
+  top: 230px;
+  width: 300px;
 }
 
 .ren img {
@@ -349,10 +337,10 @@ body {
 
 .ques {
   position: absolute;
-  top: 100px;
-  right: 400px;
-  width: 500px;
-  height: 440px;
+  top: 20px;
+  right: 200px;
+  width: 300px;
+  height: 300px;
   background-color: rgb(255, 255, 255);
   border-radius: 20px;
   border: 4px solid;
@@ -363,20 +351,20 @@ body {
 }
 
 .questions {
-  font-size: 45px;
+  font-size: 30px;
   position: absolute;
-  left: 650px;
-  top: 580px;
+  left: 380px;
+  top: 340px;
 }
 
 .ques img {
-  width: 50%;
-  height: 80%;
+  width: 200px;
+  height: 250px;
 }
 
 .options {
-  width: 1100px;
-  height: 205px;
+  width: 630px;
+  height: 130px;
   /* background-color: antiquewhite; */
   position: absolute;
   bottom: 10px;
@@ -390,30 +378,28 @@ body {
   display: flex;
   /* justify-content: center; */
   align-items: center;
-  width: 250px;
-  height: 100px;
+  width: 130px;
 }
 
 .op {
-  /* width: 10px; */
-  height: 100%;
+  /* width: 60px; */
+  height: 60px;
 }
 
 .yu {
-  width: 110px;
+  width: 60px;
 }
 
 .o1 {
   position: absolute;
-  /* background-color: blue; */
-  left: 100px;
+  left: -400px;
   top: 10px;
   transition: left 2s ease;
 }
 
 .o2 {
   position: absolute;
-  left: -20%;
+  left: -250px;
   top: 70px;
   transition: left 2s ease;
 }
