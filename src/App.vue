@@ -162,7 +162,6 @@ export default {
       console.log(this.questions);
 
       await this.calTotalTm();
-      await this.hasGame();
     } else {
       alert("Network error!");
     }
@@ -679,7 +678,7 @@ export default {
       this.audio_id = url_id;
       this.audioEle = audio_now;
     },
-    async hasGame(){
+    hasGame(){
       if(this.questions.zww || this.questions.dyt || this.questions.qet || this.questions.qet_n){
         return true;
       }else{
