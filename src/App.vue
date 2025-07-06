@@ -6,12 +6,12 @@
         <el-main>
           <!-- 题目部分 -->
           <div class="question-container">
-            <template v-if="isInVideo">
+            <template v-if="isInVideo && !hasGame()">
               <span style="font-size: large;">下面请小朋友自己动手做一做吧 </span>
               <img src="../static/static2/assets/laba.png" alt="" class="laba" @click="playAudio(0)"
                 @touchend="playAudio(0)">
             </template>
-            <hr>
+            <hr v-if="isInVideo && !hasGame()"/>
             <!-- part1_选择题 -->
             <xzt :questions="questions.xzt" v-if="questions.xzt && questions.xzt.length" />
             <!-- part2_填空题 -->
@@ -162,6 +162,7 @@ export default {
       console.log(this.questions);
 
       await this.calTotalTm();
+      await this.hasGame();
     } else {
       alert("Network error!");
     }
@@ -678,7 +679,13 @@ export default {
       this.audio_id = url_id;
       this.audioEle = audio_now;
     },
-
+    async hasGame(){
+      if(this.questions.zww || this.questions.dyt || this.questions.qet || this.questions.qet_n){
+        return true;
+      }else{
+        return false;
+      }
+    }
   },
   mounted(){
     if(this.isInVideo){
