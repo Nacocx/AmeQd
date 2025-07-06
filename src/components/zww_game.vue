@@ -114,13 +114,13 @@ export default {
 
         this.message.is_click = true;
         var oImgElement = this.$refs[`oImg_${index}_${index1}`][0];
-        var dis = 167 * index1 + 77;
+        var dis = 267 * index1 + 134;
         console.log(index1);
         var t = 0.5 + index1 * 0.5;
         this.message.transitionStyleGou = `left ${t}s ease, top 1s ease`
         this.message.transitionStyleTiao = `left ${t}s ease, top 1s ease, height 1s ease`
         this.message.gouLeft = `${dis}px`;//247-77=170
-        this.message.tiaoLeft = `${dis + 28}px`;
+        this.message.tiaoLeft = `${dis + 40}px`;
         const wait = (ms) => new Promise(resolve => setTimeout(resolve, ms));
         //其实感觉异步并没有清晰多少
 
@@ -129,29 +129,29 @@ export default {
 
           this.message.tiaoHeight = '10px'
         }, 1000);
-        this.message.gouTop = '210px';
-        this.message.tiaoHeight = '90px'
+        this.message.gouTop = '320px';
+        this.message.tiaoHeight = '110px'
 
         await wait(1000);
-        this.message.gouTop = '140px';
+        this.message.gouTop = '220px';
         this.show_yanhua();
 
         this.message.p[index][index1] = (index1 + 1) == this.message.true_answer[this.message.now_t];
         this.$refs.win.play();
         oImgElement.style.position = 'relative';
         oImgElement.style.transition = `left ${t}s ease, top 1s ease`
-        oImgElement.style.top = '-50px';
+        oImgElement.style.top = '-90px';
         // oImgElement.style.transition = `left ${t}s ease, top 1s ease`
         await wait(1000);
         this.message.transitionStyleGou = `left ${2 - t}s ease, top 1s ease`;
         this.message.transitionStyleTiao = `left ${2 - t}s ease, top 1s ease, height 1s ease`;
         oImgElement.style.transition = `left ${2 - t}s ease, top 1s ease`
 
-        this.message.gouLeft = `635px`;
-        this.message.tiaoLeft = `663px`;
-        oImgElement.style.left = `${560 - 167 * index1}px`
+        this.message.gouLeft = `1035px`;
+        this.message.tiaoLeft = `1075px`;
+        oImgElement.style.left = `${900 - 267 * index1}px`
         await wait(1500);
-        oImgElement.style.top = `170px`
+        oImgElement.style.top = `270px`
         await wait(5500 - (t * 1000 + 3000));
         this.message.transitionStyleGou = `left 2s ease, top 1s ease`;
         this.message.transitionStyleTiao = `left 2s ease, top 1s ease, height 1s ease`;
@@ -159,36 +159,15 @@ export default {
         this.message.tiaoLeft = this.message.tiaoLeft_begin;
       }
       else {
-
-
-
-        // let scale = 1;
-        // let isIncreasing = true;
-        // // 每 100 毫秒执行一次缩放操作
-        // var time = setInterval(() => {
-        //   if (isIncreasing) {
-        //     scale += 0.1;
-        //     if (scale >= 1.5) {
-        //       isIncreasing = false;
-        //     }
-        //   } else {
-        //     scale -= 0.1;
-        //     if (scale <= 1) {
-        //       isIncreasing = true;
-        //     }
-        //   }
-        //   cuo.style.transform = `scale(${scale})`;
-        // }, 1000);
-
         this.message.is_click = true;
         var oImgElement = this.$refs[`oImg_${index}_${index1}`][0];
-        var dis = 167 * index1 + 77;
+        var dis = 267 * index1 + 134;
         console.log(index1);
         var t = 0.5 + index1 * 0.5;
         this.message.transitionStyleGou = `left ${t}s ease, top 1s ease`
         this.message.transitionStyleTiao = `left ${t}s ease, top 1s ease, height 1s ease`
         this.message.gouLeft = `${dis}px`;//247-77=170
-        this.message.tiaoLeft = `${dis + 28}px`;
+        this.message.tiaoLeft = `${dis + 40}px`;
         const wait = (ms) => new Promise(resolve => setTimeout(resolve, ms));
         //其实感觉异步并没有清晰多少
         await wait(t * 1000);
@@ -196,8 +175,8 @@ export default {
 
           this.message.tiaoHeight = '10px'
         }, 1000);
-        this.message.gouTop = '210px';
-        this.message.tiaoHeight = '90px'
+        this.message.gouTop = '320px';
+        this.message.tiaoHeight = '110px'
 
         await wait(1000);
         this.message.p[index][index1] = (index1 + 1) == this.message.true_answer[this.message.now_t];
@@ -223,7 +202,7 @@ export default {
           cuo.style.transform = `scale(1)`;
           console.log(2);
         }, 1500);
-        this.message.gouTop = '140px';
+        this.message.gouTop = '220px';
         await wait(5500 - (t * 1000 + 3000));
         this.message.transitionStyleGou = `left 2s ease, top 1s ease`;
         this.message.transitionStyleTiao = `left 2s ease, top 1s ease, height 1s ease`;
@@ -455,12 +434,14 @@ export default {
   z-index: 6;
   position: absolute;
   left: 0px;
-  top: 0px;
-  height: 600px;
+  top: 80px;
+  height: 840px;
+  background-color: aqua;
+  /* z-index: 200; */
 }
 
 .up .up1 {
-  width: 700px;
+  width: 1200px;
   height: 12px;
   position: absolute;
   top: 130px;
@@ -470,8 +451,8 @@ export default {
 }
 
 .up .up2 {
-  width: 580px;
-  height: 150px;
+  width: 900px;
+  height: 240px;
   position: absolute;
   bottom: 0px;
   border-right: 6px solid rgb(121, 152, 255);
@@ -482,29 +463,29 @@ export default {
 
 .up .up3 {
   width: 6px;
-  height: 400px;
+  height: 470px;
   position: absolute;
   top: 130px;
-  left: 574px;
+  left: 894px;
   background-color: rgb(121, 152, 255);
 }
 
 
 .down {
-  width: 580px;
+  width: 780px;
   z-index: 1;
   position: absolute;
   left: 0px;
-  top: 0px;
+  top: 80px;
   height: 600px;
 }
 
 .down .down1 {
   position: absolute;
   left: 0px;
-  top: 380px;
-  height: 70px;
-  width: 530px;
+  top: 490px;
+  height: 120px;
+  width: 850px;
   background-color: rgb(218, 237, 255);
   border-top: 6px solid rgb(165, 182, 240);
   overflow: hidden;
@@ -513,10 +494,10 @@ export default {
 
 .down .down2 {
   position: absolute;
-  left: 515px;
-  top: 380px;
+  left: 830px;
+  top: 490px;
   transform: skew(20deg);
-  height: 70px;
+  height: 120px;
   width: 50px;
   background-color: rgb(218, 237, 255);
   border-right: 6px solid rgb(165, 182, 240);
@@ -527,17 +508,17 @@ export default {
 
 .down .down3 {
   position: absolute;
-  left: 547px;
+  left: 853px;
   top: 130px;
-  height: 253px;
+  height: 363px;
   width: 6px;
   background-color: rgb(165, 182, 240);
 
 }
 
 .main_body {
-  width: 960px;
-  height: 600px;
+  height: 923px;
+  width: 1680px;
   text-align: center;
   border: 1px solid black;
   position: relative;
@@ -551,8 +532,8 @@ export default {
 }
 
 .show {
-  width: 960px;
-  height: 600px;
+  height: 923px;
+  width: 1680px;
   position: absolute;
   left: 0px;
   top: 0px;
@@ -564,19 +545,17 @@ export default {
   z-index: 9;
   background-color: aliceblue;
   opacity: 0.7;
-  width: 960px;
-  height: 600px;
-
-  /* display: none; */
+  height: 923px;
+  width: 1680px;
 }
 
 .result {
   position: absolute;
-  left: 50%;
+  left: 53%;
   top: 50%;
   transform: translate(-50%, -50%);
-  width: 500px;
-  height: 400px;
+  width: 750px;
+  height: 600px;
   background-color: rgb(255, 255, 255);
   border-radius: 20px;
   position: absolute;
@@ -587,6 +566,7 @@ export default {
   align-items: center;
 }
 
+
 .begin .be {
   position: absolute;
   left: 0;
@@ -594,16 +574,17 @@ export default {
   z-index: 9;
   background-color: aliceblue;
   opacity: 0.7;
-  width: 960px;
-  height: 600px;
+  height: 923px;
+  width: 1680px;
 }
 
 .begin .btn {
   position: absolute;
-  width: 200px;
-  height: 50px;
-  left: 400px;
-  top: 250px;
+  width: 380px;
+  height: 80px;
+  font-size: 30px;
+  left: 680px;
+  top: 400px;
   background-color: whitesmoke;
   border-radius: 20px;
   border: 2px solid rgb(121, 152, 255);
@@ -623,8 +604,8 @@ export default {
 }
 
 .result .ws {
-  width: 300px;
-  height: 250px;
+  width: 600px;
+  height: 340px;
   text-align: center;
   display: flex;
   justify-content: center;
@@ -634,43 +615,44 @@ export default {
 }
 
 .ws .word1 {
-  width: 300px;
-  font-size: 60px;
+  width: 600px;
+  font-size: 70px;
   font-weight: 750px;
 
 }
 
 .ws .word2 {
-  width: 300px;
-  font-size: 40px;
+  width: 600px;
+  font-size: 60px;
   font-weight: 10px;
 }
 
 .ws .word3 {
-  width: 300px;
-  font-size: 40px;
+  text-align: center;
+  width: 600px;
+  font-size: 60px;
   font-weight: 10px;
 }
 
 .Lan {
-  width: 130px;
-  height: 90px;
+  width: 220px;
+  height: 160px;
   /* background-image: url('/img/L.png'); */
   background-size: 100% 100%;
   background-repeat: no-repeat;
   position: absolute;
-  right: 220px;
+  right: 480px;
   bottom: 60px;
   z-index: 6;
 }
 
 .reply {
-  height: 28px;
+  height: 38px;
 }
 
 .Ren {
-  width: 150px;
-  height: 230px;
+  width: 310px;
+  height: 430px;
   /* background-image: url('/img/r.png'); */
   background-size: 100% 100%;
   background-repeat: no-repeat;
@@ -680,14 +662,14 @@ export default {
 }
 
 .t_img {
-  width: 200px;
-  height: 200px;
+  width: 300px;
+  height: 300px;
   /* background-image: url('/img/t1.png'); */
   background-size: 100% 100%;
   background-repeat: no-repeat;
   position: absolute;
-  right: 70px;
-  bottom: 260px;
+  right: 120px;
+  bottom: 460px;
 }
 
 
@@ -695,8 +677,8 @@ export default {
   width: 100px;
   height: 100px;
   position: absolute;
-  right: 120px;
-  bottom: 308px;
+  right: 220px;
+  bottom: 558px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -704,38 +686,38 @@ export default {
 
 .t img {
   /* width: 100px; */
-  height: 27px;
+  height: 37px;
 }
 
 
 .tiao {
-  width: 13px;
+  width: 19px;
   /* background-image: url('/img/tiao.png'); */
   background-size: 100% 100%;
   background-repeat: no-repeat;
   position: absolute;
-  left: 38px;
-  top: 140px;
+  left: 58px;
+  top: 220px;
   transition: height 3s ease;
   transition: left 0.5s ease, top 0.5s ease;
 }
 
 .Gou {
-  width: 70px;
-  height: 70px;
+  width: 100px;
+  height: 100px;
   /* background-image: url('/img/g.png'); */
   background-size: 100% 100%;
   background-repeat: no-repeat;
   position: absolute;
   left: 10px;
-  top: 140px;
+  top: 220px;
   transition: left 0.5s ease, top 0.5s ease;
 }
 
 
 .o_img {
-  width: 100px;
-  height: 130px;
+  width: 160px;
+  height: 190px;
   margin-left: 15px;
   position: relative;
   top: 10px;
@@ -750,10 +732,10 @@ export default {
 }
 
 .o {
-  width: 130px;
-  height: 90px;
+  width: 190px;
+  height: 130px;
   background-color: rgb(255, 255, 255);
-  border-radius: 5px;
+  border-radius: 15px;
   border: 3px solid rgb(157, 155, 34);
   display: flex;
   justify-content: center;
@@ -768,9 +750,9 @@ export default {
 
 .options {
   position: absolute;
-  left: 30px;
-  top: 220px;
-  width: 500px;
+  left: 50px;
+  top: 350px;
+  width: 800px;
   display: flex;
   justify-content: space-around;
   align-items: center;
@@ -780,7 +762,7 @@ export default {
 
 .container {
   margin: auto;
-  width: 960px;
+  width: 1680px;
   height: 200px;
   /* background-color: rgba(0, 0, 0, 0.8); */
   overflow: hidden;
@@ -811,8 +793,8 @@ export default {
 
 .pd {
   position: absolute;
-  left: 100px;
-  top: 46px;
+  left: 160px;
+  top: 76px;
   width: 50px;
   height: 50px;
   z-index: 189;
