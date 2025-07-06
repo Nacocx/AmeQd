@@ -8,8 +8,8 @@
           <div class="question-container">
             <template v-if="isInVideo">
               <span style="font-size: large;">下面请小朋友自己动手做一做吧 </span>
-              <img src="../static/static2/assets/laba.png" alt="" class="laba" @click="playAudio(0, $event)"
-                @touchend="playAudio(0, $event)">
+              <img src="../static/static2/assets/laba.png" alt="" class="laba" @click="playAudio(0)"
+                @touchend="playAudio(0)">
             </template>
             <hr>
             <!-- part1_选择题 -->
@@ -637,10 +637,7 @@ export default {
       this.countTm.tyt.percentage = parseFloat((this.countTm.tyt.right / this.countTm.tyt.cnt * 100).toFixed(2));
     },
 
-    playAudio(index, e) {
-      if (e.touches) {
-        e.preventDefault();
-      }
+    playAudio(index) {
       var url_now;
       var audio_now;
       var url_id;
@@ -682,6 +679,13 @@ export default {
       this.audioEle = audio_now;
     },
 
+  },
+  mounted(){
+    if(this.isInVideo){
+    setTimeout(() => {
+     this.playAudio(0);
+    }, 1000);
+  }
   }
 }
 
