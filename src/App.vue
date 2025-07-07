@@ -1,17 +1,17 @@
 <template>
-  <div id="app">
+  <div id="app" v-if="!hasGame()">
     <el-container>
       <el-container>
         <sidebar :student-info="studentInfo" :count-tm="answerStatus" v-if="!isInVideo" />
         <el-main>
           <!-- 题目部分 -->
           <div class="question-container">
-            <template v-if="isInVideo">
+            <template v-if="isInVideo && !hasGame()">
               <span style="font-size: large;">下面请小朋友自己动手做一做吧 </span>
-              <img src="../static/static2/assets/laba.png" alt="" class="laba" @click="playAudio(0, $event)"
-                   @touchend="playAudio(0, $event)">
+              <img src="../static/static2/assets/laba.png" alt="" class="laba" @click="playAudio(0)"
+                @touchend="playAudio(0)">
             </template>
-            <hr>
+            <hr />
             <!-- part1_选择题 -->
             <xzt :questions="questions.xzt" v-if="questions.xzt && questions.xzt.length" />
             <!-- part2_填空题 -->
@@ -19,7 +19,7 @@
             <!-- 涂画题 部分 -->
             <template v-if="questions.tht">
               <tht :items="questions.tht.items" :tuxing-path="questions.tht.tuxingpath"
-                   :another="questions.tht.another" />
+                :another="questions.tht.another" />
             </template>
             <!-- 画图题 部分 -->
             <template v-if="questions.htt && questions.htt.length">
@@ -65,21 +65,32 @@
             <!-- pyt 部分 -->
             <pyt v-if="questions.pyt && questions.pyt.length" :pinyin-data="questions.pyt" />
 
+
             <!-- tyt 部分 -->
             <template v-if="questions.tyt && questions.tyt.length">
               <div v-for="tyt in questions.tyt" :key="tyt">
-                <tyt :question="tyt"/>
+                <tyt :question="tyt" />
               </div>
             </template>
-            <!--  <GameFishing  :game-fishing-json-array="questions.gmf"/>-->
             <el-button type="primary" @click="willSubmit" id="Submit" size="large">提交答案</el-button>
           </div>
         </el-main>
       </el-container>
     </el-container>
     <el-dialog v-model="dialogTableVisible" title="答题统计结果:" width="800">
-      <tm-percentage :count-tm="countTm" :questions="questions"/>
+      <tm-percentage :count-tm="countTm" :questions="questions" />
     </el-dialog>
+  </div>
+  <div class="game_body" v-if="hasGame()">
+    <!-- 抓娃娃 -->
+    <zww v-if="questions.zww" :message="questions.zww" />
+    <!-- 钓鱼 -->
+    <dyt v-if="questions.dyt" :message="questions.dyt" />
+    <!-- 企鹅 -->
+    <qet v-if="questions.qet" :message="questions.qet" />
+
+    <!-- 企鹅 加音频 -->
+    <qet_n v-if="questions.qet_n" :message="questions.qet_n" />
   </div>
 </template>
 
@@ -97,6 +108,10 @@ import htt_tuo from "@/components/htt_tuo.vue";
 import pyt from "@/components/pyt.vue";
 import lzt from "@/components/lzt.vue";
 import axios from "axios";
+import zww from "@/components/zww_game.vue";
+import dyt from "@/components/dyt_game.vue";
+import qet from "@/components/qet_game.vue";
+import qet_n from "@/components/qet_game_nomusic.vue";
 
 import TmPercentage from "@/components/TmPercentage.vue";
 import Tyt from "@/components/tyt.vue";
@@ -138,7 +153,11 @@ export default {
     qst,
     htt_tuo,
     pyt,
-    lzt
+    lzt,
+    zww,
+    dyt,
+    qet
+
   },
   async created() {
     await this.loadInfo();
@@ -249,10 +268,10 @@ export default {
 
       // 计算连字题已作答数
       if (this.questions.lzt && this.questions.lzt.length) {
-        let isAdded=false;
+        let isAdded = false;
         this.questions.lzt.forEach(e => {
           e.userAnswer.forEach((ans, index) => {
-            if(ans!==0&&!isAdded) {
+            if (ans !== 0 && !isAdded) {
               answeredInfo.answeredCount++;
               isAdded = true;
             }
@@ -261,9 +280,9 @@ export default {
       }
 
       // 计算听音题已作答数
-      if(this.questions.tyt && this.questions.tyt.length) {
+      if (this.questions.tyt && this.questions.tyt.length) {
         this.questions.tyt.forEach(e => {
-          if(e.changed) answeredInfo.answeredCount++;
+          if (e.changed) answeredInfo.answeredCount++;
         })
       }
 
@@ -294,8 +313,8 @@ export default {
         tht: (questions) => questions.tht.items.length,
         qst: (questions) => questions.qst.length,
         htt_tuo: (questions) => questions.htt_tuo.reduce((sum, el) => sum + el.subQuestion.length, 0),
-        pyt: (questions) =>questions.pyt.length,
-        lzt: (questions) =>questions.lzt.length,
+        pyt: (questions) => questions.pyt.length,
+        lzt: (questions) => questions.lzt.length,
         tyt: (questions) => questions.tyt.length,
       };
 
@@ -581,12 +600,12 @@ export default {
     getPytBoolList() {
       this.countTm.pyt.right = 0;
       this.boolLists.pyt = [];
-      this.questions.pyt.forEach(e=>{
-        if(e.isRight===true){
+      this.questions.pyt.forEach(e => {
+        if (e.isRight === true) {
           this.countTm.pyt.right++;
           this.countTm.rightCnt++;
           this.boolLists.pyt.push(true);
-        }else{
+        } else {
           this.boolLists.pyt.push(false);
         }
       });
@@ -595,36 +614,33 @@ export default {
     getLztBoolList() {
       this.countTm.lzt.right = 0;
       this.boolLists.lzt = [];
-      this.questions.lzt.forEach(e=>{
-        if(e.flag===true){
+      this.questions.lzt.forEach(e => {
+        if (e.flag === true) {
           this.countTm.lzt.right++;
           this.countTm.rightCnt++;
           this.boolLists.lzt.push(true);
-        }else{
+        } else {
           this.boolLists.lzt.push(false);
         }
       });
       this.countTm.lzt.percentage = parseFloat((this.countTm.lzt.right / this.countTm.lzt.cnt * 100).toFixed(2));
     },
     getTytBoolList() {
-      this.countTm.tyt.right=0;
+      this.countTm.tyt.right = 0;
       this.boolLists.tyt = [];
-      this.questions.tyt.forEach(e=>{
-        if(e.isRight===true){
+      this.questions.tyt.forEach(e => {
+        if (e.isRight === true) {
           this.countTm.tyt.right++;
           this.countTm.rightCnt++;
           this.boolLists.tyt.push(true);
-        }else{
+        } else {
           this.boolLists.tyt.push(false);
         }
       });
       this.countTm.tyt.percentage = parseFloat((this.countTm.tyt.right / this.countTm.tyt.cnt * 100).toFixed(2));
     },
 
-    playAudio(index, e) {
-      if (e.touches) {
-        e.preventDefault();
-      }
+    playAudio(index) {
       var url_now;
       var audio_now;
       var url_id;
@@ -665,7 +681,20 @@ export default {
       this.audio_id = url_id;
       this.audioEle = audio_now;
     },
-
+    hasGame() {
+      if (this.questions.zww || this.questions.dyt || this.questions.qet || this.questions.qet_n) {
+        return true;
+      } else {
+        return false;
+      }
+    }
+  },
+  mounted() {
+    if (this.isInVideo) {
+      setTimeout(() => {
+        this.playAudio(0);
+      }, 1000);
+    }
   }
 }
 
@@ -676,6 +705,16 @@ export default {
 <style>
 * {
   user-select: none;
+}
+
+body,
+html {
+  /* 移除默认的外边距和内边距 */
+  margin: auto;
+  padding: 0;
+  height: 100vh;
+  width: 99vw;
+  /* background-color: rgb(99, 131, 158); */
 }
 
 .el-aside {
@@ -714,6 +753,14 @@ export default {
 
 #app {
   padding-top: 10px;
+}
+
+.game_body {
+  width: 98%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 </style>
 
