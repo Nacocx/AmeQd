@@ -111,6 +111,10 @@
       {
         "value": "C",
         "img": "VITE_RES_BASE_PATH/img/xzt_C.png"
+      },
+            {
+        "value": "D",
+        "img": "VITE_RES_BASE_PATH/img/xzt_D.png"
       }
     ],
     "userAnswer": "VITE_RES_BASE_PATH/img/xzt_D.png",
