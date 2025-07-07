@@ -58,7 +58,7 @@
         "VITE_RES_BASE_PATH/audio/part3_v.mp3"
       ],
       "id": 1,
-      "title": "part 3 请连接和图片中物品数量一致的圆的图片",
+      "title": "part 3 连一连",
       "flag": "t3",
       "changed": false,
       "result": [],
