@@ -758,6 +758,9 @@ html {
 .game_body {
   width: 98%;
   height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 </style>
 
