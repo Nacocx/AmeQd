@@ -100,7 +100,7 @@ for ((group=1; group<=$total_groups; group++)); do
 
         # 使用rsync合并目录（保留所有文件）
         if command -v rsync >/dev/null 2>&1; then
-            rsync -a --delete-after ./dist/ "$target_dir/"
+            rsync -a  ./dist/ "$target_dir/"
         else
             # 如果没有rsync，使用cp合并
             cp -Rf ./dist/* "$target_dir/"
