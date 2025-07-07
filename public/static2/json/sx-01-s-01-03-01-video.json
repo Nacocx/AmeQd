@@ -11,7 +11,7 @@
     "items": [
       {
         "rightItem": "VITE_RES_BASE_PATH/img/rightImg1_v.png",
-        "cnt": 4,
+        "cnt": 3,
         "flag": [
           false,
           false,
@@ -23,7 +23,7 @@
       },
       {
         "rightItem": "VITE_RES_BASE_PATH/img/rightImg2_v.png",
-        "cnt": 4,
+        "cnt": 0,
         "flag": [
           false,
           false,
@@ -35,7 +35,7 @@
       },
       {
         "rightItem": "VITE_RES_BASE_PATH/img/rightImg3_v.png",
-        "cnt": 2,
+        "cnt": 4,
         "flag": [
           false,
           false,
