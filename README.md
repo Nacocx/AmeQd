@@ -1,6 +1,10 @@
-# AME Project
+# AMEQD Project
 
-私密仓库 - 基于 Vue 3 + Vite + Element Plus 的前端项目
+这个名字是我随手打的，项目是一个基于Vue的题目渲染系统
+
+支持多种题型的展示，操作和检验
+
+练手项目
 
 ## 技术栈
 
@@ -9,53 +13,7 @@
 - Element Plus (UI 组件库)
 - Axios (HTTP 客户端)
 
-## 推荐开发环境
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (请禁用 Vetur)
-
-## 项目配置
-
-查看 [Vite 配置参考](https://vite.dev/config/).
-
-## 项目设置
-
-### 安装依赖
-```sh
-npm install
-```
-
-### 开发模式 (热更新)
-```sh
-npm run dev
-```
-
-### 生产环境构建
-```sh
-npm run build
-```
-运行 build 后，会产生 dist 文件夹，里面是打包好的静态文件
-
-### 预览生产构建
-```sh
-npm run preview
-```
-
-## 主要依赖说明
-
-
-
-### Element Plus 使用
-在 `main.js` 中引入：
-```javascript
-import { createApp } from 'vue'
-import ElementPlus from 'element-plus'
-import 'element-plus/dist/index.css'
-import App from './App.vue'
-
-const app = createApp(App)
-app.use(ElementPlus)
-app.mount('#app')
-```
 
 ## 项目结构
 
@@ -111,6 +69,12 @@ src/
 
 
 ## JSON 文件格式说明
+
+
+部分json文件以及写了生成器在下面，可以参考:
+
+[AmeQdJsonGenerator](https://github.com/Nacog/AmeQdJsonGenerator)
+
 ### zww题型（抓娃娃）
 
 ```json
