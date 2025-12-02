@@ -75,6 +75,8 @@ src/
 
 [AmeQdJsonGenerator](https://github.com/Nacog/AmeQdJsonGenerator)
 
+下面的题型不是我写的
+
 ### zww题型（抓娃娃）
 
 ```json
