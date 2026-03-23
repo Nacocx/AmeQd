@@ -1,326 +1,361 @@
-# AMEQD Project
+# AmeQd
 
-这个名字是我随手打的，项目是一个基于Vue的题目渲染系统
+一个基于 **Vue 3 + Vite + Element Plus** 的题目渲染与交互答题项目，适用于将结构化 JSON 题库渲染为可操作的练习页或轻量互动游戏。项目内置多种题型组件，支持答案提交、统计结果展示、音频播放，以及按课程/课时资源路径进行静态化部署。
 
-支持多种题型的展示，操作和检验
+## 项目定位
 
-练手项目
+这个项目的核心目标不是“题库管理后台”，而是：
+
+- 根据一份 JSON 配置快速渲染一套答题页面。
+- 支持多种不同的交互题型。
+- 支持课堂练习、视频配套练习、轻量游戏化题型。
+- 支持将不同课程资源打包为静态文件，嵌入其他系统或部署到静态服务器。
+
+从现有实现来看，项目更接近一个 **“题目播放/渲染引擎”**，而不是通用业务后台。
+
+## 功能概览
+
+### 常规题型
+
+应用入口会根据 JSON 中存在的字段动态渲染不同题型，目前主流程已经接入以下类型：
+
+- `xzt`：选择题
+- `tkt`：填空题
+- `tht`：涂画题
+- `htt`：画图题
+- `htt_tuo`：拖拽/画图组合题
+- `lxt`：连线题
+- `sst`：数数题
+- `qst`：圈数/圈选题
+- `lzt`：连字题
+- `pyt`：拼音题
+- `tyt`：听音题
+
+### 游戏题型
+
+当 JSON 中包含以下字段时，应用会进入游戏模式：
+
+- `zww`：抓娃娃
+- `dyt`：钓鱼题
+- `qet`：企鹅题
+- `qet_n`：企鹅题（无音乐版本）
+
+### 运行特性
+
+- 根据环境变量加载不同题库 JSON。
+- 自动替换 JSON 中的 `VITE_RES_BASE_PATH` 占位符。
+- 支持题目作答统计与提交后正确率展示。
+- 视频配套资源场景下支持进入页面后自动播放提示音。
+- 支持按不同课程配置批量构建多个 HTML 页面。
 
 ## 技术栈
 
+### 前端基础
+
 - Vue 3
 - Vite
-- Element Plus (UI 组件库)
-- Axios (HTTP 客户端)
+- Element Plus
+- Axios
 
+### 其他依赖
 
+- Phaser：用于部分游戏化场景的能力扩展
+- TensorFlow.js
+- Tesseract.js
 
-## 项目结构
+> 说明：从当前仓库结构看，核心答题流程主要使用 Vue + Element Plus + Axios；其余依赖更像是为特定能力或后续扩展准备。
 
-```
-public/
-├── assets/            # 公共资源
-├── json               # 题目文件
-└── ...                # 题目素材
+## 目录结构
 
-src/
-├── components/        # 公共组件
-├── App.vue            # 根组件
-└── main.js            # 入口文件
-```
-
-
-
-## 代码规范
-
-- 尽量保持代码风格一致(采用`JavaScript`和`OptionAPI`以后慢慢转向`TypeScript`和`CompositionAPI`)
-- 组件命名清晰
-- 单文件组件结构顺序：`template -> script -> style`
-- 非必须情况下`style`使用`scoped`
-
-## 部署说明(单页)
-
-1. 修改 `.env.production`中`VITE_RES_BASE_PATH`和`VITE_JSON_BASE_PATH`和`VITE_JC_BASE_PATH`为正确路径,比如
-   ```
-    VITE_RES_BASE_PATH=../static/static2/zw-01-u01-lesson01-01
-    VITE_JSON_BASE_PATH=../static/static2/json/zw-01-u01-lesson01-01-ClassroomExercises
-    VITE_JC_BASE_PATH=static/static2/zw-01-u01-lesson01-01/ #一定要在结尾加上 /
-   ```
-2. 将public中图片文件夹名按照正确路径排好
-3. 运行 `npm run build`
-4. 将 dist 文件夹内容部署到静态服务器
-   
-## 部署说明(SpringBoot)
-1. 在`data.txt`编写正确的配置文件，例如:
-   ```text
-    VITE_RES_BASE_PATH=../static/static2/zw-01-u01-lesson01-4
-    VITE_JSON_BASE_PATH=../static/static2/json/zw-01-u01-lesson01-4-video2
-    VITE_JC_BASE_PATH=static/static2/zw-01-u01-lesson01-4/video2/
-   ```
-   配置文件应该用空行隔开，并且行尾序列必须是`LF`而非`CRLF`
-2. 在linux环境下，运行build2.sh
-3. 将产生的build-dist文件夹内的static2放入`shihua`项目的`static`中
-4. 将产生的html文件放入`shihua`项目的`template`中
-5. 编写对应的控制器，例如：
-   ```java
-    @RequestMapping("/sx-01-s-01-04-01-classroom")
-    public String sx01s010401Class() {return "sx-01-s-01-04-01-classroom";}
-   ```
-
-
-## JSON 文件格式说明
-
-
-部分json文件以及写了生成器在下面，可以参考:
-
-[AmeQdJsonGenerator](https://github.com/Nacog/AmeQdJsonGenerator)
-
-下面的题型不是我写的
-
-### zww题型（抓娃娃）
-
-```json
-
-{//未加注释的可以不用管
-  "zww":{
-    "tnum":6,//总题目数量
-     "questions": [//题目的图片（就是相当于根据什么）
-       "VITE_RES_BASE_PATH/img/t1_v2.png",
-        "VITE_RES_BASE_PATH/img/t2_v2.png",
-        "VITE_RES_BASE_PATH/img/t3_v2.png",
-        "VITE_RES_BASE_PATH/img/t4_v2.png",
-        "VITE_RES_BASE_PATH/img/t5_v2.png",
-        "VITE_RES_BASE_PATH/img/t6_v2.png"
-
-      ],
-      "yin": "VITE_RES_BASE_PATH/audio/yin.mp3",
-      "win": "VITE_RES_BASE_PATH/audio/win.wav",
-      "fail": "VITE_RES_BASE_PATH/audio/fail.wav",
-      "pd": ["VITE_RES_BASE_PATH/img/dui.png", "VITE_RES_BASE_PATH/img/cuo.png"],
-     "p": [//有多少个选项建立多少个（后面看要不要改进下）
-        [-1, -1, -1],
-        [-1, -1, -1],
-        [-1, -1, -1],
-        [-1, -1, -1],
-        [-1, -1, -1],
-        [-1, -1, -1]
-      ],
-      "reply": [//就是下面选项的图片
-        ["VITE_RES_BASE_PATH/img/t1_x1_v2.png","VITE_RES_BASE_PATH/img/t1_x2_v2.png", "VITE_RES_BASE_PATH/img/t1_x3_v2.png"],
-        ["VITE_RES_BASE_PATH/img/t2_x1_v2.png","VITE_RES_BASE_PATH/img/t2_x2_v2.png", "VITE_RES_BASE_PATH/img/t2_x3_v2.png"],
-        ["VITE_RES_BASE_PATH/img/t3_x1_v2.png","VITE_RES_BASE_PATH/img/t3_x2_v2.png", "VITE_RES_BASE_PATH/img/t3_x3_v2.png"],
-        ["VITE_RES_BASE_PATH/img/t4_x1_v2.png","VITE_RES_BASE_PATH/img/t4_x2_v2.png", "VITE_RES_BASE_PATH/img/t4_x3_v2.png"],
-        ["VITE_RES_BASE_PATH/img/t5_x1_v2.png","VITE_RES_BASE_PATH/img/t5_x2_v2.png", "VITE_RES_BASE_PATH/img/t5_x3_v2.png"],
-        ["VITE_RES_BASE_PATH/img/t6_x1_v2.png","VITE_RES_BASE_PATH/img/t6_x2_v2.png", "VITE_RES_BASE_PATH/img/t6_x3_v2.png"]
-    
-      ],
-      "reply_img": [//上面动物图片
-        ["VITE_RES_BASE_PATH/img/a.png", "VITE_RES_BASE_PATH/img/b.png", "VITE_RES_BASE_PATH/img/c.png"],
-        ["VITE_RES_BASE_PATH/img/a.png", "VITE_RES_BASE_PATH/img/b.png", "VITE_RES_BASE_PATH/img/c.png"],
-        ["VITE_RES_BASE_PATH/img/a.png", "VITE_RES_BASE_PATH/img/b.png", "VITE_RES_BASE_PATH/img/c.png"],
-        ["VITE_RES_BASE_PATH/img/a.png", "VITE_RES_BASE_PATH/img/b.png", "VITE_RES_BASE_PATH/img/c.png"],
-        ["VITE_RES_BASE_PATH/img/a.png", "VITE_RES_BASE_PATH/img/b.png", "VITE_RES_BASE_PATH/img/c.png"],
-        ["VITE_RES_BASE_PATH/img/a.png", "VITE_RES_BASE_PATH/img/b.png", "VITE_RES_BASE_PATH/img/c.png"]
-      ],
-      "true_answer": [1,2,1,3,1,2],//按题目顺序正确的选项
-      "userAnswer": [0, 0, 0, 0,0,0],
-      "gouLeft_begin": "10px",
-      "gouLeft": "10px",
-      "gouTop_begin": "140px",
-      "gouTop": "140px",
-      "tiaoHeight_begin": "10px",
-      "tiaoHeight": "10px",
-      "tiaoLeft_begin": "38px",
-      "tiaoLeft": "38px",
-      "transitionStyleGou": "left 0.5s ease, top 0.5s ease",
-      "transitionStyleTiao": "left 0.5s ease, top 0.5s ease, height 3s ease",
-      "now_t": 0,
-      "trueNum": 0,
-      "is_click": false,
-      "visibleIndices": [0],
-      "mes": ["恭喜你", "答对4题", "通过", ""],
-      "background_img": "VITE_RES_BASE_PATH/img/back.jpeg",
-      "Lan_img": "VITE_RES_BASE_PATH/img/L.png",
-      "r_img":"VITE_RES_BASE_PATH/img/r.png",
-      "t1_img":"VITE_RES_BASE_PATH/img/t1.png",
-      "tiao_img":"VITE_RES_BASE_PATH/img/tiao.png",
-      "gou_img":"VITE_RES_BASE_PATH/img/g.png"
-  }
-}
+```text
+.
+├── public/
+│   └── static2/
+│       ├── json/                  # 题库 JSON 示例
+│       ├── <lesson>/img/          # 课程图片资源
+│       ├── <lesson>/audio/        # 课程音频资源
+│       └── assets/                # 公共资源
+├── src/
+│   ├── components/                # 各题型组件
+│   ├── App.vue                    # 题目分发、提交、统计入口
+│   └── main.js                    # 应用入口
+├── build.sh                       # 单配置构建后处理脚本
+├── build2.sh                      # 多配置批量构建脚本
+├── data.txt                       # 批量构建配置列表
+├── vite.config.js                 # Vite 与产物路径配置
+└── README.md
 ```
 
-### dyt题型（钓鱼题）
+## 快速开始
 
-```json
-{//未加注释可以不用管
-  "dyt": {
-    "ts": 8,//题目数量
-    "question_img": [//题目图片
-      "VITE_RES_BASE_PATH/img/t1_1.png",
-      "VITE_RES_BASE_PATH/img/t1_2.png",
-      "VITE_RES_BASE_PATH/img/t1_3.png",
-      "VITE_RES_BASE_PATH/img/t2_1.png",
-      "VITE_RES_BASE_PATH/img/t2_2.png",
-      "VITE_RES_BASE_PATH/img/t3_1.png",
-      "VITE_RES_BASE_PATH/img/t3_2.png",
-      "VITE_RES_BASE_PATH/img/t3_3.png"
-    ],
-    "questions": [//题目文字提问
-      "请根据图片对应情景，选出合适的字或词语",
-      "请根据图片对应情景，选出合适的字或词语",
-      "请根据图片对应情景，选出合适的字或词语",
-      "请根据图片对应情景，选出合适的字或词语",
-      "请根据图片对应情景，选出合适的字或词语",
-      "请根据汉字，选出合适的字组成词语",
-      "请根据汉字，选出合适的字组成词语",
-      "请根据汉字，选出合适的字组成词语"
-    ],
-    "mes": [
-      "恭喜你",
-      "答对4题",
-      "通过",
-      ""
-    ],
-    "yu": [//三个为一组（有多少题目加几个 每个题目对应一个 三个一组顺序 后面应该会改动 暂时这样）
-      [
-        "VITE_RES_BASE_PATH/img/y1.png",
-        "VITE_RES_BASE_PATH/img/y2.png",
-        "VITE_RES_BASE_PATH/img/y3.png"
-      ],
-      [
-        "VITE_RES_BASE_PATH/img/y2.png",
-        "VITE_RES_BASE_PATH/img/y3.png",
-        "VITE_RES_BASE_PATH/img/y1.png"
-      ],
-      [
-        "VITE_RES_BASE_PATH/img/y3.png",
-        "VITE_RES_BASE_PATH/img/y1.png",
-        "VITE_RES_BASE_PATH/img/y2.png"
-      ],
-      [
-        "VITE_RES_BASE_PATH/img/y1.png",
-        "VITE_RES_BASE_PATH/img/y2.png",
-        "VITE_RES_BASE_PATH/img/y3.png"
-      ],
-      [
-        "VITE_RES_BASE_PATH/img/y2.png",
-        "VITE_RES_BASE_PATH/img/y3.png",
-        "VITE_RES_BASE_PATH/img/y1.png"
-      ],
-      [
-        "VITE_RES_BASE_PATH/img/y3.png",
-        "VITE_RES_BASE_PATH/img/y1.png",
-        "VITE_RES_BASE_PATH/img/y2.png"
-      ],
-      [
-        "VITE_RES_BASE_PATH/img/y1.png",
-        "VITE_RES_BASE_PATH/img/y2.png",
-        "VITE_RES_BASE_PATH/img/y3.png"
-      ],
-      [
-        "VITE_RES_BASE_PATH/img/y2.png",
-        "VITE_RES_BASE_PATH/img/y3.png",
-        "VITE_RES_BASE_PATH/img/y1.png"
-      ]
-    ],
-    "options": [//每道题的选项（三个定死 多个还需改动）
-      [
-        "VITE_RES_BASE_PATH/img/t1_x1.png",
-        "VITE_RES_BASE_PATH/img/t1_x2.png",
-        "VITE_RES_BASE_PATH/img/t1_x3.png"
-      ],
-      [
-        "VITE_RES_BASE_PATH/img/t1_x2.png",
-        "VITE_RES_BASE_PATH/img/t1_x3.png",
-        "VITE_RES_BASE_PATH/img/t1_x1.png"
-      ],
-      [
-        "VITE_RES_BASE_PATH/img/t1_x1.png",
-        "VITE_RES_BASE_PATH/img/t1_x2.png",
-        "VITE_RES_BASE_PATH/img/t1_x3.png"
-      ],
-      [
-        "VITE_RES_BASE_PATH/img/t2_x2.png",
-        "VITE_RES_BASE_PATH/img/t2_x3.png",
-        "VITE_RES_BASE_PATH/img/t2_x1.png"
-      ],
-      [
-        "VITE_RES_BASE_PATH/img/t2_x1.png",
-        "VITE_RES_BASE_PATH/img/t2_x2.png",
-        "VITE_RES_BASE_PATH/img/t2_x3.png"
-      ],
-      [
-        "VITE_RES_BASE_PATH/img/t3_x1.png",
-        "VITE_RES_BASE_PATH/img/t3_x2.png",
-        "VITE_RES_BASE_PATH/img/t3_x3.png"
-      ],
-      [
-        "VITE_RES_BASE_PATH/img/t3_x2.png",
-        "VITE_RES_BASE_PATH/img/t3_x3.png",
-        "VITE_RES_BASE_PATH/img/t3_x1.png"
-      ],
-      [
-        "VITE_RES_BASE_PATH/img/t3_x1.png",
-        "VITE_RES_BASE_PATH/img/t3_x2.png",
-        "VITE_RES_BASE_PATH/img/t3_x3.png"
-      ]
-    ],
-    "yin": "VITE_RES_BASE_PATH/audio/yin.mp3",
-    "win": "VITE_RES_BASE_PATH/audio/win.wav",
-    "fail": "VITE_RES_BASE_PATH/audio/fail.wav",
-    "trueAnswer": [2,3,3,3,2,2,2,1],//正确答案
-    "userAnswer": [0,0,0,0,0,0,0,0],//用户是否答对
-    "is_show_ren": 1,
-    "t_num": 0,
-    "trueNum": 0,
-    "yu_bpos": [
-      -400,
-      -250,
-      -100
-    ],
-    "is_xun": false,
-    "background_img": "VITE_RES_BASE_PATH/img/all.png",
-    "r_img": [
-      "VITE_RES_BASE_PATH/img/rt1.jpg",
-      "VITE_RES_BASE_PATH/img/r2t.jpg"
-    ]
-  }
-}
+### 1. 安装依赖
+
+```bash
+npm install
 ```
 
-### qet题型（企鹅题）
+### 2. 配置开发环境变量
 
-```json
-{//未加注释不管
-  "qet":{
-    "yin": "VITE_RES_BASE_PATH/audio/yin.mp3",
-     "win": "VITE_RES_BASE_PATH/audio/win.wav",
-      "fail": "VITE_RES_BASE_PATH/audio/fail.wav",   
-      "trueAnswer": [3, 1, 3, 2],//正确答案
-      "userAnswer": [0, 0, 0, 0],
-      "questions_img": [//题目选项
-        ["VITE_RES_BASE_PATH/img/t1_a.png", "VITE_RES_BASE_PATH/img/t1_b.png", "VITE_RES_BASE_PATH/img/t1_c.png"],
-        ["VITE_RES_BASE_PATH/img/t2_a.png", "VITE_RES_BASE_PATH/img/t2_b.png", "VITE_RES_BASE_PATH/img/t2_c.png"],
-        ["VITE_RES_BASE_PATH/img/t3_a.png", "VITE_RES_BASE_PATH/img/t3_b.png", "VITE_RES_BASE_PATH/img/t3_c.png"],
-        ["VITE_RES_BASE_PATH/img/t4_a.png", "VITE_RES_BASE_PATH/img/t4_b.png", "VITE_RES_BASE_PATH/img/t4_c.png"]
-      ],
-      "questions_title": [//题目图片
-        "VITE_RES_BASE_PATH/img/t1.png",
-        "VITE_RES_BASE_PATH/img/t2.png",
-        "VITE_RES_BASE_PATH/img/t3.png",
-        "VITE_RES_BASE_PATH/img/t4.png"
-      ],
-      "place": "VITE_RES_BASE_PATH/img/jia.png",
-      "cha": "VITE_RES_BASE_PATH/img/qi.png",
-      "kuang": "VITE_RES_BASE_PATH/img/kuang.png",
+开发模式下主要依赖以下变量：
 
-      "t_num": 0,
-      "trueNum": 0,
-      "mes": ["恭喜你", "答对4题", "通过", ""],
-      "goPlace": [{ "bottom": 100, "left": 195 }, { "bottom": 100, "left": 430 }, { "bottom": 100, "left": 660 }],
-      "is_xuan": false,
-      "background_img": "VITE_RES_BASE_PATH/img/back.jpeg"//可以更换背景（也可以不换）
-  }
-}
+```env
+VITE_RES_BASE_PATH=/static2/zw-01-u01-lesson01-1
+VITE_JSON_BASE_PATH=/static2/json/zw-01-u01-lesson01-1-zwClassroomExercises
+VITE_JC_BASE_PATH=static2/zw-01-u01-lesson01-1
 ```
 
+含义说明：
+
+- `VITE_RES_BASE_PATH`：题目图片、音频等资源的基础路径。
+- `VITE_JSON_BASE_PATH`：题库 JSON 路径，不带 `.json` 后缀。
+- `VITE_JC_BASE_PATH`：构建后 JS/CSS/资源输出路径前缀。
+
+### 3. 启动开发服务器
+
+```bash
+npm run dev
+```
+
+### 4. 构建产物
+
+```bash
+npm run build
+```
+
+### 5. 预览构建结果
+
+```bash
+npm run preview
+```
+
+## 运行机制说明
+
+### 题库加载
+
+应用启动后会读取 `VITE_JSON_BASE_PATH` 对应的 JSON 文件，例如：
+
+```text
+../static/static2/json/zw-01-u01-lesson01-1-video2.json
+```
+
+入口组件会：
+
+1. 请求 JSON 文件。
+2. 深度遍历题目数据。
+3. 将其中的 `VITE_RES_BASE_PATH` 替换为真实资源路径。
+4. 根据 JSON 顶层字段决定渲染哪些题型组件。
+
+这意味着：
+
+- **同一套前端代码可以通过切换环境变量渲染不同课程内容。**
+- **新增一套课程资源时，通常不需要改动业务代码，只需补充资源与 JSON。**
+
+### 普通模式与游戏模式
+
+- 如果 JSON 中是 `xzt / tkt / lxt ...` 等常规字段，则进入普通答题界面。
+- 如果 JSON 中包含 `zww / dyt / qet / qet_n`，则进入游戏界面。
+
+### 提交与统计
+
+提交后会按照题型分别计算：
+
+- 每种题型总题数
+- 每种题型答对数量
+- 每种题型正确率
+- 全部题目的总体正确率
+
+统计结果通过弹窗展示。
+
+## 已接入题型与组件对应关系
+
+| JSON 字段 | 组件 | 说明 |
+| --- | --- | --- |
+| `xzt` | `src/components/xzt.vue` | 选择题 |
+| `tkt` | `src/components/tkt.vue` | 填空题 |
+| `tht` | `src/components/tht.vue` | 涂画题 |
+| `htt` | `src/components/htt.vue` | 画图题 |
+| `htt_tuo` | `src/components/htt_tuo.vue` | 拖拽/画图题 |
+| `lxt` | `src/components/lxt.vue` | 连线题 |
+| `sst` | `src/components/sst.vue` | 数数题 |
+| `qst` | `src/components/qst.vue` | 圈选题 |
+| `lzt` | `src/components/lzt.vue` | 连字题 |
+| `pyt` | `src/components/pyt.vue` | 拼音题 |
+| `tyt` | `src/components/tyt.vue` | 听音题 |
+| `zww` | `src/components/zww_game.vue` | 抓娃娃游戏 |
+| `dyt` | `src/components/dyt_game.vue` | 钓鱼游戏 |
+| `qet` | `src/components/qet_game.vue` | 企鹅游戏 |
+| `qet_n` | `src/components/qet_game_nomusic.vue` | 无音乐企鹅游戏 |
+
+## JSON 设计约定
+
+项目不是通过固定路由去配置题目，而是通过 JSON 顶层 key 决定页面内容。建议遵守以下约定：
+
+1. 顶层字段名直接对应题型。
+2. 资源路径统一写成 `VITE_RES_BASE_PATH/...` 占位形式。
+3. 用户作答状态字段（如 `userAnswer`、`changed`、`flag`、`isRight`）在组件内部会被修改，建议为每题初始化。
+4. 尽量为每种题型保留清晰的 `answer` / `answers` / `result` 等判题字段。
+
+仓库内可参考的 JSON 示例：
+
+- `public/static2/json/test.json`：常规题型组合示例
+- `public/static2/json/test_qet.json`：游戏题型示例
+- `public/static2/json/*.json`：实际课程/课时示例
+
+如果你需要生成题库，原 README 提到的 JSON 生成器项目也可以作为补充参考：
+
+- [AmeQdJsonGenerator](https://github.com/Nacog/AmeQdJsonGenerator)
+
+## 部署说明
+
+### 方式一：普通静态部署
+
+适合单个课程页面单独构建。
+
+1. 修改 `.env.production` 中的三个路径变量。
+2. 运行：
+
+```bash
+npm run build
+```
+
+3. 如需自动整理目录，可执行：
+
+```bash
+sh build.sh
+```
+
+`build.sh` 会在构建完成后：
+
+- 检查 `dist/static/static2`
+- 合并到 `dist/static2`
+- 删除空的 `dist/static`
+
+最终可将 `dist/` 部署到静态服务器。
+
+### 方式二：批量构建多个课程页面
+
+适合一次性生成多个课时页面。
+
+1. 在 `data.txt` 中按 **三行一组 + 空行分隔** 维护配置：
+
+```env
+VITE_RES_BASE_PATH=../static/static2/sx-01-s-01-01-01
+VITE_JSON_BASE_PATH=../static/static2/json/sx-01-s-01-01-01-sxClassroomExercises
+VITE_JC_BASE_PATH=static/static2/sx-01-s-01-01-01/
+```
+
+2. 运行：
+
+```bash
+bash build2.sh
+```
+
+脚本会自动：
+
+- 遍历 `data.txt` 中的每组配置
+- 临时改写 `.env.production`
+- 逐组执行 `npm run build`
+- 将 `dist/index.html` 按 JSON 文件名重命名
+- 合并资源到 `build-dist/`
+- 构建结束后恢复原始 `.env.production`
+
+### 方式三：嵌入 Spring Boot 项目
+
+仓库现有脚本和原始说明显示，这个项目也可作为前端静态模板嵌入 Spring Boot：
+
+1. 使用 `data.txt` 准备多组配置。
+2. 执行 `build2.sh` 生成 `build-dist/`。
+3. 将生成出的静态资源目录放入后端项目的静态资源目录。
+4. 将 HTML 模板放入后端模板目录。
+5. 在 Spring Boot 中增加对应控制器路由映射。
+
+这套流程明显带有“课程资源打包到既有教学平台”的使用背景。
+
+## 开发建议
+
+### 新增题型
+
+如果要新增一种题型，通常需要同步修改以下位置：
+
+1. 在 `src/components/` 新增组件。
+2. 在 `src/App.vue` 中引入组件并挂载渲染逻辑。
+3. 在 `calTotalTm()` 中增加总题数统计规则。
+4. 在 `willSubmit()` 中增加该题型判题分支。
+5. 补充对应的 `getXxxBoolList()` 判题函数。
+6. 如需结果展示，更新统计展示组件。
+7. 设计对应 JSON 数据结构。
+
+### 资源组织
+
+建议每套课程资源维持如下结构：
+
+```text
+public/static2/<lesson>/
+├── img/
+├── audio/
+└── ...
+```
+
+同时在 `public/static2/json/` 下维护与之对应的 JSON 文件，命名尽量统一，以便批量构建脚本自动推导 HTML 文件名。
+
+### 代码风格现状
+
+当前项目以：
+
+- JavaScript
+- Vue Options API
+- 单文件组件（SFC）
+
+为主。如果后续继续迭代，比较自然的演进方向会是：
+
+- 渐进迁移到 Composition API
+- 按题型抽离更清晰的共享逻辑
+- 为 JSON 数据结构补充文档或 schema 校验
+- 为判题逻辑增加自动化测试
+
+## 常见问题
+
+### 1. 页面空白或题目未加载
+
+优先检查：
+
+- `VITE_JSON_BASE_PATH` 是否正确
+- JSON 文件是否真实存在
+- JSON 是否带有 `.json` 后缀以外的命名问题
+- 资源路径是否使用了 `VITE_RES_BASE_PATH` 占位符
+
+### 2. 图片或音频 404
+
+优先检查：
+
+- `VITE_RES_BASE_PATH` 是否与资源目录匹配
+- 生产环境相对路径是否和部署目录一致
+- `VITE_JC_BASE_PATH` 是否影响了静态资源访问位置
+
+### 3. 批量构建结果不完整
+
+优先检查：
+
+- `data.txt` 是否按照“3 行配置 + 空行分隔”编写
+- `.env.production` 是否存在
+- `build2.sh` 执行环境是否支持 bash
+- 服务器是否提供 `rsync`（没有也能退化为 `cp`）
+
+## 后续可改进方向
+
+- 增加 README 中的题型数据结构示例，替代超长的内联 JSON 片段。
+- 为各题型补充最小可运行示例。
+- 增加 `.env.example`，降低新成员接手成本。
+- 把构建脚本中的路径规则进一步参数化。
+- 为题型判分逻辑增加单元测试。
+- 对 JSON 做 schema 校验，减少运行时错误。
+
+## 适合谁使用
+
+这个项目比较适合：
+
+- 需要快速交付教学互动练习页的前端开发者
+- 需要把题库资源静态化部署到既有平台中的团队
+- 需要将“题目数据”与“渲染引擎”解耦的教学内容项目
+
+如果你接手的是一个“已有大量图片、音频、JSON 题库资源”的教学项目，这个仓库会比从零搭一个题目系统更省时间。
